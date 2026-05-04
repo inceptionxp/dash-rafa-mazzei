@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Consultoria Mazzei — Implementação · Inception Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Caveat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde:#474928; --verde-2:#5a5d34;
+  --marrom:#a77b4a; --marrom-2:#c19566;
+  --bege:#eeece3; --bege-2:#f6f5ee;
+  --chumbo:#1f201e; --chumbo-2:#2a2b28;
+  --branco:#ffffff;
+  --bg:var(--bege); --surface:var(--branco);
+  --text:var(--chumbo); --text-2:rgba(31,32,30,0.72); --text-3:rgba(31,32,30,0.5);
+  --border:rgba(31,32,30,0.08); --border-2:rgba(31,32,30,0.16);
+  --accent:var(--verde); --accent-2:var(--marrom); --success:#5a7a3c;
+  --font-display:'Bebas Neue','Impact',sans-serif;
+  --font-body:'Hanken Grotesk',system-ui,sans-serif;
+  --font-serif:'DM Serif Display',Georgia,serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --pattern-card:url('https://res.cloudinary.com/dynwzjfjw/image/upload/f_auto,q_auto/the-path/texturas/pattern-drab.png');
+  --sidebar-w:260px;
+  --radius:6px; --radius-card:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.app{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--chumbo);color:var(--bege);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;border-right:1px solid rgba(238,236,227,0.06);z-index:10;overflow-y:auto}
+.sidebar-brand{padding:24px 22px 22px;border-bottom:1px solid rgba(238,236,227,0.08)}
+.sidebar-brand img{height:28px;width:auto;display:block}
+.sidebar-brand-meta{display:block;margin-top:10px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(238,236,227,0.45)}
+.sidebar-section{padding:18px 14px 8px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(238,236,227,0.35)}
+.sidebar-nav{padding:0 8px 24px}
+.nav-link{display:flex;align-items:center;gap:12px;padding:10px 14px;font-size:14px;font-weight:500;color:rgba(238,236,227,0.78);border-radius:var(--radius);cursor:pointer;border:none;background:transparent;width:100%;text-align:left;font-family:var(--font-body);transition:background .15s,color .15s}
+.nav-link:hover{background:rgba(238,236,227,0.05);color:var(--bege)}
+.nav-link.active{background:var(--verde);color:var(--bege)}
+.nav-icon{width:18px;height:18px;flex-shrink:0;opacity:0.85}
+.nav-num{font-family:var(--font-mono);font-size:10px;font-weight:600;width:22px;flex-shrink:0;color:rgba(238,236,227,0.5)}
+.nav-link.active .nav-num{color:var(--bege)}
+.nav-chevron{margin-left:auto;font-size:10px;opacity:0.5;transition:transform .2s}
+.nav-group.expanded .nav-chevron{transform:rotate(90deg)}
+.nav-children{list-style:none;display:none;padding:4px 0 6px 30px}
+.nav-group.expanded .nav-children{display:block}
+.nav-child{display:flex;align-items:center;gap:8px;padding:6px 12px;font-size:13px;color:rgba(238,236,227,0.6);border-radius:var(--radius);cursor:pointer;border-left:1px solid rgba(238,236,227,0.1)}
+.nav-child:hover{color:var(--bege);background:rgba(238,236,227,0.04)}
+.nav-child.active{color:var(--bege);border-left-color:var(--marrom)}
+.nav-child-status{margin-left:auto;font-size:11px;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center}
+.nav-child-status.pending{color:rgba(238,236,227,0.25)}
+.nav-child-status.draft{color:var(--marrom-2)}
+.nav-child-status.validated{color:var(--success)}
+.sidebar-footer{margin-top:auto;padding:16px 22px 22px;border-top:1px solid rgba(238,236,227,0.06);font-family:var(--font-mono);font-size:10px;color:rgba(238,236,227,0.35);letter-spacing:0.05em}
+.sidebar-footer strong{color:rgba(238,236,227,0.6);font-weight:500}
+
+/* MAIN */
+.main{flex:1;margin-left:var(--sidebar-w);padding:0;min-height:100vh}
+.main-inner{max-width:1200px;margin:0 auto;padding:48px 56px 96px}
+.page-head{margin-bottom:40px}
+.breadcrumb{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.page-title{font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:clamp(34px,5vw,48px);line-height:1.05;color:var(--chumbo);letter-spacing:-0.01em;margin-bottom:12px}
+.page-lead{font-family:var(--font-body);font-size:16px;font-weight:300;color:var(--text-2);max-width:640px}
+.page-lead em{font-family:var(--font-serif);font-style:italic;color:var(--verde);font-weight:400}
+.divider{height:1px;background:var(--border);margin:28px 0 36px}
+
+/* HOME CARDS */
+.layers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+.layer-card{background:var(--surface);border-radius:var(--radius-card);overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+.layer-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(31,32,30,0.08)}
+.layer-card-cover{background:linear-gradient(180deg,rgba(31,32,30,0) 30%,rgba(31,32,30,0.25) 100%),var(--pattern-card),var(--verde);background-size:cover;background-position:center;background-blend-mode:overlay,normal;aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:24px}
+.layer-card-cover::before{content:'';position:absolute;inset:0;background:url('https://res.cloudinary.com/dynwzjfjw/image/upload/f_auto,q_auto/iniciais-alabaster_cpcw40') no-repeat top 18px center;background-size:42px auto;opacity:0.45;pointer-events:none}
+.layer-card-title{font-family:var(--font-display);font-size:44px;letter-spacing:0.04em;color:var(--bege);text-transform:uppercase;line-height:1;position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,0.25)}
+.layer-card-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;gap:12px}
+.layer-card-num-wrap{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--chumbo)}
+.layer-card-icon{width:18px;height:18px;color:var(--verde);flex-shrink:0}
+.layer-card-desc{font-size:13px;font-weight:300;color:var(--text-2);line-height:1.55;flex:1}
+.layer-card-progress{display:flex;align-items:center;gap:10px;margin-top:auto}
+.progress-bar-wrap{flex:1;height:5px;background:rgba(31,32,30,0.06);border-radius:3px;overflow:hidden;position:relative}
+.progress-bar-fill{height:100%;background:var(--verde);border-radius:3px;transition:width .3s}
+.progress-bar-fill.empty{background:repeating-linear-gradient(45deg,rgba(31,32,30,0.08) 0 4px,transparent 4px 8px)}
+.progress-count{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--text-2);min-width:36px;text-align:right}
+
+/* LAYER HERO */
+.layer-hero{background:var(--verde);color:var(--bege);border-radius:var(--radius-card);padding:48px 44px;position:relative;overflow:hidden;margin-bottom:32px}
+.layer-hero::before{content:'';position:absolute;inset:0;background:var(--pattern-card);opacity:0.28;mix-blend-mode:overlay;pointer-events:none}
+.layer-hero-num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(238,236,227,0.55);margin-bottom:12px;position:relative;z-index:2}
+.layer-hero-title{font-family:var(--font-display);font-size:72px;letter-spacing:0.04em;line-height:1;text-transform:uppercase;position:relative;z-index:2;margin-bottom:16px}
+.layer-hero-frase{font-family:var(--font-serif);font-style:italic;font-size:22px;line-height:1.45;color:rgba(238,236,227,0.92);max-width:720px;position:relative;z-index:2;font-weight:300}
+.layer-hero-progress{display:flex;align-items:center;gap:14px;margin-top:28px;position:relative;z-index:2;font-family:var(--font-mono);font-size:12px;color:rgba(238,236,227,0.7);text-transform:uppercase;letter-spacing:0.08em}
+.layer-hero-progress-bar{flex:1;max-width:320px;height:4px;background:rgba(238,236,227,0.18);border-radius:2px;overflow:hidden}
+.layer-hero-progress-fill{height:100%;background:var(--marrom-2);border-radius:2px}
+
+/* SECTIONS */
+.section{background:var(--surface);border-radius:var(--radius-card);padding:32px 36px;margin-bottom:22px;border:1px solid var(--border)}
+.section-label{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--marrom);margin-bottom:10px}
+.section h2{font-family:var(--font-display);font-size:30px;letter-spacing:0.04em;text-transform:uppercase;color:var(--chumbo);line-height:1;margin-bottom:8px;font-weight:400}
+.section-desc{color:var(--text-3);font-size:13.5px;margin-bottom:24px;max-width:720px}
+.section h3{font-family:var(--font-display);font-size:22px;letter-spacing:0.04em;text-transform:uppercase;color:var(--chumbo);margin:24px 0 12px;font-weight:400}
+.section h4{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);margin:22px 0 10px}
+.section p{margin-bottom:14px;color:var(--text-2)}
+.section ul,.section ol{margin:12px 0 16px 22px;color:var(--text-2)}
+.section li{margin-bottom:6px}
+blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;line-height:1.4;color:var(--verde);border-left:3px solid var(--marrom);padding:8px 0 8px 22px;margin:18px 0;font-weight:400}
+
+/* EXERCISE META */
+.exercise-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:18px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3)}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
+.tag.pending{background:rgba(31,32,30,0.06);color:var(--text-3)}
+.tag.draft{background:rgba(167,123,74,0.15);color:var(--marrom)}
+.tag.validated{background:rgba(90,122,60,0.15);color:var(--success)}
+.tag-validated::before{content:'✓ '}
+
+/* ANALOGIA */
+.analogia-visual{background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:36px;margin:24px 0;text-align:center}
+.analogia-visual svg{max-width:100%;height:auto}
+.analogia-caption{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--text-2);margin-top:18px;max-width:560px;margin-left:auto;margin-right:auto}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0 24px}
+.stat-card{background:var(--bege-2);border-radius:var(--radius-card);padding:22px 20px;border:1px solid var(--border)}
+.stat-card.dark{background:var(--chumbo);color:var(--bege);border-color:transparent}
+.stat-card.verde{background:var(--verde);color:var(--bege);border-color:transparent}
+.stat-value{font-family:var(--font-display);font-size:38px;line-height:1;margin-bottom:6px;letter-spacing:0.02em}
+.stat-label{font-family:var(--font-body);font-size:12px;font-weight:500}
+.stat-card .stat-label{color:var(--text-2)}
+.stat-card.dark .stat-label,.stat-card.verde .stat-label{color:rgba(238,236,227,0.75)}
+
+/* CHART */
+.chart-wrap{background:var(--bege-2);border-radius:var(--radius-card);padding:24px;border:1px solid var(--border);margin:18px 0}
+.chart-title{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);margin-bottom:14px}
+
+/* PEOPLE */
+.people-grid{display:flex;flex-wrap:wrap;gap:4px;margin:14px 0;max-width:520px}
+.person-icon{width:14px;height:18px;background:var(--marrom);clip-path:polygon(50% 0,70% 25%,70% 50%,100% 100%,0 100%,30% 50%,30% 25%);opacity:0.8}
+.person-icon.muted{background:rgba(31,32,30,0.18)}
+
+/* VALIDATION */
+.validation-check{display:flex;align-items:center;gap:14px;background:rgba(90,122,60,0.08);border:1px solid rgba(90,122,60,0.25);border-radius:var(--radius-card);padding:16px 20px;margin:24px 0;font-size:13px;color:var(--success)}
+.validation-check.pending{background:rgba(167,123,74,0.06);border-color:rgba(167,123,74,0.2);color:var(--marrom)}
+.validation-check-icon{width:22px;height:22px;flex-shrink:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--success);color:var(--bege);font-weight:700;font-size:13px}
+.validation-check.pending .validation-check-icon{background:transparent;border:2px dashed var(--marrom);color:var(--marrom)}
+.validation-check-meta{margin-left:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.7}
+
+/* QUOTE LIST */
+.quote-list{display:flex;flex-direction:column;gap:14px;margin:18px 0}
+.quote-item{background:var(--bege-2);border-left:3px solid var(--marrom);padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0}
+.quote-item p{font-family:var(--font-serif);font-style:italic;font-size:15px;color:var(--chumbo);margin:0 0 6px}
+.quote-item span{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3)}
+
+/* TABLES */
+.section table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+.section th{background:var(--verde);color:var(--bege);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700}
+.section td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-2)}
+.section tr:last-child td{border-bottom:none}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}
+.pillar{background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:18px}
+.pillar-num{font-family:var(--font-mono);font-size:10px;color:var(--marrom);letter-spacing:0.18em;text-transform:uppercase;font-weight:700}
+.pillar-title{font-family:var(--font-display);font-size:20px;color:var(--chumbo);margin:6px 0 8px;letter-spacing:0.02em;text-transform:uppercase}
+.pillar-desc{font-size:13px;color:var(--text-2);line-height:1.5}
+
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:4px;font-size:11.5px;font-weight:500;font-family:var(--font-body);letter-spacing:0.02em}
+.chip-yellow{background:#f6e7c2;color:#7a5d20}
+.chip-orange{background:#f6d8c2;color:#8a4a22}
+.chip-green{background:#cfe2bf;color:#3d5a23}
+.chip-purple{background:#dccff0;color:#523078}
+.chip-peach{background:#f3d8c6;color:#7a4a2a}
+.chip-pink{background:#f0c8d4;color:#7a2c4a}
+.chip-blue{background:#c8def0;color:#1f4a78}
+.chip-gray{background:rgba(31,32,30,0.08);color:rgba(31,32,30,0.6)}
+.chip-skyblue{background:#cfe5f4;color:#1f3d5a}
+.chip-rose{background:#f0c8c8;color:#7a2828}
+.chip-mint{background:#c8e8d8;color:#1f5a3a}
+.chip-coral{background:#f6c8b6;color:#7a2c14}
+
+/* DOR/DESEJO ITEM CARDS */
+.item-card{background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:22px 24px;margin-bottom:14px}
+.item-card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.item-card-num{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);font-weight:700}
+.item-card-title{font-family:var(--font-display);font-size:22px;letter-spacing:0.02em;text-transform:uppercase;color:var(--chumbo);margin:6px 0 10px;font-weight:400}
+.item-card-frase{font-family:var(--font-serif);font-style:italic;font-size:17px;color:var(--verde);line-height:1.45;margin:8px 0 14px;padding-left:14px;border-left:2px solid var(--marrom)}
+.item-card-section{margin-top:14px}
+.item-card-section h5{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);font-weight:700;margin-bottom:6px}
+.item-card-section p,.item-card-section ul{font-size:14px;color:var(--text-2);margin-bottom:0}
+.item-card-section ul{margin:6px 0 0 18px}
+
+/* IMPACT BARS */
+.impact-bar{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin:4px 0}
+.impact-bar-track{flex:1;max-width:180px;height:6px;background:rgba(31,32,30,0.06);border-radius:3px;overflow:hidden}
+.impact-bar-fill{height:100%;border-radius:3px;background:var(--verde)}
+.impact-bar-fill.high{background:#a13a1a}
+.impact-bar-fill.med{background:var(--marrom)}
+.impact-bar-fill.low{background:var(--verde)}
+
+/* TAM SAM SOM */
+.tamsamsom-wrap{display:flex;justify-content:center;margin:18px 0}
+
+/* RECOMMEND BOX */
+.recommend{background:var(--verde);color:var(--bege);border-radius:var(--radius-card);padding:18px 22px;margin:14px 0;display:flex;gap:14px;align-items:flex-start}
+.recommend-icon{flex-shrink:0;width:32px;height:32px;border:1.5px solid var(--marrom-2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;color:var(--marrom-2);font-weight:700}
+.recommend > div{flex:1}
+.recommend strong{color:var(--bege);display:block;margin-bottom:6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-family:var(--font-mono)}
+.recommend p{margin:0;color:rgba(238,236,227,0.88);font-size:14px;line-height:1.55}
+.recommend.alt{background:var(--chumbo)}
+.recommend.alt strong{color:var(--marrom-2)}
+.recommend-stack{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.recommend-stack .recommend{margin:0}
+
+/* TIMELINE NARRATIVA */
+.timeline-block{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--border)}
+.timeline-block:first-of-type{border-top:none}
+.timeline-period{font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);font-weight:700}
+.timeline-period strong{display:block;font-family:var(--font-display);font-size:26px;letter-spacing:0.04em;color:var(--chumbo);font-weight:400;margin-top:6px}
+.timeline-body h4{font-family:var(--font-display);font-size:22px;letter-spacing:0.04em;text-transform:uppercase;color:var(--chumbo);margin:0 0 8px;font-weight:400}
+.timeline-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.timeline-conn{display:flex;flex-direction:column;gap:4px;margin-top:14px;padding:12px 14px;background:var(--bege-2);border-left:2px solid var(--marrom);border-radius:0 var(--radius) var(--radius) 0}
+.timeline-conn-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);font-weight:700}
+.timeline-conn-text{font-size:13px;color:var(--text-2)}
+
+/* HISTÓRIA CARDS */
+.story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:14px 0}
+.story-card{background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:18px 20px;display:flex;flex-direction:column;gap:8px;transition:transform .15s,box-shadow .15s;cursor:pointer;text-decoration:none;color:inherit;position:relative}
+.story-card[data-page]:hover{border-color:var(--marrom)}
+.story-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(31,32,30,0.06)}
+.story-card-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);font-weight:700}
+.story-card-title{font-family:var(--font-display);font-size:18px;letter-spacing:0.02em;color:var(--chumbo);text-transform:uppercase;font-weight:400;margin:2px 0 4px}
+.story-card-nucleo{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--verde);line-height:1.45;margin:4px 0 8px}
+
+/* ROADMAP */
+.roadmap-wrap{background:var(--chumbo);border-radius:var(--radius-card);padding:32px 28px;margin:18px 0;color:var(--bege);position:relative;overflow:hidden}
+.roadmap-wrap::before{content:'';position:absolute;inset:0;background:var(--pattern-card);opacity:0.18;mix-blend-mode:overlay;pointer-events:none}
+.roadmap-grid{display:grid;grid-template-columns:160px repeat(var(--cols,5),1fr);gap:0;position:relative;z-index:2}
+.roadmap-header{display:contents}
+.roadmap-header-period{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(238,236,227,0.55);padding:0 0 14px 12px;border-bottom:1px solid rgba(238,236,227,0.15);border-left:1px solid rgba(238,236,227,0.1)}
+.roadmap-header-empty{padding-bottom:14px;border-bottom:1px solid rgba(238,236,227,0.15)}
+.roadmap-row{display:contents}
+.roadmap-label{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--bege);padding:18px 16px 18px 0;text-align:right;border-bottom:1px solid rgba(238,236,227,0.06)}
+.roadmap-track{padding:14px 0;border-bottom:1px solid rgba(238,236,227,0.06);border-left:1px solid rgba(238,236,227,0.1);grid-column:span var(--span,1);position:relative;display:flex;align-items:center}
+.roadmap-bar{height:32px;background:var(--marrom);border-radius:100px;width:100%;position:relative;display:flex;align-items:center;padding:0 14px;font-family:var(--font-body);font-size:11px;font-weight:600;color:var(--bege);box-shadow:0 2px 12px rgba(167,123,74,0.25)}
+.roadmap-bar.ghost{background:rgba(238,236,227,0.1);box-shadow:none;color:rgba(238,236,227,0.5)}
+.roadmap-bar.start-25{margin-left:25%}
+.roadmap-bar.start-50{margin-left:50%}
+.roadmap-bar.start-75{margin-left:75%}
+
+/* ETAPA BLOCK */
+.etapa-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:30px 32px;margin-bottom:18px;border-left:4px solid var(--verde)}
+.etapa-block-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.etapa-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--verde);color:var(--bege);font-family:var(--font-display);font-size:22px;letter-spacing:0.04em;flex-shrink:0}
+.etapa-title{font-family:var(--font-display);font-size:28px;letter-spacing:0.04em;text-transform:uppercase;color:var(--chumbo);font-weight:400;line-height:1}
+.etapa-period{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);margin-left:auto;font-weight:700}
+.etapa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:14px}
+.etapa-cell{background:var(--bege-2);border-radius:var(--radius);padding:18px 20px;border:1px solid var(--border)}
+.etapa-cell h5{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);margin-bottom:8px;font-weight:700;display:flex;align-items:center;gap:6px}
+.etapa-cell p,.etapa-cell ul{font-size:13.5px;color:var(--text-2);margin:0}
+.etapa-cell ul{margin:4px 0 0 18px}
+.etapa-cell li{margin-bottom:4px}
+
+/* MARCO BADGE */
+.marco-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:var(--verde);color:var(--bege);font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-top:8px}
+.marco-badge::before{content:'◆';font-size:9px}
+
+/* PRODUTO CARDS */
+.produto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin:18px 0}
+.produto-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:24px;display:flex;flex-direction:column;gap:14px;cursor:pointer;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;position:relative}
+.produto-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(31,32,30,0.08)}
+.produto-card-arrow{position:absolute;top:16px;right:18px;font-family:var(--font-mono);font-size:14px;color:var(--text-3);transition:transform .15s,color .15s}
+.produto-card:hover .produto-card-arrow{transform:translateX(2px);color:var(--marrom)}
+.produto-card-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.produto-card-formato{display:inline-flex;padding:3px 10px;border-radius:4px;background:var(--verde);color:var(--bege);font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700}
+.produto-card-status{display:inline-flex;padding:3px 10px;border-radius:4px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700}
+.produto-card-status.ativo{background:#5a7a3c;color:var(--bege)}
+.produto-card-status.dev{background:var(--marrom);color:var(--bege)}
+.produto-card-status.ideia{background:rgba(31,32,30,0.12);color:var(--text-2)}
+.produto-card-title{font-family:var(--font-display);font-size:26px;letter-spacing:0.04em;text-transform:uppercase;color:var(--chumbo);font-weight:400;line-height:1;margin:6px 0 0}
+.produto-card-frase{font-family:var(--font-serif);font-style:italic;font-size:15px;color:var(--verde);line-height:1.45;margin:0}
+.produto-card-ticket{display:flex;align-items:baseline;gap:6px;margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.produto-card-ticket-value{font-family:var(--font-display);font-size:24px;color:var(--chumbo);letter-spacing:0.02em}
+.produto-card-ticket-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-3);font-weight:700}
+
+/* PRODUTO HERO */
+.produto-hero{background:var(--verde);color:var(--bege);border-radius:var(--radius-card);padding:40px 44px;margin-bottom:22px;position:relative;overflow:hidden}
+.produto-hero::before{content:'';position:absolute;inset:0;background:var(--pattern-card);opacity:0.2;mix-blend-mode:overlay;pointer-events:none}
+.produto-hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;position:relative;z-index:2}
+.produto-hero-meta .produto-card-formato{background:var(--marrom)}
+.produto-hero-title{font-family:var(--font-display);font-size:54px;letter-spacing:0.04em;line-height:1;text-transform:uppercase;position:relative;z-index:2;margin-bottom:14px}
+.produto-hero-frase{font-family:var(--font-serif);font-style:italic;font-size:20px;line-height:1.45;color:rgba(238,236,227,0.92);max-width:680px;position:relative;z-index:2;font-weight:300}
+.produto-hero-ticket{display:flex;gap:24px;margin-top:24px;position:relative;z-index:2;flex-wrap:wrap}
+.produto-hero-ticket-item{display:flex;flex-direction:column;gap:2px}
+.produto-hero-ticket-item small{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(238,236,227,0.55);font-weight:700}
+.produto-hero-ticket-item strong{font-family:var(--font-display);font-size:26px;color:var(--bege);letter-spacing:0.02em;font-weight:400}
+
+/* TIPO OFERTA */
+.tipo-oferta{display:inline-flex;padding:4px 12px;border-radius:100px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700}
+.tipo-oferta.principal{background:var(--verde);color:var(--bege)}
+.tipo-oferta.upsell{background:var(--marrom);color:var(--bege)}
+.tipo-oferta.downsell{background:#5a7a3c;color:var(--bege)}
+.tipo-oferta.bump{background:var(--chumbo);color:var(--bege)}
+
+/* BULLET LIST */
+.bullet-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.bullet-list li{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:var(--text-2);line-height:1.45}
+.bullet-list li::before{content:'';width:14px;height:14px;flex-shrink:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:var(--font-mono);margin-top:3px}
+.bullet-list.check li::before{background:#5a7a3c;color:var(--bege);content:'✓'}
+.bullet-list.cross li::before{background:#a13a1a;color:var(--bege);content:'✗'}
+.bullet-list.dot li::before{background:var(--marrom);color:var(--bege);content:''}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--chumbo);color:var(--bege);padding:14px 22px;border-radius:8px;font-family:var(--font-body);font-size:14px;font-weight:500;box-shadow:0 8px 32px rgba(31,32,30,0.25);opacity:0;transform:translateY(12px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:1000;display:flex;align-items:center;gap:10px;border:1px solid rgba(238,236,227,0.1)}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast::before{content:'✓';color:var(--success);font-weight:700;font-size:16px}
+
+/* PAGE VISIBILITY */
+.page{display:none}
+.page.active{display:block;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(238,236,227,0.12);border-radius:3px}
+@media(max-width:900px){:root{--sidebar-w:220px}.main-inner{padding:32px 28px 64px}.layer-hero{padding:32px 24px}.layer-hero-title{font-size:52px}}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="https://res.cloudinary.com/dynwzjfjw/image/upload/f_auto,q_auto/logotipo_completo-alabaster_ast0i8" alt="Inception Experience">
+      <span class="sidebar-brand-meta">Consultoria · v1</span>
+    </div>
+
+    <div class="sidebar-section">Navegação</div>
+    <nav class="sidebar-nav">
+
+      <button class="nav-link active" data-page="home">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
+        <span>Home</span>
+      </button>
+
+      <div class="nav-group" data-group="aprendiz">
+        <button class="nav-link" data-page="layer-aprendiz"><span class="nav-num">01</span><span>O Aprendiz</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="ex-aprendiz-icp"><span>ICP</span><span class="nav-child-status validated">✓</span></li>
+          <li class="nav-child" data-page="ex-aprendiz-pesquisa"><span>Pesquisa de mercado</span><span class="nav-child-status validated">✓</span></li>
+          <li class="nav-child" data-page="ex-aprendiz-dores"><span>Dores e problemas</span><span class="nav-child-status validated">✓</span></li>
+          <li class="nav-child" data-page="ex-aprendiz-desejos"><span>Desejos e necessidades</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-aprendiz-rotina"><span>Rotina</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-aprendiz-habilidades"><span>Habilidades digitais</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="expert">
+        <button class="nav-link" data-page="layer-expert"><span class="nav-num">02</span><span>O Expert</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="ex-expert-zona-maestria"><span>Zona de Maestria</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-expert-golden-circle"><span>Golden Circle</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-expert-narrativa"><span>Trajetória e Narrativa</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-expert-voz"><span>Voz e Posicionamento</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-expert-historias"><span>Banco de Histórias</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="metodo">
+        <button class="nav-link" data-page="layer-metodo"><span class="nav-num">03</span><span>O Método</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="ex-metodo-puv"><span>Proposta de Valor</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-metodo-jornada"><span>Jornada do Método</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-metodo-frameworks"><span>Frameworks</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-metodo-instrumentos"><span>Instrumentos</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="produto">
+        <button class="nav-link" data-page="layer-produto"><span class="nav-num">04</span><span>Esteira de Produtos</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="produto-imersao"><span>Imersão ao vivo</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="produto-sellz"><span>Sell-z</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="produto-2za"><span>2Z Advisor</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-produto-comparativo"><span>Comparativo de Ofertas</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="venda">
+        <button class="nav-link" data-page="layer-venda"><span class="nav-num">05</span><span>Vendas</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="ex-venda-branding"><span>Branding</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-venda-funil"><span>Funil &amp; Canais</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-venda-lancamento"><span>Lançamento</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="projeto">
+        <button class="nav-link" data-page="layer-projeto"><span class="nav-num">06</span><span>O Projeto</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="ex-projeto-status"><span>Painel de progresso</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-projeto-debriefing"><span>Debriefing</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <strong>Inception Experience</strong><br>
+      Consultoria Mazzei · v1
+    </div>
+  </aside>
+
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="main-inner">
+
+
+      <!-- HOME -->
+      <div class="page active" id="page-home">
+        <div class="page-head">
+          <div class="breadcrumb">Consultoria Mazzei · Implementação · Inception Experience</div>
+          <h1 class="page-title">Consultoria <em>Mazzei</em></h1>
+          <p class="page-lead">Esta dashboard documenta toda a entrega da consultoria — método, expert, produtos e lançamento. Use as <em>6 camadas</em> abaixo para navegar.</p>
+        </div>
+
+        <div class="layers-grid">
+          <a class="layer-card" data-page="layer-aprendiz">
+            <div class="layer-card-cover"><span class="layer-card-title">O Aprendiz</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 4-7 8-7s8 3 8 7"/></svg><span>01. O Aprendiz</span></div>
+              <p class="layer-card-desc">Empresário de venda consultiva — vende pelo valor que entrega, mas não faz o cliente perceber antes do preço.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:50%"></div></div><span class="progress-count">3/6</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-expert">
+            <div class="layer-card-cover"><span class="layer-card-title">O Expert</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><span>02. O Expert</span></div>
+              <p class="layer-card-desc">Antes de ensinar, descubra o que você sabe que ninguém mais consegue articular.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:20%"></div></div><span class="progress-count">1/5</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-metodo">
+            <div class="layer-card-cover"><span class="layer-card-title">O Método</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.5c1 1 1.5 2.5 1.5 3.5h5c0-1 .5-2.5 1.5-3.5A7 7 0 0 0 12 2z"/></svg><span>03. O Método</span></div>
+              <p class="layer-card-desc">Organize o caos genial que vive na sua cabeça em sequência ensinável e replicável.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:50%"></div></div><span class="progress-count">2/4</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-produto">
+            <div class="layer-card-cover"><span class="layer-card-title">Os Produtos</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span>04. Esteira de Produtos</span></div>
+              <p class="layer-card-desc">Três produtos. Uma jornada. Cada degrau intensifica desejo pelo próximo.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:75%"></div></div><span class="progress-count">3/4</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-venda">
+            <div class="layer-card-cover"><span class="layer-card-title">Vendas</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h2l3 12h11l3-8H7"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span>05. Vendas</span></div>
+              <p class="layer-card-desc">Branding, funil, canais e lançamento. Marketing e venda da esteira.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/3</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-projeto">
+            <div class="layer-card-cover"><span class="layer-card-title">O Projeto</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>06. O Projeto</span></div>
+              <p class="layer-card-desc">Painel de progresso e debriefing de toda a implementação.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/2</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+
+      <!-- LAYER · APRENDIZ -->
+      <div class="page" id="page-layer-aprendiz">
+        <div class="breadcrumb">Consultoria Mazzei · Camada 01</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Camada 01 · Fundação</div>
+          <h1 class="layer-hero-title">O Aprendiz</h1>
+          <p class="layer-hero-frase">Empresário de venda consultiva — vende pelo valor que entrega, mas não faz o cliente perceber antes do preço.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:50%"></div></div><span>3/6 validados</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Resumo da camada</div>
+          <h2>Quem é o aprendiz da Mazzei</h2>
+          <p class="section-desc">Síntese consolidada da pesquisa de público-alvo, mercado e concorrência (Mar/2026). Função desta página: confirmar leitura, ajustar nuances, refinar com a expert.</p>
+
+          <h4>ICP central</h4>
+          <blockquote class="tese">Empresário de serviço consultivo (R$ 10k–R$ 150k/mês) que vende cadeira — depende de feeling e indicação, sem método para sair de "comparado por preço" para "escolhido por valor".</blockquote>
+
+          <h4>Tamanho de mercado · Brasil</h4>
+          <p><strong>TAM</strong> 1,1M–1,8M empresas de serviço · <strong>SAM</strong> 300k–750k em centros urbanos com venda consultiva · <strong>Público 1</strong> (R$10k–35k/mês) 800k–1,2M · <strong>Público 2</strong> (R$35k–150k/mês) 250k–400k.</p>
+
+          <h4>Dor consciente principal</h4>
+          <p>"Vendo bem às vezes e travo em outras — sem entender o que muda."</p>
+
+          <h4>Desejo dominante</h4>
+          <p><strong>Público 1</strong> — consistência (parar do feast-or-famine, garantir reserva, dormir tranquilo). <strong>Público 2</strong> — escala sem colapsar (sair do gargalo do dono, montar conselho/processo, escalar sem perder qualidade).</p>
+
+          <h4>Janela na rotina</h4>
+          <p>Agenda de 50–60h/semana atendendo cliente. 67% prefere avançar sozinho (pesquisa, conteúdo, comparação) antes de falar com alguém (Gartner 2026). Decide em ciclos curtos via WhatsApp e IG; due diligence no YouTube.</p>
+
+          <h4>Outputs dessa camada</h4>
+          <ul>
+            <li><strong>ICP</strong> · perfil consolidado <span class="tag validated tag-validated">validado</span></li>
+            <li><strong>Pesquisa de mercado</strong> · TAM/SAM/SOM + bench 8 concorrentes + 15 fontes <span class="tag validated tag-validated">validado</span></li>
+            <li><strong>Dores e problemas</strong> · dor central + 5 dores + 3 problemas inconscientes <span class="tag validated tag-validated">validado</span></li>
+            <li><strong>Desejos e necessidades</strong> · ranking 12 universais por público <span class="tag draft">rascunho</span></li>
+            <li><strong>Rotina</strong> · janela útil + canais + horários <span class="tag draft">rascunho</span></li>
+            <li><strong>Habilidades digitais</strong> · em extração <span class="tag pending">pendente</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- EX · APRENDIZ · ICP -->
+      <div class="page" id="page-ex-aprendiz-icp">
+        <div class="breadcrumb">Camada 01 · O Aprendiz</div>
+        <div class="page-head">
+          <h1 class="page-title">ICP <em>— empresário de venda consultiva, comparado por preço</em></h1>
+          <p class="page-lead">Perfil-alvo único da Consultoria Mazzei: empresário de serviço consultivo (R$10k–150k/mês) que vende cadeira, depende de feeling e indicação, e quer sair de "comparado por preço" para "escolhido por valor".</p>
+          <div class="exercise-meta"><span class="tag validated tag-validated">validado</span><span>Última edição: Mar/2026</span><span>Por: Researcher (squad MSE)</span></div>
+        </div>
+
+        <div class="validation-check">
+          <span class="validation-check-icon">✓</span>
+          <div><strong>Validado pela expert</strong> — Rafa confirmou em 27/03/2026 (Documento Estratégico Mar 2026).</div>
+          <span class="validation-check-meta">v2</span>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Highlights do mercado</div>
+          <h2>Tamanho do nicho · Brasil 2026</h2>
+          <div class="stats-grid">
+            <div class="stat-card verde"><div class="stat-value">1,1–1,8M</div><div class="stat-label">TAM · empresas de serviço no Brasil (IBGE / Mapa de Empresas)</div></div>
+            <div class="stat-card dark"><div class="stat-value">300–750k</div><div class="stat-label">SAM · centros urbanos com venda consultiva</div></div>
+            <div class="stat-card"><div class="stat-value">800k–1,2M</div><div class="stat-label">Público 1 · faturamento R$10k–35k/mês</div></div>
+            <div class="stat-card"><div class="stat-value">250–400k</div><div class="stat-label">Público 2 · faturamento R$35k–150k/mês</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA do ICP</div>
+          <h2>Perfil completo</h2>
+          <table>
+            <tr><th>Eixo</th><th>Detalhe</th></tr>
+            <tr><td><strong>Profissão</strong></td><td>Arquiteto · designer · consultor · médico · dentista · advogado · BPO financeiro · contador consultivo · terapeuta</td></tr>
+            <tr><td><strong>Faturamento</strong></td><td>Dois perfis · Público 1: R$10k–35k/mês · Público 2: R$35k–150k/mês</td></tr>
+            <tr><td><strong>Idade</strong></td><td>30–48 anos · concentração 33–44</td></tr>
+            <tr><td><strong>Geografia</strong></td><td>Sudeste 44% (SP 29%) · Sul mais densidade per capita · interior cresce 9,2% a.a.</td></tr>
+            <tr><td><strong>Motivação dominante</strong></td><td>Autonomia / independência (69,2% — CFA)</td></tr>
+            <tr><td><strong>Identidade atual</strong></td><td>"Profissional que vende" — não se reconhece como "empresário com método"</td></tr>
+            <tr><td><strong>Estado emocional</strong></td><td>"Vendedor acidental" · culpa por cobrar · medo de perder o contrato</td></tr>
+            <tr><td><strong>Vocabulário evitado</strong></td><td>"Guru" · "fórmula mágica" · linguagem marketeira</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Para quem É · Para quem NÃO É</div>
+          <h2>Critérios de qualificação</h2>
+          <table>
+            <tr><th>É para você se</th><th>NÃO é se</th></tr>
+            <tr><td>Vende cadeira (consultiva, alto envolvimento)</td><td>Vende varejo, impulso ou commodity</td></tr>
+            <tr><td>Serviço especializado · ticket alto</td><td>Trabalha em war de preço com concorrência</td></tr>
+            <tr><td>Fatura R$10k–150k/mês (consultoria, projeto, atendimento)</td><td>Enterprise multi-decisor com ciclo &gt;6 meses</td></tr>
+            <tr><td>Quer processo, previsibilidade e maturidade empresarial</td><td>Fatura R$1M+/ano (G4 zone)</td></tr>
+            <tr><td>Vende pelo valor — só não consegue fazer ver antes do preço</td><td>Quer "técnica de venda" desconectada do negócio</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Vozes da pesquisa</div>
+          <h2>O que o aprendiz pensa e fala</h2>
+
+          <h4>Pensa</h4>
+          <div class="quote-list">
+            <div class="quote-item"><p>"Não sei o que muda entre o mês bom e o ruim."</p><span>Insegurança recorrente · alta frequência</span></div>
+            <div class="quote-item"><p>"Cobrar mais vai me fazer perder o contrato."</p><span>Medo central · trava precificação</span></div>
+            <div class="quote-item"><p>"Já investi muito sem retorno claro."</p><span>Cicatriz de cursos e mentorias passadas</span></div>
+          </div>
+
+          <h4>Fala (em voz alta)</h4>
+          <div class="quote-list">
+            <div class="quote-item"><p>"Não cabe no orçamento."</p><span>Objeção financeira clássica</span></div>
+            <div class="quote-item"><p>"Meu negócio é diferente."</p><span>Defesa contra método "genérico"</span></div>
+            <div class="quote-item"><p>"Já tentei e não implemento."</p><span>Cicatriz de tentativas falhas</span></div>
+            <div class="quote-item"><p>"Pedir ajuda é fraqueza."</p><span>Identidade do empresário-herói</span></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · APRENDIZ · PESQUISA DE MERCADO -->
+      <div class="page" id="page-ex-aprendiz-pesquisa">
+        <div class="breadcrumb">Camada 01 · O Aprendiz</div>
+        <div class="page-head">
+          <h1 class="page-title">Pesquisa de mercado <em>— TAM, SAM, SOM, bench, fontes</em></h1>
+          <p class="page-lead">Mercado de serviços consultivos no Brasil. Dados oficiais (IBGE, Sebrae, Serasa, FGV-Hotmart) + análise de 8 players + 15 fontes auditáveis.</p>
+          <div class="exercise-meta"><span class="tag validated tag-validated">validado</span><span>Última edição: Mar/2026</span><span>Por: Researcher (squad MSE)</span></div>
+        </div>
+
+        <div class="validation-check"><span class="validation-check-icon">✓</span><div><strong>Validado pela expert</strong> — Rafa aprovou em Mar/2026 (Documento Estratégico Mazzei).</div><span class="validation-check-meta">v1</span></div>
+
+        <div class="section">
+          <div class="section-label">Tamanho de mercado · Brasil</div>
+          <h2>TAM · SAM · SOM</h2>
+          <p class="section-desc">Mercado total de empresas de serviço → fração com venda consultiva → fração capturável pela Mazzei em 3 anos.</p>
+
+          <div class="tamsamsom-wrap">
+            <svg viewBox="0 0 540 360" style="width:100%;max-width:520px">
+              <circle cx="270" cy="180" r="170" fill="#eeece3" stroke="#1f201e" stroke-width="1.5"/>
+              <circle cx="270" cy="200" r="115" fill="#a77b4a" fill-opacity="0.9" stroke="#1f201e" stroke-width="1.5"/>
+              <circle cx="270" cy="225" r="55" fill="#474928" stroke="#1f201e" stroke-width="1.5"/>
+              <g font-family="Bebas Neue" letter-spacing="3" text-anchor="middle">
+                <text x="270" y="40"  font-size="20" fill="#1f201e">TAM</text>
+                <text x="270" y="60"  font-size="13" fill="rgba(31,32,30,0.6)" letter-spacing="2">1,1–1,8M EMPRESAS SERVIÇO</text>
+                <text x="270" y="115" font-size="18" fill="#eeece3">SAM</text>
+                <text x="270" y="132" font-size="11" fill="rgba(238,236,227,0.85)" letter-spacing="2">300–750K VENDA CONSULTIVA</text>
+                <text x="270" y="222" font-size="18" fill="#eeece3">SOM</text>
+                <text x="270" y="240" font-size="10" fill="rgba(238,236,227,0.85)" letter-spacing="2">3.000 EM 3 ANOS</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-value">1,1–1,8M</div><div class="stat-label">TAM · Empresas de serviço Brasil (IBGE / Mapa de Empresas)</div></div>
+            <div class="stat-card"><div class="stat-value">300–750k</div><div class="stat-label">SAM · Centros urbanos com venda consultiva (estimativa Sebrae 2024)</div></div>
+            <div class="stat-card verde"><div class="stat-value">3.000</div><div class="stat-label">SOM · Capturável em 3 anos pela Mazzei (estimativa interna)</div></div>
+            <div class="stat-card dark"><div class="stat-value">8,9M</div><div class="stat-label">Empresas inadimplentes no país · R$213B em dívidas (Serasa)</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Benchmark</div>
+          <h2>Mapa de concorrência</h2>
+          <p class="section-desc">Players que disputam atenção do empresário de serviço — direta ou indiretamente. Análise completa em <code>RELATORIO_EXTRA_SOBRE_PUBLICO_-_MERCADO_E_CONCORRENCIA.pdf</code>.</p>
+
+          <table>
+            <tr><th>Player</th><th>Ticket</th><th>Posicionamento</th><th>Gap vs Mazzei</th></tr>
+            <tr><td><strong>G4 Educação</strong></td><td>~R$ 25k</td><td>Empresas R$1M+/ano · gestão escala</td><td>Fora do nicho de serviço consultivo PME · público acima</td></tr>
+            <tr><td><strong>EAG (Marcelo Germano)</strong></td><td>R$22,6k / 12m</td><td>Gestão geral · 6 pilares</td><td>Fraco no comercial consultivo · genérico</td></tr>
+            <tr><td><strong>Sales Clube / Thiago Concer</strong></td><td>R$1,3k–125k</td><td>Mira R$7M–50M · vendas</td><td>Não especializado em serviço consultivo</td></tr>
+            <tr><td><strong>Marcus Marques</strong></td><td>Variável</td><td>3M seguidores · 10–1000 funcionários</td><td>Público massa · não consultivo PME</td></tr>
+            <tr><td><strong>Gabriela Melo (Smart Closer)</strong></td><td>High ticket</td><td>Closer · condução de call</td><td>Foca técnica de call, não maturidade empresarial</td></tr>
+            <tr><td><strong>Sebrae</strong></td><td>R$122/h–5k</td><td>Gestão geral PME</td><td>Generalista · sem metodologia consultiva</td></tr>
+            <tr><td><strong>Febracis / Paulo Vieira</strong></td><td>Variável</td><td>11M+ livros · CIS</td><td>Excesso de mindset · pouco processo</td></tr>
+            <tr style="background:rgba(167,123,74,0.1)"><td><strong>Mazzei (Inception)</strong></td><td>R$ 6k–48k</td><td><strong>Venda consultiva como expressão de maturidade empresarial</strong></td><td>—</td></tr>
+          </table>
+
+          <h4>Lacunas competitivas identificadas</h4>
+          <ol style="font-size:13.5px;line-height:1.7">
+            <li><strong>Penetração mínima do mercado</strong> — apenas 6% dos empresários buscaram orientação no último ano (Sebrae 2024). Espaço enorme para captura.</li>
+            <li><strong>Nicho R$10k–150k/mês não atendido</strong> — G4 está acima, Sales Clube acima, generalistas mal servidos. Mazzei ocupa o vão exato.</li>
+            <li><strong>Foco em serviço consultivo</strong> — não é varejo, não é SaaS, não é enterprise. Recorte único entre os players.</li>
+            <li><strong>Venda como expressão de maturidade empresarial</strong> — territorio único: vender bem é consequência de ter casa em ordem, não técnica isolada.</li>
+          </ol>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Tendências 2025–2026</div>
+          <h2>O que está mudando no mercado</h2>
+          <table>
+            <tr><th>Tendência</th><th>Impacto</th></tr>
+            <tr><td><strong>IA integrada ao produto</strong></td><td>+30% engajamento em plataformas com IA · diferencial competitivo</td></tr>
+            <tr><td><strong>Comunidades + assinatura</strong></td><td>Empresas com recorrência crescem 4,6x mais rápido</td></tr>
+            <tr><td><strong>Microlearning</strong></td><td>+20% taxa de conclusão com módulos curtos</td></tr>
+            <tr><td><strong>Modelo phygital</strong></td><td>Online + imersões presenciais elevam ticket e percepção de valor</td></tr>
+            <tr><td><strong>Micronichos ultra-específicos</strong></td><td>Maior conversão e menor custo de aquisição</td></tr>
+            <tr><td><strong>Reforma Tributária</strong></td><td>Alíquota serviços passa de 8,65% → 19,6%–26,5% · urgência por margem</td></tr>
+            <tr><td><strong>Selic 14,75%</strong></td><td>Crédito proibitivo · capital próprio é regra</td></tr>
+            <tr><td><strong>Inadimplência recorde</strong></td><td>8,9M empresas, R$213B (Serasa) · serviços com 55,2% inadimplentes</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Recomendações estratégicas</div>
+          <h2>O que isso significa para a Mazzei</h2>
+
+          <div class="recommend-stack">
+            <div class="recommend"><div class="recommend-icon">1</div><div><strong>Argumento de venda contextual</strong><p>"Cada mês sem processo comercial custa dinheiro que você não pode perder." A reforma tributária + inadimplência alta + Selic 14,75% criam senso de urgência real (não inventado). Usar como gatilho pra conversa de venda.</p></div></div>
+            <div class="recommend alt"><div class="recommend-icon">2</div><div><strong>Território único</strong><p>"Venda consultiva como maturidade empresarial." Recorte que ninguém ocupa. Diferencia de Sales Clube (técnica), G4 (gestão escala), Sebrae (genérico) e Febracis (mindset).</p></div></div>
+            <div class="recommend"><div class="recommend-icon">3</div><div><strong>Sweet spots de preço</strong><p>Público 1: R$6k–12k (12x R$500–1k) · Público 2: R$24k–48k (12x R$2k–4k). Ancoragem em ROI: 1 contrato a mais paga 6 meses de programa. Tickets validados em pesquisa.</p></div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Fontes</div>
+          <h2>15 fontes auditáveis</h2>
+          <ol style="font-size:13px;line-height:1.7;color:var(--text-2)">
+            <li>IBGE — Pesquisa Anual de Serviços</li>
+            <li>Mapa de Empresas (Ministério do Desenvolvimento)</li>
+            <li>Sebrae — Pesquisa Empresarial 2024</li>
+            <li>IMARC Group — Educação online Brasil</li>
+            <li>FGV-Hotmart — Creator Economy 2024</li>
+            <li>Hotmart Creator Economy Report</li>
+            <li>Serasa Experian — Inadimplência Brasil</li>
+            <li>CFA — Conselho Federal de Administração (motivação empreendedora)</li>
+            <li>Gartner 2026 — Comportamento de compra B2B</li>
+            <li>LinkedIn Marketing BR</li>
+            <li>ABED — Associação Brasileira de Educação a Distância</li>
+            <li>Reclame Aqui — categorias serviço</li>
+            <li>Reddit r/empreendedorismo (escuta qualitativa)</li>
+            <li>Pesquisa interna Inception (entrevistas)</li>
+            <li>Documento Estratégico Mazzei · Mar 2026</li>
+          </ol>
+        </div>
+      </div>
+
+
+      <!-- EX · APRENDIZ · DORES E PROBLEMAS -->
+      <div class="page" id="page-ex-aprendiz-dores">
+        <div class="breadcrumb">Camada 01 · O Aprendiz</div>
+        <div class="page-head">
+          <h1 class="page-title">Dores e problemas <em>— o que trava o empresário consultivo</em></h1>
+          <p class="page-lead">Dor central + 5 dores secundárias + 3 problemas inconscientes que o empresário ainda não nomeia. Base para todo discurso comercial e narrativa de produto.</p>
+          <div class="exercise-meta"><span class="tag validated tag-validated">validado</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check"><span class="validation-check-icon">✓</span><div><strong>Validado pela expert</strong> — Rafa confirmou frase principal e ranking de impacto.</div><span class="validation-check-meta">v1</span></div>
+
+        <div class="section">
+          <div class="section-label">Dor central</div>
+          <h2>O que ele pensa quando ninguém vê</h2>
+          <blockquote class="tese">Vendo bem às vezes e travo em outras — sem entender o que muda.</blockquote>
+
+          <h4>Como se manifesta</h4>
+          <ul>
+            <li>Mês bom e mês travado sem entender por quê</li>
+            <li>Depende 100% de indicação — não tem canal de aquisição próprio</li>
+            <li>Cobra por feeling, sem método de precificação</li>
+            <li>Cada conversa de venda é esforço exaustivo (sem roteiro)</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-label">5 dores secundárias</div>
+          <h2>Mapa de impacto e frequência</h2>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">Dor 02</span><span class="chip chip-orange">instabilidade</span><span class="chip chip-rose">crítico</span></div>
+            <h3 class="item-card-title">Instabilidade de faturamento (feast-or-famine)</h3>
+            <p class="item-card-frase">"Mês cheio, mês vazio. 59% de nós não tem reserva financeira."</p>
+            <div class="item-card-section"><h5>Frequência</h5><div class="impact-bar"><span>~85%</span><div class="impact-bar-track"><div class="impact-bar-fill high" style="width:85%"></div></div></div></div>
+            <div class="item-card-section"><h5>Impacto</h5><div class="impact-bar"><span>Crítico</span><div class="impact-bar-track"><div class="impact-bar-fill high" style="width:90%"></div></div></div></div>
+          </div>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">Dor 03</span><span class="chip chip-yellow">aquisição</span><span class="chip chip-orange">alto</span></div>
+            <h3 class="item-card-title">Dependência total de indicação</h3>
+            <p class="item-card-frase">"Tudo que vendo veio de alguém que me indicou. Quando o boca-a-boca seca, eu seco junto."</p>
+            <div class="item-card-section"><h5>Frequência</h5><div class="impact-bar"><span>~78%</span><div class="impact-bar-track"><div class="impact-bar-fill med" style="width:78%"></div></div></div></div>
+            <div class="item-card-section"><h5>Contexto</h5><p>60% do público chega por indicação. Sem canal próprio. Operação inteira flutua com humor da rede.</p></div>
+          </div>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">Dor 04</span><span class="chip chip-purple">processo</span><span class="chip chip-orange">alto</span></div>
+            <h3 class="item-card-title">Venda no feeling (sem roteiro)</h3>
+            <p class="item-card-frase">"Cada conversa é uma performance nova. Saio exausta de cada reunião comercial."</p>
+            <div class="item-card-section"><h5>Frequência</h5><div class="impact-bar"><span>~80%</span><div class="impact-bar-track"><div class="impact-bar-fill med" style="width:80%"></div></div></div></div>
+            <div class="item-card-section"><h5>Contexto</h5><p>Sem script, sem sequência, sem diagnóstico estruturado. Esforço por venda é altíssimo. Burnout precoce.</p></div>
+          </div>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">Dor 05</span><span class="chip chip-coral">precificação</span><span class="chip chip-rose">crítico</span></div>
+            <h3 class="item-card-title">Dificuldade de precificação</h3>
+            <p class="item-card-frase">"Tenho medo de cobrar o que vale e perder o contrato. Então cobro pelo feeling — e me arrependo depois."</p>
+            <div class="item-card-section"><h5>Frequência</h5><div class="impact-bar"><span>~76%</span><div class="impact-bar-track"><div class="impact-bar-fill high" style="width:76%"></div></div></div></div>
+            <div class="item-card-section"><h5>Contexto</h5><p>76% relatam essa dor. Mistura PF/PJ — não conhece margem real. Aceita escopo aberto e implementação eterna.</p></div>
+          </div>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">Dor 06</span><span class="chip chip-gray">público 2</span><span class="chip chip-rose">crítico</span></div>
+            <h3 class="item-card-title">Já tentei e não implementei (Público 2)</h3>
+            <p class="item-card-frase">"Já fiz cursos, contratei consultoria. Tudo bonito no papel — mas na prática nada cola."</p>
+            <div class="item-card-section"><h5>Frequência</h5><div class="impact-bar"><span>~65%</span><div class="impact-bar-track"><div class="impact-bar-fill high" style="width:65%"></div></div></div></div>
+            <div class="item-card-section"><h5>Contexto</h5><p>Excesso de mindset, ferramentas que não viram processo real, ROI difícil de mensurar. Cicatriz de tentativas frustradas.</p></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Problemas inconscientes</div>
+          <h2>O que ele não sabe que tem</h2>
+          <p class="section-desc">Problemas reais por trás das dores que ele consegue articular. Conteúdo do método precisa expor para gerar a tomada de consciência.</p>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">P01</span><span class="chip chip-blue">diagnóstico</span></div>
+            <h3 class="item-card-title">Confunde "vender mais" com "ter processo comercial"</h3>
+            <p class="item-card-frase">Acha que problema é volume de leads quando é eficiência do funil.</p>
+            <div class="item-card-section"><h5>Como aparece</h5><p>Diz "preciso de mais marketing" enquanto fecha 1 a cada 10 reuniões qualificadas. Resolveria mais com roteiro do que com tráfego.</p></div>
+            <div class="item-card-section"><h5>Detecção</h5><div class="impact-bar"><span>~88%</span><div class="impact-bar-track"><div class="impact-bar-fill high" style="width:88%"></div></div></div></div>
+          </div>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">P02</span><span class="chip chip-mint">identidade</span></div>
+            <h3 class="item-card-title">Identidade de "profissional que vende" trava transição para "empresário com método"</h3>
+            <p class="item-card-frase">Vê venda como atividade menor que expertise técnica.</p>
+            <div class="item-card-section"><h5>Como aparece</h5><p>Subestima necessidade de método — acha que método é "perder a alma". Resiste a estruturar por achar que vai virar robô.</p></div>
+            <div class="item-card-section"><h5>Detecção</h5><div class="impact-bar"><span>~75%</span><div class="impact-bar-track"><div class="impact-bar-fill med" style="width:75%"></div></div></div></div>
+          </div>
+
+          <div class="item-card">
+            <div class="item-card-head"><span class="item-card-num">P03</span><span class="chip chip-peach">público 2</span><span class="chip chip-rose">crítico</span></div>
+            <h3 class="item-card-title">Escala heroica</h3>
+            <p class="item-card-frase">Cresce porque se esforça mais, não porque tem método.</p>
+            <div class="item-card-section"><h5>Como aparece</h5><p>98% participam diretamente das decisões estratégicas. Vira gargalo do próprio negócio. Quando para, tudo para.</p></div>
+            <div class="item-card-section"><h5>Detecção</h5><div class="impact-bar"><span>~70% Público 2</span><div class="impact-bar-track"><div class="impact-bar-fill high" style="width:70%"></div></div></div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · APRENDIZ · DESEJOS -->
+      <div class="page" id="page-ex-aprendiz-desejos">
+        <div class="breadcrumb">Camada 01 · O Aprendiz</div>
+        <div class="page-head">
+          <h1 class="page-title">Desejos e necessidades <em>— ranking dos 12 universais</em></h1>
+          <p class="page-lead">Aplicação do framework dos 12 desejos universais aos dois públicos. Base para arco emocional da copy.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check pending"><span class="validation-check-icon">○</span><div><strong>Em rascunho</strong> — top 3 confirmados pela expert. Ranking completo dos 12 em refinamento.</div><span class="validation-check-meta">v0</span></div>
+
+        <div class="section">
+          <div class="section-label">Top 3 por público</div>
+          <h2>Hierarquia de desejos</h2>
+
+          <h3>Público 1 · faturamento R$10k–35k/mês</h3>
+          <div class="pillars">
+            <div class="pillar"><span class="pillar-num">01</span><h4 class="pillar-title">Segurança</h4><p class="pillar-desc">Sair do feast-or-famine. Reserva. Dormir tranquilo sabendo que mês que vem tem caixa.</p></div>
+            <div class="pillar"><span class="pillar-num">02</span><h4 class="pillar-title">Autonomia</h4><p class="pillar-desc">Não depender de indicação. Ter controle do próprio funil. Decidir quanto cobrar sem medo.</p></div>
+            <div class="pillar"><span class="pillar-num">03</span><h4 class="pillar-title">Pertencimento</h4><p class="pillar-desc">Peer group de empresários no mesmo estágio. Sair do isolamento do dono solo.</p></div>
+          </div>
+
+          <h3>Público 2 · faturamento R$35k–150k/mês</h3>
+          <div class="pillars">
+            <div class="pillar"><span class="pillar-num">01</span><h4 class="pillar-title">Reconhecimento</h4><p class="pillar-desc">Ser visto como autoridade do nicho. Ter portfólio que fala por si. Cobrar pelo nome.</p></div>
+            <div class="pillar"><span class="pillar-num">02</span><h4 class="pillar-title">Significância</h4><p class="pillar-desc">Construir negócio que importa. Legado, não bico. Operação que orgulha.</p></div>
+            <div class="pillar"><span class="pillar-num">03</span><h4 class="pillar-title">Liberdade</h4><p class="pillar-desc">Sair do gargalo do dono. Tirar férias sem o negócio parar. Conselho/processo cuidando.</p></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · APRENDIZ · ROTINA -->
+      <div class="page" id="page-ex-aprendiz-rotina">
+        <div class="breadcrumb">Camada 01 · O Aprendiz</div>
+        <div class="page-head">
+          <h1 class="page-title">Rotina <em>— janela útil + canais + horários</em></h1>
+          <p class="page-lead">Onde o empresário consultivo vive, quando consome conteúdo, em que canal decide.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check pending"><span class="validation-check-icon">○</span><div><strong>Em rascunho</strong> — dados quantitativos validados. Refinar comportamento por persona.</div><span class="validation-check-meta">v0</span></div>
+
+        <div class="section">
+          <div class="section-label">Janela disponível</div>
+          <h2>Carga semanal</h2>
+          <div class="stats-grid">
+            <div class="stat-card verde"><div class="stat-value">50–60h</div><div class="stat-label">Por semana atendendo cliente · agenda apertada</div></div>
+            <div class="stat-card"><div class="stat-value">67%</div><div class="stat-label">Prefere avançar sozinho antes de falar com alguém (Gartner 2026)</div></div>
+            <div class="stat-card"><div class="stat-value">5–8h</div><div class="stat-label">Disponíveis pra trabalhar NO negócio (estimativa)</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Canais</div>
+          <h2>Onde ele está</h2>
+          <table>
+            <tr><th>Canal</th><th>Adoção</th><th>Função no funil</th></tr>
+            <tr><td><strong>WhatsApp</strong></td><td>95–99%</td><td>Conversa final · fechamento · operação diária</td></tr>
+            <tr><td><strong>Instagram</strong></td><td>88–90%</td><td>Descoberta · prova social · conteúdo curto</td></tr>
+            <tr><td><strong>YouTube</strong></td><td>85%</td><td>Due diligence · 30–60min antes de comprar · profundidade</td></tr>
+            <tr><td><strong>LinkedIn</strong></td><td>72% Público 2</td><td>Autoridade · networking B2B · conteúdo técnico</td></tr>
+          </table>
+
+          <h4>Horários de pico (ter–qui)</h4>
+          <ul>
+            <li><strong>IG</strong> · 11h–13h e 17h–19h</li>
+            <li><strong>YouTube</strong> · 13h (intervalo do almoço · sessão longa de pesquisa)</li>
+            <li><strong>LinkedIn</strong> · 8h–14h (jornada de trabalho)</li>
+            <li><strong>WhatsApp</strong> · 9h–11h (manhã produtiva)</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- EX · APRENDIZ · HABILIDADES -->
+      <div class="page" id="page-ex-aprendiz-habilidades">
+        <div class="breadcrumb">Camada 01 · O Aprendiz</div>
+        <div class="page-head">
+          <h1 class="page-title">Habilidades digitais <em>— ferramentas que ele usa e domina</em></h1>
+          <p class="page-lead">Mapa de habilidades digitais do empresário consultivo. Define o quanto o produto pode pressupor (ferramenta, IA, automação) versus o quanto precisa entregar guiado.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando sessão de trabalho</h2>
+          <p class="section-desc">Esta seção será preenchida via squad <strong>the-path</strong> usando agente <code>the-path-aprendiz-extractor</code>. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LAYER · EXPERT -->
+      <div class="page" id="page-layer-expert">
+        <div class="breadcrumb">Consultoria Mazzei · Camada 02</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Camada 02 · Identidade</div>
+          <h1 class="layer-hero-title">O Expert</h1>
+          <p class="layer-hero-frase">Antes de ensinar, descubra o que você sabe que ninguém mais consegue articular.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:20%"></div></div><span>1/5 validados</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Resumo da camada</div>
+          <h2>Quem é Rafaella Mazzei</h2>
+          <p class="section-desc">Especialista em estruturação comercial para negócios de venda consultiva. 10+ anos de prática validada. Formada em arquitetura de negócios de serviço.</p>
+
+          <h4>Tese central</h4>
+          <blockquote class="tese">O empresário que vende por conversa não sofre só por falta de técnica comercial — ele sofre porque opera sem método, sem coerência, sem leitura estratégica e sem maturidade suficiente para sustentar previsibilidade e valor percebido.</blockquote>
+
+          <h4>Movimento que conduz</h4>
+          <p><strong>Comparado → Justificado → Escolhido (insubstituível).</strong> Eixo da promessa central da Mazzei.</p>
+
+          <h4>Declaração de transformação</h4>
+          <p style="font-family:var(--font-serif);font-style:italic;font-size:18px;color:var(--verde);line-height:1.5">"Ajudo quem vende pelo valor que entrega — mas ainda não faz o cliente enxergar isso antes do preço — a construir o processo que faz a diferença ser percebida, não só prometida."</p>
+
+          <h4>Outputs dessa camada</h4>
+          <ul>
+            <li><strong>Zona de Maestria</strong> · habilidades, conhecimentos, valores, paixões <span class="tag draft">rascunho</span></li>
+            <li><strong>Golden Circle</strong> · why · how · what <span class="tag pending">pendente</span></li>
+            <li><strong>Trajetória e Narrativa</strong> · timeline expert <span class="tag pending">pendente</span></li>
+            <li><strong>Voz e Posicionamento</strong> · tom, vocabulário, atributos <span class="tag pending">pendente</span></li>
+            <li><strong>Banco de Histórias</strong> · cases · pessoais · clientes <span class="tag pending">pendente</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- EX · EXPERT · ZONA DE MAESTRIA -->
+      <div class="page" id="page-ex-expert-zona-maestria">
+        <div class="breadcrumb">Camada 02 · O Expert</div>
+        <div class="page-head">
+          <h1 class="page-title">Zona de Maestria <em>— habilidades · conhecimentos · valores · paixões</em></h1>
+          <p class="page-lead">Cruzamento das 4 dimensões que sustentam a expertise da Rafa. Rascunho inicial extraído de reuniões e documentos — refinar em sessão dedicada.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check pending"><span class="validation-check-icon">○</span><div><strong>Em rascunho</strong> — primeira leitura, refinar com a Rafa em sessão.</div><span class="validation-check-meta">v0</span></div>
+
+        <div class="section">
+          <div class="section-label">As 4 dimensões</div>
+          <h2>Maestria · cruzamento de eixos</h2>
+
+          <div class="pillars">
+            <div class="pillar">
+              <span class="pillar-num">01 · Habilidades</span>
+              <h4 class="pillar-title">O que ela faz</h4>
+              <p class="pillar-desc">Leitura estratégica de negócio · diagnóstico comercial · construção de processo de venda consultiva · precificação por valor · análise de reunião comercial.</p>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">02 · Conhecimentos</span>
+              <h4 class="pillar-title">O que ela sabe</h4>
+              <p class="pillar-desc">Arquitetura de processo comercial · finanças básicas para serviço · funil consultivo · maturidade empresarial · negócio de serviço especializado.</p>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">03 · Valores</span>
+              <h4 class="pillar-title">O que ela defende</h4>
+              <p class="pillar-desc">Integridade · maturidade · autonomia · clareza · longo prazo. Não vende ilusão. Não promete o que negócio não sustenta.</p>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">04 · Paixões</span>
+              <h4 class="pillar-title">O que a move</h4>
+              <p class="pillar-desc">Ver empresário sair do gargalo · ouvir reunião comercial real · destravar previsibilidade. O "antes e depois" do cliente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · EXPERT · GOLDEN CIRCLE -->
+      <div class="page" id="page-ex-expert-golden-circle">
+        <div class="breadcrumb">Camada 02 · O Expert</div>
+        <div class="page-head">
+          <h1 class="page-title">Golden Circle <em>— why · how · what</em></h1>
+          <p class="page-lead">Núcleo de propósito da Mazzei. Por quê → como → o quê.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando sessão de trabalho</h2>
+          <p class="section-desc">Esta seção será preenchida via squad <strong>the-path</strong> usando agente <code>the-path-expert-builder</code>. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · EXPERT · NARRATIVA -->
+      <div class="page" id="page-ex-expert-narrativa">
+        <div class="breadcrumb">Camada 02 · O Expert</div>
+        <div class="page-head">
+          <h1 class="page-title">Trajetória e narrativa <em>— timeline pessoal-profissional</em></h1>
+          <p class="page-lead">Linha do tempo da Rafa: marcos, viradas, decisões fundadoras. Base para storytelling comercial.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando sessão de trabalho</h2>
+          <p class="section-desc">Esta seção será preenchida via squad <strong>the-path</strong> usando agente <code>the-path-narrative-extractor</code>. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · EXPERT · VOZ -->
+      <div class="page" id="page-ex-expert-voz">
+        <div class="breadcrumb">Camada 02 · O Expert</div>
+        <div class="page-head">
+          <h1 class="page-title">Voz e posicionamento <em>— tom, vocabulário, atributos</em></h1>
+          <p class="page-lead">Como a Rafa fala, escreve e se posiciona. Atributos de marca pessoal.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando sessão de trabalho</h2>
+          <p class="section-desc">Esta seção será preenchida via squad <strong>the-path</strong> usando agente <code>the-path-voice-architect</code>. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · EXPERT · HISTÓRIAS -->
+      <div class="page" id="page-ex-expert-historias">
+        <div class="breadcrumb">Camada 02 · O Expert</div>
+        <div class="page-head">
+          <h1 class="page-title">Banco de histórias <em>— cases · pessoais · clientes</em></h1>
+          <p class="page-lead">Repositório de histórias usáveis em copy, conteúdo e treinamento de IA. Distribuído por tipo (cliente, pessoal, profissional) e tema.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando sessão de trabalho</h2>
+          <p class="section-desc">Esta seção será preenchida via squad <strong>the-path</strong> usando agente <code>the-path-story-keeper</code>. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LAYER · MÉTODO -->
+      <div class="page" id="page-layer-metodo">
+        <div class="breadcrumb">Consultoria Mazzei · Camada 03</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Camada 03 · Sistema</div>
+          <h1 class="layer-hero-title">O Método</h1>
+          <p class="layer-hero-frase">Organize o caos genial que vive na sua cabeça em sequência ensinável e replicável.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:50%"></div></div><span>2/4 validados</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Resumo da camada</div>
+          <h2>Sistema da Mazzei</h2>
+          <p class="section-desc">Núcleo metodológico extraído de reuniões e validado com a expert. 6 frameworks confirmados, 4 pendentes de extração.</p>
+
+          <h4>Proposta única de valor</h4>
+          <blockquote class="tese">Método que transforma empresário de venda consultiva (R$10k–150k/mês) em líder maduro com processo comercial previsível e venda por valor percebido — em 6–8 encontros.</blockquote>
+
+          <h4>Jornada validada</h4>
+          <p><strong>Ordem na Casa → Setup de Ofertas → Posicionamento → Funil &amp; Processo Comercial → Implementação assistida.</strong></p>
+
+          <h4>Frameworks autorais identificados</h4>
+          <ul>
+            <li>Território de Atuação</li>
+            <li>Comparado / Justificado / Insubstituível</li>
+            <li>Roda da Vida Empresarial — 27 afirmações</li>
+            <li>4 Pilares do Negócio Soberano</li>
+            <li>Diagnóstico de Crenças Limitantes sobre Vendas</li>
+            <li>Esteira de Produtos (boi-de-piranha + lucro)</li>
+          </ul>
+
+          <h4>Outputs dessa camada</h4>
+          <ul>
+            <li><strong>Proposta de Valor</strong> · 3 versões <span class="tag draft">rascunho</span></li>
+            <li><strong>Jornada do Método</strong> · 4 etapas detalhadas <span class="tag draft">rascunho</span></li>
+            <li><strong>Frameworks</strong> · 6 confirmados + 4 a extrair <span class="tag draft">rascunho</span></li>
+            <li><strong>Instrumentos</strong> · ferramentas, planilhas, prompts <span class="tag pending">pendente</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- EX · MÉTODO · PUV -->
+      <div class="page" id="page-ex-metodo-puv">
+        <div class="breadcrumb">Camada 03 · O Método</div>
+        <div class="page-head">
+          <h1 class="page-title">Proposta de valor <em>— 3 versões</em></h1>
+          <p class="page-lead">Promessa central da Mazzei em 3 níveis: 1 frase, 1 parágrafo, carta longa. Núcleo de toda copy de vendas.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check pending"><span class="validation-check-icon">○</span><div><strong>Em rascunho</strong> — promessa validada, formulações em refinamento.</div><span class="validation-check-meta">v0</span></div>
+
+        <div class="section">
+          <div class="section-label">Anatomia</div>
+          <h2>Os 4 elementos</h2>
+          <table>
+            <tr><th>Elemento</th><th>Aplicação</th></tr>
+            <tr><td><strong>Verbo</strong></td><td>Transformar</td></tr>
+            <tr><td><strong>Aprendiz</strong></td><td>Empresário de venda consultiva</td></tr>
+            <tr><td><strong>Transformação</strong></td><td>De comparado por preço para escolhido por valor — com processo, números e maturidade</td></tr>
+            <tr><td><strong>Diferencial</strong></td><td>Venda consultiva tratada como expressão de maturidade empresarial, não como técnica isolada</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Versão 1 · 1 frase</div>
+          <h2>Pitch curto</h2>
+          <blockquote class="tese">Método que faz empresário de venda consultiva sair do feast-or-famine.</blockquote>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Versão 2 · 1 parágrafo</div>
+          <h2>Pitch médio</h2>
+          <p style="font-size:15px;color:var(--text-2);line-height:1.65">Método que transforma empresário de venda consultiva (R$10k–150k/mês) em líder maduro com processo comercial previsível e venda por valor percebido — em 6–8 encontros. Sai do feeling, sai da indicação, sai do mês cheio-mês vazio. Constrói casa em ordem, oferta clara, posicionamento e funil. A Rafa atende como conselheira-consultora que ensina o empresário a ver o próprio negócio.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Versão 3 · carta longa</div>
+          <h2>Pitch completo</h2>
+          <p>O empresário consultivo no Brasil opera sem método. Vende cadeira — serviço de alto envolvimento, que exige confiança, critério e valor percebido — mas conduz a operação por feeling. Entrega bem, atende bem, mas não consegue explicar para o cliente por que vale o que cobra. Resultado: é comparado por preço, justificado por proposta, raramente escolhido por insubstituibilidade.</p>
+          <p>O método da Mazzei conduz esse empresário pelo eixo <strong>Comparado → Justificado → Insubstituível</strong>. Não pela técnica de venda isolada, mas pela construção dos 4 pilares que sustentam a percepção de valor: <strong>casa em ordem (financeiro, território, plano), oferta estruturada (produtos, ancoragem, esteira), posicionamento (mentalidade + diferenciação) e funil comercial (captação à entrega).</strong></p>
+          <p>Em 6–8 encontros, o empresário começa a vender com método. Para de depender de boca-a-boca. Tem critério para qualificar, roteiro para conduzir e processo para fechar. Vira o empresário maduro que o mercado escolhe — não compara.</p>
+        </div>
+      </div>
+
+
+      <!-- EX · MÉTODO · JORNADA -->
+      <div class="page" id="page-ex-metodo-jornada">
+        <div class="breadcrumb">Camada 03 · O Método</div>
+        <div class="page-head">
+          <h1 class="page-title">Jornada do método <em>— 4 etapas, ~1,5 mês para começar a vender</em></h1>
+          <p class="page-lead">Sequência validada. Cada etapa entrega resultado isolado e prepara a próxima. Aluno começa a vender em ~1,5 mês de programa.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check pending"><span class="validation-check-icon">○</span><div><strong>Sequência validada</strong> · detalhamento por encontro em refinamento.</div><span class="validation-check-meta">v0</span></div>
+
+        <div class="section">
+          <div class="section-label">Mapa visual</div>
+          <h2>Roadmap das 4 etapas</h2>
+
+          <div class="roadmap-wrap">
+            <div class="roadmap-grid" style="--cols:8">
+              <div class="roadmap-header">
+                <div class="roadmap-header-empty"></div>
+                <div class="roadmap-header-period">SEM 1</div>
+                <div class="roadmap-header-period">SEM 2</div>
+                <div class="roadmap-header-period">SEM 3</div>
+                <div class="roadmap-header-period">SEM 4</div>
+                <div class="roadmap-header-period">SEM 5</div>
+                <div class="roadmap-header-period">SEM 6</div>
+                <div class="roadmap-header-period">SEM 7</div>
+                <div class="roadmap-header-period">SEM 8</div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">01 · Ordem na Casa</div>
+                <div class="roadmap-track" style="--span:4"><div class="roadmap-bar">Diagnóstico · território · financeiro</div></div>
+                <div class="roadmap-track" style="--span:4"></div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">02 · Setup de Ofertas</div>
+                <div class="roadmap-track" style="--span:4"></div>
+                <div class="roadmap-track" style="--span:2"><div class="roadmap-bar">Esteira · precificação · ancoragem</div></div>
+                <div class="roadmap-track" style="--span:2"></div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">03 · Posicionamento</div>
+                <div class="roadmap-track" style="--span:5"></div>
+                <div class="roadmap-track" style="--span:2"><div class="roadmap-bar">Diferenciação · mentalidade vendas</div></div>
+                <div class="roadmap-track" style="--span:1"></div>
+              </div>
+              <div class="roadmap-row">
+                <div class="roadmap-label">04 · Funil &amp; Processo</div>
+                <div class="roadmap-track" style="--span:6"></div>
+                <div class="roadmap-track" style="--span:2"><div class="roadmap-bar">Captação · qualificação · roteiro · fechamento</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Detalhe por etapa</div>
+          <h2>O que acontece em cada uma</h2>
+
+          <div class="etapa-block">
+            <div class="etapa-block-head">
+              <span class="etapa-num">01</span>
+              <h3 class="etapa-title">Ordem na Casa</h3>
+              <span class="etapa-period">3–4 semanas</span>
+            </div>
+            <p>Diagnóstico inicial pela Roda da Vida Empresarial (27 afirmações). Mapeamento do território de atuação, separação plano-vida × plano-negócio, levantamento financeiro, separação PF/PJ, fluxo de caixa.</p>
+            <div class="etapa-grid">
+              <div class="etapa-cell"><h5>Entrega</h5><p>Diagnóstico priorizado · plano de ação 90 dias</p></div>
+              <div class="etapa-cell"><h5>Frameworks</h5><p>Roda da Vida Empresarial · Território · Plano Vida×Negócio</p></div>
+              <div class="etapa-cell"><h5>Marco</h5><p><span class="marco-badge">Casa organizada</span></p></div>
+            </div>
+          </div>
+
+          <div class="etapa-block">
+            <div class="etapa-block-head">
+              <span class="etapa-num">02</span>
+              <h3 class="etapa-title">Setup de Ofertas</h3>
+              <span class="etapa-period">1–2 semanas</span>
+            </div>
+            <p>Estruturação da esteira (produto isca → principal → upsell). Precificação estratégica. Ancoragem. Bônus. Blueprint da oferta principal.</p>
+            <div class="etapa-grid">
+              <div class="etapa-cell"><h5>Entrega</h5><p>Esteira definida · ofertas precificadas · blueprint</p></div>
+              <div class="etapa-cell"><h5>Frameworks</h5><p>Esteira boi-de-piranha · Precificação Estratégica</p></div>
+              <div class="etapa-cell"><h5>Marco</h5><p><span class="marco-badge">Oferta pronta</span></p></div>
+            </div>
+          </div>
+
+          <div class="etapa-block">
+            <div class="etapa-block-head">
+              <span class="etapa-num">03</span>
+              <h3 class="etapa-title">Posicionamento Essencial</h3>
+              <span class="etapa-period">1–2 semanas</span>
+            </div>
+            <p>Refinamento do território. Diferenciação clara. Trabalho de mentalidade de vendas — vender ≠ enganar. Diagnóstico de crenças limitantes.</p>
+            <div class="etapa-grid">
+              <div class="etapa-cell"><h5>Entrega</h5><p>Posicionamento escrito · diferenciação · mentalidade</p></div>
+              <div class="etapa-cell"><h5>Frameworks</h5><p>Comparado / Justificado / Insubstituível · Crenças Limitantes</p></div>
+              <div class="etapa-cell"><h5>Marco</h5><p><span class="marco-badge">Voz própria</span></p></div>
+            </div>
+          </div>
+
+          <div class="etapa-block">
+            <div class="etapa-block-head">
+              <span class="etapa-num">04</span>
+              <h3 class="etapa-title">Funil &amp; Processo Comercial</h3>
+              <span class="etapa-period">5–6 semanas (validação + implementação)</span>
+            </div>
+            <p>Etapas do funil: captação · qualificação · reunião · proposta · fechamento · onboarding. Critérios de qualificação. Roteiro de reunião. Implementação assistida da captação.</p>
+            <div class="etapa-grid">
+              <div class="etapa-cell"><h5>Entrega</h5><p>Funil rodando · roteiro · CRM · primeiras vendas</p></div>
+              <div class="etapa-cell"><h5>Frameworks</h5><p>Critérios de Qualificação · Roteiro de Reunião · Análise de Reunião</p></div>
+              <div class="etapa-cell"><h5>Marco</h5><p><span class="marco-badge">Vendendo com método</span></p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Meta</div>
+          <h2>Quando o aluno começa a vender</h2>
+          <div class="recommend"><div class="recommend-icon">★</div><div><strong>~1,5 mês</strong><p>Após a etapa 02 (Setup de Ofertas), aluno já tem oferta pronta para começar a vender. Etapas 03 e 04 polem o processo. Marco interno: "primeira venda com método" deve acontecer entre semana 6 e semana 8.</p></div></div>
+        </div>
+      </div>
+
+
+      <!-- EX · MÉTODO · FRAMEWORKS -->
+      <div class="page" id="page-ex-metodo-frameworks">
+        <div class="breadcrumb">Camada 03 · O Método</div>
+        <div class="page-head">
+          <h1 class="page-title">Frameworks <em>— 6 confirmados, 4 a extrair</em></h1>
+          <p class="page-lead">Frameworks autorais já identificados em reuniões e documentos. Cada um é uma ferramenta proprietária da Mazzei — assina e diferencia.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Última edição: Mar/2026</span></div>
+        </div>
+
+        <div class="validation-check pending"><span class="validation-check-icon">○</span><div><strong>6 frameworks confirmados</strong> · 4 pendentes de extração formal.</div><span class="validation-check-meta">v0</span></div>
+
+        <div class="section">
+          <div class="section-label">Framework 01</div>
+          <h2>Território de Atuação</h2>
+          <p><strong>Aplica em:</strong> Etapa Ordem na Casa.</p>
+          <p><strong>Lógica:</strong> posicionar pelo TIPO de decisão de compra do cliente, não pelo nicho convencional.</p>
+          <p><strong>Critério:</strong> território = vendas onde decisão é por confiança, critério e valor (não impulso, conveniência ou preço).</p>
+          <p><strong>Status:</strong> <span class="tag validated tag-validated">confirmado em reuniões</span></p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Framework 02</div>
+          <h2>Comparado / Justificado / Insubstituível</h2>
+          <p><strong>Aplica em:</strong> Posicionamento + Funil.</p>
+          <p><strong>Lógica:</strong> 3 estágios da venda consultiva — espelha a maturidade do empresário e do cliente.</p>
+          <ul>
+            <li><strong>Comparado</strong> · cliente decide por preço</li>
+            <li><strong>Justificado</strong> · cliente decide por custo-benefício</li>
+            <li><strong>Insubstituível</strong> · cliente decide por diferenciação · procura sem comparar</li>
+          </ul>
+          <p><strong>Promessa do método:</strong> levar o empresário de Comparado a Insubstituível.</p>
+          <p><strong>Status:</strong> <span class="tag validated tag-validated">confirmado</span></p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Framework 03</div>
+          <h2>Roda da Vida Empresarial · 27 afirmações</h2>
+          <p><strong>Aplica em:</strong> Ordem na Casa (diagnóstico inicial).</p>
+          <p><strong>Lógica:</strong> sistema de pontuação por dimensão — financeiro · estratégia · operação · comercial · gestão · liderança · pessoal.</p>
+          <p><strong>Saída:</strong> IA gera plano de ação personalizado a partir do diagnóstico. Formato check sim/não para reduzir atrito (micro vitória inicial).</p>
+          <p><strong>Status:</strong> <span class="tag validated tag-validated">confirmado</span></p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Framework 04</div>
+          <h2>4 Pilares do Negócio Soberano</h2>
+          <p><strong>Aplica em:</strong> estrutura geral do método.</p>
+          <p><strong>Lógica:</strong> sequência validada. Organizar casa → definir ofertas → posicionar → estruturar funil → executar.</p>
+          <ul>
+            <li><strong>01 · Ordem na Casa</strong></li>
+            <li><strong>02 · Setup de Ofertas</strong></li>
+            <li><strong>03 · Posicionamento</strong></li>
+            <li><strong>04 · Funil &amp; Processo Comercial</strong></li>
+          </ul>
+          <p><strong>Status:</strong> <span class="tag validated tag-validated">confirmado</span></p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Framework 05</div>
+          <h2>Diagnóstico de Crenças Limitantes sobre Vendas</h2>
+          <p><strong>Aplica em:</strong> antes do módulo Funil (mentalidade).</p>
+          <p><strong>Lógica:</strong> vender ≠ enganar. Identifica crenças negativas e direciona para conteúdo de mentalidade antes de ensinar técnica.</p>
+          <p><strong>Status:</strong> <span class="tag validated tag-validated">confirmado</span></p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Framework 06</div>
+          <h2>Esteira de Produtos · boi-de-piranha + lucro</h2>
+          <p><strong>Aplica em:</strong> Setup de Ofertas.</p>
+          <p><strong>Lógica:</strong> produto isca → produto principal → upsell. Estratégia de upsell é mais eficiente que buscar novos clientes.</p>
+          <p><strong>Status:</strong> <span class="tag validated tag-validated">confirmado</span></p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Pendentes</div>
+          <h2>Frameworks a extrair</h2>
+          <p class="section-desc">A serem formalizados em sessões com agente <code>the-path-method-architect</code>.</p>
+          <ul>
+            <li><strong>Framework de Precificação Estratégica</strong> <span class="tag pending">pendente</span></li>
+            <li><strong>Framework de Critérios de Qualificação</strong> · formulário que desqualifica <span class="tag pending">pendente</span></li>
+            <li><strong>Framework de Roteiro de Reunião Comercial</strong> <span class="tag pending">pendente</span></li>
+            <li><strong>Framework de Análise de Reunião Comercial</strong> <span class="tag pending">pendente</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- EX · MÉTODO · INSTRUMENTOS -->
+      <div class="page" id="page-ex-metodo-instrumentos">
+        <div class="breadcrumb">Camada 03 · O Método</div>
+        <div class="page-head">
+          <h1 class="page-title">Instrumentos <em>— ferramentas, planilhas, prompts</em></h1>
+          <p class="page-lead">Tudo que o aluno usa para implementar o método no dia-a-dia. Notion, planilhas de diagnóstico, prompts de IA, dashboards.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando sessão de trabalho</h2>
+          <p class="section-desc">Esta seção será preenchida via squad <strong>the-path</strong> usando agente <code>the-path-instrument-builder</code>. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LAYER · PRODUTO -->
+      <div class="page" id="page-layer-produto">
+        <div class="breadcrumb">Consultoria Mazzei · Camada 04</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Camada 04 · Esteira</div>
+          <h1 class="layer-hero-title">Esteira de Produtos</h1>
+          <p class="layer-hero-frase">Três produtos. Uma jornada. Cada degrau intensifica desejo pelo próximo.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:75%"></div></div><span>3/4 validados</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Estratégia da esteira</div>
+          <h2>Três degraus, uma jornada</h2>
+          <p class="section-desc">Cada produto seeds o próximo. Aluno paga barato no início, sente que pagou pouco demais pelo valor que recebeu, quer continuar.</p>
+
+          <div class="produto-grid">
+            <a class="produto-card" data-page="produto-imersao">
+              <span class="produto-card-arrow">→</span>
+              <div class="produto-card-head"><span class="produto-card-formato">Captação</span><span class="produto-card-status dev">em dev</span></div>
+              <h3 class="produto-card-title">Imersão ao vivo</h3>
+              <p class="produto-card-frase">Workshop pago de aquecimento + qualificação + pitch para Sell-z.</p>
+              <div class="produto-card-ticket"><span class="produto-card-ticket-value">R$ 39</span><span class="produto-card-ticket-label">Standard</span></div>
+            </a>
+
+            <a class="produto-card" data-page="produto-sellz">
+              <span class="produto-card-arrow">→</span>
+              <div class="produto-card-head"><span class="produto-card-formato">Aceleração</span><span class="produto-card-status dev">em dev</span></div>
+              <h3 class="produto-card-title">Sell-z</h3>
+              <p class="produto-card-frase">Programa de aceleração em cohort · 6–8 encontros · ferramentas funcionando + implementação assistida.</p>
+              <div class="produto-card-ticket"><span class="produto-card-ticket-value">R$ 1.249</span><span class="produto-card-ticket-label">1ª turma</span></div>
+            </a>
+
+            <a class="produto-card" data-page="produto-2za">
+              <span class="produto-card-arrow">→</span>
+              <div class="produto-card-head"><span class="produto-card-formato">Mentoria</span><span class="produto-card-status ativo">ativo</span></div>
+              <h3 class="produto-card-title">2Z Advisor</h3>
+              <p class="produto-card-frase">Mentoria como conselho estratégico · acompanhamento contínuo · CRM + dashboards.</p>
+              <div class="produto-card-ticket"><span class="produto-card-ticket-value">R$ 22.800</span><span class="produto-card-ticket-label">12x R$ 1.900</span></div>
+            </a>
+          </div>
+
+          <h4>Status nomenclatura</h4>
+          <ul>
+            <li><strong>Imersão</strong> · nome em validação · naming a definir até 30/04</li>
+            <li><strong>Sell-z</strong> · nome em validação</li>
+            <li><strong>2Z Advisor (2ZA)</strong> · confirmado · selo "2ZA" usado em comunicação</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- PRODUTO · IMERSÃO -->
+      <div class="page" id="page-produto-imersao">
+        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="produto-hero">
+          <div class="produto-hero-meta"><span class="produto-card-formato">Captação · Workshop pago</span><span class="produto-card-status dev">em dev</span></div>
+          <h1 class="produto-hero-title">Imersão ao vivo</h1>
+          <p class="produto-hero-frase">Aquecimento + qualificação + pitch. Porta de entrada da esteira.</p>
+          <div class="produto-hero-ticket">
+            <div class="produto-hero-ticket-item"><small>Ticket Standard</small><strong>R$ 39</strong></div>
+            <div class="produto-hero-ticket-item"><small>Ticket VIP</small><strong>R$ 219–249</strong></div>
+            <div class="produto-hero-ticket-item"><small>Início captação</small><strong>~25/05/2026</strong></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Função no funil</div>
+          <h2>Como esse produto trabalha</h2>
+          <p>Substitui evento gratuito tradicional. Cobrança baixa filtra curioso, qualifica interesse, paga parte da operação, valida desejo. Última versão (gratuita) custou R$ 5k em tráfego — esta vai amortizar a captação.</p>
+
+          <h4>Estrutura</h4>
+          <ul>
+            <li><strong>~25/05</strong> · início da captação</li>
+            <li><strong>3–4 semanas</strong> · janela de vendas (Standard + VIP)</li>
+            <li><strong>Evento ao vivo</strong> · 1 dia · conteúdo + pitch final</li>
+            <li><strong>Pitch final</strong> · oferta Sell-z R$ 1.249 (sugerido)</li>
+          </ul>
+
+          <h4>Tickets</h4>
+          <table>
+            <tr><th>Tier</th><th>Ticket</th><th>Inclui</th></tr>
+            <tr><td><strong>Standard</strong></td><td>R$ 39</td><td>Acesso ao vivo · 1 dia</td></tr>
+            <tr><td><strong>VIP</strong></td><td>R$ 219–249</td><td>Tudo do Standard + gravação + materiais + hot seat</td></tr>
+          </table>
+
+          <h4>Investimento de tráfego</h4>
+          <p>A definir. Última versão gratuita: R$ 5k. Meta: amortizar com vendas Standard + VIP da própria imersão.</p>
+        </div>
+      </div>
+
+
+      <!-- PRODUTO · SELL-Z -->
+      <div class="page" id="page-produto-sellz">
+        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="produto-hero">
+          <div class="produto-hero-meta"><span class="produto-card-formato">Aceleração · Cohort</span><span class="produto-card-status dev">em dev</span></div>
+          <h1 class="produto-hero-title">Sell-z</h1>
+          <p class="produto-hero-frase">Programa de aceleração em cohort. 6–8 encontros. Aluno sai vendendo com método.</p>
+          <div class="produto-hero-ticket">
+            <div class="produto-hero-ticket-item"><small>Ticket 1ª turma</small><strong>R$ 1.000–3.000</strong></div>
+            <div class="produto-hero-ticket-item"><small>Sweet spot</small><strong>R$ 6k–12k</strong></div>
+            <div class="produto-hero-ticket-item"><small>Início previsto</small><strong>jun–jul 2026</strong></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Estrutura</div>
+          <h2>Formato e duração</h2>
+          <ul>
+            <li><strong>6–8 encontros semanais ao vivo</strong> · ~2 meses</li>
+            <li><strong>Cohort</strong> · turma fechada · momentum coletivo</li>
+            <li><strong>Materiais</strong> · HTML com passo a passo (não Notion inicialmente)</li>
+            <li><strong>Tutor técnico</strong> · suporte em IA / Cloud Code (familiar mencionado em pauta — confirmar)</li>
+          </ul>
+
+          <h4>Sequência de encontros</h4>
+          <table>
+            <tr><th>Encontro</th><th>Tema</th><th>Output</th></tr>
+            <tr><td>01 · Kick-off</td><td>Diagnóstico Roda da Vida + Território</td><td>Plano de ação 90 dias</td></tr>
+            <tr><td>02 · Ordem na Casa</td><td>Financeiro · plano-vida × plano-negócio</td><td>Casa organizada</td></tr>
+            <tr><td>03 · Território e Oferta</td><td>Esteira · precificação</td><td>Blueprint da oferta</td></tr>
+            <tr><td>04 · Posicionamento</td><td>Diferenciação · mentalidade</td><td>Voz própria</td></tr>
+            <tr><td>05–06 · Funil</td><td>Captação · qualificação · roteiro · fechamento</td><td>Funil rodando</td></tr>
+            <tr><td>07–08 · Análise Continuada</td><td>Análise de reunião · ajustes · pitch para 2ZA</td><td>Vendendo com método</td></tr>
+          </table>
+
+          <h4>Output entregue</h4>
+          <ul>
+            <li>Ferramentas funcionando · agentes instalados · implementação assistida</li>
+            <li>Oferta construída e validada</li>
+            <li>Funil capturando · primeiras vendas com método</li>
+            <li>Pitch para 2ZA no encontro final (seeding suave em todos os encontros)</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Estratégia comercial</div>
+          <h2>Seeding e migração</h2>
+          <p>Cada encontro do Sell-z faz seeding sutil do 2ZA — recursos avançados (CRM completo, laboratório de análise, conselho estratégico) ficam reservados para a mentoria sênior. O Sell-z entrega o "começar a vender" · o 2ZA entrega o "escalar e refinar".</p>
+        </div>
+      </div>
+
+
+      <!-- PRODUTO · 2ZA -->
+      <div class="page" id="page-produto-2za">
+        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="produto-hero">
+          <div class="produto-hero-meta"><span class="produto-card-formato">Mentoria · Conselho estratégico</span><span class="produto-card-status ativo">ativo</span></div>
+          <h1 class="produto-hero-title">2Z Advisor · 2ZA</h1>
+          <p class="produto-hero-frase">Mentoria como conselho estratégico. Refinamento, performance e dashboards para o empresário maduro.</p>
+          <div class="produto-hero-ticket">
+            <div class="produto-hero-ticket-item"><small>Ticket anual</small><strong>R$ 20.400–22.800</strong></div>
+            <div class="produto-hero-ticket-item"><small>Mensal</small><strong>12x R$ 1.700–1.900</strong></div>
+            <div class="produto-hero-ticket-item"><small>Sweet spot Público 2</small><strong>R$ 24k–48k</strong></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Formato</div>
+          <h2>O que está incluído</h2>
+          <ul>
+            <li><strong>Mentoria de refinamento</strong> · acompanhamento contínuo</li>
+            <li><strong>Notion completo</strong> · CRM + dashboards prontos</li>
+            <li><strong>Laboratório mensal</strong> · análise de reunião comercial real</li>
+            <li><strong>Acesso ao conteúdo Sell-z</strong> + materiais exclusivos 2ZA</li>
+            <li><strong>Ferramenta de pesquisa de mercado</strong> avançada</li>
+            <li><strong>Selo "2ZA"</strong> · usado na comunicação para diferenciar</li>
+          </ul>
+
+          <h4>Diferencial</h4>
+          <p>Conselho estratégico · não só conteúdo. Rafa atua como consultora-conselheira do negócio. Foco em refinar sessões de venda + performance comercial.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Migração e descontinuação</div>
+          <h2>Transições em curso</h2>
+          <table>
+            <tr><th>Origem</th><th>Destino</th><th>Condição</th></tr>
+            <tr><td><strong>Maestria (alunos atuais)</strong></td><td>2ZA automático</td><td>Mantém todos os benefícios já prometidos</td></tr>
+            <tr><td><strong>Negócio Soberano</strong></td><td>2ZA com upgrade</td><td>R$ 12k–15k (12x R$ 1.200–1.500) · explicação clara do upgrade</td></tr>
+            <tr><td><strong>Negócio Soberano</strong></td><td>—</td><td><strong>Descontinuado em 17/05/2026</strong></td></tr>
+          </table>
+
+          <h4>Onboarding nova mentoria</h4>
+          <p><strong>11–15/05/2026</strong> · janela de onboarding e migração. Comunicação detalhada para cada perfil.</p>
+
+          <h4>Limite de operação</h4>
+          <p>Máximo <strong>100 alunos</strong> viável para gestão individualizada — premissa para escala saudável da Rafa.</p>
+        </div>
+      </div>
+
+
+      <!-- EX · PRODUTO · COMPARATIVO -->
+      <div class="page" id="page-ex-produto-comparativo">
+        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="page-head">
+          <h1 class="page-title">Comparativo de ofertas <em>— Imersão · Sell-z · 2ZA</em></h1>
+          <p class="page-lead">Tabela lado-a-lado das três ofertas para uso em vendas e materiais de apoio.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em extração</div>
+          <h2>Aguardando consolidação</h2>
+          <p class="section-desc">Esta seção será preenchida após validação final dos preços e formato de cada produto. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — aguardando preços finais e materiais.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LAYER · VENDAS -->
+      <div class="page" id="page-layer-venda">
+        <div class="breadcrumb">Consultoria Mazzei · Camada 05</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Camada 05 · Marketing</div>
+          <h1 class="layer-hero-title">Vendas</h1>
+          <p class="layer-hero-frase">Branding, funil, canais e lançamento. Marketing e venda da esteira.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/3 validados</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Cronograma</div>
+          <h2>Rebranding em curso</h2>
+          <p class="section-desc">Sistema não pausa durante rebranding — entregas seguem em paralelo, copy e visual ajustam quando agência entregar.</p>
+
+          <table>
+            <tr><th>Marco</th><th>Data</th><th>Status</th></tr>
+            <tr><td><strong>Naming</strong></td><td>30/04/2026</td><td><span class="tag pending">aguardando agência</span></td></tr>
+            <tr><td><strong>Anteprojeto branding</strong></td><td>07/05/2026</td><td><span class="tag pending">aguardando agência</span></td></tr>
+            <tr><td><strong>Logo final</strong></td><td>19/06/2026</td><td><span class="tag pending">aguardando agência</span></td></tr>
+          </table>
+
+          <h4>Outputs dessa camada</h4>
+          <ul>
+            <li><strong>Branding</strong> · paleta · tipografia · tom <span class="tag pending">pendente</span></li>
+            <li><strong>Funil &amp; Canais</strong> · arquitetura comercial <span class="tag pending">pendente</span></li>
+            <li><strong>Lançamento</strong> · cronograma + emails + criativos <span class="tag pending">pendente</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- EX · VENDA · BRANDING -->
+      <div class="page" id="page-ex-venda-branding">
+        <div class="breadcrumb">Camada 05 · Vendas</div>
+        <div class="page-head">
+          <h1 class="page-title">Branding <em>— paleta, tipografia, tom</em></h1>
+          <p class="page-lead">Identidade visual e verbal da Mazzei pós-rebranding. Anteprojeto previsto para 07/05/2026.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em desenvolvimento</div>
+          <h2>Aguardando agência</h2>
+          <p class="section-desc">Esta seção será preenchida após entrega do anteprojeto de branding pela agência (07/05). Squad <strong>MSE</strong> assume validação e desdobramento.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — em desenvolvimento — squad MSE assume entrega.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · VENDA · FUNIL -->
+      <div class="page" id="page-ex-venda-funil">
+        <div class="breadcrumb">Camada 05 · Vendas</div>
+        <div class="page-head">
+          <h1 class="page-title">Funil &amp; canais <em>— arquitetura comercial</em></h1>
+          <p class="page-lead">Funil completo da esteira: captação, qualificação, conversão e onboarding por canal.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em desenvolvimento</div>
+          <h2>Aguardando consolidação</h2>
+          <p class="section-desc">Esta seção será preenchida com a arquitetura de funil aprovada. Squad <strong>MSE</strong> assume entrega.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — em desenvolvimento — squad MSE assume entrega.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · VENDA · LANÇAMENTO -->
+      <div class="page" id="page-ex-venda-lancamento">
+        <div class="breadcrumb">Camada 05 · Vendas</div>
+        <div class="page-head">
+          <h1 class="page-title">Lançamento <em>— cronograma, emails, criativos</em></h1>
+          <p class="page-lead">Plano completo do lançamento da Imersão e Sell-z. Cronograma, peças, criativos.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em desenvolvimento</div>
+          <h2>Aguardando consolidação</h2>
+          <p class="section-desc">Esta seção será preenchida após validação dos produtos. Squad <strong>MSE</strong> assume entrega — emails, criativos e calendário.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — em desenvolvimento — squad MSE assume entrega.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LAYER · PROJETO -->
+      <div class="page" id="page-layer-projeto">
+        <div class="breadcrumb">Consultoria Mazzei · Camada 06</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Camada 06 · Gestão</div>
+          <h1 class="layer-hero-title">O Projeto</h1>
+          <p class="layer-hero-frase">Painel de progresso e debriefing de toda a implementação.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/2 validados</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Linha do tempo</div>
+          <h2>Próximas datas-chave</h2>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q2<strong>30/04</strong></div>
+            <div class="timeline-body">
+              <h4>Naming finalizado</h4>
+              <p>Agência entrega naming para Imersão e Sell-z.</p>
+              <div class="timeline-tags"><span class="chip chip-yellow">branding</span><span class="chip chip-orange">agência</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q2<strong>07/05</strong></div>
+            <div class="timeline-body">
+              <h4>Anteprojeto branding</h4>
+              <p>Agência entrega posicionamento, tom de voz, copy guidelines, paleta.</p>
+              <div class="timeline-tags"><span class="chip chip-yellow">branding</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q2<strong>11–15/05</strong></div>
+            <div class="timeline-body">
+              <h4>Onboarding 2ZA + migração de alunos</h4>
+              <p>Janela de migração Maestria → 2ZA e Negócio Soberano → 2ZA com upgrade.</p>
+              <div class="timeline-tags"><span class="chip chip-green">produto</span><span class="chip chip-blue">alunos</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q2<strong>17/05</strong></div>
+            <div class="timeline-body">
+              <h4>Fim Negócio Soberano</h4>
+              <p>Programa antigo é descontinuado oficialmente.</p>
+              <div class="timeline-tags"><span class="chip chip-rose">descontinuação</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q2<strong>~25/05</strong></div>
+            <div class="timeline-body">
+              <h4>Início captação Imersão</h4>
+              <p>Tráfego inicia para Imersão Standard + VIP.</p>
+              <div class="timeline-tags"><span class="chip chip-purple">lançamento</span><span class="chip chip-orange">tráfego</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q2<strong>19/06</strong></div>
+            <div class="timeline-body">
+              <h4>Logo final</h4>
+              <p>Agência entrega logo finalizada — fim do rebranding visual.</p>
+              <div class="timeline-tags"><span class="chip chip-yellow">branding</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-block">
+            <div class="timeline-period">2026 · Q3<strong>jun–jul</strong></div>
+            <div class="timeline-body">
+              <h4>Início Sell-z · 1ª turma</h4>
+              <p>Lançamento da 1ª turma do Sell-z. Primeira validação de ticket e formato em escala.</p>
+              <div class="timeline-tags"><span class="chip chip-green">produto</span><span class="chip chip-mint">cohort</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · PROJETO · STATUS -->
+      <div class="page" id="page-ex-projeto-status">
+        <div class="breadcrumb">Camada 06 · O Projeto</div>
+        <div class="page-head">
+          <h1 class="page-title">Painel de progresso <em>— status por camada e exercício</em></h1>
+          <p class="page-lead">Visão consolidada do que está validado, em rascunho ou pendente em todo o projeto.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em consolidação</div>
+          <h2>Painel a montar</h2>
+          <p class="section-desc">Esta seção será preenchida após primeira rodada completa de extração de todas as camadas. Para extrair, agendar sessão com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — sem dados extraídos ainda.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · PROJETO · DEBRIEFING -->
+      <div class="page" id="page-ex-projeto-debriefing">
+        <div class="breadcrumb">Camada 06 · O Projeto</div>
+        <div class="page-head">
+          <h1 class="page-title">Debriefing <em>— retrospectiva pós-implementação</em></h1>
+          <p class="page-lead">Lições aprendidas, decisões críticas, ajustes e recomendações finais ao final da consultoria.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em consolidação</div>
+          <h2>Aguardando fim da implementação</h2>
+          <p class="section-desc">Esta seção será preenchida ao final do ciclo de consultoria. Para extrair, agendar sessão de debriefing com expert.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — implementação em curso.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+
+</div>
+
+<script>
+const navLinks = document.querySelectorAll('[data-page]');
+const pages = document.querySelectorAll('.page');
+
+function groupForId(id) {
+  if (!id) return null;
+  if (id.startsWith('layer-')) return id.replace('layer-', '');
+  if (id.startsWith('ex-')) return id.replace('ex-', '').split('-')[0];
+  if (id.startsWith('produto-')) return 'produto';
+  if (id.startsWith('framework-')) return 'metodo';
+  if (id.startsWith('lancamento-')) return 'venda';
+  return null;
+}
+
+function showPage(id, opts = {}) {
+  pages.forEach(p => p.classList.remove('active'));
+  navLinks.forEach(l => l.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) target.classList.add('active');
+  document.querySelectorAll('[data-page="' + id + '"]').forEach(l => l.classList.add('active'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (!opts.fromSidebar) {
+    const groupName = groupForId(id);
+    if (groupName) {
+      document.querySelectorAll('.nav-group').forEach(g => {
+        if (g.dataset.group === groupName) g.classList.add('expanded');
+      });
+    }
+  }
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id = link.dataset.page;
+    const isSidebar = !!link.closest('.sidebar');
+    const isLayerLink = id && id.startsWith('layer-');
+
+    if (isSidebar && isLayerLink) {
+      const groupName = id.replace('layer-', '');
+      const group = document.querySelector('.nav-group[data-group="' + groupName + '"]');
+      if (group) group.classList.toggle('expanded');
+      showPage(id, { fromSidebar: true });
+      return;
+    }
+
+    if (isSidebar) {
+      showPage(id, { fromSidebar: true });
+      return;
+    }
+
+    showPage(id);
+  });
+});
+
+showPage('home');
+
+const toast = document.createElement('div');
+toast.className = 'toast';
+toast.textContent = 'Link copiado';
+document.body.appendChild(toast);
+
+let toastTimer;
+function showToast() {
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function doCopy(text, btn, msg) {
+  toast.textContent = msg || 'Link copiado';
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    showToast();
+    setTimeout(() => btn.classList.remove('copied'), 1200);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.classList.add('copied');
+    showToast();
+    setTimeout(() => btn.classList.remove('copied'), 1200);
+  });
+}
+
+document.addEventListener('click', (e) => {
+  const linkBtn = e.target.closest('.copy-link');
+  if (linkBtn) {
+    e.preventDefault();
+    if (linkBtn.dataset.link) doCopy(linkBtn.dataset.link, linkBtn, 'Link copiado');
+    return;
+  }
+
+  const codeBtn = e.target.closest('.code-block-copy');
+  if (codeBtn) {
+    e.preventDefault();
+    if (codeBtn.dataset.copy) doCopy(codeBtn.dataset.copy, codeBtn, 'Conteúdo copiado');
+  }
+});
+</script>
+
+<!-- Giscus — sistema de comentários por seção -->
+<script>
+(function() {
+  // Config Giscus
+  const GISCUS_REPO = 'inceptionxp/dash-rafa-mazzei';
+  const GISCUS_REPO_ID = 'R_kgDOSUNvXw';
+  const GISCUS_CATEGORY = 'General';
+  const GISCUS_CATEGORY_ID = 'DIC_kwDOSUNvX84C8VLR';
+
+  // Injeta widget Giscus em cada seção de página
+  function injectGiscus(pageId) {
+    const page = document.getElementById('page-' + pageId);
+    if (!page) return;
+    // Evita duplicar
+    if (page.querySelector('.giscus-wrapper')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'giscus-wrapper';
+    wrapper.style.cssText = 'margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);';
+
+    const label = document.createElement('p');
+    label.style.cssText = 'font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);margin-bottom:16px;';
+    label.textContent = '💬 Comentários & Feedback';
+    wrapper.appendChild(label);
+
+    const container = document.createElement('div');
+    container.className = 'giscus';
+    wrapper.appendChild(container);
+    page.appendChild(wrapper);
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', GISCUS_REPO);
+    script.setAttribute('data-repo-id', GISCUS_REPO_ID);
+    script.setAttribute('data-category', GISCUS_CATEGORY);
+    script.setAttribute('data-category-id', GISCUS_CATEGORY_ID);
+    script.setAttribute('data-mapping', 'specific');
+    script.setAttribute('data-term', 'dash-secao-' + pageId);
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', 'dark_dimmed');
+    script.setAttribute('data-lang', 'pt');
+    script.setAttribute('data-loading', 'lazy');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+    container.appendChild(script);
+  }
+
+  // Observa mudança de página e injeta Giscus
+  const origShowPage = window.showPage;
+  if (typeof origShowPage === 'function') {
+    window.showPage = function(id, opts) {
+      origShowPage(id, opts);
+      setTimeout(() => injectGiscus(id), 100);
+    };
+  }
+
+  // Injeta na página inicial (visível ao carregar)
+  document.addEventListener('DOMContentLoaded', function() {
+    const active = document.querySelector('.page-content.active');
+    if (active) injectGiscus(active.id.replace('page-', ''));
+  });
+})();
+</script>
+
+</body>
+</html>
