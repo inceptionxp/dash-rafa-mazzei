@@ -2386,6 +2386,9 @@ window.showPage = function showPage(id, opts = {}) {
       });
     }
   }
+
+  // Giscus: injeta widget na página recém-ativada
+  setTimeout(function() { if (typeof window._injectGiscus === 'function') window._injectGiscus(id); }, 150);
 }
 
 navLinks.forEach(link => {
@@ -2464,18 +2467,16 @@ document.addEventListener('click', (e) => {
 <!-- Giscus — sistema de comentários por seção -->
 <script>
 (function() {
-  // Config Giscus
-  const GISCUS_REPO = 'inceptionxp/dash-rafa-mazzei';
-  const GISCUS_REPO_ID = 'R_kgDOSUNvXw';
-  const GISCUS_CATEGORY = 'General';
+  const GISCUS_REPO        = 'inceptionxp/dash-rafa-mazzei';
+  const GISCUS_REPO_ID     = 'R_kgDOSUNvXw';
+  const GISCUS_CATEGORY    = 'General';
   const GISCUS_CATEGORY_ID = 'DIC_kwDOSUNvX84C8VLR';
 
-  // Injeta widget Giscus em cada seção de página
-  function injectGiscus(pageId) {
+  // Expõe globalmente para showPage chamar direto
+  window._injectGiscus = function(pageId) {
     const page = document.getElementById('page-' + pageId);
     if (!page) return;
-    // Evita duplicar
-    if (page.querySelector('.giscus-wrapper')) return;
+    if (page.querySelector('.giscus-wrapper')) return; // já injetado
 
     const wrapper = document.createElement('div');
     wrapper.className = 'giscus-wrapper';
@@ -2493,37 +2494,28 @@ document.addEventListener('click', (e) => {
 
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', GISCUS_REPO);
-    script.setAttribute('data-repo-id', GISCUS_REPO_ID);
-    script.setAttribute('data-category', GISCUS_CATEGORY);
-    script.setAttribute('data-category-id', GISCUS_CATEGORY_ID);
-    script.setAttribute('data-mapping', 'specific');
-    script.setAttribute('data-term', 'dash-secao-' + pageId);
-    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-repo',           GISCUS_REPO);
+    script.setAttribute('data-repo-id',        GISCUS_REPO_ID);
+    script.setAttribute('data-category',       GISCUS_CATEGORY);
+    script.setAttribute('data-category-id',    GISCUS_CATEGORY_ID);
+    script.setAttribute('data-mapping',        'specific');
+    script.setAttribute('data-term',           'dash-secao-' + pageId);
+    script.setAttribute('data-strict',         '0');
     script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-emit-metadata',  '0');
     script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme', 'dark_dimmed');
-    script.setAttribute('data-lang', 'pt');
-    script.setAttribute('data-loading', 'lazy');
+    script.setAttribute('data-theme',          'dark_dimmed');
+    script.setAttribute('data-lang',           'pt');
+    script.setAttribute('data-loading',        'lazy');
     script.crossOrigin = 'anonymous';
     script.async = true;
     container.appendChild(script);
-  }
+  };
 
-  // Observa mudança de página e injeta Giscus
-  const origShowPage = window.showPage;
-  if (typeof origShowPage === 'function') {
-    window.showPage = function(id, opts) {
-      origShowPage(id, opts);
-      setTimeout(() => injectGiscus(id), 100);
-    };
-  }
-
-  // Injeta na página inicial (visível ao carregar)
+  // Injeta na página ativa ao carregar
   document.addEventListener('DOMContentLoaded', function() {
     const active = document.querySelector('.page.active');
-    if (active) injectGiscus(active.id.replace('page-', ''));
+    if (active) window._injectGiscus(active.id.replace('page-', ''));
   });
 })();
 </script>
