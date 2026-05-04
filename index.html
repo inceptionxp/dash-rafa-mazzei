@@ -73,7 +73,7 @@ a{color:inherit;text-decoration:none}
 .layer-card{background:var(--surface);border-radius:var(--radius-card);overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
 .layer-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(31,32,30,0.08)}
 .layer-card-cover{background:linear-gradient(180deg,rgba(31,32,30,0) 30%,rgba(31,32,30,0.25) 100%),var(--pattern-card),var(--verde);background-size:cover;background-position:center;background-blend-mode:overlay,normal;aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:24px}
-.layer-card-cover::before{content:'';position:absolute;inset:0;background:url('https://res.cloudinary.com/dynwzjfjw/image/upload/f_auto,q_auto/iniciais-alabaster_cpcw40') no-repeat top 18px center;background-size:42px auto;opacity:0.45;pointer-events:none}
+.layer-card-cover::before{display:none}
 .layer-card-title{font-family:var(--font-display);font-size:44px;letter-spacing:0.04em;color:var(--bege);text-transform:uppercase;line-height:1;position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,0.25)}
 .layer-card-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;gap:12px}
 .layer-card-num-wrap{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--chumbo)}
@@ -422,7 +422,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       <div class="page active" id="page-home">
         <div class="page-head">
           <div class="breadcrumb">Consultoria Mazzei · Implementação · Inception Experience</div>
-          <h1 class="page-title">Consultoria <em>Mazzei</em></h1>
+          <h1 class="page-title">Consultoria <em>Rafa Mazzei</em></h1>
           <p class="page-lead">Esta dashboard documenta toda a entrega da consultoria — método, expert, produtos e lançamento. Use as <em>6 camadas</em> abaixo para navegar.</p>
         </div>
 
