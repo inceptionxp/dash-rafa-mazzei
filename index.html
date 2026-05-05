@@ -2464,58 +2464,83 @@ document.addEventListener('click', (e) => {
 });
 </script>
 
-<!-- Giscus — sistema de comentários por seção -->
+<!-- Giscus — widget único flutuante que segue a página ativa -->
 <script>
 (function() {
   const GISCUS_REPO        = 'inceptionxp/dash-rafa-mazzei';
   const GISCUS_REPO_ID     = 'R_kgDOSUNvXw';
   const GISCUS_CATEGORY    = 'General';
   const GISCUS_CATEGORY_ID = 'DIC_kwDOSUNvX84C8VLR';
+  const GISCUS_ORIGIN      = 'https://giscus.app';
 
-  // Expõe globalmente para showPage chamar direto
-  window._injectGiscus = function(pageId) {
-    const page = document.getElementById('page-' + pageId);
-    if (!page) return;
-    if (page.querySelector('.giscus-wrapper')) return; // já injetado
+  var currentPageId = null;
+  var widgetReady = false;
 
-    const wrapper = document.createElement('div');
-    wrapper.className = 'giscus-wrapper';
-    wrapper.style.cssText = 'margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);';
+  // Cria wrapper fixo no final do body — widget único que se move entre páginas
+  var floatingWrapper = document.createElement('div');
+  floatingWrapper.id = 'giscus-float';
+  floatingWrapper.style.cssText = 'margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);display:none;';
 
-    const label = document.createElement('p');
-    label.style.cssText = 'font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);margin-bottom:16px;';
-    label.textContent = '💬 Comentários & Feedback';
-    wrapper.appendChild(label);
+  var label = document.createElement('p');
+  label.style.cssText = 'font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.35);margin-bottom:16px;';
+  label.textContent = '💬 Comentários & Feedback';
+  floatingWrapper.appendChild(label);
 
-    const container = document.createElement('div');
-    container.className = 'giscus';
-    wrapper.appendChild(container);
-    page.appendChild(wrapper);
+  var giscusContainer = document.createElement('div');
+  giscusContainer.className = 'giscus';
+  floatingWrapper.appendChild(giscusContainer);
 
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo',           GISCUS_REPO);
-    script.setAttribute('data-repo-id',        GISCUS_REPO_ID);
-    script.setAttribute('data-category',       GISCUS_CATEGORY);
-    script.setAttribute('data-category-id',    GISCUS_CATEGORY_ID);
-    script.setAttribute('data-mapping',        'specific');
-    script.setAttribute('data-term',           'dash-secao-' + pageId);
-    script.setAttribute('data-strict',         '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata',  '0');
-    script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme',          'dark_dimmed');
-    script.setAttribute('data-lang',           'pt');
-    script.setAttribute('data-loading',        'eager');
-    script.crossOrigin = 'anonymous';
-    script.async = true;
-    container.appendChild(script);
+  // Move widget para dentro da página ativa e muda term via postMessage
+  window._showGiscus = function(pageId) {
+    if (pageId === currentPageId) return;
+    currentPageId = pageId;
+
+    var page = document.getElementById('page-' + pageId);
+    if (!page) { floatingWrapper.style.display = 'none'; return; }
+
+    // Move wrapper para dentro da página ativa
+    page.appendChild(floatingWrapper);
+    floatingWrapper.style.display = 'block';
+
+    if (!widgetReady) {
+      // Primeira vez: injeta script
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo',              GISCUS_REPO);
+      script.setAttribute('data-repo-id',           GISCUS_REPO_ID);
+      script.setAttribute('data-category',          GISCUS_CATEGORY);
+      script.setAttribute('data-category-id',       GISCUS_CATEGORY_ID);
+      script.setAttribute('data-mapping',           'specific');
+      script.setAttribute('data-term',              'dash-secao-' + pageId);
+      script.setAttribute('data-strict',            '0');
+      script.setAttribute('data-reactions-enabled', '1');
+      script.setAttribute('data-emit-metadata',     '0');
+      script.setAttribute('data-input-position',    'top');
+      script.setAttribute('data-theme',             'dark_dimmed');
+      script.setAttribute('data-lang',              'pt');
+      script.crossOrigin = 'anonymous';
+      script.async = true;
+      giscusContainer.appendChild(script);
+      widgetReady = true;
+    } else {
+      // Já carregado: muda discussion via postMessage
+      var iframe = document.querySelector('iframe.giscus-frame');
+      if (iframe) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { term: 'dash-secao-' + pageId } } },
+          GISCUS_ORIGIN
+        );
+      }
+    }
   };
 
-  // Injeta na página ativa ao carregar
+  // Expõe para showPage chamar (mantém compatibilidade)
+  window._injectGiscus = window._showGiscus;
+
+  // Ativa na página inicial
   document.addEventListener('DOMContentLoaded', function() {
-    const active = document.querySelector('.page.active');
-    if (active) window._injectGiscus(active.id.replace('page-', ''));
+    var active = document.querySelector('.page.active');
+    if (active) window._showGiscus(active.id.replace('page-', ''));
   });
 })();
 </script>
