@@ -2537,11 +2537,11 @@ document.addEventListener('click', (e) => {
   // Expõe para showPage chamar (mantém compatibilidade)
   window._injectGiscus = window._showGiscus;
 
-  // Ativa na página inicial
-  document.addEventListener('DOMContentLoaded', function() {
+  // Ativa na página inicial — DOM já pronto (script inline no fim do body)
+  (function init() {
     var active = document.querySelector('.page.active');
     if (active) window._showGiscus(active.id.replace('page-', ''));
-  });
+  })();
 })();
 </script>
 
