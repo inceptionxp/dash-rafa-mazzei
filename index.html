@@ -150,7 +150,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 .timeline{position:relative;padding-left:32px;margin:24px 0}
 .timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--marrom) 0%,var(--marrom-claro) 50%,rgba(0,0,0,0.05) 100%)}
 .timeline-item{position:relative;margin-bottom:28px;padding:18px 22px;background:var(--bege-2);border-radius:var(--radius);border-left:3px solid var(--marrom)}
-.timeline-item::before{content:"";position:absolute;left:-29px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--marrom);border:3px solid var(--bege-1)}
+.timeline-item::before{content:"";position:absolute;left:-29px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--marrom);border:3px solid var(--bege)}
 .timeline-year{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--marrom);margin-bottom:6px}
 .timeline-item h4{font-family:var(--font-serif);font-size:18px;color:var(--chumbo);margin:0 0 8px;font-weight:600}
 .timeline-item p{margin:0;font-size:14px;line-height:1.6;color:var(--text-2)}
@@ -176,6 +176,63 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 .pillar-num{font-family:var(--font-mono);font-size:10px;color:var(--marrom);letter-spacing:0.18em;text-transform:uppercase;font-weight:700}
 .pillar-title{font-family:var(--font-display);font-size:20px;color:var(--chumbo);margin:6px 0 8px;letter-spacing:0.02em;text-transform:uppercase}
 .pillar-desc{font-size:13px;color:var(--text-2);line-height:1.5}
+.pillar-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.pillar-list li{font-size:13px;color:var(--text-2);line-height:1.45;padding-left:14px;position:relative}
+.pillar-list li::before{content:"·";position:absolute;left:4px;top:-1px;color:var(--marrom);font-weight:700}
+
+/* INFO CARD (genérico) */
+.info-card{background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:20px 22px}
+.info-card .info-card-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--marrom);font-weight:700;display:block;margin-bottom:6px}
+.info-card h3{font-family:var(--font-display);font-size:16px;letter-spacing:0.02em;text-transform:uppercase;color:var(--chumbo);margin:0 0 12px;font-weight:600;line-height:1.3}
+.info-card p{font-size:13px;line-height:1.6;color:var(--text-2);margin:0 0 10px}
+.info-card p:last-child{margin-bottom:0}
+.info-card ul{margin:0;padding-left:18px}
+.info-card ul li{font-size:13px;line-height:1.55;color:var(--text-2);margin-bottom:6px}
+.info-card[style*="border-left"]{padding-left:24px}
+
+/* STORY GALLERY (Banco de Histórias) */
+.story-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:14px 0}
+.story-card{background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:18px 20px;display:flex;flex-direction:column;gap:8px;transition:transform .15s,box-shadow .15s,border-color .15s;cursor:pointer;text-decoration:none;color:inherit;position:relative}
+.story-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(31,32,30,0.08);border-color:var(--marrom)}
+.story-card-arrow{position:absolute;top:14px;right:16px;font-family:var(--font-mono);font-size:14px;color:var(--text-3);transition:transform .15s,color .15s}
+.story-card:hover .story-card-arrow{transform:translateX(2px);color:var(--marrom)}
+.story-card-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-3);font-weight:700}
+.story-card-title{font-family:var(--font-display);font-size:17px;letter-spacing:0.02em;color:var(--chumbo);text-transform:uppercase;font-weight:500;margin:2px 0 4px;line-height:1.25}
+.story-card-nucleo{font-family:var(--font-serif);font-style:italic;font-size:13.5px;color:var(--marrom);line-height:1.45;margin:4px 0 8px}
+.story-card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.story-card-meta{font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:500;font-family:var(--font-body);letter-spacing:0.02em;border:none}
+.chip-yellow{background:#f6e7c2;color:#7a5d20}
+.chip-orange{background:#f6d8c2;color:#8a4a22}
+.chip-green{background:#cfe2bf;color:#3d5a23}
+.chip-purple{background:#dccff0;color:#523078}
+.chip-peach{background:#f3d8c6;color:#7a4a2a}
+.chip-pink{background:#f0c8d4;color:#7a2c4a}
+.chip-blue{background:#c8def0;color:#1f4a78}
+.chip-gray{background:rgba(31,32,30,0.08);color:rgba(31,32,30,0.6)}
+.chip-skyblue{background:#cfe5f4;color:#1f3d5a}
+.chip-rose{background:#f0c8c8;color:#7a2828}
+.chip-mint{background:#c8e8d8;color:#1f5a3a}
+.chip-coral{background:#f6c8b6;color:#7a2c14}
+
+.tipo-pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:700;font-family:var(--font-mono);letter-spacing:0.12em;text-transform:uppercase;background:var(--chumbo);color:var(--bege)}
+.tipo-pill.pessoal{background:var(--marrom);color:var(--bege)}
+.tipo-pill.profissional{background:var(--chumbo);color:var(--bege)}
+.tipo-pill.cliente{background:var(--verde,#3d5a23);color:var(--bege)}
+.tipo-pill.analogia{background:#523078;color:var(--bege)}
+
+.story-card-status{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;font-size:9px;color:var(--bege);font-weight:700}
+.story-card-status.public{background:#3d5a23}
+.story-card-status.private{background:var(--marrom)}
+.story-card-status.confirm{background:#a13a1a}
+
+/* HISTORY HERO (página individual) */
+.history-hero{background:var(--chumbo);color:var(--bege);border-radius:var(--radius-card);padding:36px 40px;margin-bottom:22px;position:relative;overflow:hidden}
+.history-hero-num{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(238,236,227,0.55);margin-bottom:8px}
+.history-hero-title{font-family:var(--font-display);font-size:38px;letter-spacing:0.04em;line-height:1.05;text-transform:uppercase;margin:0 0 14px;color:var(--bege)}
+.history-hero-nucleo{font-family:var(--font-serif);font-style:italic;font-size:18px;line-height:1.45;color:rgba(238,236,227,0.9);max-width:680px;font-weight:300;margin:0}
+.history-hero-meta{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
 
 /* CHIPS */
 .chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:4px;font-size:11.5px;font-weight:500;font-family:var(--font-body);letter-spacing:0.02em}
@@ -271,6 +328,9 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 .etapa-cell{background:var(--bege-2);border-radius:var(--radius);padding:18px 20px;border:1px solid var(--border)}
 .etapa-cell h5{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);margin-bottom:8px;font-weight:700;display:flex;align-items:center;gap:6px}
 .etapa-cell p,.etapa-cell ul{font-size:13.5px;color:var(--text-2);margin:0}
+.etapa-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.etapa-list li{font-size:13.5px;color:var(--text-2);line-height:1.55;padding-left:14px;position:relative}
+.etapa-list li::before{content:"·";position:absolute;left:4px;top:-1px;color:var(--marrom);font-weight:700;font-size:14px}
 .etapa-cell ul{margin:4px 0 0 18px}
 .etapa-cell li{margin-bottom:4px}
 
@@ -1087,41 +1147,165 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
         </div>
 
         <div class="section">
-          <div class="section-label">As 4 dimensões</div>
-          <h2>Maestria · cruzamento de eixos</h2>
+          <div class="section-label">As 4 dimensões · framework Zona de Maestria</div>
+          <h2>O cruzamento das 4 dimensões da Rafaella Mazzei</h2>
+          <p class="section-desc">Framework Zona de Maestria (variação do <em>Zone of Genius</em> de Gay Hendricks): a maestria real não está em cada eixo isolado — está no ponto onde os 4 se cruzam simultaneamente. Habilidade sem paixão é trabalho. Paixão sem conhecimento é hobby. Conhecimento sem valor é mercadoria.</p>
 
           <div class="pillars">
             <div class="pillar">
               <span class="pillar-num">01 · Habilidades</span>
               <h4 class="pillar-title">O que ela faz</h4>
-              <p class="pillar-desc">Leitura estratégica de negócio · diagnóstico comercial integrado (financeiro + comercial + operação) · construção de processo de venda consultiva · precificação por valor · análise de reunião comercial real · seleção de protocolos de tração por contexto.</p>
+              <ul class="pillar-list">
+                <li>Leitura estratégica de negócio</li>
+                <li>Diagnóstico comercial integrado (financeiro + comercial + operação)</li>
+                <li>Construção de processo de venda consultiva</li>
+                <li>Precificação por valor (não por mercado)</li>
+                <li>Análise de reunião comercial real (gravação × pitch teórico)</li>
+                <li>Seleção de protocolos de tração por contexto</li>
+                <li>Treinamento de time comercial do zero à alta performance</li>
+                <li>Liderança e montagem de equipe de vendas</li>
+              </ul>
             </div>
             <div class="pillar">
               <span class="pillar-num">02 · Conhecimentos</span>
               <h4 class="pillar-title">O que ela sabe</h4>
-              <p class="pillar-desc">Arquitetura de processo comercial · finanças básicas para serviço (DRE, fluxo de caixa, separação PF/PJ, prolabore) · funil consultivo do lead ao pós-venda · ancoragem e precificação · liderança e montagem de time comercial · maturidade empresarial · negócio de serviço especializado.</p>
+              <ul class="pillar-list">
+                <li>Arquitetura de processo comercial</li>
+                <li>Finanças básicas para serviço (DRE, fluxo de caixa, PF/PJ, prolabore)</li>
+                <li>Funil consultivo do lead ao pós-venda</li>
+                <li>Ancoragem e precificação</li>
+                <li>Maturidade empresarial × maturidade profissional</li>
+                <li>Negócio de serviço especializado (consultoria, advisoria, mentoria)</li>
+                <li>Posição na mente do cliente (Comparado · Justificado · Escolhido)</li>
+                <li>Marketing de relacionamento, MMN e modelos de carreira escalonada</li>
+              </ul>
             </div>
             <div class="pillar">
               <span class="pillar-num">03 · Valores</span>
               <h4 class="pillar-title">O que ela defende</h4>
-              <p class="pillar-desc">Integridade · maturidade · autonomia · clareza · longo prazo. "Empreender é identidade." Não vende ilusão. Não promete o que negócio não sustenta. "Qualidade é obrigação." Critica marketing da esperança.</p>
+              <ul class="pillar-list">
+                <li>Liberdade (geográfica + financeira) · valor fundador</li>
+                <li>Excelência · auto-cobrança permanente, técnica antes de motivação</li>
+                <li>Verdade · coerência mesmo quando custa dinheiro</li>
+                <li>Integridade · não promete o que negócio não sustenta</li>
+                <li>Maturidade · prefere ensinar a estruturar do que prometer atalho</li>
+                <li>Autonomia · cliente que decide, não que é convencido</li>
+                <li>Longo prazo · constrói para repetir, não para fechar a venda</li>
+                <li>Qualidade é obrigação · não diferencial</li>
+              </ul>
             </div>
             <div class="pillar">
               <span class="pillar-num">04 · Paixões</span>
               <h4 class="pillar-title">O que a move</h4>
-              <p class="pillar-desc">Ver empresário sair do gargalo do dono · ouvir reunião comercial real · destravar previsibilidade · ver cliente trocar "eu preciso" por "eu decido". O "antes e depois" mensurável.</p>
+              <ul class="pillar-list">
+                <li>Ver empresário sair do gargalo do dono</li>
+                <li>Ouvir reunião comercial real (não pitch ensaiado)</li>
+                <li>Destravar previsibilidade de faturamento</li>
+                <li>Ver cliente trocar "eu preciso" por "eu decido"</li>
+                <li>Acompanhar antes-e-depois mensurável (5× faturamento médio)</li>
+                <li>Treinar equipe — repetir o método e ver execução por outras mãos</li>
+                <li>Palco · palestra · ensinar para muita gente ao mesmo tempo</li>
+                <li>Mostrar que ponto de partida não define destino</li>
+              </ul>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-label">Cruzamentos · onde mora a maestria</div>
-          <h2>Os pontos onde os 4 eixos se encontram</h2>
-          <ul>
-            <li><strong>Habilidade × Conhecimento</strong> — diagnóstico comercial que enxerga a casa toda (não só venda) e prescreve plano executável em 90 dias.</li>
-            <li><strong>Conhecimento × Valores</strong> — defesa do empresário maduro: prefere ensinar a estruturar do que prometer atalho.</li>
-            <li><strong>Valores × Paixões</strong> — preferência por trabalho próximo, profundo, com poucos clientes que avançam de verdade. Não escala virando volume sem método.</li>
-            <li><strong>Paixões × Habilidades</strong> — laboratório de análise de reunião como prática regular: ouvir o cliente vendendo, não só o cliente reclamando.</li>
+          <div class="section-label">Os 4 cruzamentos · onde mora a maestria</div>
+          <h2>Pontos de interseção dos eixos</h2>
+          <p class="section-desc">Cada par de eixos forma uma capacidade — o cruzamento dos 4 simultaneamente é onde mora a maestria genuína (Zona de Genialidade). Abaixo, os 6 pares possíveis e o que cada um produz na Rafa.</p>
+
+          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
+            <div class="info-card">
+              <div class="info-card-num">01</div>
+              <h3>Habilidade × Conhecimento</h3>
+              <p><strong>Produz:</strong> diagnóstico comercial que enxerga a casa toda (não só a venda) e prescreve plano executável em 90 dias.</p>
+              <p><strong>Sinal de excelência:</strong> consegue olhar para uma mentoria gravada e identificar 3 falhas estruturais antes do final do play.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card-num">02</div>
+              <h3>Conhecimento × Valores</h3>
+              <p><strong>Produz:</strong> defesa do empresário maduro — ensina a estruturar em vez de prometer atalho.</p>
+              <p><strong>Sinal de excelência:</strong> recusa cliente que quer fórmula mágica; só aceita quem topa fazer trabalho real.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card-num">03</div>
+              <h3>Valores × Paixões</h3>
+              <p><strong>Produz:</strong> preferência por trabalho próximo, profundo, com poucos clientes que avançam de verdade.</p>
+              <p><strong>Sinal de excelência:</strong> não escala virando volume sem método — escolhe ticket alto sobre lista grande.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card-num">04</div>
+              <h3>Paixões × Habilidades</h3>
+              <p><strong>Produz:</strong> laboratório de análise de reunião como prática regular — ouvir o cliente vendendo, não só reclamando.</p>
+              <p><strong>Sinal de excelência:</strong> usa reunião gravada como insumo central da consultoria, não como exceção.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card-num">05</div>
+              <h3>Habilidade × Valores</h3>
+              <p><strong>Produz:</strong> precificação por valor entregue (não por mercado) — coerência entre o que cobra e o que entrega.</p>
+              <p><strong>Sinal de excelência:</strong> aluno aceita ticket alto porque enxerga o valor antes do preço.</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card-num">06</div>
+              <h3>Conhecimento × Paixões</h3>
+              <p><strong>Produz:</strong> capacidade de ensinar venda consultiva como expressão de maturidade empresarial — não como técnica.</p>
+              <p><strong>Sinal de excelência:</strong> aluno sai entendendo que vender bem é consequência de ser empresário maduro.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Zona de Genialidade · interseção dos 4 eixos</div>
+          <h2>O que só a Rafa entrega · oportunidades únicas</h2>
+          <p class="section-desc">Onde os 4 eixos se cruzam simultaneamente, surge a Zona de Genialidade — capacidades que ninguém mais no mercado entrega da mesma forma. Aqui são os ângulos únicos detectados a partir do material extraído.</p>
+
+          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <h3>1. Venda consultiva como ferramenta de estruturação empresarial</h3>
+              <p><strong>O ângulo único:</strong> a maioria do mercado ensina venda como técnica isolada. A Rafa ensina venda como diagnóstico que reorganiza a casa toda — financeiro, posicionamento, oferta, time. Vender bem é consequência de ser empresário maduro, não causa.</p>
+              <p><strong>Por que só ela:</strong> chegou na venda pela necessidade (-R$50k aos 24 anos) e na estruturação pela excelência (formações em coaching, análise comportamental, mastermind). As duas linhagens convivem no mesmo método.</p>
+            </div>
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <h3>2. Análise de reunião real como prática didática</h3>
+              <p><strong>O ângulo único:</strong> não trabalha com pitch teórico. Trabalha com gravação de reunião comercial real do aluno. Detecta padrões em segundos.</p>
+              <p><strong>Por que só ela:</strong> 13 anos vendendo no campo de batalha (Mary Kay, MMN saúde, roupas tecnológicas, palestras, mentorias) — repertório de reunião suficiente para ler nuance que professor de teoria não enxerga.</p>
+            </div>
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <h3>3. Transição "profissional que vende" → "empresário com método"</h3>
+              <p><strong>O ângulo único:</strong> trabalha a identidade antes da técnica. O aluno entra como excelente profissional que vende; sai como empresário com método. Mudança identitária → mudança de operação.</p>
+              <p><strong>Por que só ela:</strong> ela mesma fez essa transição (farmacêutica → vendedora intuitiva → vendedora técnica → empresária). Conhece cada estágio porque viveu.</p>
+            </div>
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <h3>4. Posicionamento em 3 cadeiras (Comparado · Justificado · Escolhido)</h3>
+              <p><strong>O ângulo único:</strong> framework próprio. Não vende "diferenciação" abstrata — vende mudança de cadeira concreta na mente do cliente. Saída do leilão de preço para escolha óbvia.</p>
+              <p><strong>Por que só ela:</strong> framework forjado em 2026 a partir de 6 anos analisando reuniões de alunos avançados. Não é teoria de marketing — é leitura de comportamento real do comprador de serviço.</p>
+            </div>
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <h3>5. Disciplina extrema sem fórmula mágica</h3>
+              <p><strong>O ângulo único:</strong> ensina trabalho duro como caminho — recusa "atalho", "fórmula", "bypass". Mas conjuga com técnica precisa: trabalho duro <em>aplicado certo</em>, não força bruta.</p>
+              <p><strong>Por que só ela:</strong> 18h/dia em 2013 + 14 dias para mudar de cidade + investir devendo. Vivência prática validada por resultado público (R$1,5M em 1 ano, 15× empresa em 2 anos).</p>
+            </div>
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <h3>6. Maturidade construída em ciclos como ativo de marca</h3>
+              <p><strong>O ângulo único:</strong> não esconde os baques — usa como prova social inversa. "Comecei do -R$50k". Cada recomeço é narrado e vira pedagogia.</p>
+              <p><strong>Por que só ela:</strong> história documentada em 4+ anos de material próprio, com números explícitos. Coerência narrativa rara — a mesma estrutura (Baque × Recomeço) aparece em todos os documentos, em décadas diferentes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">O que NÃO é Zona de Maestria</div>
+          <h2>Atividades fora do núcleo de genialidade</h2>
+          <p class="section-desc">Mapear o que a Rafa <em>faz mas não deveria</em> é tão importante quanto mapear o que ela domina. Aqui o teste de Hendricks: o que tira energia em vez de gerar?</p>
+          <ul class="pillar-list">
+            <li>Operação de back-office, agenda, pós-venda administrativo</li>
+            <li>Edição de vídeo, cortes, design gráfico (delegado a time)</li>
+            <li>Tráfego pago de execução (estratégia sim · operação não)</li>
+            <li>Atendimento individual de aluno em volume (CS1 cobre engajamento)</li>
+            <li>Briefings extensivos por escrito · prefere conversa estruturada</li>
+            <li>Suporte técnico de plataforma (Curseduca, Notion, Zoom)</li>
           </ul>
         </div>
 
@@ -1129,10 +1313,12 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
           <div class="section-label">Sinais para confirmar com a Rafa</div>
           <h2>O que ainda precisa de validação</h2>
           <ul>
-            <li>Lista final de habilidades autorais (acima é hipótese da pesquisa)</li>
-            <li>Quais conhecimentos ela considera "obrigatórios" do método e quais são "complementares"</li>
-            <li>Quais valores ela quer comunicar publicamente e quais ficam só na entrega</li>
-            <li>O que mais a paixona (e o que ela faz sem prazer mas ainda faz)</li>
+            <li>Lista de habilidades autorais (acima é hipótese da pesquisa)</li>
+            <li>Quais conhecimentos são "obrigatórios" do método × "complementares"</li>
+            <li>Quais valores comunica publicamente × ficam só na entrega</li>
+            <li>O que mais paixona (e o que faz sem prazer mas ainda faz)</li>
+            <li>Validar se "Posicionamento em 3 cadeiras" entra como capacidade da Zona de Genialidade ou como instrumento do método</li>
+            <li>Validar lista de "fora da Zona" — Rafa pode estar fazendo coisas que não percebeu que tira energia</li>
           </ul>
         </div>
       </div>
@@ -1480,168 +1666,288 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       <div class="page" id="page-ex-expert-historias">
         <div class="breadcrumb">Camada 02 · O Expert</div>
         <div class="page-head">
-          <h1 class="page-title">Banco de histórias <em>— pessoais · profissionais · cliente</em></h1>
-          <p class="page-lead">Repositório de histórias autorais já narradas pela Rafa em documentos próprios (2023-2025). Cada card traz o tema, a história resumida, frase-âncora citável e tag de uso. <strong>Cases de cliente com nomes e números aguardam sessão dedicada com autorização explícita.</strong></p>
+          <h1 class="page-title">Banco de histórias <em>— pessoais · profissionais · analogias</em></h1>
+          <p class="page-lead">Galeria navegável de 14 histórias autorais + 6 analogias. Clique em qualquer card para ver narrativa completa, frase-âncora citável, conexões com o método e usos editoriais. <strong>Cases de cliente com nomes aguardam sessão dedicada com autorização explícita por aluno.</strong></p>
           <div class="exercise-meta"><span class="tag draft">rascunho</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">aguarda validação Rafa</span></div>
         </div>
 
         <div class="section">
-          <div class="section-label">Histórias pessoais — origem e infância</div>
+          <div class="section-label">Histórias pessoais · origem e infância</div>
           <h2>Antes de qualquer CNPJ</h2>
-          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
-            <div class="info-card">
-              <div class="info-card-num">H01</div>
-              <h3>A lojinha aos 7 anos na porta da avó</h3>
-              <p><strong>Tema:</strong> origem da identidade vendedora. <strong>Resumo:</strong> Centro de Ubá. Vendia uvas da parreira, miçangas e calçados emprestados pela loja da frente. Quando a prima vendia fiado, alertava: "produto lá, dinheiro cá".</p>
-              <p><em>"Eu era muito nova, tinha uns 7 anos, mas já sabia que vender era um meio para conseguir dinheiro e comprar as coisas que eu queria."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">copy abertura</span></p>
+          <div class="story-grid">
+            <div class="story-card" data-page="historia-h01-lojinha">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H01</span>
+              <span class="story-card-title">A lojinha aos 7 anos</span>
+              <p class="story-card-nucleo">"Já sabia que vender era um meio para conseguir dinheiro e comprar as coisas que eu queria."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">origem</span>
+                <span class="chip chip-mint">identidade vendedora</span>
+                <span class="chip chip-yellow">copy abertura</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill pessoal">pessoal</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H02</div>
-              <h3>"Não temos dinheiro" — divórcio aos 15</h3>
-              <p><strong>Tema:</strong> dor fundadora. <strong>Resumo:</strong> Pais separaram por crise financeira. Foi morar na casa da avó materna. Continuou em escola particular só por bolsa de mérito.</p>
-              <p><em>"Quando eu queria algo e ouvia 'não temos dinheiro', era uma dor muito forte. Ali vi nas vendas a solução confiável de fazer dinheiro pra nunca mais passar por isso."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">narrativa de dor original</span></p>
+
+            <div class="story-card" data-page="historia-h02-divorcio">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H02</span>
+              <span class="story-card-title">"Não temos dinheiro"</span>
+              <p class="story-card-nucleo">"Era uma dor muito forte. Vi nas vendas a solução pra nunca mais passar por isso."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-rose">dor fundadora</span>
+                <span class="chip chip-pink">divórcio dos pais</span>
+                <span class="chip chip-purple">narrativa de origem</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill pessoal">pessoal</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H03</div>
-              <h3>Benzetacil no SUS para economizar antibiótico</h3>
-              <p><strong>Tema:</strong> precariedade na faculdade · promessa identitária. <strong>Resumo:</strong> Anos na UFJF — garganta infeccionada, ia a pé pro pronto-socorro com febre. Pedia injeção em vez de antibiótico oral pra economizar. Promessa: "com primeiro salário contrato plano de saúde — nunca mais paro de pagar". Cumprida até hoje.</p>
-              <p><em>"Depois de diversas horas na sala de espera de hospital, eu prometi pra mim mesma que com meu primeiro salário eu contrataria um plano de saúde para nunca mais deixar de pagá-lo."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">prova de origem</span></p>
+
+            <div class="story-card" data-page="historia-h03-benzetacil">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H03</span>
+              <span class="story-card-title">Benzetacil no SUS</span>
+              <p class="story-card-nucleo">"Prometi que com meu primeiro salário eu contrataria um plano de saúde para nunca mais deixar de pagá-lo."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-coral">precariedade</span>
+                <span class="chip chip-mint">promessa cumprida</span>
+                <span class="chip chip-yellow">prova de origem</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill pessoal">pessoal</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H04</div>
-              <h3>Salário R$1.145 e reajuste anual de R$36</h3>
-              <p><strong>Tema:</strong> trigger da saída da CLT. <strong>Resumo:</strong> 5 meses como farmacêutica — reajuste anual de R$36 fez ela pedir demissão. <em>"Vou trabalhar 1 ano inteiro fazendo hora extra pra ter R$36 de aumento? Estou fora."</em></p>
-              <p><em>"Liberdade financeira é receber proporcional à minha dedicação."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">copy CLT × empreendedorismo</span></p>
+
+            <div class="story-card" data-page="historia-h04-salario">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H04</span>
+              <span class="story-card-title">Salário R$1.145, reajuste R$36</span>
+              <p class="story-card-nucleo">"Vou trabalhar 1 ano inteiro fazendo hora extra pra ter R$36 de aumento? Estou fora."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">trigger CLT</span>
+                <span class="chip chip-yellow">liberdade financeira</span>
+                <span class="chip chip-mint">copy CLT × empreender</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill pessoal">pessoal</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-label">Histórias profissionais — virada e construção</div>
-          <h2>Mary Kay, recomeços e Mazzei Treinamentos</h2>
-          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
-            <div class="info-card">
-              <div class="info-card-num">H05</div>
-              <h3>O roubo de R$50 mil no início do MMN</h3>
-              <p><strong>Tema:</strong> baque fundador. <strong>Resumo:</strong> Junho/2012 — invadiram local onde guardava produtos. R$30k em mercadoria roubada (R$12k ainda não pagos, cartão emprestado). Total de prejuízo: R$50k. <strong>Decisão:</strong> não voltou para CLT. Pediu novo cartão emprestado para comprar mais produto.</p>
-              <p><em>"Não comecei do zero. Comecei do menos R$50 mil."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">história mestra</span></p>
+          <div class="section-label">Histórias profissionais · Mary Kay e construção</div>
+          <h2>2012-2022 — virada e Mazzei Treinamentos</h2>
+          <div class="story-grid">
+            <div class="story-card" data-page="historia-h05-roubo">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H05</span>
+              <span class="story-card-title">O roubo de R$50 mil</span>
+              <p class="story-card-nucleo">"Não comecei do zero. Comecei do menos R$50 mil."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-rose">baque fundador</span>
+                <span class="chip chip-orange">história mestra</span>
+                <span class="chip chip-purple">decisão de não recuar</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H06</div>
-              <h3>Carro rosa às 17h do dia 31/12/2013</h3>
-              <p><strong>Tema:</strong> fechar meta na hora limite. <strong>Resumo:</strong> Meta de 6 meses precisava ser concluída no último dia do ano. Família deu carro de brinquedo no Natal alegando que ela já podia descansar. Bateu meta às 17h do 31/12. <strong>Total ao longo da carreira:</strong> 2 carros rosa.</p>
-              <p><em>"Foi dedicação surreal. 18h/dia. Eu pedia água nas casas pra economizar."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">disciplina extrema</span></p>
+
+            <div class="story-card" data-page="historia-h06-carrorosa">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H06</span>
+              <span class="story-card-title">Carro rosa às 17h do 31/12</span>
+              <p class="story-card-nucleo">"Foi dedicação surreal. 18h/dia. Eu pedia água nas casas pra economizar."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-yellow">disciplina extrema</span>
+                <span class="chip chip-pink">Mary Kay</span>
+                <span class="chip chip-mint">virada</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H07</div>
-              <h3>Blazer e salto alto no sol de 30°C</h3>
-              <p><strong>Tema:</strong> imagem profissional como decisão. <strong>Resumo:</strong> Vendendo porta a porta em Ubá. Mesmo no calor extremo, blazer, lenço, saia no joelho, meia-calça, salto altíssimo. Tese: "as pessoas nos compram antes do produto".</p>
-              <p><em>"Entendi que as pessoas nos compram antes de comprarem qualquer produto ou serviço nosso."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">posicionamento pessoal</span></p>
+
+            <div class="story-card" data-page="historia-h07-blazer">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H07</span>
+              <span class="story-card-title">Blazer no sol de 30°C</span>
+              <p class="story-card-nucleo">"Entendi que as pessoas nos compram antes de comprarem qualquer produto ou serviço nosso."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">imagem profissional</span>
+                <span class="chip chip-skyblue">posicionamento pessoal</span>
+                <span class="chip chip-mint">tese A03</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H08</div>
-              <h3>Empresa fechou no Brasil — ligação inesperada</h3>
-              <p><strong>Tema:</strong> baque externo. <strong>Resumo:</strong> 1,5 ano construindo segunda carreira em MMN — ligação informa fim das operações no Brasil. "Zerada" em horas. Conhecida convidou para treinar funcionários. Aceitou com frio na barriga. Origem das primeiras consultorias.</p>
-              <p><em>"Eu achava que não sabia o suficiente. Mas haviam empresários dispostos a me contratar."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">síndrome do impostor × convite</span></p>
+
+            <div class="story-card" data-page="historia-h08-ligacao">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H08</span>
+              <span class="story-card-title">Empresa fechou no Brasil</span>
+              <p class="story-card-nucleo">"Eu achava que não sabia o suficiente. Mas haviam empresários dispostos a me contratar."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-rose">baque externo</span>
+                <span class="chip chip-purple">síndrome do impostor</span>
+                <span class="chip chip-mint">primeira consultoria</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H09</div>
-              <h3>Saída do MMN de saúde por valor VERDADE</h3>
-              <p><strong>Tema:</strong> coerência custou dinheiro. <strong>Resumo:</strong> 7 cargos em 6 meses, cruzeiro internacional. 1 ano depois saiu — conduta da empresa contrariava o valor VERDADE. Não hesitou.</p>
-              <p><em>"Optei por deixá-la no final de 2019."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">decisão de coerência</span></p>
+
+            <div class="story-card" data-page="historia-h09-saidammn">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H09</span>
+              <span class="story-card-title">Saída do MMN por VERDADE</span>
+              <p class="story-card-nucleo">"Optei por deixá-la no final de 2019."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">coerência</span>
+                <span class="chip chip-yellow">valor VERDADE</span>
+                <span class="chip chip-mint">decisão custou dinheiro</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H10</div>
-              <h3>2022 — Recomeço Final no Instagram</h3>
-              <p><strong>Tema:</strong> migração para o digital. <strong>Resumo:</strong> Jul/2022 começou se posicionar como Mentora de Vendas. Set: 1º curso. Out: evento 140 mulheres. Nov: Decole Vendas. Dez: livro co-autora. Jan/2023: 2ª turma esgotada.</p>
-              <p><em>"Eu decidi cumprir meu propósito de vida nesse mundo, apesar do medo."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">marco de fundação</span></p>
+
+            <div class="story-card" data-page="historia-h10-recomeçofinal">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H10</span>
+              <span class="story-card-title">Recomeço Final no Instagram</span>
+              <p class="story-card-nucleo">"Eu decidi cumprir meu propósito de vida nesse mundo, apesar do medo."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-mint">marco de fundação</span>
+                <span class="chip chip-skyblue">migração digital</span>
+                <span class="chip chip-orange">2022</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-label">Histórias profissionais — Alphaville</div>
+          <div class="section-label">Histórias profissionais · Alphaville</div>
           <h2>2023-2025 — a aposta no ambiente</h2>
-          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
-            <div class="info-card">
-              <div class="info-card-num">H11</div>
-              <h3>14 dias para mudar de Ubá para Alphaville</h3>
-              <p><strong>Tema:</strong> decisão fundadora 2023. <strong>Resumo:</strong> Proposta de sociedade com mentor digital que fatura milhões/ano. Avisou a mãe às 18h do dia anterior à viagem. Família soube por chamada de vídeo horas antes. Saiu às 9h30 da manhã seguinte sem clareza do que iria acontecer.</p>
-              <p><em>"Decisão fácil, vida difícil. Decisão difícil, vida fácil."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">história mestra recente</span></p>
+          <div class="story-grid">
+            <div class="story-card" data-page="historia-h11-mudanca">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H11</span>
+              <span class="story-card-title">14 dias para Alphaville</span>
+              <p class="story-card-nucleo">"Decisão fácil, vida difícil. Decisão difícil, vida fácil."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">história mestra recente</span>
+                <span class="chip chip-purple">decisão fundadora</span>
+                <span class="chip chip-mint">2023</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H12</div>
-              <h3>Airfryer na pia do banheiro do hotel</h3>
-              <p><strong>Tema:</strong> precariedade da virada. <strong>Resumo:</strong> 30 dias em hotel. Airfryer na pia, frigobar pequeno, malas no chão, doente com bronquite. "Cenário perfeito pra muita gente desistir." Continuou.</p>
-              <p><em>"Dentro de mim algo sussurrava: faça a sua parte, que Deus está fazendo a dele."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">vulnerabilidade calculada</span></p>
+
+            <div class="story-card" data-page="historia-h12-airfryer">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H12</span>
+              <span class="story-card-title">Airfryer na pia do hotel</span>
+              <p class="story-card-nucleo">"Faça a sua parte, que Deus está fazendo a dele."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-rose">vulnerabilidade</span>
+                <span class="chip chip-coral">precariedade</span>
+                <span class="chip chip-purple">camada espiritual</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status confirm">!</span><span>validar uso público da camada Cristo</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H13</div>
-              <h3>Sociedade durou 3 meses — e foi suficiente</h3>
-              <p><strong>Tema:</strong> ponte é diferente de destino. <strong>Resumo:</strong> Sociedade que motivou a mudança durou 3 meses. Decidiu ficar em Alphaville mesmo sem a sociedade. Tese central: "o motivo que te leva a algo nem sempre é o mesmo que te faz permanecer".</p>
-              <p><em>"Essa sociedade foi a ponte que Deus usou pra me colocar no caminho do meu propósito."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">tese central recente</span></p>
+
+            <div class="story-card" data-page="historia-h13-ponte">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H13</span>
+              <span class="story-card-title">Sociedade durou 3 meses</span>
+              <p class="story-card-nucleo">"Foi a ponte que Deus usou pra me colocar no caminho do meu propósito."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-yellow">tese central</span>
+                <span class="chip chip-mint">ponte × destino</span>
+                <span class="chip chip-skyblue">analogia A04</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status confirm">!</span><span>validar uso público da camada Cristo</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">H14</div>
-              <h3>Ambiente é aceleração — 10 anos em 2 anos</h3>
-              <p><strong>Tema:</strong> tese de poder do ambiente. <strong>Resumo:</strong> Investiu em visto alto, mentoria, mastermind, lugares caros. Empresa cresceu 15× em 2 anos. Justifica o investimento contínuo em comunidade.</p>
-              <p><em>"Você pode ser extraordinário, mas num ambiente errado vai crescer 10 anos em 10 anos."</em></p>
-              <p><span class="tag" style="background:#d4d4d4;color:#222;">uso público</span> <span class="tag" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);">tese 2ZA</span></p>
+
+            <div class="story-card" data-page="historia-h14-ambiente">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">H14</span>
+              <span class="story-card-title">10 anos em 2 anos</span>
+              <p class="story-card-nucleo">"Você pode ser extraordinário, mas num ambiente errado vai crescer 10 anos em 10 anos."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">tese 2ZA</span>
+                <span class="chip chip-mint">poder do ambiente</span>
+                <span class="chip chip-yellow">15× empresa</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill profissional">profissional</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-label">Analogias autorais</div>
+          <div class="section-label">Analogias autorais · imagens didáticas</div>
           <h2>Imagens que ela usa para explicar conceitos</h2>
-          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
-            <div class="info-card">
-              <div class="info-card-num">A01</div>
-              <h3>Vendas como GPS</h3>
-              <p><em>"Eu olho o retrovisor para ver o que ficou para trás, mas o meu foco está no parabrisa, no caminho, onde quero chegar, no meu destino. E as vendas tornaram o meu GPS."</em></p>
-              <p><strong>Uso:</strong> abertura de mentoria — define vendas como instrumento de direção, não fim em si.</p>
+          <div class="story-grid">
+            <div class="story-card" data-page="analogia-a01-gps">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">A01</span>
+              <span class="story-card-title">Vendas como GPS</span>
+              <p class="story-card-nucleo">"Olho o retrovisor, mas o foco está no parabrisa. As vendas viraram meu GPS."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-skyblue">abertura mentoria</span>
+                <span class="chip chip-mint">vendas como direção</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill analogia">analogia</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">A02</div>
-              <h3>Produto lá, dinheiro cá</h3>
-              <p><strong>História-mãe:</strong> H01 (lojinha aos 7 anos, prima vendendo fiado).</p>
-              <p><strong>Uso:</strong> mentoria — para falar de processo de pagamento, não confiar em "depois eu te pago", estruturar cobrança.</p>
+
+            <div class="story-card" data-page="analogia-a02-produtola">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">A02</span>
+              <span class="story-card-title">Produto lá, dinheiro cá</span>
+              <p class="story-card-nucleo">"Aprendi aos 7 anos vendo a prima vender fiado. Cliente fiado não volta pra pagar."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">processo de cobrança</span>
+                <span class="chip chip-yellow">história-mãe H01</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill analogia">analogia</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">A03</div>
-              <h3>Pessoas compram você antes do produto</h3>
-              <p><strong>História-mãe:</strong> H07 (blazer no sol de 30°C).</p>
-              <p><strong>Uso:</strong> posicionamento pessoal, imagem profissional, branding individual.</p>
+
+            <div class="story-card" data-page="analogia-a03-pessoascompram">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">A03</span>
+              <span class="story-card-title">Pessoas compram você antes do produto</span>
+              <p class="story-card-nucleo">"Antes do produto, o cliente compra você. Posicionamento é venda silenciosa."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-purple">branding individual</span>
+                <span class="chip chip-yellow">história-mãe H07</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill analogia">analogia</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">A04</div>
-              <h3>Ponte × destino</h3>
-              <p><strong>História-mãe:</strong> H13 (sociedade de 3 meses em Alphaville).</p>
-              <p><strong>Uso:</strong> aluno que entra no produto por um motivo e descobre outro maior. Justifica não vender com promessa estreita.</p>
+
+            <div class="story-card" data-page="analogia-a04-pontedestino">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">A04</span>
+              <span class="story-card-title">Ponte × destino</span>
+              <p class="story-card-nucleo">"O motivo que te leva a algo nem sempre é o que te faz permanecer."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-mint">copy de oferta</span>
+                <span class="chip chip-skyblue">justifica esteira</span>
+                <span class="chip chip-yellow">história-mãe H13</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill analogia">analogia</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">A05</div>
-              <h3>Investir devendo</h3>
-              <p><strong>História-mãe:</strong> H05 (cartão emprestado pós-roubo) + eventos R$3k em SP.</p>
-              <p><strong>Uso:</strong> contraponto à objeção "estou sem dinheiro". Mostra que ela mesma fez sem ter.</p>
+
+            <div class="story-card" data-page="analogia-a05-investirdevendo">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">A05</span>
+              <span class="story-card-title">Investir devendo</span>
+              <p class="story-card-nucleo">"Pago parcelado e me viro pra usar o conhecimento pra fazer pra pagar."</p>
+              <div class="story-card-tags">
+                <span class="chip chip-orange">contraponto objeção</span>
+                <span class="chip chip-coral">"estou sem dinheiro"</span>
+                <span class="chip chip-yellow">história-mãe H05</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill analogia">analogia</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
-            <div class="info-card">
-              <div class="info-card-num">A06</div>
-              <h3>BAQUE × RECOMEÇO</h3>
-              <p><strong>Estrutura mestra.</strong> Numera os ciclos (Baque 1, 2, 3, 4 · Recomeço 1, 2, 3, 5, Final). Pode virar framework didático em mentoria — "qual baque você está vivendo agora? em que recomeço?".</p>
+
+            <div class="story-card" data-page="analogia-a06-baquerecomeço">
+              <span class="story-card-arrow">→</span>
+              <span class="story-card-num">A06</span>
+              <span class="story-card-title">Baque × Recomeço</span>
+              <p class="story-card-nucleo">"Qual baque você está vivendo agora? Em que recomeço?"</p>
+              <div class="story-card-tags">
+                <span class="chip chip-purple">framework didático</span>
+                <span class="chip chip-mint">estrutura mestra</span>
+                <span class="chip chip-orange">narrativa autoral</span>
+              </div>
+              <div class="story-card-meta"><span class="tipo-pill analogia">analogia</span><span class="story-card-status public">✓</span><span>uso público</span></div>
             </div>
           </div>
         </div>
@@ -1656,6 +1962,907 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <li><strong>Analogias técnicas</strong> — como ela explica precificação, posicionamento, funil consultivo (formas próprias dela, não dos livros)</li>
             <li><strong>Decole Vendas (2022)</strong> — primeiro produto digital, marco mas falta detalhe de execução</li>
             <li><strong>Hot Seats marcantes</strong> — episódios com aluno que viraram tese</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H01 · A LOJINHA AOS 7 ANOS -->
+      <div class="page" id="page-historia-h01-lojinha">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 01</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 01 · Pessoal · ~1995, Ubá/MG</div>
+          <h1 class="history-hero-title">A lojinha aos 7 anos na porta da avó</h1>
+          <p class="history-hero-nucleo">"Eu era muito nova, tinha uns 7 anos, mas já sabia que vender era um meio para conseguir dinheiro e comprar as coisas que eu queria."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">origem</span>
+            <span class="chip chip-mint">identidade vendedora</span>
+            <span class="chip chip-yellow">copy abertura</span>
+            <span class="tipo-pill pessoal">pessoal</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Centro de Ubá, porta da avó paterna</h2>
+          <p>Nas férias da escola, Rafa pedia à avó paterna para abrir uma "lojinha" na porta da rua, no centro da cidade. Vendia uvas da parreira de casa, acessórios feitos por ela mesma com miçangas e calçados emprestados pela loja da frente — o dono incentivava deixando ela ficar com o lucro. A prima vendia junto.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O detalhe que virou tese</div>
+          <h2>"Produto lá, dinheiro cá"</h2>
+          <p>Quando a prima ficava sozinha na lojinha e vendia fiado, Rafa alertava: "o cliente não vai voltar pra pagar. Você não vai receber a comissão. Produto lá, dinheiro cá." Aos 7 anos já entendia que entregar produto sem garantia de pagamento é prejuízo certo.</p>
+          <p>A prima, anos depois, descreveu Rafa: <em>"Você é uma pessoa determinada de visão e eu sou RETA NÉ — de retardada."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · público</h4>
+          <p>Aluno que vende serviço de alto valor e oferece "fiado disfarçado" — entrega sem contrato firmado, parcelamento sem garantia, escopo aberto. Rafa viveu isso aos 7 anos.</p>
+          <h4>Conexão · método</h4>
+          <p>Origem da analogia A02 (Produto lá, dinheiro cá) — usada para falar de processo de cobrança, contrato, separação entre entrega e pagamento.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Abertura de copy</strong> — "minha primeira venda foi aos 7 anos"</li>
+            <li><strong>Argumento de identidade</strong> — vender é tese de vida, não escolha de carreira</li>
+            <li><strong>Mentoria de processo comercial</strong> — exemplificar separação produto × pagamento</li>
+            <li><strong>NÃO usar</strong> sem contextualizar — sem o detalhe do "fiado", a história fica boba</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H02 · DIVÓRCIO -->
+      <div class="page" id="page-historia-h02-divorcio">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 02</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 02 · Pessoal · 2003, 15 anos</div>
+          <h1 class="history-hero-title">"Não temos dinheiro" · BAQUE 1</h1>
+          <p class="history-hero-nucleo">"Quando eu queria algo e ouvia 'não temos dinheiro', era uma dor muito forte. Aos 15 anos vi nas vendas a solução confiável de fazer dinheiro pra nunca mais passar por isso."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-rose">dor fundadora</span>
+            <span class="chip chip-pink">divórcio dos pais</span>
+            <span class="chip chip-purple">narrativa de origem</span>
+            <span class="tipo-pill pessoal">pessoal</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Crise financeira anterior à separação</h2>
+          <p>A família vinha enfrentando crise financeira por anos antes do divórcio. Quando os pais se separaram (Rafa tinha 15), ela, a mãe e o irmão foram morar na casa da avó materna. Continuou em escola particular só por bolsa por mérito (notas excelentes + liderança em projetos).</p>
+          <p>Começou a dar aulas particulares e vender roupas — única forma de ter dinheiro próprio para passear com amigos e comprar coisas pra ela.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O ponto de virada</div>
+          <h2>A frase que mudou a trajetória</h2>
+          <p>"Não temos dinheiro" virou gatilho identitário. Não foi reação emocional — foi decisão estratégica. A partir desse momento, vender deixou de ser hobby de criança (H01) e virou método para resolver um problema concreto e recorrente.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · valor LIBERDADE</h4>
+          <p>Liberdade financeira como valor fundador nasce aqui. Toda decisão posterior (saída da farmácia, MMN, mudança para SP) está ancorada nessa promessa de 15 anos.</p>
+          <h4>Conexão · público Sell-z</h4>
+          <p>Aluno do Sell-z geralmente carrega versão dessa dor — cresceu vendo família sem dinheiro e construiu negócio para "nunca mais passar por isso". Rafa fala de dentro do problema.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Narrativa de dor original</strong> em copy de tráfego pago para Sell-z</li>
+            <li><strong>Abertura de palestra</strong> — antes de qualquer técnica, mostrar de onde veio</li>
+            <li><strong>Storytelling em vídeo</strong> — funciona em formato longo (1-2 min de contexto)</li>
+            <li><strong>NÃO usar</strong> em copy curta — sem o desdobramento (vendas como solução), vira lamento</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H03 · BENZETACIL -->
+      <div class="page" id="page-historia-h03-benzetacil">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 03</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 03 · Pessoal · 2006-2012, UFJF</div>
+          <h1 class="history-hero-title">Benzetacil no SUS para economizar antibiótico</h1>
+          <p class="history-hero-nucleo">"Prometi pra mim mesma que com meu primeiro salário eu contrataria um plano de saúde para nunca mais deixar de pagá-lo."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-coral">precariedade</span>
+            <span class="chip chip-mint">promessa cumprida</span>
+            <span class="chip chip-yellow">prova de origem</span>
+            <span class="tipo-pill pessoal">pessoal</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Anos regrados na federal</h2>
+          <p>Rafa entrou aos 18 na UFJF (Farmácia). Foram anos de aperto: pegava carona para voltar da universidade, fazia estágios remunerados desde o 1º período (inclusive férias), vendia cosméticos. Visitava a família em Ubá uma vez por mês, no máximo.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O detalhe que ficou</div>
+          <h2>4 horas de espera + injeção dolorosa para economizar</h2>
+          <p>Vivia com a garganta infeccionada. Ia a pé pro pronto-socorro com febre — sol ou chuva. Esperava 4 horas em média. Pedia ao médico Benzetacil (injeção dolorosa) em vez de antibiótico oral porque a recuperação era mais rápida e ela economizava o custo do remédio.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A promessa</div>
+          <h2>Pacto consigo mesma — cumprido até hoje</h2>
+          <p>Depois de horas e horas em sala de espera, Rafa fez um pacto: <em>"com meu primeiro salário contrato plano de saúde — e nunca mais paro de pagar."</em> Tem plano de saúde desde 2012 ininterruptamente.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · maturidade financeira</h4>
+          <p>Rafa transforma promessa pessoal em hábito sustentado por 13+ anos. É isso que ela ensina ao aluno empresário: separar PF/PJ, prolabore fixo, plano de saúde como linha de despesa não-negociável.</p>
+          <h4>Conexão · pedagogia da disciplina</h4>
+          <p>Promessa cumprida = prova de que palavra dada (mesmo a si mesma) tem peso. Rafa não negocia compromissos — ensina o aluno a fazer o mesmo.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Prova de origem</strong> — quando precisa mostrar de onde veio sem soar piedoso</li>
+            <li><strong>Hábito > motivação</strong> — em conteúdo de mentalidade empresarial</li>
+            <li><strong>Detalhe econômico explícito</strong> (4h espera, injeção dolorosa) — vulnerabilidade calculada</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H04 · SALÁRIO -->
+      <div class="page" id="page-historia-h04-salario">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 04</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 04 · Profissional · 2012, primeira CLT</div>
+          <h1 class="history-hero-title">Salário R$1.145, reajuste anual de R$36</h1>
+          <p class="history-hero-nucleo">"Vou trabalhar 1 ano inteiro fazendo hora extra pra ter R$36 de aumento? Estou fora."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">trigger CLT</span>
+            <span class="chip chip-yellow">liberdade financeira</span>
+            <span class="chip chip-mint">copy CLT × empreender</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>5 meses como farmacêutica</h2>
+          <p>Formada aos 24, trabalhou 1 mês em hospital de Viçosa/MG e 4 meses em hospital de Ubá. Total: 5 meses na profissão escolhida pela professora do colégio (que indicou Farmácia "por ela gostar de exatas e amar pessoas"). Salário R$1.145 em 2012.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O número que decidiu tudo</div>
+          <h2>R$36 de reajuste anual</h2>
+          <p>Rafa viu o reajuste salarial anual ser de R$36. Calculou: trabalhar 1 ano inteiro, com hora extra, presa em laboratório, olhando microscópio, para receber R$36 a mais. Pediu demissão em junho/2012, 4 meses depois de ser admitida.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A reação da família</div>
+          <h2>Pai não falou com ela</h2>
+          <p>O pai não apoiou a saída. Ficou um tempo sem conversar com Rafa. Na visão dele, ela tinha "desistido cedo" — 5+ anos de faculdade dedicados, 4 meses tentando atuar. <em>"Eu entendo perfeitamente. Mas ali entendi que não consigo permanecer muito tempo fora do meu propósito."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · valor LIBERDADE FINANCEIRA</h4>
+          <p>Definição prática do valor: receber proporcional à dedicação. Salário fixo desproporcional ao esforço viola o pacto.</p>
+          <h4>Conexão · público Sell-z</h4>
+          <p>Muitos alunos saíram (ou querem sair) da CLT por motivo similar. Rafa fala de dentro da experiência — não de fora.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Copy "CLT × empreendedorismo"</strong> em campanha de Sell-z</li>
+            <li><strong>Storytelling de virada</strong> — o número exato (R$36) prende atenção</li>
+            <li><strong>Argumento contra "estabilidade"</strong> — estabilidade é ilusão se for desproporcional</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H05 · ROUBO -->
+      <div class="page" id="page-historia-h05-roubo">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 05</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 05 · Profissional · junho/2012 · BAQUE 2</div>
+          <h1 class="history-hero-title">O roubo de R$50 mil no início do MMN</h1>
+          <p class="history-hero-nucleo">"Não comecei do zero. Comecei do menos R$50 mil."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-rose">baque fundador</span>
+            <span class="chip chip-orange">história mestra</span>
+            <span class="chip chip-purple">decisão de não recuar</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Logo após a saída da CLT</h2>
+          <p>Recém-saída da farmácia, Rafa tinha cartão de crédito próprio com R$250 de limite. Comprou produtos Mary Kay com cartão emprestado da mãe (até R$30 mil em estoque). Plano: subir no plano de carreira da empresa e virar Diretora.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O baque</div>
+          <h2>Invasão e prejuízo de R$50 mil</h2>
+          <p>Junho/2012 — invadiram o local onde Rafa guardava os produtos. Levaram notebook, impressora e R$30 mil em mercadoria. Desses R$30k, R$12k ainda não estavam pagos (cartão emprestado da mãe). Total de prejuízo somando dívidas e perdas: ~R$50 mil. Pai ainda estava sem falar com ela.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A decisão</div>
+          <h2>Endividar mais para não voltar à CLT</h2>
+          <p>Duas opções: voltar para o salário fixo da CLT ou continuar empreendendo. Para continuar, precisaria endividar mais — pegar novo cartão emprestado, comprar mais produto, vender para quitar tudo. Sem garantias. Abalada psicologicamente.</p>
+          <p><em>"Não voltei atrás. Pedi novamente cartão emprestado e aumentei ainda mais a minha dívida, com a fé de que eu venderia os produtos para ir quitando tudo."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">O desdobramento</div>
+          <h2>De Setembro/2013: palestrante no mesmo evento</h2>
+          <p>A mãe inscreveu Rafa em 2 eventos (R$1.500 cada) em SP — set/2012 e jan/2013. No evento de set/2013, segunda edição daquele primeiro, Rafa <strong>retornou como palestrante</strong>. Já tinha quitado a dívida, subido 6 níveis na carreira e estava buscando o primeiro carro rosa.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · estrutura mestra Baque × Recomeço</h4>
+          <p>Esta é a história fundadora do framework A06. Cada baque posterior na vida de Rafa é lido em comparação com este — "se sobrevivi a R$50k de prejuízo aos 24, sobrevivo a qualquer coisa".</p>
+          <h4>Conexão · analogia A05 (Investir devendo)</h4>
+          <p>Origem direta. Cartão emprestado para comprar mais produto + R$3k em eventos = "investir devendo". Ela ensina o aluno a fazer escolha similar quando faz sentido estratégico.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Copy de oferta</strong> — "começar do menos R$50k" como prova social inversa</li>
+            <li><strong>Argumento contra "estou sem dinheiro"</strong> em mentoria de Sell-z</li>
+            <li><strong>Storytelling de virada</strong> — em formato longo, com setembro/2013 como cliffhanger</li>
+            <li><strong>Validar com Rafa</strong> uso em copy de tráfego pago — o número R$50k pode soar performático</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H06 · CARRO ROSA -->
+      <div class="page" id="page-historia-h06-carrorosa">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 06</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 06 · Profissional · 31/12/2013, 17h</div>
+          <h1 class="history-hero-title">Carro rosa às 17h do último dia do ano</h1>
+          <p class="history-hero-nucleo">"Foi dedicação surreal. 18h/dia. Eu pedia água nas casas pra economizar."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-yellow">disciplina extrema</span>
+            <span class="chip chip-pink">Mary Kay</span>
+            <span class="chip chip-mint">virada</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Meta de 6 meses · prazo dezembro</h2>
+          <p>Mary Kay: para conquistar o carro rosa precisava bater meta específica em janela de 6 meses. Rafa tinha até 31/dez/2013. No Natal, a família deu de presente um carro rosa de brinquedo — alegando que ela já podia descansar, "como se já estivesse conquistado".</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A última semana</div>
+          <h2>Clientes sumiram, ela continuou</h2>
+          <p>Final do ano: clientes viajam, somem. A meta estava bem distante. Rafa não desacreditou um único dia. <em>"A meta estava colada pela casa toda."</em></p>
+          <p>Trabalhou 18h/dia. Vendia porta a porta de blazer, salto alto, lenço, meia-calça — mesmo no sol de 30°C. Para economizar, pedia água nas casas onde passava. Não comprava.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O fechamento</div>
+          <h2>17h do dia 31/12/2013</h2>
+          <p>Bateu meta às 17 horas do último dia do ano. Conquistou o primeiro carro rosa. Três anos depois, conquistou o segundo. Total: 2 carros rosa ao longo da carreira em Mary Kay.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · disciplina técnica</h4>
+          <p>Não é só vontade — é técnica. Vender porta a porta com imagem profissional impecável (blazer, salto) é decisão estratégica que comunica posicionamento antes do produto.</p>
+          <h4>Conexão · analogia A03</h4>
+          <p>Origem da analogia "pessoas compram você antes do produto". A imagem profissional fechou vendas que técnica de produto não fecharia.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Argumento de disciplina extrema</strong> — sem virar overwork glamourizado</li>
+            <li><strong>Storytelling de virada com prazo</strong> — em copy de oferta com escassez legítima</li>
+            <li><strong>Posicionamento pessoal</strong> — exemplo concreto de "imagem comunica antes do produto"</li>
+            <li><strong>NÃO usar</strong> sem contextualizar — sem o detalhe da família dando carro de brinquedo, perde a tensão</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H07 · BLAZER -->
+      <div class="page" id="page-historia-h07-blazer">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 07</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 07 · Profissional · 2012-2013, Ubá</div>
+          <h1 class="history-hero-title">Blazer e salto alto no sol de 30°C</h1>
+          <p class="history-hero-nucleo">"As pessoas nos compram antes de comprarem qualquer produto ou serviço nosso."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">imagem profissional</span>
+            <span class="chip chip-skyblue">posicionamento pessoal</span>
+            <span class="chip chip-mint">tese A03</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Vendendo Mary Kay porta a porta</h2>
+          <p>Rafa começou a evolução da imagem profissional logo nos primeiros meses de Mary Kay. Antes, era "vendedora intuitiva, amadora". Depois dos primeiros eventos em SP (set/2012), virou vendedora capacitada.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A decisão estética</div>
+          <h2>Blazer · lenço · saia · meia-calça · salto altíssimo</h2>
+          <p>Mesmo no sol de 30°C de Ubá, Rafa saía vendendo porta a porta com uniforme completo: blazer, lenço no pescoço, saia no joelho, meia-calça e salto altíssimo. Não negociava o look mesmo nos dias mais quentes.</p>
+          <p><em>"É engraçado observar a evolução inclusive da minha imagem profissional. As pessoas nos compram antes de comprarem qualquer produto ou serviço nosso."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">A tese</div>
+          <h2>Imagem é venda silenciosa</h2>
+          <p>Antes de qualquer pitch, antes de mostrar produto, antes de dar preço — a vendedora já é avaliada. Postura, roupa, maquiagem, voz, postura corporal. Tudo comunica posicionamento. Rafa entendeu cedo que vestir abaixo do que cobra é abrir mão de fechar.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · analogia A03</h4>
+          <p>Esta história é a origem direta da analogia. Rafa cita o blazer no sol como evidência de que entendeu a tese antes da maioria.</p>
+          <h4>Conexão · ensino atual</h4>
+          <p>Em mentoria, Rafa pergunta ao aluno: "como você se veste para reunião comercial? Como aparece no Zoom?". A resposta indica o posicionamento percebido — não o cobrado.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Argumento de branding individual</strong> em conteúdo de posicionamento</li>
+            <li><strong>Imagem de capa</strong> — visual icônico (Rafa de blazer no sol)</li>
+            <li><strong>Mentoria de imagem profissional</strong> — exemplo concreto de coerência estética × valor cobrado</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H08 · LIGAÇÃO -->
+      <div class="page" id="page-historia-h08-ligacao">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 08</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 08 · Profissional · ~2019 · BAQUE 3 + RECOMEÇO 3</div>
+          <h1 class="history-hero-title">A ligação que comunicou o fim · primeira consultoria</h1>
+          <p class="history-hero-nucleo">"Eu achava que não sabia o suficiente. Mas haviam empresários dispostos a me contratar."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-rose">baque externo</span>
+            <span class="chip chip-purple">síndrome do impostor</span>
+            <span class="chip chip-mint">primeira consultoria</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>1,5 ano construindo segunda carreira em MMN</h2>
+          <p>Rafa tinha saído de Mary Kay (RECOMEÇO 2) e estava 1,5 ano em outra empresa de cosméticos tecnológicos, trabalhando domingo a domingo. Mentalidade já formada — só executar.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O baque</div>
+          <h2>Empresa fechou no Brasil</h2>
+          <p>Recebeu ligação informando o fim das operações no Brasil. A partir do mês seguinte: zerada. Mesma sensação do roubo de R$50k (BAQUE 2) — só que agora sem dívidas, mas sem renda também.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O convite inesperado</div>
+          <h2>"Vem treinar minha equipe"</h2>
+          <p>Uma conhecida perguntou o que Rafa estava pensando em fazer. Convidou-a para passar um tempo na empresa, treinando funcionários e organizando processos. <em>"O que vocês acham que eu respondi? Claro! Porém lá dentro a incerteza — será que vou saber o que fazer?"</em></p>
+          <p>Rafa achava que precisava aprender mais antes de dar consultoria. Aceitou com frio na barriga. Lá descobriu que já tinha conhecimento suficiente.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">O desdobramento</div>
+          <h2>4 empresas + Rede Unicomp (1,5 ano)</h2>
+          <p>Passou por 4 empresas nessa fase. Em uma delas — Rede Unicomp, autorizada VIVO — ficou 1,5 ano consultando 40 pessoas distribuídas em 12 lojas (supervisores, gerentes, vendedores).</p>
+          <p>Paralelamente, fez formações em coaching, análise comportamental, imersões de vendas. Pagas parceladas no cartão.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · valor EXCELÊNCIA</h4>
+          <p>"Achava que não sabia o suficiente" é manifestação prática do valor — auto-cobrança permanente. Rafa ensina o aluno que o ponto onde ele acha que precisa estudar mais já é o ponto em que ele pode começar a cobrar.</p>
+          <h4>Conexão · público</h4>
+          <p>Aluno do Sell-z é geralmente excelente no que faz mas se subestima. Rafa fala de dentro dessa experiência.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Argumento contra síndrome do impostor</strong> — em copy de Sell-z</li>
+            <li><strong>Storytelling de pivô forçado</strong> — quando contexto muda e força nova decisão</li>
+            <li><strong>Mentoria de precificação</strong> — "você sabe mais do que pensa que sabe"</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H09 · SAÍDA MMN -->
+      <div class="page" id="page-historia-h09-saidammn">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 09</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 09 · Profissional · final 2019 · BAQUE 4</div>
+          <h1 class="history-hero-title">Saída do MMN de saúde por valor VERDADE</h1>
+          <p class="history-hero-nucleo">"Optei por deixá-la no final de 2019."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">coerência</span>
+            <span class="chip chip-yellow">valor VERDADE</span>
+            <span class="chip chip-mint">decisão custou dinheiro</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Resultado expressivo no MMN de saúde</h2>
+          <p>Rafa entrou em MMN de saúde e produtos naturais como segunda fonte de renda paralela às consultorias. Em 6 meses subiu 7 cargos. Conquistou maiores salários até então. Ganhou cruzeiro internacional.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A descoberta incômoda</div>
+          <h2>Conduta da empresa contrariava VERDADE</h2>
+          <p>1 ano depois de entrar, Rafa percebeu que a conduta da empresa contrariava seu terceiro valor: VERDADE. Não detalha publicamente o que era. Mas decidiu sair.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A decisão</div>
+          <h2>Coerência custou dinheiro</h2>
+          <p>Saiu sem ter substituto à altura financeira. Não negociou. <em>"Optei por deixá-la no final de 2019."</em> A frase é seca — sem dramatização. A coerência é o ponto.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · valor VERDADE</h4>
+          <p>Definição prática: aceitar consultoria por saber que pode ajudar (não por status, não por dinheiro). Recusar contrato que viola valores — mesmo lucrativo.</p>
+          <h4>Conexão · ensino</h4>
+          <p>Rafa ensina alunos a recusarem cliente errado. Define perfil que NÃO atende. Critério é coerência, não receita.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Argumento de coerência empresarial</strong> — em conteúdo de posicionamento</li>
+            <li><strong>Recusar cliente errado</strong> — exemplo concreto em mentoria</li>
+            <li><strong>NÃO entrar em detalhes</strong> da empresa específica — a tese funciona sem nome</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H10 · RECOMEÇO FINAL -->
+      <div class="page" id="page-historia-h10-recomeçofinal">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 10</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 10 · Profissional · julho/2022 · RECOMEÇO FINAL</div>
+          <h1 class="history-hero-title">Recomeço Final no Instagram · Mazzei Treinamentos</h1>
+          <p class="history-hero-nucleo">"Eu decidi cumprir meu propósito de vida nesse mundo, apesar do medo."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-mint">marco de fundação</span>
+            <span class="chip chip-skyblue">migração digital</span>
+            <span class="chip chip-orange">2022</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>O incômodo persistente</h2>
+          <p>Mesmo feliz na empresa de roupas tecnológicas (Top 3 Brasil/mundo no primeiro mês, palestra na Convenção em Brusque/SC), algo ardia dentro de Rafa: a missão de ensinar venda e liderança de equipes em escala maior. <em>"Resolvi encarar o mercado digital e de palestras."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">Cronologia 2022-2023</div>
+          <h2>6 meses que reposicionaram tudo</h2>
+          <ul>
+            <li><strong>Julho/2022</strong> — começa a se posicionar como Mentora de Vendas no Instagram</li>
+            <li><strong>Setembro/2022</strong> — vende primeiro curso para grupo fechado de empresa</li>
+            <li><strong>Outubro/2022</strong> — realiza, com parceira, evento para mais de 140 mulheres</li>
+            <li><strong>Novembro/2022</strong> — lança Decole Vendas (primeiro curso digital · público geral) — "sucesso absoluto"</li>
+            <li><strong>Dezembro/2022</strong> — lança primeiro livro como co-autora</li>
+            <li><strong>Janeiro/2023</strong> — abre 2ª turma de mentoria · esgota</li>
+            <li><strong>Fevereiro/2023</strong> — abre 3ª turma · momento em que escreveu o documento "Quem é Rafaella Mazzei"</li>
+          </ul>
+        </div>
+        <div class="section">
+          <div class="section-label">A fundação</div>
+          <h2>Mazzei Treinamentos vira CNPJ</h2>
+          <p>Esse é o marco oficial de fundação da empresa. Mais de 3.446 profissionais impactados desde então (declaração da própria Rafa em código de cultura · 2026). Foco: empresários e profissionais liberais de venda consultiva.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · cronologia → método</h4>
+          <p>Cronologia mostra cadência: posicionamento → primeiro produto B2B → evento presencial → produto digital → livro → mentoria recorrente. É blueprint que ela ensina ao aluno empresário.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Marco de fundação</strong> — quando precisa datar o início da Mazzei Treinamentos</li>
+            <li><strong>Storyline de "do zero ao reposicionamento"</strong> — em copy para empresário pré-digital</li>
+            <li><strong>Decole Vendas</strong> — falta detalhe operacional · pendente de coleta direta com Rafa</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H11 · MUDANÇA -->
+      <div class="page" id="page-historia-h11-mudanca">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 11</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 11 · Profissional · 25/maio/2023</div>
+          <h1 class="history-hero-title">14 dias para mudar de Ubá para Alphaville</h1>
+          <p class="history-hero-nucleo">"Decisão fácil, vida difícil. Decisão difícil, vida fácil."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">história mestra recente</span>
+            <span class="chip chip-purple">decisão fundadora</span>
+            <span class="chip chip-mint">2023</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Proposta de sociedade · 14 dias para decidir</h2>
+          <p>Maio/2023 — Rafa recebeu proposta de sociedade de mentor digital que fatura milhões por ano. Condição: mudar do interior de Minas para Alphaville/SP em 14 dias. Sem clareza de como seria. Os dias passaram.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A decisão</div>
+          <h2>18h do dia anterior · "Mãe, decidi, eu vou"</h2>
+          <p>Um dia antes da viagem, às 18h, Rafa ligou para a mãe: <em>"Mãe, decidi, eu vou. Corre aqui pra casa pra me ajudar a fazer as malas, que eu saio amanhã às 7h da manhã."</em></p>
+          <p>Não tinha nada pronto. Mala, nada. Mãe foi lavar roupa. Rafa gravou vídeo às 18h30: <em>"São 6h30 da noite, amanhã eu viajo cedo, minha mãe tá ali lavando os trens, veio aqui me ajudar pra gente fazer mala e fazer minha mudança pra Alphaville. Não tem nada pronto. Mas vai dar tudo certo, já deu."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">A despedida</div>
+          <h2>Família soube por chamada de vídeo</h2>
+          <p>Ainda deu tempo de despedir dos amigos. O comunicado para a família foi feito por chamada de vídeo horas antes da partida. <strong>Ninguém sabia.</strong></p>
+          <p>A partida não foi às 7h — pequenos problemas técnicos. Saiu às 9h30 sem clareza ainda do que iria acontecer.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · decisão como ato singular</h4>
+          <p>Família como contra-personagem produtivo. Decisão fundadora não pede licença. Rafa ensina alunos a tomar decisões grandes sem buscar aprovação coletiva.</p>
+          <h4>Conexão · público 2ZA</h4>
+          <p>Aluno avançado precisa fazer transições semelhantes (mudar mercado, fechar produto, demitir time). Rafa fala de dentro da experiência.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Storytelling de virada</strong> — em copy de tráfego pago para 2ZA</li>
+            <li><strong>Conteúdo de mentalidade</strong> — decisão difícil × decisão fácil</li>
+            <li><strong>Aniversário simbólico</strong> — 25/maio é potencial de calendário editorial anual</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H12 · AIRFRYER -->
+      <div class="page" id="page-historia-h12-airfryer">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 12</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 12 · Profissional · maio-junho/2023, hotel Alphaville</div>
+          <h1 class="history-hero-title">Airfryer na pia do banheiro do hotel</h1>
+          <p class="history-hero-nucleo">"Faça a sua parte, que Deus está fazendo a dele."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-rose">vulnerabilidade</span>
+            <span class="chip chip-coral">precariedade</span>
+            <span class="chip chip-purple">camada espiritual</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag" style="background:#f0c8c8;color:#7a2828;">!validar uso público de Cristo</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>30 dias em hotel · sem clareza do destino</h2>
+          <p>Logo após a mudança, Rafa passou 30 dias em hotel em Alphaville. Cenário: airfryer na pia do banheiro, frigobar pequeno, malas abertas no chão. Doente com bronquite. Dias fechada, sem tirar pijama, só trabalhando.</p>
+          <p><em>"Cenário perfeito pra muitas pessoas desistirem e até mesmo dizerem 'menina, volta pra casa'."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">A frase interna</div>
+          <h2>O sussurro que sustentou</h2>
+          <p>No 2º mês, Rafa alugou apartamento. O que sustentou os 30 dias precários: <em>"Dentro de mim algo sussurrava — faça a sua parte, que Deus está fazendo a dele."</em> Continuou.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Validação pendente</div>
+          <h2>Camada espiritual · uso público?</h2>
+          <p>A frase "faça a sua parte que Deus está fazendo a dele" aparece em vídeo público do Instagram (25/05/2025). Mas precisa decisão da Rafa: usar essa camada em copy pública de tráfego pago? Só conteúdo orgânico? Só mentoria? Toda peça?</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · vulnerabilidade calculada</h4>
+          <p>Tom de Rafa: conta o ridículo (airfryer, pijama, bronquite) acoplado ao desfecho (alugou apartamento no 2º mês). Vulnerabilidade nunca isolada — sempre tem fechamento.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Storytelling de virada com vulnerabilidade</strong> — em vídeo longo</li>
+            <li><strong>Detalhe icônico (airfryer)</strong> — visual marcante, prende atenção</li>
+            <li><strong>VALIDAR com Rafa</strong> — uso da camada Cristo em copy paga</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H13 · PONTE -->
+      <div class="page" id="page-historia-h13-ponte">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 13</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 13 · Profissional · agosto/2023</div>
+          <h1 class="history-hero-title">Sociedade durou 3 meses · e foi suficiente</h1>
+          <p class="history-hero-nucleo">"Foi a ponte que Deus usou pra me colocar no caminho do meu propósito."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-yellow">tese central</span>
+            <span class="chip chip-mint">ponte × destino</span>
+            <span class="chip chip-skyblue">analogia A04</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag" style="background:#f0c8c8;color:#7a2828;">!validar uso público de Cristo</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>3 meses de trabalho duro</h2>
+          <p>Sociedade que motivou a mudança para Alphaville durou 3 meses. Evento, mentoria, transformações de alunos — missão cumprida. <em>"Sou eternamente grata por essa oportunidade."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">A tese central</div>
+          <h2>Motivo × destino</h2>
+          <p>Rafa decidiu não seguir com a sociedade — mas escolheu permanecer em Alphaville. <em>"O motivo que te leva a algo nem sempre é o mesmo que te faz permanecer. Mas pode ser a ponte que Deus usa pra te conectar ao seu propósito."</em></p>
+          <p>Tese formulada explicitamente. Vira analogia A04 do método.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">As 3 certezas</div>
+          <h2>O que a sustentou</h2>
+          <p>Rafa só sabia 3 coisas: <strong>ser obediente</strong>, <strong>fazer a sua parte</strong>, <strong>descansar em Deus</strong>. Longe da família, do cachorro (que veio 3 meses depois), em cidade com custo de vida dos mais altos do país.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · analogia A04</h4>
+          <p>Esta história é a origem direta. Rafa usa em copy de oferta para justificar esteira: aluno entra por um motivo (resolver venda) e descobre outro maior (estruturar negócio inteiro).</p>
+          <h4>Conexão · pedagogia da decisão</h4>
+          <p>Sair da sociedade sem ter próximo passo claro = decisão de coerência. Rafa ensina alunos a fazerem o mesmo — fechar capítulo quando para de fazer sentido, mesmo sem o seguinte mapeado.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Copy de oferta de esteira</strong> — para justificar produto premium após produto de entrada</li>
+            <li><strong>Conteúdo de propósito</strong> — em formato longo</li>
+            <li><strong>VALIDAR camada Cristo</strong> — frase central tem fundo religioso explícito</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- HISTÓRIA H14 · AMBIENTE -->
+      <div class="page" id="page-historia-h14-ambiente">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · História 14</div>
+        <div class="history-hero">
+          <div class="history-hero-num">História 14 · Profissional · 2023-2025, Alphaville</div>
+          <h1 class="history-hero-title">10 anos em 2 anos · poder do ambiente</h1>
+          <p class="history-hero-nucleo">"Você pode ser extraordinário, mas num ambiente errado vai crescer 10 anos em 10 anos."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">tese 2ZA</span>
+            <span class="chip chip-mint">poder do ambiente</span>
+            <span class="chip chip-yellow">15× empresa</span>
+            <span class="tipo-pill profissional">profissional</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">Contexto</div>
+          <h2>Decisão de permanecer em Alphaville</h2>
+          <p>Após o fim da sociedade (H13), Rafa decidiu ficar em Alphaville mesmo sem clareza. Em local que tem o custo de vida dos mais altos do país. A certeza: não recuar.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">A tese</div>
+          <h2>Ambiente é aceleração</h2>
+          <p>Rafa entendeu o "poder do ambiente". Em Alphaville estão grandes empresários com grandes resultados no digital. Pessoas que poderiam inspirar, ensinar, direcionar — principalmente se ela estivesse mais perto.</p>
+          <p><em>"Me coloquei no pior e no melhor cenário. Investi em visto alto, em conhecimento, em acesso. Passei a frequentar lugares, conhecer pessoas — entendendo que ambiente é aceleração."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">A prova</div>
+          <h2>Crescimento mensurável</h2>
+          <p>Em 2 anos: empresa cresceu mais de 15×. Mais de 70 pessoas (alunos + suas famílias) impactadas. Alunos multiplicaram faturamento em média 5×. <em>"Cresci 10 anos em 2 anos. Não foi sorte — foi decisão, investimento e principalmente obediência."</em></p>
+        </div>
+        <div class="section">
+          <div class="section-label">Conexões</div>
+          <h2>Como sustenta o método</h2>
+          <h4>Conexão · justificativa de mastermind no 2ZA</h4>
+          <p>Tese serve para justificar investimento em comunidade premium dentro do produto avançado. Aluno paga ticket alto entendendo que parte do valor é o ambiente — não só o conteúdo.</p>
+          <h4>Conexão · estratégia de captura · 2ZA</h4>
+          <p>Mostra o efeito do ambiente certo. Aluno avançado quer estar entre pares semelhantes. Não junto com iniciantes.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Uso editorial</div>
+          <h2>Quando usar</h2>
+          <ul>
+            <li><strong>Copy de venda 2ZA</strong> — argumento principal de investimento em comunidade</li>
+            <li><strong>Conteúdo de mentalidade empresarial</strong> — em formato curto</li>
+            <li><strong>Storytelling de transformação</strong> — 15× crescimento em 2 anos como prova</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- ANALOGIAS A01-A06 -->
+      <div class="page" id="page-analogia-a01-gps">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · Analogia A01</div>
+        <div class="history-hero">
+          <div class="history-hero-num">Analogia A01 · imagem didática</div>
+          <h1 class="history-hero-title">Vendas como GPS</h1>
+          <p class="history-hero-nucleo">"Olho o retrovisor para ver o que ficou para trás, mas o foco está no parabrisa, no caminho. As vendas viraram meu GPS."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-skyblue">abertura mentoria</span>
+            <span class="chip chip-mint">vendas como direção</span>
+            <span class="tipo-pill analogia">analogia</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">A imagem</div>
+          <h2>Direção, não destino</h2>
+          <p>Vendas não é meta — é instrumento de direção. GPS não decide para onde você vai; mostra como chegar onde você decidiu ir. Rafa usa para diferenciar venda como técnica isolada × venda como sistema de orientação para o negócio inteiro.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Quando usar</h2>
+          <ul>
+            <li><strong>Abertura de mentoria</strong> — define o que é venda no método</li>
+            <li><strong>Aluno que confunde meta com direção</strong> — vende mais sem saber pra onde está indo</li>
+            <li><strong>Conteúdo de mentalidade</strong> em fase 1 do método</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page" id="page-analogia-a02-produtola">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · Analogia A02</div>
+        <div class="history-hero">
+          <div class="history-hero-num">Analogia A02 · história-mãe H01</div>
+          <h1 class="history-hero-title">Produto lá, dinheiro cá</h1>
+          <p class="history-hero-nucleo">"Aprendi aos 7 anos vendo a prima vender fiado. Cliente fiado não volta pra pagar."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">processo de cobrança</span>
+            <span class="chip chip-yellow">história-mãe H01</span>
+            <span class="tipo-pill analogia">analogia</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">A imagem</div>
+          <h2>Separação produto × pagamento</h2>
+          <p>"Produto lá, dinheiro cá" condensa em 4 palavras o princípio de cobrança: entrega só após pagamento (ou contrato firmado). Não é desconfiança — é estrutura. Cliente fiado é cliente que dá calote estatisticamente provável.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Quando usar</h2>
+          <ul>
+            <li><strong>Mentoria de processo comercial</strong> — separar entrega de pagamento</li>
+            <li><strong>Aluno que oferece "começar antes de assinar"</strong> — mostra a fragilidade</li>
+            <li><strong>Estruturação de contrato</strong> — argumento contra parcelamento sem garantia</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page" id="page-analogia-a03-pessoascompram">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · Analogia A03</div>
+        <div class="history-hero">
+          <div class="history-hero-num">Analogia A03 · história-mãe H07</div>
+          <h1 class="history-hero-title">Pessoas compram você antes do produto</h1>
+          <p class="history-hero-nucleo">"Antes do produto, o cliente compra você. Posicionamento é venda silenciosa."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-purple">branding individual</span>
+            <span class="chip chip-yellow">história-mãe H07</span>
+            <span class="tipo-pill analogia">analogia</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">A imagem</div>
+          <h2>Venda silenciosa antes da venda explícita</h2>
+          <p>Antes de qualquer pitch, o cliente já avalia: postura, roupa, voz, carisma, segurança. Tudo isso é venda silenciosa. Quando a venda explícita começa, metade da decisão já foi tomada.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Quando usar</h2>
+          <ul>
+            <li><strong>Branding individual</strong> — em conteúdo de posicionamento</li>
+            <li><strong>Mentoria de imagem profissional</strong> — coerência estética × valor cobrado</li>
+            <li><strong>Análise de reunião gravada</strong> — ler postura corporal antes do pitch</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page" id="page-analogia-a04-pontedestino">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · Analogia A04</div>
+        <div class="history-hero">
+          <div class="history-hero-num">Analogia A04 · história-mãe H13</div>
+          <h1 class="history-hero-title">Ponte × destino</h1>
+          <p class="history-hero-nucleo">"O motivo que te leva a algo nem sempre é o que te faz permanecer."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-mint">copy de oferta</span>
+            <span class="chip chip-skyblue">justifica esteira</span>
+            <span class="chip chip-yellow">história-mãe H13</span>
+            <span class="tipo-pill analogia">analogia</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">A imagem</div>
+          <h2>Entrar por um motivo, ficar por outro</h2>
+          <p>Aluno entra no Sell-z por motivo X (geralmente "vender mais"). Descobre que o problema é Y (estruturação inteira do negócio). Sai com transformação maior do que comprou. Justifica a entrega exceder a promessa explícita.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Quando usar</h2>
+          <ul>
+            <li><strong>Copy de oferta</strong> — para justificar promessa não-estreita</li>
+            <li><strong>Storytelling de continuidade</strong> — Sell-z → 2ZA</li>
+            <li><strong>Defender preço</strong> — valor entregue cresce ao longo do tempo, não estaciona no que foi vendido</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page" id="page-analogia-a05-investirdevendo">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · Analogia A05</div>
+        <div class="history-hero">
+          <div class="history-hero-num">Analogia A05 · história-mãe H05</div>
+          <h1 class="history-hero-title">Investir devendo</h1>
+          <p class="history-hero-nucleo">"Pago parcelado e me viro pra usar o conhecimento pra fazer pra pagar."</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-orange">contraponto objeção</span>
+            <span class="chip chip-coral">"estou sem dinheiro"</span>
+            <span class="chip chip-yellow">história-mãe H05</span>
+            <span class="tipo-pill analogia">analogia</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">A imagem</div>
+          <h2>Decisão antes de recurso</h2>
+          <p>Rafa pegou cartão emprestado para comprar produto após o roubo de R$50k. Pagou R$3k em eventos sem ter o dinheiro. Sempre justificou: investir em conhecimento é investir em capacidade futura. Pagar parcelado e usar o aprendizado para gerar a renda que paga o investimento.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Cuidado de uso</h2>
+          <p>Não é apologia ao endividamento irresponsável. É decisão estratégica em momento de virada — quando o investimento tem retorno mensurável e prazo curto. Em outros contextos, viraria armadilha.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Quando usar</h2>
+          <ul>
+            <li><strong>Contraponto à objeção "estou sem dinheiro"</strong> — em mentoria</li>
+            <li><strong>Argumento de coragem</strong> — em copy de tráfego pago</li>
+            <li><strong>NÃO usar</strong> em contexto de cliente em crise financeira séria — ali é irresponsável</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page" id="page-analogia-a06-baquerecomeço">
+        <div class="breadcrumb"><a href="#" data-page="ex-expert-historias" style="color:var(--marrom);font-weight:600">← Banco de Histórias</a> · Analogia A06</div>
+        <div class="history-hero">
+          <div class="history-hero-num">Analogia A06 · estrutura mestra</div>
+          <h1 class="history-hero-title">Baque × Recomeço</h1>
+          <p class="history-hero-nucleo">"Qual baque você está vivendo agora? Em que recomeço?"</p>
+          <div class="history-hero-meta">
+            <span class="chip chip-purple">framework didático</span>
+            <span class="chip chip-mint">estrutura mestra</span>
+            <span class="chip chip-orange">narrativa autoral</span>
+            <span class="tipo-pill analogia">analogia</span>
+            <span class="tag draft">uso público</span>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-label">A imagem</div>
+          <h2>Vida em ciclos numerados</h2>
+          <p>Rafa estrutura sua narrativa em ciclos: Baque 1 (divórcio), 2 (roubo), 3 (empresa fechou), 4 (saída MMN). Recomeço 1 (saída CLT), 2 (Mary Kay), 3 (consultoria), 5 (roupas tecnológicas), Final (Mazzei Treinamentos). A estrutura tira o drama isolado e mostra padrão.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Como usar didaticamente</h2>
+          <p>Em mentoria, Rafa pode aplicar a estrutura ao aluno: "qual o seu Baque atual? Que número de Recomeço esse vai ser?" Tira o aluno do papel de vítima de circunstância e coloca em sequência identitária.</p>
+        </div>
+        <div class="section">
+          <div class="section-label">Quando usar</h2>
+          <ul>
+            <li><strong>Mentoria 1:1</strong> — aplicar a estrutura ao aluno em momento difícil</li>
+            <li><strong>Conteúdo orgânico</strong> — em série editorial sobre virada</li>
+            <li><strong>Storytelling de marca</strong> — todo material sobre Rafa pode usar</li>
           </ul>
         </div>
       </div>
@@ -1781,8 +2988,17 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">01</span><h3 class="etapa-title">Plano de Vida × Plano de Negócio</h3><span class="etapa-period">Avançado</span></div>
             <p><strong>Objetivo:</strong> identificar onde está hoje, onde quer chegar e possíveis incoerências entre vida e negócio.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Tipos e modelos de negócio · prós e contras de cada modelo · projeção e antecipação de desafios · mentalidade de autorresponsabilidade e identidade.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Decidir qual modelo de negócio quer ter · se comprometer com a identidade · organizar a agenda para se tornar quem constrói a vida que quer.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Tipos e modelos de negócio</li>
+                <li>Prós e contras de cada modelo</li>
+                <li>Projeção e antecipação de desafios</li>
+                <li>Mentalidade de autorresponsabilidade e identidade</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Decidir qual modelo de negócio quer ter</li>
+                <li>Se comprometer com a identidade</li>
+                <li>Organizar a agenda para se tornar quem constrói a vida que quer</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1790,8 +3006,15 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">02</span><h3 class="etapa-title">As Regras do Jogo · olhar para fora</h3><span class="etapa-period">Avançado</span></div>
             <p><strong>Objetivo:</strong> conhecer o cenário para desenvolver visão estratégica e parar de improvisar.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Ferramentas e técnicas de pesquisa · análise estratégica de dados.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Pesquisar público-alvo (deep research, mapa da empatia) · pesquisar mercado e concorrentes (cliente oculto, deep research, relatórios) · definir canais de informação contínua sobre o nicho.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Ferramentas e técnicas de pesquisa</li>
+                <li>Análise estratégica de dados</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Pesquisar público-alvo (deep research, mapa da empatia)</li>
+                <li>Pesquisar mercado e concorrentes (cliente oculto, deep research, relatórios)</li>
+                <li>Definir canais de informação contínua sobre o nicho</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1799,8 +3022,17 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">03</span><h3 class="etapa-title">Ordem na Casa · olhar para dentro</h3><span class="etapa-period">Intermediário</span></div>
             <p><strong>Objetivo:</strong> sair do amadorismo e se tornar profissional — no papel e na mentalidade.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Básico do negócio (CNPJ, tipo de cadastro, contabilidade básica) · financeiro básico (fluxo de caixa, DRE).</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Implementar ações do diagnóstico da etapa 1 · preencher planilha e olhar para os números · separar PF e PJ · planejar custo de vida e prolabore · separar recebimento de competência.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Básico do negócio (CNPJ, tipo de cadastro, contabilidade básica)</li>
+                <li>Financeiro básico (fluxo de caixa, DRE)</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Implementar ações do diagnóstico da etapa 1</li>
+                <li>Preencher planilha e olhar para os números</li>
+                <li>Separar PF e PJ</li>
+                <li>Planejar custo de vida e prolabore</li>
+                <li>Separar recebimento de competência</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1808,8 +3040,13 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">04</span><h3 class="etapa-title">Setup de Ofertas</h3><span class="etapa-period">Intermediário</span></div>
             <p><strong>Objetivo:</strong> clareza das diferenças de cada produto/serviço.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Qual a transformação do que ela vende · ancoragem, precificação, definição de bônus.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Configurar o blueprint das ofertas (GPT).</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Qual a transformação do que ela vende</li>
+                <li>Ancoragem, precificação e definição de bônus</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Configurar o blueprint das ofertas (GPT)</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1817,8 +3054,15 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">05</span><h3 class="etapa-title">Setup de Posicionamento</h3><span class="etapa-period">Avançado · Bônus</span></div>
             <p><strong>Objetivo:</strong> definir diferencial, limites e comunicação.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Comunicação e tom de voz · imagem pessoal · erros comuns que fazem clientes não respeitarem.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Definir atributos a comunicar · definir limites e como se posicionar diante de situações que contrariem esses limites.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Comunicação e tom de voz</li>
+                <li>Imagem pessoal</li>
+                <li>Erros comuns que fazem clientes não respeitarem</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Definir atributos a comunicar</li>
+                <li>Definir limites e como se posicionar diante de situações que contrariem esses limites</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1826,8 +3070,15 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">06</span><h3 class="etapa-title">Funil do Lead até a Venda</h3><span class="etapa-period">Intermediário</span></div>
             <p><strong>Objetivo:</strong> clareza do funil de ponta a ponta com domínio estratégico do porquê de cada etapa.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Possibilidades de captação, negociação, conversão, onboarding, pós-venda · critérios de definição.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Definir processos e scripts de cada etapa · implementar fluxo otimizado realista · planejar melhorias por prioridade.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Possibilidades de captação, negociação, conversão, onboarding e pós-venda</li>
+                <li>Critérios de definição</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Definir processos e scripts de cada etapa</li>
+                <li>Implementar fluxo otimizado realista</li>
+                <li>Planejar melhorias por prioridade</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1835,8 +3086,15 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">07</span><h3 class="etapa-title">Vendas no Campo de Batalha</h3><span class="etapa-period">Intermediário</span></div>
             <p><strong>Objetivo:</strong> refinar o desempenho dela como vendedora.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Detalhes do dia a dia que mudam o jogo · refinamento de posicionamento e comunicação.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Reuniões de venda + diagnóstico de pontos fortes/fracos · registro religioso da rotina comercial (follow ups, reuniões, prospecções) · definir e acompanhar metas.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Detalhes do dia a dia que mudam o jogo</li>
+                <li>Refinamento de posicionamento e comunicação</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Reuniões de venda + diagnóstico de pontos fortes/fracos</li>
+                <li>Registro religioso da rotina comercial (follow-ups, reuniões, prospecções)</li>
+                <li>Definir e acompanhar metas</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1844,8 +3102,18 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">08</span><h3 class="etapa-title">Métodos de Captura</h3><span class="etapa-period">Avançado · Sob demanda</span></div>
             <p><strong>Objetivo:</strong> escolher e implementar protocolos de tração.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Quando aplicar cada protocolo conforme recursos · o que saber antes de contratar · tese: eficiência ganha de volume.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Protocolo de parceiro · protocolo de referidos · protocolo de marketing de conteúdo · protocolo de tráfego pago · protocolo de networking.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Quando aplicar cada protocolo conforme recursos</li>
+                <li>O que saber antes de contratar</li>
+                <li>Tese: eficiência ganha de volume</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Protocolo de parceiro</li>
+                <li>Protocolo de referidos</li>
+                <li>Protocolo de marketing de conteúdo</li>
+                <li>Protocolo de tráfego pago</li>
+                <li>Protocolo de networking</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1853,8 +3121,15 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">09</span><h3 class="etapa-title">Estratégia de Guerra</h3><span class="etapa-period">Avançado</span></div>
             <p><strong>Objetivo:</strong> refinar processos da operação direcionando para a meta.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Quando contratar e como projetar métricas · domínio dos números do fluxo · análise e otimização de pós-venda · LTV e cuidado do cliente.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Coletar e olhar dados de forma estratégica (metas, crescimento, projeção, satisfação, pós-venda).</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Quando contratar e como projetar métricas</li>
+                <li>Domínio dos números do fluxo</li>
+                <li>Análise e otimização de pós-venda</li>
+                <li>LTV e cuidado do cliente</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Coletar e olhar dados de forma estratégica (metas, crescimento, projeção, satisfação, pós-venda)</li>
+              </ul></div>
             </div>
           </div>
 
@@ -1862,21 +3137,145 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <div class="etapa-block-head"><span class="etapa-num">10</span><h3 class="etapa-title">Liderar e Escalar</h3><span class="etapa-period">Avançado</span></div>
             <p><strong>Objetivo:</strong> montagem, treinamento e acompanhamento de time comercial.</p>
             <div class="etapa-grid">
-              <div class="etapa-cell"><h5>Conhecimentos</h5><p>Cargos e atribuições · treinamento e rampagem · acompanhamento e rotinas · KPIs.</p></div>
-              <div class="etapa-cell"><h5>Ações</h5><p>Definir organograma · cultura empresarial · descrição de cargo + proposta (salário, comissão, bônus) · planejar e ensinar contratações · definir KPIs, ferramentas e rotinas · ensinar demissões.</p></div>
+              <div class="etapa-cell"><h5>Conhecimentos</h5><ul class="etapa-list">
+                <li>Cargos e atribuições</li>
+                <li>Treinamento e rampagem</li>
+                <li>Acompanhamento e rotinas</li>
+                <li>KPIs</li>
+              </ul></div>
+              <div class="etapa-cell"><h5>Ações</h5><ul class="etapa-list">
+                <li>Definir organograma</li>
+                <li>Cultura empresarial</li>
+                <li>Descrição de cargo + proposta (salário, comissão, bônus)</li>
+                <li>Planejar e ensinar contratações</li>
+                <li>Definir KPIs, ferramentas e rotinas</li>
+                <li>Ensinar demissões</li>
+              </ul></div>
             </div>
           </div>
         </div>
 
+        <div class="section" style="background:rgba(167,123,74,0.08);border-radius:var(--radius-card);padding:24px 28px;margin-top:32px;border-left:4px solid var(--marrom);">
+          <div class="section-label" style="color:var(--marrom);">Diagnóstico do método · @method-extractor</div>
+          <h2>Análise crítica · 7 problemas identificados na estrutura atual</h2>
+          <p class="section-desc">Análise feita aplicando o framework do agente <code>@method-extractor</code> sobre o método atual de 10 etapas. Objetivo: identificar inconsistências, sobreposições e oportunidades de simplificação antes de validar com a Rafa.</p>
+
+          <div class="card-grid" style="grid-template-columns:repeat(2,1fr);">
+            <div class="info-card">
+              <div class="info-card-num">01</div>
+              <h3>Tom dos nomes mistura "de guerra" com técnico</h3>
+              <p><strong>Problema:</strong> "Estratégia de Guerra", "Vendas no Campo de Batalha", "Ordem na Casa" são metafóricos · "Setup de Ofertas", "Métodos de Captura", "Funil do Lead até a Venda" são técnicos. Inconsistência reduz coerência mental.</p>
+              <p><strong>Sugestão:</strong> escolher 1 dos 2 tons e padronizar. Tom de guerra dá mais identidade — combina com a Rafa. Mas precisa funcionar para públicos PJ B2B sem soar ranzinza.</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-num">02</div>
+              <h3>Sequência das etapas não bate com sequência dos produtos</h3>
+              <p><strong>Problema:</strong> Etapa 01 (Plano de Vida × Negócio · Avançado) vem ANTES da Etapa 03 (Ordem na Casa · Intermediário). Aluno do Sell-z começa pela etapa 3 — invalida etapas 1 e 2 como "fundação".</p>
+              <p><strong>Sugestão:</strong> ou (a) reordenar para começar pelas Intermediárias e depois Avançadas, ou (b) deixar claro que "número de etapa" não é "ordem cronológica" — é categoria.</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-num">03</div>
+              <h3>Granularidade desigual entre etapas</h3>
+              <p><strong>Problema:</strong> Etapa 04 (Setup de Ofertas) tem 1 ação. Etapa 10 (Liderar e Escalar) tem 6 ações. Algumas são micro-tarefas, outras são mega-blocos. O aluno percebe e perde confiança no método.</p>
+              <p><strong>Sugestão:</strong> ou consolidar etapa 04 em outra (ex: dentro de Ordem na Casa), ou expandir o que ela contém. Equilibrar peso por etapa.</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-num">04</div>
+              <h3>Sobreposição entre etapas 05, 06 e 07</h3>
+              <p><strong>Problema:</strong> Setup de Posicionamento (05) trata comunicação · Funil do Lead (06) trata processo de venda · Vendas no Campo (07) trata refino da venda. Há mistura — "atributos a comunicar" (05) volta em "refinamento de comunicação" (07).</p>
+              <p><strong>Sugestão:</strong> consolidar em 2 etapas: <strong>Posicionamento e oferta</strong> (atributos + ofertas + ancoragem) + <strong>Processo comercial</strong> (funil + execução + refino).</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-num">05</div>
+              <h3>10 etapas é mais do que o aluno consegue carregar</h3>
+              <p><strong>Problema:</strong> framework didático aguenta 5-7 marcos. Acima disso o aluno perde mapa mental. Métodos famosos (Lean Startup, BMC, Sprint, etc.) trabalham com 5-9 blocos máximo.</p>
+              <p><strong>Sugestão:</strong> consolidar em <strong>6 etapas</strong> (proposta detalhada abaixo).</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-num">06</div>
+              <h3>Tags "Sob demanda" e "Bônus" quebram a linearidade visual</h3>
+              <p><strong>Problema:</strong> Etapa 05 é "Avançado · Bônus". Etapa 08 é "Avançado · Sob demanda". Quando o aluno olha o infográfico, fica confuso — algumas etapas são opcionais, outras não.</p>
+              <p><strong>Sugestão:</strong> mover bônus/sob demanda para fora da espinha dorsal — virarem módulos complementares ou aprofundamentos do produto Avançado, não etapas do método.</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-num">07</div>
+              <h3>"Plano de Vida × Negócio" antes de "Regras do Jogo" inverte fundação</h3>
+              <p><strong>Problema:</strong> empresário precisa entender o jogo (mercado, público, concorrente) <em>antes</em> de definir modelo de negócio coerente com sua vida. A ordem atual pede ao aluno se decidir antes de entender o terreno.</p>
+              <p><strong>Sugestão:</strong> inverter — começar por <strong>Regras do Jogo</strong> e só depois <strong>Plano de Vida × Negócio</strong>. Diagnóstico externo antes de decisão interna.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" style="background:var(--bege-2);border-radius:var(--radius-card);padding:24px 28px;margin-top:24px;border-left:4px solid var(--verde);">
+          <div class="section-label" style="color:var(--verde);">Proposta de método · 6 etapas consolidadas</div>
+          <h2>Versão simplificada — para discussão com a Rafa</h2>
+          <p class="section-desc">Propondo redução de 10 → 6 etapas, mantendo todos os conhecimentos e ações originais, mas reorganizados por blocos com peso equilibrado e ordem lógica de execução. Tom: identidade da Rafa preservada (de guerra) com nomes mais limpos.</p>
+
+          <div class="card-grid" style="grid-template-columns:1fr;gap:14px;">
+            <div class="info-card" style="border-left:3px solid var(--verde);">
+              <div class="info-card-num">Etapa 01 · Intermediário</div>
+              <h3>Diagnóstico · ler o terreno</h3>
+              <p><strong>Vem de:</strong> antiga 02 (Regras do Jogo). <strong>Por que primeiro:</strong> empresário precisa entender o jogo antes de decidir como vai jogar.</p>
+              <p><strong>Inclui:</strong> pesquisa de mercado · ICP · concorrência · cliente oculto · canais de informação contínua.</p>
+            </div>
+
+            <div class="info-card" style="border-left:3px solid var(--verde);">
+              <div class="info-card-num">Etapa 02 · Intermediário</div>
+              <h3>Ordem na Casa · ler o próprio negócio</h3>
+              <p><strong>Vem de:</strong> antiga 03 + parte da 04. <strong>Por que segundo:</strong> antes de pensar fora, organizar dentro. Sem números claros, decisão estratégica é chute.</p>
+              <p><strong>Inclui:</strong> CNPJ + estrutura · DRE · fluxo de caixa · separação PF/PJ · prolabore · ancoragem e precificação.</p>
+            </div>
+
+            <div class="info-card" style="border-left:3px solid var(--verde);">
+              <div class="info-card-num">Etapa 03 · Intermediário</div>
+              <h3>Setup Comercial · oferta e processo</h3>
+              <p><strong>Vem de:</strong> antiga 04 (parte) + 06. <strong>Por que terceiro:</strong> com diagnóstico e casa em ordem, define o que vende e como vende.</p>
+              <p><strong>Inclui:</strong> blueprint de oferta · funil consultivo · scripts · onboarding · pós-venda.</p>
+            </div>
+
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <div class="info-card-num">Etapa 04 · Intermediário · ponte para Avançado</div>
+              <h3>Posicionamento · ser o Escolhido</h3>
+              <p><strong>Vem de:</strong> antiga 05 + 07. <strong>Por que quarto:</strong> só faz sentido posicionar quando já tem oferta e processo. Posição na mente do cliente (Comparado · Justificado · Escolhido) — framework-âncora.</p>
+              <p><strong>Inclui:</strong> atributos a comunicar · imagem pessoal · análise de reunião real · refino de pitch · limites e como se posicionar.</p>
+            </div>
+
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <div class="info-card-num">Etapa 05 · Avançado</div>
+              <h3>Vida × Negócio · alinhar agenda à identidade</h3>
+              <p><strong>Vem de:</strong> antiga 01. <strong>Por que aqui:</strong> só funciona depois que o empresário viveu a operação. Sem operação, definir "modelo de negócio coerente com vida" é abstração.</p>
+              <p><strong>Inclui:</strong> tipos e modelos de negócio · projeção e antecipação · autorresponsabilidade · agenda alinhada à identidade.</p>
+            </div>
+
+            <div class="info-card" style="border-left:3px solid var(--marrom);">
+              <div class="info-card-num">Etapa 06 · Avançado</div>
+              <h3>Estratégia de Guerra · escalar com método</h3>
+              <p><strong>Vem de:</strong> antigas 08 + 09 + 10. <strong>Por que último:</strong> escalar é consequência, não ponto de partida. Todos os blocos anteriores precisam estar funcionando.</p>
+              <p><strong>Inclui:</strong> protocolos de captação (parceiro, referidos, conteúdo, tráfego, networking) · métricas e LTV · liderança e montagem de time · KPIs · cultura · contratação e demissão.</p>
+            </div>
+          </div>
+
+          <p style="margin-top:20px;font-size:13px;color:var(--text-2);"><strong>O que ganha:</strong> sequência lógica · peso equilibrado · 4 etapas para o Sell-z (1-4) e 2 para o 2ZA (5-6) · nomes mais consistentes · cabe na cabeça do aluno.</p>
+          <p style="font-size:13px;color:var(--text-2);"><strong>O que precisa decisão da Rafa:</strong> aceita reordenação de Vida × Negócio? topa consolidar 10 → 6? quer manter alguns nomes "de guerra" originais (ex: "Estratégia de Guerra")?</p>
+        </div>
+
         <div class="section">
           <div class="section-label">A refinar com a Rafa</div>
-          <h2>Próximos passos para fechar a jornada</h2>
+          <h2>Próximos passos</h2>
           <ul>
-            <li>Validar nomes — alguns são "de guerra" da Rafa, outros são técnicos · padronizar tom</li>
-            <li>Confirmar ordem entre Plano de Vida × Negócio e As Regras do Jogo (e se há prioridade entre olhar para fora × dentro)</li>
+            <li>Validar diagnóstico dos 7 problemas — concordar/discordar item a item</li>
+            <li>Validar proposta de 6 etapas — ou propor reagrupamento alternativo</li>
+            <li>Decidir tom dos nomes (de guerra · técnico · híbrido)</li>
             <li>Atribuir frameworks por etapa (camada conceitual)</li>
             <li>Atribuir instrumentos por etapa (entregáveis ao aluno)</li>
-            <li>Decidir critério de avanço entre etapas (o que define que o aluno está pronto)</li>
+            <li>Decidir critério de avanço entre etapas</li>
+            <li>Mover "Bônus" e "Sob demanda" para fora da espinha do método</li>
           </ul>
         </div>
       </div>
