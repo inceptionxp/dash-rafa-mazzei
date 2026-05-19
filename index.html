@@ -54,6 +54,7 @@ a{color:inherit;text-decoration:none}
 .nav-child-status{margin-left:auto;font-size:11px;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center}
 .nav-child-status.pending{color:rgba(238,236,227,0.25)}
 .nav-child-status.draft{color:var(--marrom-2)}
+.nav-child-status.done{color:#7a9a4f}
 .nav-child-status.validated{color:var(--success)}
 .sidebar-footer{margin-top:auto;padding:16px 22px 22px;border-top:1px solid rgba(238,236,227,0.06);font-family:var(--font-mono);font-size:10px;color:rgba(238,236,227,0.35);letter-spacing:0.05em}
 .sidebar-footer strong{color:rgba(238,236,227,0.6);font-weight:500}
@@ -422,7 +423,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
         <ul class="nav-children">
           <li class="nav-child" data-page="ex-aprendiz-icp"><span>ICP</span><span class="nav-child-status draft">●</span></li>
           <li class="nav-child" data-page="ex-aprendiz-pesquisa"><span>Pesquisa de mercado</span><span class="nav-child-status draft">●</span></li>
-          <li class="nav-child" data-page="ex-aprendiz-dores"><span>Dores e problemas</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-aprendiz-dores"><span>Dores e problemas</span><span class="nav-child-status done">●</span></li>
           <li class="nav-child" data-page="ex-aprendiz-desejos"><span>Desejos e necessidades</span><span class="nav-child-status draft">●</span></li>
           <li class="nav-child" data-page="ex-aprendiz-rotina"><span>Rotina</span><span class="nav-child-status draft">●</span></li>
           <li class="nav-child" data-page="ex-aprendiz-habilidades"><span>Habilidades digitais</span><span class="nav-child-status draft">●</span></li>
@@ -801,8 +802,61 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
         <div class="breadcrumb">Camada 01 · O Aprendiz</div>
         <div class="page-head">
           <h1 class="page-title">Dores e problemas <em>— o que trava o empresário consultivo</em></h1>
-          <p class="page-lead">Dor central + 5 dores secundárias por público + 3 problemas inconscientes. Base para todo discurso comercial e narrativa de produto.</p>
-          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Aguarda validação Rafa</span></div>
+          <p class="page-lead">Dor central + 5 dores secundárias por público + 3 problemas inconscientes. Base para todo discurso comercial e narrativa de produto. <strong>Evidência quantitativa adicionada em 19/05/2026</strong> a partir de 118 Hot Seats reais.</p>
+          <div class="exercise-meta"><span class="tag draft">rascunho + evidência</span><span>Aguarda validação Rafa</span></div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- EVIDÊNCIA QUANTITATIVA · 118 HOT SEATS       -->
+        <!-- Análise feita em 19/05/2026                  -->
+        <!-- ============================================ -->
+
+        <div class="section" style="background:var(--chumbo);color:var(--bege);border-color:var(--chumbo)">
+          <div class="section-label" style="color:var(--marrom-2)">Evidência · análise dos Hot Seats</div>
+          <h2 style="color:var(--bege)">O que os alunos pedem ajuda há 10 meses</h2>
+          <p style="color:rgba(238,236,227,0.82)">Análise de <strong style="color:var(--bege)">118 submissões do formulário de Hot Seat</strong> entre agosto/2025 e maio/2026, de <strong style="color:var(--bege)">42 alunos únicos</strong>. Cada pergunta foi categorizada por tema; perguntas podem tocar múltiplos temas, por isso a soma passa de 100%.</p>
+          <p style="color:rgba(238,236,227,0.82);margin-bottom:0">A leitura quantitativa <strong style="color:var(--marrom-2)">valida e refina</strong> as dores listadas no rascunho qualitativo abaixo. Fonte completa: <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:3px;font-size:11px">pesquisas-publico/ANALISE_HOT_SEATS_TOP_TEMAS.md</code></p>
+
+          <h4 style="color:var(--marrom-2);margin-top:24px">Top 10 temas pedidos ao vivo (118 hot seats)</h4>
+          <table>
+            <tr><th>#</th><th>Tema</th><th>Perguntas</th><th>% dos hot seats</th></tr>
+            <tr><td><strong>1</strong></td><td><strong>Vendas e fechamento</strong> (objeções, conversão, reunião comercial)</td><td>38</td><td>32,2%</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Oferta e esteira</strong> (PDF de oferta, transformação, posicionamento)</td><td>32</td><td>27,1%</td></tr>
+            <tr><td><strong>3</strong></td><td><strong>Apresentação e proposta comercial</strong> (revisar pitch, PDF, deck)</td><td>31</td><td>26,3%</td></tr>
+            <tr><td><strong>4</strong></td><td><strong>Tempo, agenda e organização</strong></td><td>31</td><td>26,3%</td></tr>
+            <tr><td><strong>5</strong></td><td><strong>Funil, CRM e processo comercial</strong> (Kommo, qualificação, lead)</td><td>30</td><td>25,4%</td></tr>
+            <tr><td><strong>6</strong></td><td><strong>Estratégia e planejamento</strong> (plano de ação, metas, direção)</td><td>27</td><td>22,9%</td></tr>
+            <tr><td><strong>7</strong></td><td><strong>Equipe e delegação</strong> (contratação, sócio, supervisor)</td><td>25</td><td>21,2%</td></tr>
+            <tr><td><strong>8</strong></td><td><strong>Financeiro e gestão de caixa</strong> (PF/PJ, custos, fluxo)</td><td>21</td><td>17,8%</td></tr>
+            <tr><td><strong>9</strong></td><td><strong>Marketing, conteúdo e tráfego</strong> (Instagram, anúncios, criativos)</td><td>19</td><td>16,1%</td></tr>
+            <tr><td><strong>10</strong></td><td><strong>Precificação</strong> (ticket, valor cobrado, reajuste)</td><td>19</td><td>16,1%</td></tr>
+          </table>
+
+          <h4 style="color:var(--marrom-2);margin-top:24px">3 insights críticos</h4>
+          <ol style="color:rgba(238,236,227,0.85)">
+            <li><strong style="color:var(--bege)">O gargalo não é "vendas" isolada.</strong> Os 4 primeiros temas (Vendas + Oferta + Apresentação + Funil) somam <strong>121 perguntas em 118 hot seats</strong> — sempre aparecem juntos. O problema é a estrutura inteira do processo comercial, não a técnica.</li>
+            <li><strong style="color:var(--bege)">"Revisar PDF de oferta" é o pedido mais recorrente</strong> — alunas voltam várias vezes com a mesma oferta. Se a Rafa entrega um template robusto de PDF de proposta no banco de materiais, mata ~25% das demandas individuais de Hot Seat.</li>
+            <li><strong style="color:var(--bege)">Tempo/agenda é sintoma, não causa</strong> — alinha exatamente com o tom de voz do anteprojeto de branding: <em>"o problema não é sua gestão de tempo, é sua falta de estrutura"</em>.</li>
+          </ol>
+
+          <h4 style="color:var(--marrom-2);margin-top:24px">Perguntas reais (amostra representativa)</h4>
+          <ul style="color:rgba(238,236,227,0.85);font-size:13.5px">
+            <li><em>"Cheguei em um teto de 10 a 12k e não consigo escalar."</em> — Gilmara, 07/08/25</li>
+            <li><em>"Qual seria a melhor estratégia para manter um faturamento previsível de pelo menos 30 mil/mês? Tivemos um faturamento ótimo em 2 meses, mas voltamos novamente para a média de 20 mil/mês."</em> — Adriana, 04/09/25</li>
+            <li><em>"Em relação a quebra de objeções, preciso escrever algo como 'Dúvidas frequentes' ou eu apenas desenvolvo verbalmente no momento da apresentação?"</em> — Amanda, 10/10/25</li>
+            <li><em>"Como aumentar meus prazos de entrega e fazer meus clientes me esperarem para fazer comigo o projeto. Hoje meus prazos são curtos e não consigo fechar com prazos mais longos."</em> — Emanoel, 27/11/25</li>
+            <li><em>"Como orientar, treinar e cobrar minha supervisora de vendas? Tenho muita dificuldade em delegar a ela o que precisa ser feito."</em> — Webert, 27/11/25</li>
+            <li><em>"Processo de venda: como seguir com leads que têm níveis de consciência diferentes e como direcionar a apresentação para cada um deles."</em> — Lorena, 29/01/26</li>
+            <li><em>"Equipe e demissão — como fazer essa reunião de alinhamento sobre tolerâncias e condutas."</em> — Priscilla, 16/03/26</li>
+          </ul>
+
+          <h4 style="color:var(--marrom-2);margin-top:24px">Recomendação: 3 primeiras Masterclasses do novo formato</h4>
+          <table>
+            <tr><th>Mês</th><th>Tema</th><th>Cobertura</th><th>Quem dá</th></tr>
+            <tr><td><strong>Junho/26</strong></td><td>A anatomia da oferta blindada</td><td>82 perguntas (Oferta + Apresentação + Precificação) · <strong>69% do dataset</strong></td><td>Rafa</td></tr>
+            <tr><td><strong>Julho/26</strong></td><td>Como conduzir uma sessão de venda consultiva do começo ao pix</td><td>68 perguntas (Vendas + Funil/CRM)</td><td>Rafa</td></tr>
+            <tr><td><strong>Agosto/26</strong></td><td>Por que o problema não é seu tempo: é falta de estrutura</td><td>~50 perguntas (Tempo + Estratégia + Equipe)</td><td>Bom candidato a convidado externo</td></tr>
+          </table>
         </div>
 
         <div class="section">
