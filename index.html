@@ -389,6 +389,34 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 .toast.show{opacity:1;transform:translateY(0)}
 .toast::before{content:'✓';color:var(--success);font-weight:700;font-size:16px}
 
+/* DOC/AÇÃO SELO */
+.tipo-pagina{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px}
+.tipo-pagina.acao{background:var(--marrom);color:var(--bege)}
+.tipo-pagina.doc{background:var(--verde);color:var(--bege)}
+.tipo-pagina::before{font-size:13px}
+.tipo-pagina.acao::before{content:'✅'}
+.tipo-pagina.doc::before{content:'📋'}
+.acao-banner{background:rgba(167,123,74,0.1);border:1px solid rgba(167,123,74,0.3);border-left:4px solid var(--marrom);border-radius:var(--radius-card);padding:18px 22px;margin:0 0 22px}
+.acao-banner strong{color:var(--marrom);font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;display:block;margin-bottom:6px}
+.acao-banner p{font-size:13.5px;color:var(--text-2);margin:0;line-height:1.55}
+.checklist{list-style:none;padding:0;margin:14px 0 8px;display:flex;flex-direction:column;gap:8px}
+.checklist li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text-2);line-height:1.5;background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+.checklist li::before{content:'';width:16px;height:16px;flex-shrink:0;border:2px solid var(--marrom);border-radius:4px;margin-top:2px}
+.checklist li strong{color:var(--chumbo)}
+
+/* FUNNEL DIAGRAM */
+.funnel-flow{display:flex;align-items:stretch;gap:0;margin:22px 0;flex-wrap:wrap}
+.funnel-step{flex:1;min-width:200px;background:var(--bege-2);border:1px solid var(--border);border-radius:var(--radius-card);padding:22px 20px;position:relative}
+.funnel-step.s1{border-top:4px solid var(--marrom-2)}
+.funnel-step.s2{border-top:4px solid var(--marrom)}
+.funnel-step.s3{border-top:4px solid var(--verde)}
+.funnel-step-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--marrom);font-weight:700;margin-bottom:6px}
+.funnel-step-title{font-family:var(--font-display);font-size:24px;letter-spacing:0.02em;text-transform:uppercase;color:var(--chumbo);margin:0 0 8px;font-weight:400;line-height:1}
+.funnel-step p{font-size:13px;color:var(--text-2);margin:0 0 8px;line-height:1.5}
+.funnel-step .funnel-ticket{font-family:var(--font-mono);font-size:11px;color:var(--marrom);font-weight:700;letter-spacing:0.06em}
+.funnel-arrow{display:flex;align-items:center;justify-content:center;padding:0 6px;font-size:22px;color:var(--marrom);font-weight:700}
+@media(max-width:760px){.funnel-arrow{transform:rotate(90deg);padding:6px 0;width:100%}}
+
 /* PAGE VISIBILITY */
 .page{display:none}
 .page.active{display:block;animation:fadeIn .25s}
@@ -452,27 +480,53 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
         </ul>
       </div>
 
-      <div class="nav-group" data-group="produto">
-        <button class="nav-link" data-page="layer-produto"><span class="nav-num">04</span><span>Esteira de Produtos</span><span class="nav-chevron">▶</span></button>
+      <div class="nav-group" data-group="imersao">
+        <button class="nav-link" data-page="layer-imersao"><span class="nav-num">04</span><span>Imersão</span><span class="nav-chevron">▶</span></button>
         <ul class="nav-children">
-          <li class="nav-child" data-page="produto-imersao"><span>Imersão ao vivo</span><span class="nav-child-status draft">●</span></li>
-          <li class="nav-child" data-page="produto-sellz"><span>Sell-z (Intermediário)</span><span class="nav-child-status draft">●</span></li>
-          <li class="nav-child" data-page="produto-2za"><span>2Z Level (Avançado)</span><span class="nav-child-status done">●</span></li>
+          <li class="nav-child" data-page="produto-imersao"><span>Visão geral</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="imersao-config"><span>Configuração &amp; Ações</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="sellz">
+        <button class="nav-link" data-page="layer-sellz"><span class="nav-num">05</span><span>Sell-z</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="produto-sellz"><span>Visão geral</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="sellz-config"><span>Configuração &amp; Ações</span><span class="nav-child-status pending">○</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="2zlevel">
+        <button class="nav-link" data-page="layer-2zlevel"><span class="nav-num">06</span><span>2Z Level</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
+          <li class="nav-child" data-page="produto-2za"><span>Documentação do produto</span><span class="nav-child-status done">●</span></li>
+          <li class="nav-child" data-page="2zlevel-curseduca"><span>Configuração da Curseduca</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="2zlevel-rotina-gp"><span>Rotina da Gestora de Progresso</span><span class="nav-child-status draft">●</span></li>
+        </ul>
+      </div>
+
+      <div class="nav-group" data-group="esteira">
+        <button class="nav-link" data-page="layer-esteira"><span class="nav-num">07</span><span>Esteira &amp; Funis</span><span class="nav-chevron">▶</span></button>
+        <ul class="nav-children">
           <li class="nav-child" data-page="ex-produto-comparativo"><span>Comparativo de Ofertas</span><span class="nav-child-status done">●</span></li>
+          <li class="nav-child" data-page="esteira-funis"><span>Conexão dos funis</span><span class="nav-child-status draft">●</span></li>
         </ul>
       </div>
 
       <div class="nav-group" data-group="venda">
-        <button class="nav-link" data-page="layer-venda"><span class="nav-num">05</span><span>Vendas</span><span class="nav-chevron">▶</span></button>
+        <button class="nav-link" data-page="layer-venda"><span class="nav-num">08</span><span>Vendas</span><span class="nav-chevron">▶</span></button>
         <ul class="nav-children">
           <li class="nav-child" data-page="ex-venda-branding"><span>Branding</span><span class="nav-child-status pending">○</span></li>
           <li class="nav-child" data-page="ex-venda-funil"><span>Funil &amp; Canais</span><span class="nav-child-status pending">○</span></li>
           <li class="nav-child" data-page="ex-venda-lancamento"><span>Lançamento</span><span class="nav-child-status draft">●</span></li>
+          <li class="nav-child" data-page="ex-venda-captura"><span>Página de captura</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-venda-emails"><span>Sequência de e-mails</span><span class="nav-child-status pending">○</span></li>
+          <li class="nav-child" data-page="ex-venda-criativos"><span>Criativos</span><span class="nav-child-status pending">○</span></li>
         </ul>
       </div>
 
       <div class="nav-group" data-group="projeto">
-        <button class="nav-link" data-page="layer-projeto"><span class="nav-num">06</span><span>O Projeto</span><span class="nav-chevron">▶</span></button>
+        <button class="nav-link" data-page="layer-projeto"><span class="nav-num">09</span><span>O Projeto</span><span class="nav-chevron">▶</span></button>
         <ul class="nav-children">
           <li class="nav-child" data-page="ex-projeto-status"><span>Painel de progresso</span><span class="nav-child-status pending">○</span></li>
           <li class="nav-child" data-page="ex-projeto-debriefing"><span>Debriefing</span><span class="nav-child-status pending">○</span></li>
@@ -497,7 +551,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
         <div class="page-head">
           <div class="breadcrumb">Consultoria Rafaella Mazzei · Implementação · Inception Experience</div>
           <h1 class="page-title">Consultoria <em>Rafaella Mazzei</em></h1>
-          <p class="page-lead">Dashboard de implementação da consultoria. Documenta método, expert, produtos e lançamento. Conteúdo é rascunho de IA — todas as <em>6 camadas</em> aguardam validação da Rafaella.</p>
+          <p class="page-lead">Dashboard de implementação da consultoria. Documenta aprendiz, expert, método, os três produtos da esteira e o lançamento. Conteúdo é rascunho de IA — os <em>9 tópicos</em> aguardam validação da Rafaella.</p>
         </div>
 
         <div class="layers-grid">
@@ -528,28 +582,55 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             </div>
           </a>
 
-          <a class="layer-card" data-page="layer-produto">
-            <div class="layer-card-cover"><span class="layer-card-title">Os Produtos</span></div>
+          <a class="layer-card" data-page="layer-imersao">
+            <div class="layer-card-cover"><span class="layer-card-title">Imersão</span></div>
             <div class="layer-card-body">
-              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span>04. Esteira de Produtos</span></div>
-              <p class="layer-card-desc">Três produtos. Uma jornada. Cada degrau intensifica desejo pelo próximo.</p>
-              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/4</span></div>
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg><span>04. Imersão</span></div>
+              <p class="layer-card-desc">Porta de entrada paga da esteira — workshop ao vivo de aquecimento, qualificação e pitch.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/2</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-sellz">
+            <div class="layer-card-cover"><span class="layer-card-title">Sell-z</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><span>05. Sell-z</span></div>
+              <p class="layer-card-desc">Produto intermediário — cohort de implementação que coloca o processo comercial rodando.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/2</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-2zlevel">
+            <div class="layer-card-cover"><span class="layer-card-title">2Z Level</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6L12 15l-6 3.5 1.5-6L3 8.5 9 8z"/></svg><span>06. 2Z Level</span></div>
+              <p class="layer-card-desc">Mentoria avançada — documentação do método, configuração da Curseduca e rotina da Gestora de Progresso.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/3</span></div>
+            </div>
+          </a>
+
+          <a class="layer-card" data-page="layer-esteira">
+            <div class="layer-card-cover"><span class="layer-card-title">Esteira</span></div>
+            <div class="layer-card-body">
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span>07. Esteira &amp; Funis</span></div>
+              <p class="layer-card-desc">Como os três produtos se encadeiam — comparativo de ofertas e conexão dos funis.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/2</span></div>
             </div>
           </a>
 
           <a class="layer-card" data-page="layer-venda">
             <div class="layer-card-cover"><span class="layer-card-title">Vendas</span></div>
             <div class="layer-card-body">
-              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h2l3 12h11l3-8H7"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span>05. Vendas</span></div>
-              <p class="layer-card-desc">Branding, funil, canais e lançamento. Marketing e venda da esteira.</p>
-              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/3</span></div>
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h2l3 12h11l3-8H7"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span>08. Vendas</span></div>
+              <p class="layer-card-desc">Branding, funil, lançamento e peças de campanha. Marketing e venda da esteira.</p>
+              <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/6</span></div>
             </div>
           </a>
 
           <a class="layer-card" data-page="layer-projeto">
             <div class="layer-card-cover"><span class="layer-card-title">O Projeto</span></div>
             <div class="layer-card-body">
-              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>06. O Projeto</span></div>
+              <div class="layer-card-num-wrap"><svg class="layer-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>09. O Projeto</span></div>
               <p class="layer-card-desc">Painel de progresso e debriefing de toda a implementação.</p>
               <div class="layer-card-progress"><div class="progress-bar-wrap"><div class="progress-bar-fill empty" style="width:0%"></div></div><span class="progress-count">0/2</span></div>
             </div>
@@ -3683,20 +3764,93 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       </div>
 
 
-      <!-- LAYER · PRODUTO -->
-      <div class="page" id="page-layer-produto">
-        <div class="breadcrumb">Consultoria Rafaella Mazzei · Camada 04</div>
+      <!-- LAYER · IMERSÃO (Tópico 04) -->
+      <div class="page" id="page-layer-imersao">
+        <div class="breadcrumb">Consultoria Rafaella Mazzei · Tópico 04</div>
         <div class="layer-hero">
-          <div class="layer-hero-num">Camada 04 · Esteira</div>
-          <h1 class="layer-hero-title">Esteira de Produtos</h1>
-          <p class="layer-hero-frase">Três produtos. Uma jornada. Cada degrau intensifica desejo pelo próximo.</p>
-          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/4 validados pela Rafa</span></div>
+          <div class="layer-hero-num">Tópico 04 · Esteira de Produtos</div>
+          <h1 class="layer-hero-title">Imersão</h1>
+          <p class="layer-hero-frase">Porta de entrada paga da esteira — workshop ao vivo que aquece, qualifica e abre o pitch para o Sell-z.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/2 validados pela Rafa</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Resumo do tópico</div>
+          <h2>O primeiro degrau da esteira</h2>
+          <p class="section-desc">A Imersão substitui o evento gratuito tradicional por um workshop pago de baixo ticket. Filtra curioso, qualifica interesse, amortiza o custo de captação e prepara o lead para o Sell-z. Produto ainda em definição — conteúdo será detalhado conforme a Rafa fechar o formato.</p>
+
+          <h4>Páginas deste tópico</h4>
+          <ul>
+            <li><strong>Visão geral</strong> · função no funil, tickets e estrutura <span class="tag draft">rascunho</span></li>
+            <li><strong>Configuração &amp; Ações</strong> · o que a Rafa precisa configurar e decidir <span class="tag pending">a desenvolver</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- LAYER · SELL-Z (Tópico 05) -->
+      <div class="page" id="page-layer-sellz">
+        <div class="breadcrumb">Consultoria Rafaella Mazzei · Tópico 05</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Tópico 05 · Esteira de Produtos</div>
+          <h1 class="layer-hero-title">Sell-z</h1>
+          <p class="layer-hero-frase">Produto intermediário — cohort de implementação e aceleração que coloca o processo comercial do empresário rodando.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/2 validados pela Rafa</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Resumo do tópico</div>
+          <h2>O degrau intermediário da esteira</h2>
+          <p class="section-desc">O Sell-z é o programa de implementação que leva o empresário em estabilização (R$10k–35k/mês) a sair do amadorismo com processo comercial rodando. Cobre as etapas intermediárias do método e faz seeding para o 2Z Level. Produto ainda em definição — conteúdo será detalhado conforme a Rafa fechar o formato.</p>
+
+          <h4>Páginas deste tópico</h4>
+          <ul>
+            <li><strong>Visão geral</strong> · para quem é, etapas do método, formato <span class="tag draft">rascunho</span></li>
+            <li><strong>Configuração &amp; Ações</strong> · o que a Rafa precisa configurar e decidir <span class="tag pending">a desenvolver</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- LAYER · 2Z LEVEL (Tópico 06) -->
+      <div class="page" id="page-layer-2zlevel">
+        <div class="breadcrumb">Consultoria Rafaella Mazzei · Tópico 06</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Tópico 06 · Esteira de Produtos</div>
+          <h1 class="layer-hero-title">2Z Level</h1>
+          <p class="layer-hero-frase">Mentoria avançada — o topo da esteira. Documentação do método, configuração da plataforma e rotina operacional da Gestora de Progresso.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/3 validados pela Rafa</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">DNA · Resumo do tópico</div>
+          <h2>O produto mais completo da esteira</h2>
+          <p class="section-desc">O 2Z Level é a mentoria avançada para o empresário em escala (R$20k–150k/mês). É o produto mais maduro — método documentado, 7 trilhas, encontros recorrentes e acompanhamento contínuo. Este tópico reúne a documentação fechada do produto e as páginas de ação para a Rafa colocar a operação em pé.</p>
+
+          <h4>Páginas deste tópico</h4>
+          <ul>
+            <li><strong>Documentação do produto</strong> · arquitetura, 7 trilhas, encontros e oferta — documentação fechada <span class="tag validated tag-validated">documentação</span></li>
+            <li><strong>Configuração da Curseduca</strong> · checklist de plataforma e estrutura de módulos <span class="tag draft">ação da Rafa</span></li>
+            <li><strong>Rotina da Gestora de Progresso</strong> · rotina operacional por cadência <span class="tag draft">ação da Rafa</span></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- LAYER · ESTEIRA & FUNIS (Tópico 07) -->
+      <div class="page" id="page-layer-esteira">
+        <div class="breadcrumb">Consultoria Rafaella Mazzei · Tópico 07</div>
+        <div class="layer-hero">
+          <div class="layer-hero-num">Tópico 07 · Esteira de Produtos</div>
+          <h1 class="layer-hero-title">Esteira &amp; Funis</h1>
+          <p class="layer-hero-frase">Três produtos. Uma jornada. Cada degrau intensifica o desejo pelo próximo — e os funis conectam um ao outro.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/2 validados pela Rafa</span></div>
         </div>
 
         <div class="section">
           <div class="section-label">DNA · Estratégia da esteira</div>
           <h2>Três degraus, uma jornada</h2>
-          <p class="section-desc">Imersão capta + qualifica · Sell-z entrega o programa de implementação e aceleração (etapas Intermediárias do método) · 2Z Level é mentoria avançada (etapas Avançadas do método).</p>
+          <p class="section-desc">Imersão capta + qualifica · Sell-z entrega o programa de implementação e aceleração (etapas Intermediárias do método) · 2Z Level é a mentoria avançada (etapas Avançadas do método).</p>
 
           <div class="produto-grid">
             <a class="produto-card" data-page="produto-imersao">
@@ -3732,11 +3886,10 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <li><strong>Bônus / Sob demanda</strong> · alguns conteúdos cruzam (Setup de Posicionamento e Métodos de Captura)</li>
           </ul>
 
-          <h4>Status nomenclatura</h4>
+          <h4>Páginas deste tópico</h4>
           <ul>
-            <li><strong>Imersão</strong> · nome em validação · naming a definir até 30/04</li>
-            <li><strong>Sell-z</strong> · nome em validação</li>
-            <li><strong>2Z Level</strong> · selo "2Z Level" usado em comunicação · a confirmar com a Rafa</li>
+            <li><strong>Comparativo de Ofertas</strong> · Sell-z × 2Z Level lado a lado + indicadores de prontidão <span class="tag draft">rascunho</span></li>
+            <li><strong>Conexão dos funis</strong> · diagrama de como Imersão → Sell-z → 2Z Level se encadeiam <span class="tag draft">rascunho</span></li>
           </ul>
         </div>
       </div>
@@ -3744,7 +3897,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 
       <!-- PRODUTO · IMERSÃO -->
       <div class="page" id="page-produto-imersao">
-        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="breadcrumb">Tópico 04 · Imersão</div>
         <div class="produto-hero">
           <div class="produto-hero-meta"><span class="produto-card-formato">Captação · Workshop pago</span><span class="produto-card-status dev">em dev</span></div>
           <h1 class="produto-hero-title">Imersão ao vivo</h1>
@@ -3782,9 +3935,46 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       </div>
 
 
+      <!-- IMERSÃO · CONFIGURAÇÃO & AÇÕES -->
+      <div class="page" id="page-imersao-config">
+        <div class="breadcrumb">Tópico 04 · Imersão</div>
+        <div class="page-head">
+          <span class="tipo-pagina acao">Ação da Rafa</span>
+          <h1 class="page-title">Configuração &amp; Ações <em>— Imersão</em></h1>
+          <p class="page-lead">O que precisa ser configurado e decidido para colocar a Imersão de pé. Não é documentação fechada — é uma <em>lista de ações</em> que se preenche conforme o produto for definido.</p>
+          <div class="exercise-meta"><span class="tag pending">a desenvolver</span><span>Produto em definição</span></div>
+        </div>
+
+        <div class="acao-banner">
+          <strong>Página de ação</strong>
+          <p>Esta página orienta a operação. As decisões de formato, plataforma e cronograma da Imersão dependem da Rafa — conteúdo a desenvolver assim que o produto estiver fechado.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em definição</div>
+          <h2>Conteúdo a desenvolver</h2>
+          <p class="section-desc">A Imersão ainda está em definição de formato. Esta seção será preenchida com o checklist de configuração (plataforma de inscrição, checkout, ambiente do evento ao vivo, sequência de lembretes, materiais do VIP) assim que a Rafa fechar a estrutura.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Conteúdo a desenvolver</strong> — produto em definição. Aguarda decisão de formato da Rafa.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+
+          <h4>Decisões pendentes que destravam esta página</h4>
+          <ul>
+            <li>Formato definitivo do evento ao vivo (duração, plataforma de transmissão)</li>
+            <li>Plataforma de inscrição e checkout (Standard + VIP)</li>
+            <li>Estrutura da oferta VIP — o que entra além do Standard</li>
+            <li>Cronograma de captação e sequência de lembretes pré-evento</li>
+            <li>Orçamento e estratégia de tráfego</li>
+          </ul>
+        </div>
+      </div>
+
+
       <!-- PRODUTO · SELL-Z -->
       <div class="page" id="page-produto-sellz">
-        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="breadcrumb">Tópico 05 · Sell-z</div>
         <div class="produto-hero">
           <div class="produto-hero-meta"><span class="produto-card-formato">Intermediário · Implementação e Aceleração</span><span class="produto-card-status dev">em dev</span></div>
           <h1 class="produto-hero-title">Sell-z</h1>
@@ -3851,9 +4041,47 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       </div>
 
 
+      <!-- SELL-Z · CONFIGURAÇÃO & AÇÕES -->
+      <div class="page" id="page-sellz-config">
+        <div class="breadcrumb">Tópico 05 · Sell-z</div>
+        <div class="page-head">
+          <span class="tipo-pagina acao">Ação da Rafa</span>
+          <h1 class="page-title">Configuração &amp; Ações <em>— Sell-z</em></h1>
+          <p class="page-lead">O que precisa ser configurado e decidido para colocar o Sell-z de pé. Não é documentação fechada — é uma <em>lista de ações</em> que se preenche conforme o produto for definido.</p>
+          <div class="exercise-meta"><span class="tag pending">a desenvolver</span><span>Produto em definição</span></div>
+        </div>
+
+        <div class="acao-banner">
+          <strong>Página de ação</strong>
+          <p>Esta página orienta a operação. As decisões de formato, plataforma e cronograma do Sell-z dependem da Rafa — conteúdo a desenvolver assim que o produto estiver fechado.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em definição</div>
+          <h2>Conteúdo a desenvolver</h2>
+          <p class="section-desc">O Sell-z ainda está em definição de formato e ticket. Esta seção será preenchida com o checklist de configuração (plataforma do cohort, área de materiais, calendário de encontros, suporte de IA, mecânica de seeding para o 2Z Level) assim que a Rafa fechar a estrutura.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Conteúdo a desenvolver</strong> — produto em definição. Aguarda decisão de formato e ticket da Rafa.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+
+          <h4>Decisões pendentes que destravam esta página</h4>
+          <ul>
+            <li>Ticket definitivo da 1ª turma e política de parcelamento</li>
+            <li>Número de encontros, dia da semana e duração do cohort</li>
+            <li>Plataforma de hospedagem dos materiais e gravações</li>
+            <li>Escopo do suporte técnico de IA na implementação</li>
+            <li>Mecânica e momento do pitch de seeding para o 2Z Level</li>
+          </ul>
+        </div>
+      </div>
+
+
       <!-- PRODUTO · 2Z Level -->
       <div class="page" id="page-produto-2za">
-        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="breadcrumb">Tópico 06 · 2Z Level</div>
+        <span class="tipo-pagina doc">Documentação</span>
         <div class="produto-hero">
           <div class="produto-hero-meta"><span class="produto-card-formato">Avançado · Mentoria</span><span class="produto-card-status ativo">documentação v2.0</span></div>
           <h1 class="produto-hero-title">2Z Level</h1>
@@ -4274,10 +4502,177 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       </div>
 
 
+      <!-- 2Z LEVEL · CONFIGURAÇÃO DA CURSEDUCA -->
+      <div class="page" id="page-2zlevel-curseduca">
+        <div class="breadcrumb">Tópico 06 · 2Z Level</div>
+        <div class="page-head">
+          <span class="tipo-pagina acao">Ação da Rafa</span>
+          <h1 class="page-title">Configuração da <em>Curseduca</em></h1>
+          <p class="page-lead">O que a Rafa precisa configurar na <strong>Curseduca</strong> para o 2Z Level ficar pronto para receber alunos. Esta página é um <em>roteiro de configuração</em> — não documentação do método. A documentação fechada do produto está em <em>Documentação do produto</em>.</p>
+          <div class="exercise-meta"><span class="tag draft">ação da Rafa</span><span>Roteiro de configuração de plataforma</span></div>
+        </div>
+
+        <div class="acao-banner">
+          <strong>Página de ação · não é documentação</strong>
+          <p>Os itens abaixo são tarefas de configuração na plataforma. Conforme a Rafa for montando a Curseduca, marque cada item. A estrutura de módulos é uma sugestão de partida — pode ser ajustada.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Estrutura sugerida</div>
+          <h2>Como organizar a Curseduca do 2Z Level</h2>
+          <p class="section-desc">A Curseduca é a área de membros do 2Z Level — onde moram as aulas gravadas, as gravações dos encontros, a biblioteca de materiais e a comunidade. Sugestão: um módulo por trilha (7 trilhas) + módulos de encontros + biblioteca + comunidade.</p>
+
+          <h4>Estrutura de módulos sugerida</h4>
+          <table>
+            <tr><th>Módulo</th><th>Tipo</th><th>O que vai dentro</th></tr>
+            <tr><td><strong>00 · Comece Aqui</strong></td><td>Onboarding</td><td>Boas-vindas, como funciona a mentoria, Diagnóstico 360º, Plano Mestre</td></tr>
+            <tr><td><strong>Trilha 1 · Comercial</strong></td><td>Trilha</td><td>7 aulas gravadas + entregáveis (roteiros, playbooks, templates de CRM)</td></tr>
+            <tr><td><strong>Trilha 2 · Oferta e Produto</strong></td><td>Trilha</td><td>5 aulas gravadas + entregáveis (skill de apresentação, calculadora de precificação)</td></tr>
+            <tr><td><strong>Trilha 3 · Gestão Adm. e Financeira</strong></td><td>Trilha</td><td>6 aulas gravadas + entregáveis (planilhas PF/PJ, fluxo de caixa, contratos)</td></tr>
+            <tr><td><strong>Trilha 4 · Posicionamento</strong></td><td>Trilha</td><td>5 aulas gravadas + entregáveis (matriz de atributos, templates de marca)</td></tr>
+            <tr><td><strong>Trilha 5 · Tração</strong></td><td>Trilha</td><td>9 aulas (Fase 1 + Fase 2 com convidados) + entregáveis (mapa de canais)</td></tr>
+            <tr><td><strong>Trilha 6 · Liderança</strong></td><td>Trilha</td><td>6 aulas gravadas + entregáveis (mapa de funções, roteiros de seleção)</td></tr>
+            <tr><td><strong>Trilha 7 · Mentalidade e Identidade</strong></td><td>Trilha</td><td>4 aulas gravadas + entregáveis (mapa de crenças, diário de decisões)</td></tr>
+            <tr><td><strong>Encontros · A Meza Bellz</strong></td><td>Gravações</td><td>Gravações dos rituais mensais de comunidade + convidados</td></tr>
+            <tr><td><strong>Encontros · Mentorias</strong></td><td>Gravações</td><td>Gravações da Janela do Mentorado (Dia das Mentorias)</td></tr>
+            <tr><td><strong>Encontros · Engenharia Reversa</strong></td><td>Gravações</td><td>Análises mensais de reuniões comerciais gravadas (a partir de ago/2026)</td></tr>
+            <tr><td><strong>Biblioteca de Materiais</strong></td><td>Biblioteca</td><td>Playbooks, planilhas, templates e instrumentos das 7 trilhas num só lugar</td></tr>
+            <tr><td><strong>Comunidade</strong></td><td>Área social</td><td>Link da comunidade WhatsApp, agenda de encontros, avisos</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Checklist de configuração</div>
+          <h2>O que a Rafa precisa fazer na Curseduca</h2>
+          <p class="section-desc">Marque cada item conforme for configurando. Itens dependem do conteúdo gravado — o que ainda não foi produzido fica como espaço reservado no módulo.</p>
+
+          <h4>Estrutura de módulos</h4>
+          <ul class="checklist">
+            <li>Criar o módulo <strong>00 · Comece Aqui</strong> com vídeo de boas-vindas e orientação de uso</li>
+            <li>Criar <strong>um módulo por trilha</strong> — as 7 trilhas, na ordem da estrutura sugerida acima</li>
+            <li>Criar os <strong>3 módulos de encontros</strong> — A Meza Bellz, Mentorias e Engenharia Reversa</li>
+            <li>Criar o módulo <strong>Biblioteca de Materiais</strong> e o módulo <strong>Comunidade</strong></li>
+          </ul>
+
+          <h4>Aulas gravadas das trilhas</h4>
+          <ul class="checklist">
+            <li>Em cada módulo de trilha, criar <strong>um espaço por aula</strong> (placeholder) — mesmo antes de gravar</li>
+            <li>Subir as <strong>aulas gravadas</strong> de cada trilha conforme forem produzidas</li>
+            <li>Anexar a cada aula o <strong>entregável correspondente</strong> (playbook, planilha, template, skill)</li>
+            <li>Nomear cada aula com o <strong>nome que vende</strong> (resultado) e usar a descrição para a precisão técnica</li>
+          </ul>
+
+          <h4>Gravações dos encontros</h4>
+          <ul class="checklist">
+            <li>Definir o fluxo de <strong>upload das gravações</strong> de A Meza Bellz após cada encontro</li>
+            <li>Definir o fluxo de <strong>upload das gravações das Mentorias</strong> (Janela do Mentorado)</li>
+            <li>Reservar o espaço da <strong>Engenharia Reversa</strong> — primeiras gravações a partir de ago/2026</li>
+          </ul>
+
+          <h4>Biblioteca e comunidade</h4>
+          <ul class="checklist">
+            <li>Organizar a <strong>biblioteca de materiais e playbooks</strong> por trilha, com busca fácil</li>
+            <li>Configurar a <strong>área da comunidade</strong> com link do WhatsApp e agenda de encontros</li>
+            <li>Definir <strong>regras de acesso</strong> — quem vê o quê (trilhas liberadas pelo Plano Mestre)</li>
+          </ul>
+
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Ação contínua</strong> — a Curseduca se preenche conforme as aulas são gravadas. A Gestora de Progresso apoia o upload e a organização.</div>
+            <span class="validation-check-meta">v1</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 2Z LEVEL · ROTINA DA GESTORA DE PROGRESSO -->
+      <div class="page" id="page-2zlevel-rotina-gp">
+        <div class="breadcrumb">Tópico 06 · 2Z Level</div>
+        <div class="page-head">
+          <span class="tipo-pagina acao">Ação da Rafa</span>
+          <h1 class="page-title">Rotina da <em>Gestora de Progresso</em></h1>
+          <p class="page-lead">A rotina operacional da Gestora de Progresso do 2Z Level, organizada por <em>cadência</em> — o que ela faz diariamente, semanalmente, mensalmente e sob demanda. Orientação operacional para a Rafa e a equipe.</p>
+          <div class="exercise-meta"><span class="tag draft">ação da Rafa</span><span>Orientação operacional</span><span>Início do cargo: 25/05/2026</span></div>
+        </div>
+
+        <div class="acao-banner">
+          <strong>Página de ação · orientação operacional</strong>
+          <p>A Gestora de Progresso é o ponto de contato constante do mentorado. Não faz parte do método — é parte da entrega da mentoria. As 19 funções do cargo estão aqui distribuídas por cadência para virar rotina de trabalho.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Rotina por cadência</div>
+          <h2>O que a Gestora faz e quando</h2>
+          <p class="section-desc">Derivado das 19 funções do cargo (citadas pela Rafa + mapeadas pela arquitetura da mentoria). A coluna de cadência transforma a lista de funções numa rotina de trabalho previsível.</p>
+
+          <table>
+            <tr><th>Cadência</th><th>O que faz</th></tr>
+            <tr>
+              <td><strong>Diário</strong></td>
+              <td>
+                Monitorar o Notion-mãe de gestão de mentorados (engajamento e atividade) ·
+                responder dúvidas de plataforma e acesso · liberar acessos pendentes ·
+                acompanhar a comunidade no WhatsApp (moderar e organizar) ·
+                identificar e acionar aluno sumido logo nos primeiros sinais.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Semanal</strong></td>
+              <td>
+                Enviar lembretes dos encontros da semana (A Meza Bellz, Mentorias, Engenharia Reversa) ·
+                fazer a triagem de pré-requisitos dos encontros — confirmar que cada aluno cumpriu o que precisa antes de um 1:1 ·
+                fazer o gatekeeping da Engenharia Reversa (oferta definida antes de entrar) ·
+                triagem da Janela do Mentorado (quem agenda, em que ordem) ·
+                consolidar a leitura de KPIs das trilhas e sinalizar à Rafa o que pede atenção.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Mensal</strong></td>
+              <td>
+                Organizar a agenda do mês de encontros e mentorias ·
+                revisar o engajamento de cada aluno e o avanço no Plano Mestre ·
+                coletar depoimentos e win stories dos mentorados ·
+                sinalizar à Rafa alunos que se aproximam do fim de ciclo (renovação / A Travessia) ·
+                acompanhar a aplicação dos KPIs das trilhas mês a mês.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Sob demanda</strong></td>
+              <td>
+                Conduzir o onboarding de cada aluno novo ·
+                agendar planejamentos e acompanhamentos (Plano Mestre, Revisão de Rota, A Travessia) ·
+                garantir o Diagnóstico 360º preenchido antes do Plano Mestre ·
+                encaminhar dúvidas metodológicas ao material certo ·
+                identificar marcos e acionar o reconhecimento do sino ·
+                gerir lista de espera · cuidar de inscrições e onboarding do evento presencial ·
+                apoiar pontualmente a operação do lançamento Sell-z (leads, inscrições).
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Limites do cargo</div>
+          <h2>O que a Gestora de Progresso NÃO faz</h2>
+          <ul class="bullet-list cross">
+            <li><strong>Financeiro</strong> — a Rafa não delega; cobrança e contas seguem com ela</li>
+            <li><strong>Dar a mentoria / o método em si</strong> — é da Rafa; a Gestora encaminha a dúvida ao material certo</li>
+            <li><strong>Decisões estratégicas de produto e ciclo</strong> — a Gestora sinaliza, a Rafa decide</li>
+          </ul>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Treinamento pendente</strong> — a Maiara dará o treinamento da Gestora + Rafa quando o produto estiver pronto (operar o Notion-mãe, fluxo de onboarding, plataformas, KPIs).</div>
+            <span class="validation-check-meta">v1</span>
+          </div>
+        </div>
+      </div>
+
+
       <!-- EX · PRODUTO · COMPARATIVO -->
       <div class="page" id="page-ex-produto-comparativo">
-        <div class="breadcrumb">Camada 04 · Esteira</div>
+        <div class="breadcrumb">Tópico 07 · Esteira &amp; Funis</div>
         <div class="page-head">
+          <span class="tipo-pagina doc">Documentação</span>
           <h1 class="page-title">Comparativo de ofertas <em>— Sell-z × 2Z Level</em></h1>
           <p class="page-lead">Os dois produtos lado a lado e os <em>indicadores de prontidão</em> — quando um lead pode entrar direto na mentoria sem passar pelo Sell-z.</p>
           <div class="exercise-meta"><span class="tag draft">v1 · aguarda validação Rafa</span></div>
@@ -4346,14 +4741,67 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       </div>
 
 
+      <!-- ESTEIRA · CONEXÃO DOS FUNIS -->
+      <div class="page" id="page-esteira-funis">
+        <div class="breadcrumb">Tópico 07 · Esteira &amp; Funis</div>
+        <div class="page-head">
+          <span class="tipo-pagina doc">Documentação</span>
+          <h1 class="page-title">Conexão dos <em>funis</em></h1>
+          <p class="page-lead">Como os três produtos se encadeiam: cada um tem seu funil, mas a saída de um alimenta a entrada do próximo. <em>Entrada paga → intermediário → mentoria.</em></p>
+          <div class="exercise-meta"><span class="tag draft">rascunho</span><span>Aguarda validação Rafa</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">O encadeamento</div>
+          <h2>Imersão → Sell-z → 2Z Level</h2>
+          <p class="section-desc">A esteira é uma escada: cada degrau entrega resultado completo e, ao mesmo tempo, faz o aluno desejar o próximo. O lead pode entrar por qualquer degrau, mas o caminho desenhado sobe da entrada paga à mentoria.</p>
+
+          <div class="funnel-flow">
+            <div class="funnel-step s1">
+              <div class="funnel-step-num">Degrau 01 · Entrada paga</div>
+              <h3 class="funnel-step-title">Imersão</h3>
+              <p>Workshop ao vivo de baixo ticket. Capta, aquece e qualifica o lead frio. No fim do evento, pitch para o Sell-z.</p>
+              <span class="funnel-ticket">R$ 39 Standard · R$ 219–249 VIP</span>
+            </div>
+            <div class="funnel-arrow">→</div>
+            <div class="funnel-step s2">
+              <div class="funnel-step-num">Degrau 02 · Intermediário</div>
+              <h3 class="funnel-step-title">Sell-z</h3>
+              <p>Cohort de implementação (~2 meses). O empresário sai do amadorismo com processo comercial rodando. Seeding contínuo para o 2Z Level.</p>
+              <span class="funnel-ticket">R$ 1.000–3.000 · 1ª turma</span>
+            </div>
+            <div class="funnel-arrow">→</div>
+            <div class="funnel-step s3">
+              <div class="funnel-step-num">Degrau 03 · Mentoria</div>
+              <h3 class="funnel-step-title">2Z Level</h3>
+              <p>Mentoria avançada, acompanhamento contínuo de 12 meses. Entrada por aplicação + entrevista — vinda do Sell-z ou direta.</p>
+              <span class="funnel-ticket">R$ 20.400–22.800 / ano</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Lógica de transição</div>
+          <h2>Como um funil alimenta o próximo</h2>
+          <table>
+            <tr><th>Transição</th><th>Mecanismo</th><th>Quem passa</th></tr>
+            <tr><td><strong>Imersão → Sell-z</strong></td><td>Pitch no fim do workshop ao vivo · oferta direta de compra</td><td>Quem comprou a Imersão e quer implementar com método</td></tr>
+            <tr><td><strong>Sell-z → 2Z Level</strong></td><td>Seeding ao longo do cohort + pitch no encerramento · aplicação + entrevista</td><td>Quem terminou o Sell-z, estabilizou e quer escalar com acompanhamento</td></tr>
+            <tr><td><strong>Entrada direta → 2Z Level</strong></td><td>Aplicação + entrevista 1:1 · sem passar pela esteira</td><td>Lead que já tem base e faturamento estável na faixa R$20k–150k/mês</td></tr>
+          </table>
+          <p style="font-style:italic;color:var(--text-3);font-size:13px">Os critérios de quem entra direto no 2Z Level estão detalhados na página <em>Comparativo de Ofertas</em>.</p>
+        </div>
+      </div>
+
+
       <!-- LAYER · VENDAS -->
       <div class="page" id="page-layer-venda">
-        <div class="breadcrumb">Consultoria Rafaella Mazzei · Camada 05</div>
+        <div class="breadcrumb">Consultoria Rafaella Mazzei · Tópico 08</div>
         <div class="layer-hero">
-          <div class="layer-hero-num">Camada 05 · Marketing</div>
+          <div class="layer-hero-num">Tópico 08 · Marketing</div>
           <h1 class="layer-hero-title">Vendas</h1>
-          <p class="layer-hero-frase">Branding, funil, canais e lançamento. Marketing e venda da esteira.</p>
-          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/3 validados</span></div>
+          <p class="layer-hero-frase">Branding, funil, canais, lançamento e peças de campanha. Marketing e venda da esteira.</p>
+          <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/6 validados</span></div>
         </div>
 
         <div class="section">
@@ -4368,11 +4816,14 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
             <tr><td><strong>Logo final</strong></td><td>19/06/2026</td><td><span class="tag pending">aguardando agência</span></td></tr>
           </table>
 
-          <h4>Outputs dessa camada</h4>
+          <h4>Páginas deste tópico</h4>
           <ul>
             <li><strong>Branding</strong> · paleta · tipografia · tom <span class="tag pending">pendente</span></li>
             <li><strong>Funil &amp; Canais</strong> · arquitetura comercial <span class="tag pending">pendente</span></li>
-            <li><strong>Lançamento</strong> · cronograma + emails + criativos <span class="tag pending">pendente</span></li>
+            <li><strong>Lançamento</strong> · briefing da campanha paga <span class="tag draft">briefing v0.1</span></li>
+            <li><strong>Página de captura</strong> · peça de campanha <span class="tag pending">pendente</span></li>
+            <li><strong>Sequência de e-mails</strong> · peça de campanha <span class="tag pending">pendente</span></li>
+            <li><strong>Criativos</strong> · peças de campanha <span class="tag pending">pendente</span></li>
           </ul>
         </div>
       </div>
@@ -4380,7 +4831,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 
       <!-- EX · VENDA · BRANDING -->
       <div class="page" id="page-ex-venda-branding">
-        <div class="breadcrumb">Camada 05 · Vendas</div>
+        <div class="breadcrumb">Tópico 08 · Vendas</div>
         <div class="page-head">
           <h1 class="page-title">Branding <em>— paleta, tipografia, tom</em></h1>
           <p class="page-lead">Identidade visual e verbal da Mazzei pós-rebranding. Anteprojeto previsto para 07/05/2026.</p>
@@ -4402,7 +4853,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 
       <!-- EX · VENDA · FUNIL -->
       <div class="page" id="page-ex-venda-funil">
-        <div class="breadcrumb">Camada 05 · Vendas</div>
+        <div class="breadcrumb">Tópico 08 · Vendas</div>
         <div class="page-head">
           <h1 class="page-title">Funil &amp; canais <em>— arquitetura comercial</em></h1>
           <p class="page-lead">Funil completo da esteira: captação, qualificação, conversão e onboarding por canal.</p>
@@ -4424,7 +4875,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 
       <!-- EX · VENDA · LANÇAMENTO -->
       <div class="page" id="page-ex-venda-lancamento">
-        <div class="breadcrumb">Camada 05 · Vendas</div>
+        <div class="breadcrumb">Tópico 08 · Vendas</div>
         <div class="page-head">
           <h1 class="page-title">Lançamento <em>— briefing da campanha paga (workshop 21–22/07)</em></h1>
           <p class="page-lead">Briefing completo da campanha de lançamento pago do <strong>Workshop + Sell-Z</strong>. Squad <strong>MSE</strong> assume entregáveis criativos e estratégicos · Pedro assume implementação técnica. Briefing criado em 19/05/2026.</p>
@@ -4662,11 +5113,77 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
       </div>
 
 
+      <!-- EX · VENDA · PÁGINA DE CAPTURA -->
+      <div class="page" id="page-ex-venda-captura">
+        <div class="breadcrumb">Tópico 08 · Vendas</div>
+        <div class="page-head">
+          <h1 class="page-title">Página de captura <em>— peça de campanha</em></h1>
+          <p class="page-lead">Landing page de captura da campanha de lançamento. Peça produzida pelo squad <strong>MSE</strong> a partir do briefing de lançamento.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em desenvolvimento</div>
+          <h2>Aguardando produção</h2>
+          <p class="section-desc">Esta seção receberá a copy e o layout da página de captura assim que a campanha entrar em produção. Squad <strong>MSE</strong> assume a entrega — base no briefing da página <em>Lançamento</em>.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — peça de campanha · squad MSE assume entrega.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · VENDA · SEQUÊNCIA DE E-MAILS -->
+      <div class="page" id="page-ex-venda-emails">
+        <div class="breadcrumb">Tópico 08 · Vendas</div>
+        <div class="page-head">
+          <h1 class="page-title">Sequência de e-mails <em>— peça de campanha</em></h1>
+          <p class="page-lead">Fluxo de e-mails da campanha de lançamento — aquecimento, captação e carrinho. Peça produzida pelo squad <strong>MSE</strong>.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em desenvolvimento</div>
+          <h2>Aguardando produção</h2>
+          <p class="section-desc">Esta seção receberá a sequência de e-mails da campanha assim que entrar em produção. Squad <strong>MSE</strong> assume a entrega — base no briefing da página <em>Lançamento</em>.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — peça de campanha · squad MSE assume entrega.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- EX · VENDA · CRIATIVOS -->
+      <div class="page" id="page-ex-venda-criativos">
+        <div class="breadcrumb">Tópico 08 · Vendas</div>
+        <div class="page-head">
+          <h1 class="page-title">Criativos <em>— peças de campanha</em></h1>
+          <p class="page-lead">Criativos de tráfego e conteúdo da campanha de lançamento — estáticos, carrosséis e vídeos. Peças produzidas pelo squad <strong>MSE</strong>.</p>
+          <div class="exercise-meta"><span class="tag pending">pendente</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Em desenvolvimento</div>
+          <h2>Aguardando produção</h2>
+          <p class="section-desc">Esta seção receberá os criativos da campanha assim que entrarem em produção. Squad <strong>MSE</strong> assume a entrega — base no briefing da página <em>Lançamento</em>.</p>
+          <div class="validation-check pending">
+            <span class="validation-check-icon">○</span>
+            <div><strong>Pendente</strong> — peças de campanha · squad MSE assume entrega.</div>
+            <span class="validation-check-meta">v0</span>
+          </div>
+        </div>
+      </div>
+
+
       <!-- LAYER · PROJETO -->
       <div class="page" id="page-layer-projeto">
-        <div class="breadcrumb">Consultoria Rafaella Mazzei · Camada 06</div>
+        <div class="breadcrumb">Consultoria Rafaella Mazzei · Tópico 09</div>
         <div class="layer-hero">
-          <div class="layer-hero-num">Camada 06 · Gestão</div>
+          <div class="layer-hero-num">Tópico 09 · Gestão</div>
           <h1 class="layer-hero-title">O Projeto</h1>
           <p class="layer-hero-frase">Painel de progresso e debriefing de toda a implementação.</p>
           <div class="layer-hero-progress"><span>Progresso</span><div class="layer-hero-progress-bar"><div class="layer-hero-progress-fill" style="width:0%"></div></div><span>0/2 validados</span></div>
@@ -4735,7 +5252,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 
       <!-- EX · PROJETO · STATUS -->
       <div class="page" id="page-ex-projeto-status">
-        <div class="breadcrumb">Camada 06 · O Projeto</div>
+        <div class="breadcrumb">Tópico 09 · O Projeto</div>
         <div class="page-head">
           <h1 class="page-title">Painel de progresso <em>— status por camada e seção</em></h1>
           <p class="page-lead">Visão consolidada de todas as seções do dashboard. Conteúdo é rascunho de IA — toda a documentação aguarda nova validação da Rafa após o reset estratégico.</p>
@@ -4794,30 +5311,62 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
         </div>
 
         <div class="section">
-          <div class="section-label">Camada 04 · Esteira de Produtos</div>
+          <div class="section-label">Tópico 04 · Imersão</div>
           <h2>Status por seção</h2>
           <table>
             <tr><th>Seção</th><th>Status atual</th><th>Validado em</th><th>Próximo passo</th></tr>
-            <tr><td>Imersão ao vivo</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Naming final + estrutura</td></tr>
-            <tr><td>Sell-z (Intermediário)</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Validar mapeamento etapas × produto</td></tr>
-            <tr><td>2Z Level (Avançado)</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Validar mapeamento etapas × produto</td></tr>
-            <tr><td>Comparativo de Ofertas</td><td><span class="tag pending">aguarda externo</span></td><td>—</td><td>Aguarda preços e formatos finais</td></tr>
+            <tr><td>Visão geral</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Naming final + estrutura</td></tr>
+            <tr><td>Configuração &amp; Ações</td><td><span class="tag pending">a desenvolver</span></td><td>—</td><td>Aguarda definição de formato pela Rafa</td></tr>
           </table>
         </div>
 
         <div class="section">
-          <div class="section-label">Camada 05 · Vendas</div>
+          <div class="section-label">Tópico 05 · Sell-z</div>
+          <h2>Status por seção</h2>
+          <table>
+            <tr><th>Seção</th><th>Status atual</th><th>Validado em</th><th>Próximo passo</th></tr>
+            <tr><td>Visão geral</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Validar mapeamento etapas × produto</td></tr>
+            <tr><td>Configuração &amp; Ações</td><td><span class="tag pending">a desenvolver</span></td><td>—</td><td>Aguarda definição de formato e ticket</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Tópico 06 · 2Z Level</div>
+          <h2>Status por seção</h2>
+          <table>
+            <tr><th>Seção</th><th>Status atual</th><th>Validado em</th><th>Próximo passo</th></tr>
+            <tr><td>Documentação do produto</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Validação final da Rafa</td></tr>
+            <tr><td>Configuração da Curseduca</td><td><span class="tag draft">ação da Rafa</span></td><td>—</td><td>Configurar módulos conforme aulas gravadas</td></tr>
+            <tr><td>Rotina da Gestora de Progresso</td><td><span class="tag draft">ação da Rafa</span></td><td>—</td><td>Validar rotina + treinamento da Gestora</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Tópico 07 · Esteira &amp; Funis</div>
+          <h2>Status por seção</h2>
+          <table>
+            <tr><th>Seção</th><th>Status atual</th><th>Validado em</th><th>Próximo passo</th></tr>
+            <tr><td>Comparativo de Ofertas</td><td><span class="tag pending">aguarda externo</span></td><td>—</td><td>Aguarda preços e formatos finais</td></tr>
+            <tr><td>Conexão dos funis</td><td><span class="tag draft">rascunho</span></td><td>—</td><td>Validar mecânica de transição com a Rafa</td></tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Tópico 08 · Vendas</div>
           <h2>Status por seção</h2>
           <table>
             <tr><th>Seção</th><th>Status atual</th><th>Validado em</th><th>Próximo passo</th></tr>
             <tr><td>Branding</td><td><span class="tag pending">aguarda externo</span></td><td>—</td><td>Anteprojeto agência · 07/05/2026</td></tr>
             <tr><td>Funil &amp; Canais</td><td><span class="tag pending">aguarda externo</span></td><td>—</td><td>Squad MSE assume após branding</td></tr>
-            <tr><td>Lançamento</td><td><span class="tag pending">aguarda externo</span></td><td>—</td><td>Squad MSE assume após produtos validados</td></tr>
+            <tr><td>Lançamento</td><td><span class="tag draft">briefing v0.1</span></td><td>—</td><td>Validar briefing com Rafa + Pedro</td></tr>
+            <tr><td>Página de captura</td><td><span class="tag pending">pendente</span></td><td>—</td><td>Squad MSE produz a partir do briefing</td></tr>
+            <tr><td>Sequência de e-mails</td><td><span class="tag pending">pendente</span></td><td>—</td><td>Squad MSE produz a partir do briefing</td></tr>
+            <tr><td>Criativos</td><td><span class="tag pending">pendente</span></td><td>—</td><td>Squad MSE produz a partir do briefing</td></tr>
           </table>
         </div>
 
         <div class="section">
-          <div class="section-label">Camada 06 · O Projeto</div>
+          <div class="section-label">Tópico 09 · O Projeto</div>
           <h2>Status por seção</h2>
           <table>
             <tr><th>Seção</th><th>Status atual</th><th>Validado em</th><th>Próximo passo</th></tr>
@@ -4841,7 +5390,7 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 
       <!-- EX · PROJETO · DEBRIEFING -->
       <div class="page" id="page-ex-projeto-debriefing">
-        <div class="breadcrumb">Camada 06 · O Projeto</div>
+        <div class="breadcrumb">Tópico 09 · O Projeto</div>
         <div class="page-head">
           <h1 class="page-title">Debriefing <em>— retrospectiva pós-implementação</em></h1>
           <p class="page-lead">Lições aprendidas, decisões críticas, ajustes e recomendações finais ao final da consultoria.</p>
@@ -4870,9 +5419,23 @@ blockquote.tese{font-family:var(--font-serif);font-style:italic;font-size:22px;l
 const navLinks = document.querySelectorAll('[data-page]');
 const pages = document.querySelectorAll('.page');
 
+// Mapa explícito de páginas → grupo da sidebar (cobre os tópicos novos 04–07)
+const pageGroupMap = {
+  'produto-imersao': 'imersao',
+  'imersao-config': 'imersao',
+  'produto-sellz': 'sellz',
+  'sellz-config': 'sellz',
+  'produto-2za': '2zlevel',
+  '2zlevel-curseduca': '2zlevel',
+  '2zlevel-rotina-gp': '2zlevel',
+  'ex-produto-comparativo': 'esteira',
+  'esteira-funis': 'esteira'
+};
+
 function groupForId(id) {
   if (!id) return null;
   if (id.startsWith('layer-')) return id.replace('layer-', '');
+  if (pageGroupMap[id]) return pageGroupMap[id];
   if (id.startsWith('ex-')) return id.replace('ex-', '').split('-')[0];
   if (id.startsWith('produto-')) return 'produto';
   if (id.startsWith('framework-')) return 'metodo';
