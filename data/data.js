@@ -418,7 +418,7 @@ const FRAMEWORKS = [
     o_que_temos:[
       'Conceito nomeado e estruturado em 3 etapas (Comparado, Justificado, Escolhido)',
       'Caso de aplicação documentado: anteprojeto Bellz House',
-      'Validado em 27 hot seats de posicionamento',
+      'Validado em 27 mentorias de posicionamento',
       'Linha de bio do Instagram já comunica ("De comparado a escolhido")'
     ],
     o_que_falta:[
@@ -428,7 +428,7 @@ const FRAMEWORKS = [
       'Roteiro de transição (gatilhos de movimento entre cadeiras)'
     ],
     fonte_primaria:'Gravações de mentoria existentes (a confirmar com Rafa) OU entrevista 1h',
-    fonte_secundaria:'Anteprojeto Bellz House + 27 hot seats de posicionamento',
+    fonte_secundaria:'Anteprojeto Bellz House + 27 mentorias de posicionamento',
     sessao:'S1 · Posicionamento + Oferta (sessão âncora)',
     duracao_rafa:'1h30 OU 0h se as gravações cobrirem',
     vira_conteudo:[
@@ -447,7 +447,7 @@ const FRAMEWORKS = [
     status:'parcial',
     o_que_e:'Os elementos que toda apresentação comercial precisa ter para comunicar valor antes do preço.',
     o_que_temos:[
-      'Rafa revisa PDF em 1 a cada 4 hot seats (32 ocorrências no histórico de 10 meses)',
+      'Rafa revisa PDF em 1 a cada 4 mentorias (32 ocorrências no histórico de 10 meses)',
       'Hot seat #65 (Maria Luiza), #66 (Priscilla), #115 (Lorena Diniz) — casos reais para análise'
     ],
     o_que_falta:[
@@ -456,7 +456,7 @@ const FRAMEWORKS = [
       'Adaptações por nicho (advocacia, arquitetura, saúde, consultoria)',
       'Skill/IA que aplica essa estrutura'
     ],
-    fonte_primaria:'Gravação de 3 hot seats de revisão de PDF (zero esforço para a Rafa)',
+    fonte_primaria:'Gravação de 3 mentorias de revisão de PDF (zero esforço para a Rafa)',
     fonte_secundaria:'Anteprojeto Bellz House',
     sessao:'S1 · Posicionamento + Oferta · OU S2 · Hot seats gravados',
     duracao_rafa:'0h (gravação) OU 1h (entrevista)',
@@ -555,7 +555,7 @@ const FRAMEWORKS = [
     o_que_e:'O framework central da Rafa de como conduzir uma reunião comercial que termina em fechamento. Reunião única (não duas), com pré-qualificação por formulário antes.',
     o_que_temos:[
       'Estrutura geral capturada na transcrição da Consultoria Presencial (26/05): pré-qualificação por formulário → reunião → diagnóstico mostrando o "o quê" (não o "como") → impacto → apresenta proposta na mesma reunião → bônus + BFI',
-      '38 hot seats com perguntas sobre fechamento (32% do dataset)',
+      '38 mentorias com perguntas sobre fechamento (32% do dataset)',
       'Taxa de conversão de alunos: 60-70% (mercado: 40%) — prova de aplicação',
       'Princípio fixado: "Reunião é inegociável. Quem aceita reunião personalizada é cliente; quem só aceita PDF no WhatsApp não é cliente."'
     ],
@@ -565,10 +565,10 @@ const FRAMEWORKS = [
       'Roteiro de quebra de objeções ao vivo',
       'Adaptação por nicho (B2C vs B2B onde fechamento imediato não funciona)'
     ],
-    fonte_primaria:'Transcrição Consultoria Presencial (26/05) + gravação de 4 hot seats',
-    fonte_secundaria:'38 hot seats do dataset',
+    fonte_primaria:'Transcrição Consultoria Presencial (26/05) + gravação de 4 mentorias',
+    fonte_secundaria:'38 mentorias do dataset',
     sessao:'S1 · Comercial · TEMA ÂNCORA',
-    duracao_rafa:'0h (já gravado) + 4 hot seats',
+    duracao_rafa:'0h (já gravado) + 4 mentorias',
     vira_conteudo:[
       'Aula T1.1 "Da primeira conversa ao pix"',
       'Roteiro de sessão de venda consultiva',
@@ -642,7 +642,7 @@ const FRAMEWORKS = [
     o_que_temos:[
       'Existe aula gravada (precisa renomear: "PDF" não pega bem por causa do acrônimo)',
       'Estrutura geral capturada na transcrição (26/05): formulário antes → reunião → PDF com antecipação de objeções → bônus + BFI',
-      '32 hot seats com revisões reais da Rafa (último 10 meses)',
+      '32 mentorias com revisões reais da Rafa (último 10 meses)',
       'Antes/depois de alunos documentado (link existe)'
     ],
     o_que_falta:[
@@ -651,7 +651,7 @@ const FRAMEWORKS = [
       'Lógica de antecipação de objeção (como ler o formulário e converter em slide)',
       'Skill criadora de apresentação comercial (IA)'
     ],
-    fonte_primaria:'Transcrição Consultoria Presencial (26/05) + revisões reais em hot seats',
+    fonte_primaria:'Transcrição Consultoria Presencial (26/05) + revisões reais em mentorias',
     fonte_secundaria:'Hot seats #65 (Maria Luiza), #66 (Priscilla), #115 (Lorena)',
     sessao:'S1 · Oferta · sub-sessão dedicada (Clínica de Oferta)',
     duracao_rafa:'1h entrevista + análise de 3 PDFs reais',
@@ -660,7 +660,7 @@ const FRAMEWORKS = [
       'Skill criadora de apresentação comercial',
       'Template Canva multi-nicho',
       'Biblioteca de modelos por nicho',
-      '🆕 Clínica de Oferta (separada do Hot Seat)'
+      '🆕 Clínica de Oferta (separada do Mentoria)'
     ]
   },
   {
@@ -920,7 +920,7 @@ const FRAMEWORKS = [
       'Lógica explicitada na transcrição (26/05) — critérios + caso prático (social mídia que cobrava R$ 900, ajustou para R$ 3-5k)',
       'Frase autoral: "Primeiro aumenta valor, depois aumenta preço"',
       'Princípio: "Para pagar, a pessoa tem que pensar: cara, ficou barato"',
-      '19 hot seats de precificação no dataset (16,1%)',
+      '19 mentorias de precificação no dataset (16,1%)',
       'Caso Luciana Ulhoa (#100)'
     ],
     o_que_falta:[
@@ -967,7 +967,7 @@ const FRAMEWORKS = [
     o_que_temos:[],
     o_que_falta:['Fórmula da Rafa','Como aplicar na decisão de delegar','Como aplicar na precificação'],
     fonte_primaria:'Entrevista 30min',
-    fonte_secundaria:'(buscar em hot seats)',
+    fonte_secundaria:'(buscar em mentorias)',
     sessao:'S1 · Oferta',
     duracao_rafa:'30min',
     vira_conteudo:['Calculadora de valor do tempo','Playbook de decisão']
@@ -981,7 +981,7 @@ const FRAMEWORKS = [
     o_que_e:'A primeira virada de "autônomo que recebe" para "empresário que opera CNPJ".',
     o_que_temos:['Caso Luciana #100, #106','Conhecimento tácito da Rafa'],
     o_que_falta:['Método de separação financeira','Identidade — como ensinar a se ver como empresário','Critérios de saúde PF/PJ'],
-    fonte_primaria:'Entrevista 1h OU hot seat gravado',
+    fonte_primaria:'Entrevista 1h OU mentoria gravado',
     fonte_secundaria:'Caso Luciana',
     sessao:'S2 · Financeiro',
     duracao_rafa:'1h ou 0h',
@@ -999,7 +999,7 @@ const FRAMEWORKS = [
     fonte_primaria:'Hot seat gravado (caso real)',
     fonte_secundaria:'Caso Luciana',
     sessao:'S2 · Financeiro',
-    duracao_rafa:'0h se gravar hot seat',
+    duracao_rafa:'0h se gravar mentoria',
     vira_conteudo:['Aula T3.2','Planilha + IA Leitora de Caixa']
   },
   {
@@ -1188,7 +1188,7 @@ const FRAMEWORKS = [
 
   // ============================================================
   // FRAMEWORKS NOVOS · varredura de transcrições (26/05/2026)
-  // Extraídos diretamente das aulas, planejamentos e hot seats
+  // Extraídos diretamente das aulas, planejamentos e mentorias
   // ============================================================
   {
     id:'cinco-regras-objecao',
@@ -1200,7 +1200,7 @@ const FRAMEWORKS = [
     o_que_temos:[
       'Estrutura completa explicada na aula gravada (Transcrições Aulas do Método Mazzei ~linha 754-802)',
       'Tese central confirmada: "Pergunta não é argumentando"',
-      'Aplicação prática documentada em hot seats'
+      'Aplicação prática documentada em mentorias'
     ],
     o_que_falta:[
       'Banco de objeções por nicho (advocacia, arquitetura, saúde, social mídia, consultoria)',
@@ -1208,7 +1208,7 @@ const FRAMEWORKS = [
       'IA simuladora de objeções pra aluno treinar'
     ],
     fonte_primaria:'Transcrições Aulas do Método Mazzei (~linha 754-802) + Engenharia de Vendas PDF',
-    fonte_secundaria:'Hot Seats múltiplos com aplicação ao vivo',
+    fonte_secundaria:'Mentorias múltiplos com aplicação ao vivo',
     sessao:'S2 · Comercial · já temos material',
     duracao_rafa:'0h-30min (Inception consolida)',
     vira_conteudo:[
@@ -1327,7 +1327,7 @@ const FRAMEWORKS = [
     status:'parcial',
     o_que_e:'Estrutura de 3 passos: (1) Reconhecer dor específica, (2) Fazer pergunta reflexiva, (3) Deixar silêncio trabalhar. Substitui o "você precisa de X" pela pergunta que faz cliente concluir sozinho.',
     o_que_temos:[
-      'Caso aplicado documentado (Fran personal · Hot Seat NS 18/03 ~linha 1648-1690)',
+      'Caso aplicado documentado (Fran personal · Mentoria NS 18/03 ~linha 1648-1690)',
       'Tese central: "Quem tenta convencer não convence. Faz pergunta."',
       'Comparação errado vs certo com exemplos'
     ],
@@ -1335,7 +1335,7 @@ const FRAMEWORKS = [
       'Banco de "pergunta empática" por dor de cliente',
       'IA Treinadora de Pergunta'
     ],
-    fonte_primaria:'Hot Seat NS 18/03 (~linha 1648-1690)',
+    fonte_primaria:'Mentoria NS 18/03 (~linha 1648-1690)',
     fonte_secundaria:'Múltiplas aplicações em planejamentos',
     sessao:'S2 · Comercial',
     duracao_rafa:'30min (banco de exemplos)',
@@ -1353,7 +1353,7 @@ const FRAMEWORKS = [
     status:'parcial',
     o_que_e:'Quando aluno fragmenta entrega (vende "planejamento" sem implementação, vende "prévia" sem pacote), está vendendo etapa, não produto. Rafa força: "isso é etapa ou é produto?"',
     o_que_temos:[
-      'Caso Duda (maquiadora de noivas) — vendia prévia separada, mudou e disse 7 NÃOs em 2024 (Hot Seats NS ~linha 610-633)',
+      'Caso Duda (maquiadora de noivas) — vendia prévia separada, mudou e disse 7 NÃOs em 2024 (Mentorias NS ~linha 610-633)',
       'Caso Mari (consultoria) — entregava só planejamento, virou caso de virada',
       'Tese explícita: "Etapa não é produto, então não vai entrar na sua esteira"'
     ],
@@ -1361,7 +1361,7 @@ const FRAMEWORKS = [
       'Critério objetivo de etapa vs produto',
       'IA Diagnosticadora de Esteira'
     ],
-    fonte_primaria:'Hot Seats NEGÓCIO SOBERANO (~linha 610-633)',
+    fonte_primaria:'Mentorias NEGÓCIO SOBERANO (~linha 610-633)',
     fonte_secundaria:'Múltiplos casos em planejamentos',
     sessao:'S1 · Oferta',
     duracao_rafa:'30min',
@@ -1378,7 +1378,7 @@ const FRAMEWORKS = [
     status:'parcial',
     o_que_e:'Ética = o que você faz quando estão olhando. Caráter = o que você faz quando ninguém tá vendo. Aplicado em conduta com cliente: contratos, registro de marca, posicionamento honesto.',
     o_que_temos:[
-      'Caso Mari (registro de marca) documentado (Hot Seats NS ~linha 440-489)',
+      'Caso Mari (registro de marca) documentado (Mentorias NS ~linha 440-489)',
       'Frase autoral consolidada',
       'Aplicação prática em conduta comercial'
     ],
@@ -1386,7 +1386,7 @@ const FRAMEWORKS = [
       'Checklist de conduta empresarial',
       'Casos comparativos'
     ],
-    fonte_primaria:'Hot Seats NEGÓCIO SOBERANO (~linha 440-489)',
+    fonte_primaria:'Mentorias NEGÓCIO SOBERANO (~linha 440-489)',
     fonte_secundaria:'WhatsApp + planejamentos',
     sessao:'S5 · Mentalidade',
     duracao_rafa:'30min',
@@ -1403,7 +1403,7 @@ const FRAMEWORKS = [
     status:'parcial',
     o_que_e:'Quando aluno tem ticket alto mas presença visual de ticket baixo, há gap que sabota a percepção. Reformar cenário não é vaidade — é comunicar autoridade desde o primeiro contato visual.',
     o_que_temos:[
-      'Caso Evelyn (arquiteta) documentado (Hot Seats MAZZEI$TRIA ~linha 532-550)',
+      'Caso Evelyn (arquiteta) documentado (Mentorias MAZZEI$TRIA ~linha 532-550)',
       'Caso Gabi confirmado',
       'Princípio aplicável a stories, fundo de videocall, atelier físico'
     ],
@@ -1411,7 +1411,7 @@ const FRAMEWORKS = [
       'Checklist visual por nicho',
       'Calculadora "ticket × presença atual" → gap'
     ],
-    fonte_primaria:'Hot Seats MAZZEI$TRIA (~linha 532-550)',
+    fonte_primaria:'Mentorias MAZZEI$TRIA (~linha 532-550)',
     fonte_secundaria:'Múltiplos casos em planejamentos',
     sessao:'S4 · Posicionamento',
     duracao_rafa:'30min',
@@ -1454,7 +1454,7 @@ const FRAMEWORKS = [
     status:'parcial',
     o_que_e:'Quando indicação chega (BNI, networking, parceiro), aluno dá link único de qualificação (formulário 2min), não o telefone. Lead preenche, cai no CRM, aluno qualifica antes de marcar reunião.',
     o_que_temos:[
-      'Protocolo documentado (Hot Seat NS 18/03 ~linha 3001-3058)',
+      'Protocolo documentado (Mentoria NS 18/03 ~linha 3001-3058)',
       'Aplicação prática com Lorena (BNI) confirmada',
       'Frase-âncora: "Quando me indicar, você dá o link, não meu telefone."'
     ],
@@ -1463,7 +1463,7 @@ const FRAMEWORKS = [
       'IA que monta o formulário por nicho',
       'Scripts pra parceiros (como ensinar quem indica)'
     ],
-    fonte_primaria:'Hot Seat NS 18/03 (~linha 3001-3058)',
+    fonte_primaria:'Mentoria NS 18/03 (~linha 3001-3058)',
     fonte_secundaria:'Aplicações múltiplas em planejamentos',
     sessao:'S5 · Tração',
     duracao_rafa:'30min',
@@ -1532,7 +1532,7 @@ const JORNADA_DETALHADA = {
     ],
     a_criar:[
       'IA de Boas-Vindas no Claude Project (knowledge base: regras do produto, contexto Bellz House, perguntas do briefing)',
-      'Documento de regras do 2Z Level (antecedência hot seat, política de reposição, sino, garantia) — formato PDF Bellz House',
+      'Documento de regras do 2Z Level (antecedência mentoria, política de reposição, sino, garantia) — formato PDF Bellz House',
       'Vídeo de 5min da Rafa (script + gravação) — entrega o método em alta-visão',
       'Templates de mensagem WhatsApp da CP (banco de 15 mensagens cobrindo cenários do onboarding)',
       'Estrutura do Notion-mãe (DBs de alunos, status do onboarding, automações)'
@@ -1661,7 +1661,7 @@ const JORNADA_DETALHADA = {
         descricao:'Criar o PDF de Oferta Irresistível do produto/serviço principal do aluno usando o Criador de Ofertas Bellz House.',
         tempo_aluna:'1h briefing + 30min revisão',
         acelerador:{ nome:'Criador de Ofertas Bellz House', status:'em construção (Sprint 0 pronto)', desc:'Briefing conversacional → gera HTML estilizado com identidade visual do aluno em 14 slides estruturados.' },
-        rafa_envolvida:'Revisão estratégica de 15min no primeiro Hot Seat'
+        rafa_envolvida:'Revisão estratégica de 15min no primeiro Mentoria'
       },
       {
         ordem:'05',
@@ -1749,7 +1749,7 @@ const PRODUTOS = [
       { nome:'A Mesa Bellz', frequencia:'1×/mês · manhã', desc:'Ritual de comunidade + café + convidado especialista. Fortalece pertencimento.' },
       { nome:'Janela do Mentorado', frequencia:'2×/mês · 30min', desc:'1:1 com a Rafa, outros alunos assistem como ouvintes. 24/ano sem reposição.' },
       { nome:'Engenharia Reversa', frequencia:'1×/mês · a partir de ago/2026', desc:'Análise de uma reunião comercial gravada do aluno. Pré-requisito: oferta definida.' },
-      { nome:'Hot Seat', frequencia:'1×/semana', desc:'Sessão grupal para análise de caso específico de um aluno. Material entregue antes (regra inegociável).' },
+      { nome:'Mentoria', frequencia:'1×/semana', desc:'Sessão grupal para análise de caso específico de um aluno. Material entregue antes (regra inegociável).' },
       { nome:'Evento presencial anual', frequencia:'1×/ano · 3 dias', desc:'1 dia exclusivo + 2 dias abertos a pagantes. Imersão profunda.' }
     ],
     // === COMPONENTES TANGÍVEIS ===
@@ -1796,10 +1796,10 @@ const PRODUTOS = [
 // PLANO DE EXTRAÇÃO
 // ================================================================
 const EXTRACAO = {
-  observacao:'VARREDURA COMPLETA EXECUTADA em 26/05/2026: 4 agentes paralelos varreram ~7MB de transcrições (Aulas · Planejamentos · Hot Seats · WhatsApp). Extraídos 11 frameworks NOVOS direto das transcrições + 4 detalhamentos de frameworks existentes — sem precisar consultar a Rafa. Score global do método saltou para refletir o material já extraído. Relatório completo em outputs/varredura-transcricoes-2026-05-26.md. Próximas sessões com a Rafa são SOMENTE para validação + renomeação + autorização de uso de casos reais.',
+  observacao:'VARREDURA COMPLETA EXECUTADA em 26/05/2026: 4 agentes paralelos varreram ~7MB de transcrições (Aulas · Planejamentos · Mentorias · WhatsApp). Extraídos 11 frameworks NOVOS direto das transcrições + 4 detalhamentos de frameworks existentes — sem precisar consultar a Rafa. Score global do método saltou para refletir o material já extraído. Relatório completo em outputs/varredura-transcricoes-2026-05-26.md. Próximas sessões com a Rafa são SOMENTE para validação + renomeação + autorização de uso de casos reais.',
   sessoes:[
     { sessao:'S1', foco:'Posicionamento + Oferta (sessão âncora)', frameworks:'3 Cadeiras · PDF de Oferta · Diferenciação por Personalização · Engenharia Reversa', fonte:'Já capturado na Consultoria Presencial — sessão é de validação Rafa', duracao_rafa:'1h validação' },
-    { sessao:'S2', foco:'Comercial', frameworks:'Venda consultiva · Quebra de objeções · Leitura de consciência · Plano de Foco', fonte:'Transcrições das mentorias (Rafa indica quais) + hot seats gravados', duracao_rafa:'0h (Inception extrai)' },
+    { sessao:'S2', foco:'Comercial', frameworks:'Venda consultiva · Quebra de objeções · Leitura de consciência · Plano de Foco', fonte:'Transcrições das mentorias (Rafa indica quais) + mentorias gravados', duracao_rafa:'0h (Inception extrai)' },
     { sessao:'S3', foco:'Financeiro', frameworks:'PF/PJ · Fluxo de caixa · Custos/margem · Critérios de contratação de apoio', fonte:'Transcrições + caso Luciana (#100, #106)', duracao_rafa:'0h-30min (Rafa indica fontes)' },
     { sessao:'S4', foco:'Liderança', frameworks:'Timing contratação · Time comercial · Liderança/delegação · Desligamento', fonte:'Transcrições + caso vivo (Rafa contratando Consultora de Progresso agora)', duracao_rafa:'30min (caso vivo)' },
     { sessao:'S5', foco:'Tração + Posicionamento avançado', frameworks:'Mapa de canais · Indicação estruturada · Marca pessoal × corporativa', fonte:'Transcrições + entrevista se necessário', duracao_rafa:'30min-1h' },
@@ -1812,10 +1812,10 @@ const EXTRACAO = {
     '🆕 Aulas do Método Mazzei (Engenharia de Vendas PDF · Processo de Vendas · Transcrições Aulas — 904KB)',
     '🆕 Planejamentos em Grupo NS · 518KB · ~11000 linhas',
     '🆕 Planejamentos Individuais MAZZEI$TRIA · 882KB · ~18000 linhas',
-    '🆕 Hot Seats NS + MAZZEI$TRIA + NS 18/03 — total ~1.3MB',
+    '🆕 Mentorias NS + MAZZEI$TRIA + NS 18/03 — total ~1.3MB',
     '🆕 WhatsApp MAZZEI$TRIA · 3MB · 35.365 linhas (out/2023-nov/2025)',
     'Notion de gestão atual da Rafa (operação)',
-    '118 hot seats analisados (10 meses · CSV)',
+    '118 mentorias analisados (10 meses · CSV)',
     'ARQUITETURA_MENTORIA.md (7 trilhas detalhadas — produzido pela Inception)',
     'Doc estratégico Mar/26 (escrito pela Rafa)',
     'Análise de público-alvo (pesquisa Inception com Gemini + Claude)'

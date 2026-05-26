@@ -127,7 +127,7 @@ function renderParaRafa() {
     <div class="section">
       <div class="section-title" style="color:var(--laranja);">PARTE 01 · validar frameworks novos</div>
       <h2 class="section-h">Os ${novos.length} frameworks que a Inception extraiu das suas transcrições</h2>
-      <p class="section-sub"><strong>Como funciona:</strong> cada framework abaixo veio diretamente de alguma transcrição sua (aula, planejamento ou hot seat). Está com status <span style="color:var(--laranja);font-weight:600;">PARCIAL</span> esperando você dizer "tá certo", "ajusta isso" ou "isso aqui não é meu".</p>
+      <p class="section-sub"><strong>Como funciona:</strong> cada framework abaixo veio diretamente de alguma transcrição sua (aula, planejamento ou mentoria). Está com status <span style="color:var(--laranja);font-weight:600;">PARCIAL</span> esperando você dizer "tá certo", "ajusta isso" ou "isso aqui não é meu".</p>
       <p class="section-sub">⏱ Tempo estimado: 5min por framework · total ~1h. Pode fazer aos poucos.</p>
 
       <div class="frameworks-grid" style="margin-top:18px;">
@@ -208,7 +208,7 @@ function renderParaRafa() {
       <div class="lacunas-label">Mensagem da Inception</div>
       <h4 style="font-family:var(--serif);font-style:italic;font-size:24px;color:var(--cream);margin-bottom:14px;">Você está mais perto do que sente.</h4>
       <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;margin-bottom:14px;">Há uma semana você abriu o áudio dizendo "como pode estar pronto se eu não vejo?". Hoje, <strong>${stats.parcial} frameworks do seu método estão documentados</strong> — não 0. Score global subiu de 8% para ${stats.score}%. Isso saiu das suas próprias transcrições. Não inventamos nada.</p>
-      <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;margin-bottom:14px;">O que esta dashboard mostra é: <strong>o seu método já existe</strong>. Está espalhado em transcrições, planejamentos, hot seats, WhatsApp. A gente está só dando forma ao que já estava lá.</p>
+      <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;margin-bottom:14px;">O que esta dashboard mostra é: <strong>o seu método já existe</strong>. Está espalhado em transcrições, planejamentos, mentorias, WhatsApp. A gente está só dando forma ao que já estava lá.</p>
       <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;">Você não precisa fazer 6 sessões de 1h com a gente. Precisa de <strong>~1h30 assíncrona</strong> pra revisar essa página. O resto, a Inception executa.</p>
     </div>
   `;
@@ -279,7 +279,7 @@ function renderHome() {
     <div class="section">
       <div class="section-title">Plano de extração</div>
       <h2 class="section-h">As 6 sessões com a Rafa</h2>
-      <p class="section-sub">Estratégia: combinar gravações existentes (zero esforço) + hot seats gravados ao vivo + entrevistas só onde necessário. <strong>Tempo total da Rafa em junho: ~3h30.</strong></p>
+      <p class="section-sub">Estratégia: combinar gravações existentes (zero esforço) + mentorias gravados ao vivo + entrevistas só onde necessário. <strong>Tempo total da Rafa em junho: ~3h30.</strong></p>
       <table class="extracao-tabela">
         <thead><tr><th>Sessão</th><th>Foco</th><th>Frameworks</th><th>Tempo da Rafa</th></tr></thead>
         <tbody>
@@ -447,7 +447,7 @@ function renderMetodo() {
         <div style="background:var(--preto);color:var(--cream);padding:24px 28px;border-radius:var(--radius-card);">
           <strong style="font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--laranja);display:block;margin-bottom:8px;">A Jornada de cada Produto</strong>
           <h4 style="font-family:var(--serif);font-style:italic;font-size:22px;margin-bottom:12px;color:var(--cream);">Específica de produto</h4>
-          <p style="font-size:13.5px;line-height:1.5;color:rgba(232,227,212,0.88);">Onboarding, Diagnóstico 360º, Plano Mestre, Mesa Bellz, Hot Seat, Travessia — tudo isso é <strong>do produto</strong>. Cada produto tem sua estrutura. Veja em <a href="#produtos" style="color:var(--laranja);">Produtos</a>.</p>
+          <p style="font-size:13.5px;line-height:1.5;color:rgba(232,227,212,0.88);">Onboarding, Diagnóstico 360º, Plano Mestre, Mesa Bellz, Mentoria, Travessia — tudo isso é <strong>do produto</strong>. Cada produto tem sua estrutura. Veja em <a href="#produtos" style="color:var(--laranja);">Produtos</a>.</p>
         </div>
       </div>
     </div>
