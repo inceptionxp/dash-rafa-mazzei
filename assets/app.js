@@ -212,7 +212,7 @@ function renderParaRafa() {
       <h4 style="font-family:var(--serif);font-style:italic;font-size:24px;color:var(--cream);margin-bottom:14px;">Você está mais perto do que sente.</h4>
       <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;margin-bottom:14px;">Há uma semana você abriu o áudio dizendo "como pode estar pronto se eu não vejo?". Hoje, <strong>${stats.parcial} frameworks do seu método estão documentados</strong> — não 0. Score global subiu de 8% para ${stats.score}%. Isso saiu das suas próprias transcrições. Não inventamos nada.</p>
       <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;margin-bottom:14px;">O que esta dashboard mostra é: <strong>o seu método já existe</strong>. Está espalhado em transcrições, planejamentos, mentorias, WhatsApp. A gente está só dando forma ao que já estava lá.</p>
-      <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;">Você não precisa fazer 6 sessões de 1h com a gente. Precisa de <strong>~1h30 assíncrona</strong> pra revisar essa página. O resto, a Inception executa.</p>
+      <p style="font-size:14.5px;line-height:1.65;color:rgba(232,227,212,0.88);max-width:760px;">Você não precisa de uma maratona de reuniões com a gente. Precisa de <strong>~1h30 assíncrona</strong> pra revisar essa página. O resto a Inception executa, conforme as demandas do projeto.</p>
     </div>
   `;
 }
@@ -281,8 +281,8 @@ function renderHome() {
 
     <div class="section">
       <div class="section-title">Plano de extração</div>
-      <h2 class="section-h">As 6 sessões com a Rafa</h2>
-      <p class="section-sub">Estratégia: combinar gravações existentes (zero esforço) + mentorias gravados ao vivo + entrevistas só onde necessário. <strong>Tempo total da Rafa em junho: ~3h30.</strong></p>
+      <h2 class="section-h">Frentes de validação por demanda</h2>
+      <p class="section-sub">A extração já foi feita pela Inception (varredura das transcrições). O que resta são frentes de <strong>validação por tema</strong> — a maioria assíncrona. <strong>Tempo total da Rafa: ~1h30 a 3h30, conforme a demanda de cada frente.</strong></p>
       <table class="extracao-tabela">
         <thead><tr><th>Sessão</th><th>Foco</th><th>Frameworks</th><th>Tempo da Rafa</th></tr></thead>
         <tbody>
@@ -1173,7 +1173,7 @@ function renderExtracao() {
 
     <div class="section">
       <div class="section-title">Calendário</div>
-      <h2 class="section-h">As 6 sessões</h2>
+      <h2 class="section-h">Frentes de validação por tema</h2>
       <table class="extracao-tabela">
         <thead><tr><th>Sessão</th><th>Foco</th><th>Frameworks</th><th>Fonte</th><th>Tempo da Rafa</th></tr></thead>
         <tbody>
