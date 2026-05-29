@@ -3,7 +3,7 @@
    Lógica de navegação + renderização
    ================================================================ */
 
-const { STATUS, ECOSSISTEMA, PERSONAS, TRILHAS, FRAMEWORKS, PRODUTOS, JORNADA_DETALHADA, EXTRACAO, APROVACOES, ESCOPO_INCEPTION, ENTREGAVEIS, calcularProgressoFrameworks, calcularProgressoTrilha } = window.DATA;
+const { STATUS, ECOSSISTEMA, PERSONAS, TRILHAS, FRAMEWORKS, PRODUTOS, JORNADA_DETALHADA, EXTRACAO, APROVACOES, ESCOPO_INCEPTION, ENTREGAVEIS, PLANO_ENSINO, calcularProgressoFrameworks, calcularProgressoTrilha } = window.DATA;
 
 // Helpers
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -33,7 +33,8 @@ const routes = {
   'aprovacoes': renderAprovacoes,
   'escopo': renderEscopo,
   'entregas': renderEntregas,
-  'entregavel': renderEntregavel
+  'entregavel': renderEntregavel,
+  'plano-ensino': renderPlanoEnsino
 };
 
 function handleRoute() {
@@ -1480,7 +1481,9 @@ function renderEntregavel(id) {
 
     <div class="section" style="margin-bottom:36px;">
       <div class="section-title">Visão geral</div>
-      <p style="font-size:16px;line-height:1.65;color:var(--txt);margin:0;max-width:780px;">${esc(e.visao_geral)}</p>
+      <p style="font-size:16px;line-height:1.65;color:var(--txt);margin:0 0 ${e.link_externo?'20px':'0'} 0;max-width:780px;">${esc(e.visao_geral)}</p>
+      ${e.link_externo ? `<a href="${e.link_externo.url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;background:var(--laranja);color:#fff;padding:14px 26px;border-radius:99px;text-decoration:none;font-weight:600;font-size:15px;box-shadow:0 10px 24px rgba(199,90,44,0.28);">${esc(e.link_externo.label)} →</a>
+      <p style="font-size:12.5px;color:var(--txt-2);margin-top:10px;">Abre em nova aba · publicado em inceptionxp.com (provisório, migra pro domínio da Rafa depois)</p>` : ''}
     </div>
 
     <div class="section" style="margin-bottom:36px;">
@@ -1529,6 +1532,52 @@ function renderEntregavel(id) {
       <span style="margin:0 12px;color:var(--txt-2);">·</span>
       <a href="#escopo" style="color:var(--laranja);text-decoration:none;font-size:14px;font-weight:600;">Ver escopo geral</a>
     </div>
+  `;
+}
+
+// ================================================================
+// PLANO DE ENSINO · aulas da Curseduca por trilha
+// ================================================================
+function renderPlanoEnsino() {
+  const pe = PLANO_ENSINO;
+  const totalAulas = pe.trilhas.reduce((s,t)=>s+t.aulas.length,0);
+
+  return `
+    <div class="page-head" style="margin-bottom:24px;">
+      <div class="breadcrumb">Método <span class="sep">/</span> Plano de Ensino</div>
+      <h1 class="page-h">Plano de Ensino</h1>
+      <p class="page-lead">As <strong>${totalAulas} aulas</strong> que vão na Curseduca, organizadas pelas 7 trilhas. Cada aula nasce de um framework do método. A Inception entrega o briefing (tema + objetivo + framework base); <strong>você grava o conteúdo</strong>.</p>
+      <p style="font-size:13px;color:var(--txt-2);font-style:italic;margin-top:8px;">${esc(pe.legenda)}</p>
+    </div>
+
+    <div style="background:var(--cream-2);border-left:3px solid var(--laranja);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:32px;">
+      <p style="font-size:14px;line-height:1.6;color:var(--txt);margin:0;">${esc(pe.intro)}</p>
+    </div>
+
+    ${pe.trilhas.map(t => `
+      <div class="section" style="margin-bottom:34px;">
+        <div class="section-title" style="color:var(--${t.cor==='laranja'?'laranja':t.cor==='azul'?'azul':'verde'},var(--laranja));">Trilha · ${esc(t.nome)}</div>
+        <h2 class="section-h">${t.aulas.length} aulas</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;">
+          ${t.aulas.map(a => `
+            <div style="background:var(--cream);border:1px solid var(--cream-3,rgba(14,15,13,0.08));border-radius:var(--radius);padding:18px 22px;${a.convidado?'border-left:3px solid var(--azul);':a.gap?'border-left:3px solid var(--laranja);':''}">
+              <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;">
+                <span style="font-family:var(--mono,monospace);font-size:12px;font-weight:700;color:var(--laranja);background:rgba(199,90,44,0.10);padding:4px 10px;border-radius:7px;white-space:nowrap;">${esc(a.num)}</span>
+                <div style="flex:1;min-width:240px;">
+                  <h3 style="font-family:var(--serif);font-size:17px;color:var(--verde);margin:0 0 4px 0;font-weight:600;">${esc(a.titulo)} ${a.convidado?'<span style="font-size:11px;color:var(--azul);font-weight:600;">👤 convidado</span>':'<span style="font-size:11px;color:var(--txt-2);">🎬</span>'}</h3>
+                  <p style="font-size:14px;line-height:1.55;color:var(--txt);margin:0 0 8px 0;"><strong style="color:var(--txt-2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;">Ao fim, o aluno consegue:</strong> ${esc(a.objetivo)}</p>
+                  <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--txt-2);">
+                    <span>🧩 ${esc(a.framework)}</span>
+                    <span>⏱ ${esc(a.dur)}</span>
+                    ${a.gap?'<span style="color:var(--laranja);font-weight:600;">⚠ depende de input da Rafa (desligamento)</span>':''}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
   `;
 }
 

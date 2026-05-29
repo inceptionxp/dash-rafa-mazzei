@@ -3331,6 +3331,7 @@ const ENTREGAVEIS = {
     plataforma:'Formulário Notion (coleta) + Squad 2Z Level no Claude Code (análise) + PDF (entrega)',
     status:'em construção',
     prioridade:1,
+    link_externo:{ url:'https://inceptionxp.com/diagnostico-2z/', label:'🔗 Abrir o Diagnóstico completo para avaliação' },
     visao_geral:'Sistema de mapeamento do ponto de partida do aluno. Herda dos Briefings 1 e 2 antigos mas adiciona a camada nova de Maturidade dos 7 Pilares (Score-Z). O aluno preenche 4 instrumentos em formulário Notion — captura resposta bruta. O Squad 2Z Level processa internamente e gera PDF Consolidado com ID visual da mentoria, entregue na sessão de Plano Mestre junto com o Notion do mentorado.',
     conteudo:[
       { item:'Instrumento 1 · DISC (Perfil Comportamental)', formato:'Formulário Notion (12 grupos de 4 adjetivos · ~15min)', desc:'Análise comportamental validada (Marston, 1928). Alimenta o algoritmo de personalização do Plano Mestre. D/I/S/C define abordagem do plano (hard comercial / relacionamento / processo / dados).', status:'a criar' },
@@ -3482,6 +3483,67 @@ function calcularProgressoTrilha(trilhaId){
 }
 
 // ================================================================
+// ================================================================
+// PLANO DE ENSINO · aulas que vão na Curseduca, por trilha
+// Inception entrega o briefing (tema + objetivo + framework base).
+// Rafa produz o conteúdo final (script, recursos, gravação).
+// ================================================================
+const PLANO_ENSINO = {
+  intro:'Cada aula nasce de um framework do método. A Inception entrega o briefing (tema, objetivo e framework base); a Rafa grava o conteúdo na Curseduca. Objetivo de cada aula descrito em "ao fim, o aluno consegue…" (andragogia: toda aula leva a uma ação concreta).',
+  legenda:'🎬 Rafa grava · 👤 Convidado especialista · ⏱ duração estimada',
+  trilhas:[
+    { id:'comercial', nome:'Comercial', cor:'verde', aulas:[
+      { num:'T1.1', titulo:'Da primeira conversa ao pix', objetivo:'Conduzir uma sessão de venda consultiva completa, da qualificação ao fechamento, sem mandar preço solto no WhatsApp.', framework:'Sessão de Venda Consultiva', dur:'~25min' },
+      { num:'T1.2', titulo:'Transformando o "vou pensar" em decisão', objetivo:'Antecipar e contornar as objeções mais comuns perguntando (não argumentando), e identificar as 3 dúvidas reais por trás do "vou pensar".', framework:'5 Regras de Objeção + 3 Dúvidas', dur:'~22min' },
+      { num:'T1.3', titulo:'Enxergando onde o dinheiro trava no funil', objetivo:'Mapear as etapas do funil, medir a conversão de cada uma e descobrir em qual etapa está vazando dinheiro.', framework:'Matemática do Funil', dur:'~20min' },
+      { num:'T1.4', titulo:'Qualificação: com quem vale a pena falar', objetivo:'Definir o ICP estrutural e usar formulário de pré-qualificação pra parar de gastar tempo com quem não fecha.', framework:'ICP Estrutural + Qualificação de Lead', dur:'~18min' },
+      { num:'T1.5', titulo:'Decidindo com números, não com achismo', objetivo:'Ler os indicadores comerciais essenciais e tomar decisão com base em matemática, não em sensação.', framework:'Leitura de Indicadores', dur:'~20min' },
+      { num:'T1.6', titulo:'Aumentando a conversão com ajustes de abordagem', objetivo:'Adaptar a condução da venda ao nível de consciência do cliente.', framework:'Leitura por Nível de Consciência', dur:'~18min' },
+      { num:'T1.7', titulo:'O pós-venda que gera indicação e recompra', objetivo:'Estruturar o pós-venda pra transformar cliente satisfeito em indicação e recompra.', framework:'Pós-venda Comercial', dur:'~15min' }
+    ]},
+    { id:'oferta', nome:'Oferta e Produto', cor:'laranja', aulas:[
+      { num:'T2.1', titulo:'A anatomia da oferta blindada', objetivo:'Montar uma oferta que comunica transformação antes do preço — e entender por que etapa não é produto.', framework:'Anatomia do PDF + Etapa ≠ Produto', dur:'~25min' },
+      { num:'T2.2', titulo:'A apresentação comercial que comunica valor', objetivo:'Estruturar o material de oferta (PDF/HTML) que conduz o cliente à decisão.', framework:'PDF de Oferta Irresistível', dur:'~22min' },
+      { num:'T2.3', titulo:'Cobrando o que vale sem medo', objetivo:'Precificar pela transformação entregue, não pela hora trabalhada.', framework:'Precificação por Valor', dur:'~20min' },
+      { num:'T2.4', titulo:'O valor do seu tempo', objetivo:'Calcular quanto vale a sua hora em cada serviço e usar isso pra decidir o que delegar.', framework:'Cálculo do Valor do Tempo', dur:'~18min' },
+      { num:'T2.5', titulo:'Da venda única à esteira que sustenta o mês', objetivo:'Construir uma esteira coerente onde o cliente entra e tem caminho pra continuar.', framework:'Esteira de Produtos', dur:'~20min' }
+    ]},
+    { id:'gestao', nome:'Gestão e Financeiro', cor:'verde', aulas:[
+      { num:'T3.1', titulo:'De autônomo a empresário: a separação que muda tudo', objetivo:'Separar PF de PJ (dinheiro e identidade) e definir pró-labore.', framework:'Análise PF/PJ', dur:'~20min' },
+      { num:'T3.2', titulo:'Sabendo se o mês fechou no azul', objetivo:'Ler a planilha de fluxo de caixa e identificar processos falhos antes que o mês feche no vermelho.', framework:'Leitura de Fluxo de Caixa', dur:'~22min' },
+      { num:'T3.3', titulo:'Onde o seu faturamento está vazando', objetivo:'Calcular margem real por serviço e caçar os "ralos" antes de mexer no preço.', framework:'Mapa de Custos e Margem', dur:'~20min' },
+      { num:'T3.4', titulo:'Quando (e quem) contratar de apoio', objetivo:'Decidir o timing e o perfil da contratação de apoio com base em caixa e fase do negócio.', framework:'Critérios de Contratação de Apoio', dur:'~18min' }
+    ]},
+    { id:'posicionamento', nome:'Posicionamento', cor:'azul', aulas:[
+      { num:'T4.1', titulo:'Saindo da guerra de preço', objetivo:'Mover o cliente de "te comparar com qualquer um" para "te escolher antes de comparar" (As 3 Cadeiras).', framework:'As 3 Cadeiras', dur:'~22min' },
+      { num:'T4.2', titulo:'O que faz o cliente te escolher antes de comparar', objetivo:'Descobrir os diferenciais reais (atributos verificáveis, não adjetivos) via engenharia reversa.', framework:'Engenharia Reversa + Diferenciação por Atributos', dur:'~22min' },
+      { num:'T4.3', titulo:'Seu nome ou o nome da empresa?', objetivo:'Decidir entre marca pessoal e corporativa com critério estratégico, e registrar a marca no CPF.', framework:'Marca Pessoal × Corporativa', dur:'~18min' },
+      { num:'T4.4', titulo:'Sua presença comunica o seu preço', objetivo:'Alinhar o cenário visual (escritório, stories, atelier) ao ticket que você cobra.', framework:'Investimento em Presença', dur:'~15min' },
+      { num:'T4.5', titulo:'Depoimento que vende (não elogio)', objetivo:'Coletar e organizar depoimentos estruturados com antes/depois e números.', framework:'Depoimento × Elogio', dur:'~18min' }
+    ]},
+    { id:'tracao', nome:'Tração e Aquisição', cor:'laranja', aulas:[
+      { num:'T5.1', titulo:'Mapeando os canais que você já tem', objetivo:'Identificar e priorizar os canais de aquisição de baixo custo que já existem.', framework:'Mapa de Canais', dur:'~18min' },
+      { num:'T5.2', titulo:'Transformando indicação em sistema', objetivo:'Sair da indicação passiva para um sistema ativo com parceiros e comissão.', framework:'Indicação Estruturada', dur:'~22min' },
+      { num:'T5.3', titulo:'A regra do link, não do telefone', objetivo:'Implementar o protocolo de qualificação para indicações (BNI, networking, parceiros).', framework:'Regra do Link, não Telefone', dur:'~12min' },
+      { num:'T5.4', titulo:'Escalando os canais que funcionam', objetivo:'Operar e escalar os funis de aquisição que já dão resultado.', framework:'Escala de Funis', dur:'~20min' },
+      { num:'T5.5', titulo:'Clientes pelo YouTube / LinkedIn / TikTok', objetivo:'Canais de aquisição de conteúdo — aulas com especialistas convidados.', framework:'(convidado)', dur:'a definir', convidado:true }
+    ]},
+    { id:'lideranca', nome:'Liderança e Time', cor:'verde', aulas:[
+      { num:'T6.1', titulo:'Saindo do gargalo: o que delegar primeiro', objetivo:'Mapear o que tira do dono e definir a primeira função a delegar.', framework:'Mapa de Funções + Valor do Tempo', dur:'~18min' },
+      { num:'T6.2', titulo:'A hora certa de contratar', objetivo:'Reconhecer os sinais de "contratar para crescer" vs "crescer para contratar".', framework:'Timing de Contratação', dur:'~18min' },
+      { num:'T6.3', titulo:'Formando o seu time comercial', objetivo:'Estruturar papéis (SDR, closer) e treinar pelo playbook do método.', framework:'Estrutura de Time Comercial', dur:'~22min' },
+      { num:'T6.4', titulo:'Liderando para o time entregar', objetivo:'Delegar desenhando, acompanhando e ajustando — sem virar gargalo nem passar a mão.', framework:'Liderança e Delegação', dur:'~20min' },
+      { num:'T6.5', titulo:'Quando e como desligar alguém', objetivo:'Conduzir um desligamento como decisão empresarial, com protocolo e sem drama.', framework:'Roteiro de Desligamento', dur:'~18min', gap:true }
+    ]},
+    { id:'mentalidade', nome:'Mentalidade e Identidade', cor:'azul', aulas:[
+      { num:'T7.1', titulo:'De profissional a empresário: a virada interna', objetivo:'Fazer a transição de identidade de "técnico" para "dono de negócio".', framework:'Transição de Identidade', dur:'~18min' },
+      { num:'T7.2', titulo:'Um negócio que sustenta a vida que você quer', objetivo:'Alinhar o modelo de negócio ao estilo de vida desejado (sair da escala heroica).', framework:'Plano de Vida × Negócio + Roda da Vida', dur:'~20min' },
+      { num:'T7.3', titulo:'As crenças que travam o seu negócio', objetivo:'Identificar e quebrar crenças limitantes com matemática e caso real.', framework:'Mapa de Crenças Limitantes', dur:'~20min' },
+      { num:'T7.4', titulo:'O Plano de Foco: inegociável, importante, sabotador', objetivo:'Aplicar o filtro de priorização que separa o que sustenta do que destrói o resultado.', framework:'Plano de Foco', dur:'~15min' }
+    ]}
+  ]
+};
+
 // EXPORTAR PARA APP.JS
 // ================================================================
 window.DATA = {
@@ -3493,6 +3555,7 @@ window.DATA = {
   PRODUTOS,
   JORNADA_DETALHADA,
   EXTRACAO,
+  PLANO_ENSINO,
   APROVACOES,
   ESCOPO_INCEPTION,
   ENTREGAVEIS,
