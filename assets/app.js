@@ -9,6 +9,28 @@ const { STATUS, ECOSSISTEMA, PERSONAS, TRILHAS, FRAMEWORKS, PRODUTOS, JORNADA_DE
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// Quebra textos com passos numerados ("1) ... 2) ..." ou "1. ... 2. ...") em lista visual.
+// Usado em "como funciona na prática" e textos longos — separa números com quebra de linha.
+function formatarPassos(txt){
+  if(!txt) return '';
+  // separa por padrões "N)" ou "· N)" mantendo o número
+  const partes = String(txt).split(/\s*(?:·\s*)?(\d+)\)\s*/).filter(x=>x!=='');
+  // se não achou numeração, devolve parágrafo simples
+  if(partes.length < 3){
+    return `<p style="font-size:15px;line-height:1.65;color:var(--txt);margin:0;">${esc(txt)}</p>`;
+  }
+  // reagrupa em pares [num, texto]
+  const itens=[];
+  for(let i=0;i<partes.length;i++){
+    if(/^\d+$/.test(partes[i]) && partes[i+1]){
+      itens.push({n:partes[i], t:partes[i+1].replace(/\s*·\s*$/,'').trim()});
+      i++;
+    }
+  }
+  if(!itens.length) return `<p style="font-size:15px;line-height:1.65;color:var(--txt);margin:0;">${esc(txt)}</p>`;
+  return `<ol style="margin:0;padding:0;list-style:none;counter-reset:cf;">${itens.map(it=>`<li style="position:relative;padding:9px 0 9px 38px;font-size:14.5px;line-height:1.55;color:var(--txt);border-bottom:1px solid var(--cream-3,rgba(14,15,13,0.06));"><span style="position:absolute;left:0;top:9px;width:24px;height:24px;border-radius:50%;background:rgba(199,90,44,0.14);color:var(--laranja);display:grid;place-items:center;font-weight:700;font-size:12px;">${esc(it.n)}</span>${esc(it.t)}</li>`).join('')}</ol>`;
+}
 const ul = (arr) => arr && arr.length ? `<ul>${arr.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : '<p style="color:var(--txt-3);font-style:italic;">(em construção)</p>';
 
 const getTrilha = (id) => TRILHAS.find(t => t.id === id);
@@ -1482,9 +1504,19 @@ function renderEntregavel(id) {
     <div class="section" style="margin-bottom:36px;">
       <div class="section-title">Visão geral</div>
       <p style="font-size:16px;line-height:1.65;color:var(--txt);margin:0 0 ${e.link_externo?'20px':'0'} 0;max-width:780px;">${esc(e.visao_geral)}</p>
+      ${e.instrucao_rafa ? `<div style="background:rgba(199,90,44,0.10);border-left:3px solid var(--laranja);border-radius:0 var(--radius) var(--radius) 0;padding:14px 18px;margin:0 0 18px 0;"><strong style="color:var(--laranja);font-size:11px;text-transform:uppercase;letter-spacing:.06em;">⚐ Para a Rafa</strong><p style="margin:6px 0 0 0;font-size:14px;line-height:1.55;color:var(--txt);">${esc(e.instrucao_rafa)}</p></div>` : ''}
       ${e.link_externo ? `<a href="${e.link_externo.url}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;background:var(--laranja);color:#fff;padding:14px 26px;border-radius:99px;text-decoration:none;font-weight:600;font-size:15px;box-shadow:0 10px 24px rgba(199,90,44,0.28);">${esc(e.link_externo.label)} →</a>
       <p style="font-size:12.5px;color:var(--txt-2);margin-top:10px;">Abre em nova aba · publicado em inceptionxp.com (provisório, migra pro domínio da Rafa depois)</p>` : ''}
     </div>
+
+    ${e.fluxo_aluno && e.fluxo_aluno.length ? `
+    <div class="section" style="margin-bottom:36px;">
+      <div class="section-title">O fluxo, do início ao fim</div>
+      <h2 class="section-h">O que acontece depois que o aluno responde</h2>
+      <ol style="margin:14px 0 0 0;padding:0;list-style:none;counter-reset:fl;">
+        ${e.fluxo_aluno.map(p=>`<li style="counter-increment:fl;position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--cream-3,rgba(14,15,13,0.08));font-size:15px;line-height:1.55;color:var(--txt);"><span style="position:absolute;left:0;top:12px;width:28px;height:28px;border-radius:50%;background:var(--verde);color:var(--cream);display:grid;place-items:center;font-weight:700;font-size:13px;content:counter(fl);">${e.fluxo_aluno.indexOf(p)+1}</span>${esc(p)}</li>`).join('')}
+      </ol>
+    </div>` : ''}
 
     <div class="section" style="margin-bottom:36px;">
       <div class="section-title">Conteúdo detalhado</div>
@@ -1511,7 +1543,7 @@ function renderEntregavel(id) {
 
     <div class="section" style="margin-bottom:36px;background:var(--cream-2);padding:24px 28px;border-radius:var(--radius);border-left:3px solid var(--laranja);">
       <div class="section-title" style="color:var(--laranja);">Como funciona na prática</div>
-      <p style="font-size:15px;line-height:1.65;color:var(--txt);margin:0;">${esc(e.como_funciona)}</p>
+      ${formatarPassos(e.como_funciona)}
     </div>
 
     <div class="section">

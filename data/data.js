@@ -2959,7 +2959,7 @@ const PRODUTOS = [
     jornada:{
       entrada:[
         { id:'onboarding', num:'01', nome:'Onboarding', quem:'Consultora de Progresso', desc:'Apresenta funcionamento + plataformas + ritual. Conduzido 100% pela CP — Rafa não opera nesta etapa.' },
-        { id:'diagnostico-360', num:'02', nome:'Diagnóstico 360º', quem:'Aluno + IAs de apoio', desc:'Score Soberano + Roda da Vida Empresarial + leitura PF/PJ + PUV atual. 4 IAs conduzem.' },
+        { id:'diagnostico-360', num:'02', nome:'Diagnóstico 360º', quem:'Aluno preenche · Squad processa', desc:'4 instrumentos: Briefing Estratégico + DISC + Score-Z (7 pilares) + Indicadores. Aluno preenche o miniapp; o Squad 2Z Level processa e gera o relatório + base do Plano Mestre.' },
         { id:'plano-mestre', num:'03', nome:'Plano Mestre', quem:'1:1 com a Rafa (90min)', desc:'Mapa anual do aluno: trilhas + metas mensais + ordem de execução. Gerado por IA, validado pela Rafa.' }
       ],
       base_universal:[
@@ -2972,10 +2972,9 @@ const PRODUTOS = [
     },
     // === ENCONTROS RECORRENTES ===
     encontros:[
-      { nome:'A Mesa Bellz', frequencia:'1×/mês · manhã', desc:'Ritual de comunidade + café + convidado especialista. Fortalece pertencimento.' },
-      { nome:'Janela do Mentorado', frequencia:'2×/mês · 30min', desc:'1:1 com a Rafa, outros alunos assistem como ouvintes. 24/ano sem reposição.' },
-      { nome:'Engenharia Reversa', frequencia:'1×/mês · a partir de ago/2026', desc:'Análise de uma reunião comercial gravada do aluno. Pré-requisito: oferta definida.' },
-      { nome:'Mentoria', frequencia:'1×/semana', desc:'Sessão grupal para análise de caso específico de um aluno. Material entregue antes (regra inegociável).' },
+      { nome:'Mezza Bellz', frequencia:'1×/mês · manhã', desc:'Ritual de comunidade + café + convidado especialista. Fortalece pertencimento.' },
+      { nome:'Mentoria', frequencia:'2×/mês · 30min por mentorado (agendado antes)', desc:'Sessão da mentoria onde cada mentorado tem seu tempo com a Rafa. O mentorado agenda os 30min antes. É a entrega central de acompanhamento — não existe "janela" separada, é uma coisa só.' },
+      { nome:'Engenharia Reversa', frequencia:'1×/mês · a partir de set/2026', desc:'Análise de casos do aluno — pode ser reunião comercial gravada, material de oferta, ou outro caso real. A Rafa analisa o que só o humano vê (não-verbal, nuance). Pré-requisito: oferta definida.' },
       { nome:'Evento presencial anual', frequencia:'1×/ano · 3 dias', desc:'1 dia exclusivo + 2 dias abertos a pagantes. Imersão profunda.' }
     ],
     // === COMPONENTES TANGÍVEIS ===
@@ -3205,12 +3204,19 @@ const ENTREGAVEIS = {
     prioridade:2,
     visao_geral:'Sistema operacional que o aluno recebe quando entra no 2Z Level. CONTÉM APENAS o essencial, comum a todos, resolvível rápido. NÃO contém aulas nem material extenso (isso fica na Curseduca). Tudo aqui é acionável — o aluno usa diariamente.',
     conteudo:[
-      { item:'Plano Mestre do aluno', formato:'Kanban acionável (tarefas com check)', desc:'Mapa anual personalizado: trilhas que vai cursar, metas mensais, ordem de execução. Aluno transita as tarefas no Kanban à medida que executa. CP acompanha visualmente.', status:'em construção' },
-      { item:'CRM Bellz', formato:'Banco de dados Notion com automações básicas', desc:'Pipeline de captação → qualificação → diagnóstico → apresentação → fechamento. Já vem com etapas configuradas, formulário de qualificação e dashboard de taxa de conversão.', status:'em construção' },
-      { item:'Ferramenta de documentação de reuniões', formato:'Template Notion', desc:'Registro estruturado de cada reunião comercial (briefing pré + ata + próximos passos). Conecta com o CRM.', status:'a criar' },
-      { item:'Checklist Setup PJ', formato:'Lista acionável', desc:'Checklist do que precisa estar configurado pra operar como CNPJ (separação PF/PJ, conta jurídica, contador, registro de marca no CPF).', status:'a criar' },
-      { item:'Formulário de Pré-Qualificação', formato:'Template Notion + link Pluga', desc:'Modelo do formulário em 2 camadas (popup básico + formulário avançado) que vai pro CRM via Pluga.', status:'a criar' },
-      { item:'Acessos aos materiais Curseduca', formato:'Links organizados por trilha', desc:'Página no Notion com links pras aulas da Curseduca, organizadas por trilha. O conteúdo NÃO está no Notion — só os links.', status:'a criar' }
+      { item:'Plano Mestre do aluno', formato:'Kanban acionável (tarefas com check)', desc:'Mapa do ciclo personalizado: trilhas, metas, ações e rotinas. Aluno transita as tarefas no Kanban à medida que executa. CP acompanha. (Os acessos às aulas da Curseduca ficam DENTRO de cada ação do Plano Mestre — não é página separada.)', status:'em construção' },
+      { item:'CRM Bellz', formato:'Banco de dados Notion · condicional', desc:'Pipeline captação → qualificação → diagnóstico → apresentação → fechamento, com dash de followups em atraso. CONDICIONAL: se o aluno já usa RD Station/outro CRM, não usa este. Se não tem, usa o nosso. (Mentorado preenche · CP acompanha)', status:'em construção' },
+      { item:'Documentação de Reuniões', formato:'Template Notion + dash · condicional', desc:'Histórico de reuniões × resultados, transcrição, análise e documentação individual. Recebe os feedbacks da IA Analista de Reuniões. CONDICIONAL: se já tem ferramenta própria, mantém. (Mentorado preenche · CP acompanha)', status:'em construção' },
+      { item:'Lista de Produtos/Serviços', formato:'Tabela simples · OBRIGATÓRIA', desc:'Nome · ticket · descrição · regra de entrega. Alimenta o CRM e serve pra CP consultar e lembrar o que cada mentorado faz na hora de orientar. Obrigatória mesmo pra quem tem esteira simples.', status:'a criar' },
+      { item:'Plano de Foco semanal', formato:'Template Notion · ritual', desc:'Inegociável × Importante × Sabotador da semana. Rotina fixa de todos. É o filtro de priorização que a Rafa usa.', status:'a criar' },
+      { item:'Banco de Depoimentos', formato:'Database Notion · condicional', desc:'Organiza depoimentos por categoria, com tags, prints e links de vídeo. Inclui na mesma página o roteiro de como coletar. CONDICIONAL: se já tem organizado, não precisa.', status:'a criar' },
+      { item:'Checklist Setup PJ', formato:'Lista acionável', desc:'O que precisa estar configurado pra operar como CNPJ (separação PF/PJ, conta jurídica, contador, marca no CPF). Possível redundância com o Diagnóstico 360º — a definir.', status:'⚠ aguardando informações Rafa' },
+      { item:'Plano de Vida × Negócio', formato:'Template Notion (Fundação)', desc:'Output da 1ª ação da Fundação: identidade pretendida, estilo de vida e modelo de negócio coerente. Fica documentado no Notion do aluno.', status:'a criar' },
+      { item:'Mapa de Canais de Aquisição', formato:'Template Notion (Tração)', desc:'Os canais que o aluno já tem, priorizados por esforço × impacto. Atualiza trimestral.', status:'a mapear' },
+      { item:'Banco de Parceiros', formato:'Database Notion (Indicação)', desc:'Parceiros de indicação mão-dupla, com comissão e tracking. Cresce ao longo do tempo.', status:'a mapear' },
+      { item:'Mapa de Funções (o que delegar)', formato:'Template Notion (Liderança)', desc:'O que tira do dono × o que delegar. Evolui conforme o negócio cresce.', status:'a mapear' },
+      { item:'Diário de Decisões', formato:'Template Notion (Mentalidade)', desc:'Registro das decisões importantes + o critério usado. Treina decisão por lógica, não por medo.', status:'a mapear' },
+      { item:'Formulário de Pré-Qualificação', formato:'Form + integração Pluga', desc:'Modelo do formulário em 2 camadas que captura o lead e joga no CRM. (Ver explicação de "Pluga" no resumo da Inception.)', status:'a criar' }
     ],
     como_funciona:'No onboarding, o aluno recebe convite pra duplicar o template. CP configura junto na primeira sessão (15min). O aluno usa diariamente — CRM, Plano Mestre, documentação de reuniões. Atualizações no Notion-mãe da Bellz se propagam pros alunos via republicação pontual (não automática — protege estabilidade).',
     o_que_NAO_tem:[
@@ -3254,8 +3260,9 @@ const ENTREGAVEIS = {
     publico:'Alunos do 2Z Level e Sell-Z (entregável final)',
     plataforma:'Curseduca (curseduca.com)',
     status:'em construção',
-    prioridade:'2 (estrutura) · contínua (conteúdo)',
-    visao_geral:'Plataforma de aprendizado dos alunos. Contém TODO material extenso: aulas, playbooks, recursos didáticos, vídeos. Aluno consulta sob demanda — quando precisa de uma trilha específica. A Inception entrega a ESTRUTURA pronta (categorias, organização por trilha, padrão visual); o CONTEÚDO das aulas é produzido pela Rafa.',
+    prioridade:'documentação (não execução)',
+    instrucao_rafa:'IMPORTANTE: a Inception NÃO acessa nem configura a Curseduca diretamente. O que entregamos é a DOCUMENTAÇÃO de como a plataforma deve ficar organizada — o que vai ter em cada trilha, a estrutura, os materiais. Você e a CP configuram lá dentro a partir dessa documentação. NÃO entregamos: capas das aulas, legendas/descrições dos conteúdos, edição de vídeo, design da plataforma. Isso é produção sua/da CP.',
+    visao_geral:'Plataforma de aprendizado dos alunos. Contém TODO material extenso: aulas, playbooks, recursos didáticos, vídeos. Aluno consulta sob demanda. A Inception entrega a DOCUMENTAÇÃO da organização (esta página + o Plano de Ensino); a Rafa e a CP configuram a plataforma e produzem o conteúdo. Não acessamos a Curseduca diretamente.',
     conteudo:[
       { item:'Estrutura organizada por trilha', formato:'Categorias e subcategorias na Curseduca', desc:'7 trilhas como categorias principais (Comercial, Oferta, Gestão, Posicionamento, Tração, Liderança, Mentalidade). Cada trilha com seus materiais aninhados.', status:'a criar' },
       { item:'Padrão visual e descritivo', formato:'Template de página', desc:'Cada material/aula segue padrão visual: capa, descrição curta, framework usado, duração, recursos complementares.', status:'a criar' },
@@ -3332,12 +3339,20 @@ const ENTREGAVEIS = {
     status:'em construção',
     prioridade:1,
     link_externo:{ url:'https://inceptionxp.com/diagnostico-2z/', label:'🔗 Abrir o Diagnóstico completo para avaliação' },
-    visao_geral:'Sistema de mapeamento do ponto de partida do aluno. Herda dos Briefings 1 e 2 antigos mas adiciona a camada nova de Maturidade dos 7 Pilares (Score-Z). O aluno preenche 4 instrumentos em formulário Notion — captura resposta bruta. O Squad 2Z Level processa internamente e gera PDF Consolidado com ID visual da mentoria, entregue na sessão de Plano Mestre junto com o Notion do mentorado.',
+    instrucao_rafa:'Rafa: o miniapp do diagnóstico do aluno já está PRONTO. Clique no botão acima, navegue como se fosse sua aluna preenchendo, e deixe seus comentários nesta página (bloco no rodapé). Os instrumentos estão aguardando a sua validação — não precisa criar nada, só avaliar o que está escrito e me dizer o que ajustar.',
+    fluxo_aluno:[
+      'A aluna acessa o miniapp e preenche os 4 instrumentos no ritmo dela (pode parar e voltar — salva sozinho).',
+      'Ao enviar, as respostas brutas vão para o sistema interno (pasta do mentorado no Claude Code).',
+      'O Squad 2Z Level processa: calcula o Score-Z, lê o DISC e as respostas abertas, e gera o relatório do Diagnóstico 360º (PDF com a identidade da mentoria).',
+      'A Rafa revisa o relatório (~30min) e valida.',
+      'Na sessão 1:1 de Plano Mestre, o relatório vira a base do plano de ação personalizado da aluna.'
+    ],
+    visao_geral:'Sistema de mapeamento do ponto de partida do aluno. Herda dos Briefings 1 e 2 antigos mas adiciona a camada nova de Maturidade dos 7 Pilares (Score-Z). O aluno preenche 4 instrumentos no miniapp — captura resposta bruta. O Squad 2Z Level processa internamente e gera o relatório Consolidado com ID visual da mentoria, entregue na sessão de Plano Mestre junto com o Notion do mentorado.',
     conteudo:[
-      { item:'Instrumento 1 · DISC (Perfil Comportamental)', formato:'Formulário Notion (12 grupos de 4 adjetivos · ~15min)', desc:'Análise comportamental validada (Marston, 1928). Alimenta o algoritmo de personalização do Plano Mestre. D/I/S/C define abordagem do plano (hard comercial / relacionamento / processo / dados).', status:'a criar' },
-      { item:'Instrumento 2 · Score-Z (Maturidade dos 7 Pilares)', formato:'Formulário Notion (35 perguntas mistas · 4 objetivas + 2 abertas por pilar · ~40min)', desc:'CAMADA NOVA. Mede maturidade em Comercial · Oferta · Gestão · Posicionamento · Tração · Liderança · Mentalidade. Score 0-100 por pilar + radar visual. Output direciona priorização do Plano Mestre.', status:'a criar' },
-      { item:'Instrumento 3 · Indicadores e Metas', formato:'Formulário Notion (Briefing 2 inteiro + bloco estrutural · ~45min)', desc:'Vendas/recebimento 12 meses + margem + conversão + metas semestre/ano + 3 metas qualitativas. Alimenta o App de Métricas (não fica no Plano Mestre).', status:'a criar' },
-      { item:'Instrumento 4 · Briefing Estratégico', formato:'Formulário Notion (12 perguntas dissertativas · ~25min)', desc:'Captura nuances qualitativas (dores, origem, perfil emocional, contrato moral). IA usa pra escrever análise com profundidade.', status:'a criar' },
+      { item:'Instrumento 1 · DISC (Perfil Comportamental)', formato:'12 grupos de 4 adjetivos · ~12min', desc:'Análise comportamental validada (Marston, 1928). Alimenta o algoritmo de personalização do Plano Mestre. D/I/S/C define abordagem do plano (hard comercial / relacionamento / processo / dados).', status:'aguardando validação Rafa' },
+      { item:'Instrumento 2 · Score-Z (Maturidade dos 7 Pilares)', formato:'35 perguntas mistas · ~40min', desc:'CAMADA NOVA. Mede maturidade em Comercial · Oferta · Gestão · Posicionamento · Tração · Liderança · Mentalidade. Perguntas simples do dia a dia; a IA interpreta a maturidade. Score 0-100 por pilar + radar.', status:'aguardando validação Rafa' },
+      { item:'Instrumento 3 · Indicadores e Metas', formato:'~45min (pede dados em mãos)', desc:'Vendas/recebimento 12 meses + margem + conversão + metas semestre/ano + 3 metas qualitativas. Alimenta o App de Métricas (não fica no Plano Mestre).', status:'aguardando validação Rafa' },
+      { item:'Instrumento 4 · Briefing Estratégico', formato:'12 perguntas dissertativas · ~25min', desc:'Primeiro instrumento (baixa fricção): a aluna fala dela — dores, origem, o que a move. Captura nuances que a IA usa pra escrever a análise com profundidade.', status:'aguardando validação Rafa' },
       { item:'Agente Diagnosticador (Squad)', formato:'Skill no Claude Code', desc:'Processa os 4 inputs brutos (JSON exportados do Notion). Calcula scores, faz cruzamentos, gera análise qualitativa estruturada.', status:'a criar' },
       { item:'Agente Designer (Squad)', formato:'Skill com template visual', desc:'Gera o PDF Diagnóstico Consolidado com ID visual da mentoria (template Canva/HTML estilizado). Entrega final que vai com a Rafa na sessão de Plano Mestre.', status:'a criar' },
       { item:'Reaplicação trimestral do pilar prioritário', formato:'Formulário curto Notion (5-7 perguntas) + Squad processa', desc:'A cada 3 meses, aluno reaplica SÓ o pilar prioritário. Squad compara com score anterior e mostra evolução. Resultado entra na revisão do Plano Mestre.', status:'a criar' }
