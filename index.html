@@ -24,34 +24,41 @@
       <span class="sidebar-brand-meta">Método em construção · v2</span>
     </div>
 
-    <div class="sidebar-section" style="color:var(--laranja);">★ Comece aqui</div>
-    <nav class="sidebar-nav">
-      <a class="nav-link" href="#para-rafa" data-view="para-rafa" style="border-left:2px solid var(--laranja);background:rgba(199,90,44,0.08);"><span class="nav-num" style="color:var(--laranja);">→</span><span style="color:var(--cream);font-weight:600;">Para a Rafa</span></a>
-      <a class="nav-link" href="#escopo" data-view="escopo" style="border-left:2px solid var(--laranja);background:rgba(199,90,44,0.08);"><span class="nav-num" style="color:var(--laranja);">⚐</span><span style="color:var(--cream);font-weight:600;">Escopo da Inception</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregas" data-view="entregas" style="padding-left:34px;font-size:13.5px;"><span style="color:var(--laranja);margin-right:8px;">↳</span><span>Entregas detalhadas</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/diagnostico-360" data-view="entregavel" data-entregavel="diagnostico-360" style="padding-left:54px;font-size:12.5px;opacity:0.95;"><span style="color:var(--laranja);margin-right:6px;">⚐</span><span><strong>Diagnóstico 360º</strong></span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/plano-mestre" data-view="entregavel" data-entregavel="plano-mestre" style="padding-left:54px;font-size:12.5px;opacity:0.95;"><span style="color:var(--laranja);margin-right:6px;">⚐</span><span><strong>Plano Mestre</strong></span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/squad-2z-level" data-view="entregavel" data-entregavel="squad-2z-level" style="padding-left:54px;font-size:12.5px;opacity:0.95;"><span style="color:var(--laranja);margin-right:6px;">⚐</span><span><strong>Squad 2Z Level</strong></span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/documentacao-metodo" data-view="entregavel" data-entregavel="documentacao-metodo" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>Documentação do método</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/notion-interno" data-view="entregavel" data-entregavel="notion-interno" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>Notion interno Bellz</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/notion-aluno" data-view="entregavel" data-entregavel="notion-aluno" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>Notion do mentorado</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/curseduca" data-view="entregavel" data-entregavel="curseduca" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>Curseduca estruturada</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/ia-plano-mestre" data-view="entregavel" data-entregavel="ia-plano-mestre" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>IA Plano Mestre (legado)</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/ias-fundacao" data-view="entregavel" data-entregavel="ias-fundacao" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>IAs Fundação (legado)</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/app-metricas" data-view="entregavel" data-entregavel="app-metricas" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>App de Métricas (Marco+Rafa)</span></a>
-      <a class="nav-link nav-child-of-escopo" href="#entregavel/playbook-treinamento" data-view="entregavel" data-entregavel="playbook-treinamento" style="padding-left:54px;font-size:12.5px;opacity:0.85;"><span style="color:var(--txt-2);margin-right:6px;">·</span><span>Playbook Treinamento</span></a>
+
+    <!-- Atalhos fixos (sempre visíveis) -->
+    <nav class="sidebar-nav sidebar-fixos">
+      <a class="nav-link destaque" href="#para-rafa" data-view="para-rafa"><span class="nav-num" style="color:var(--laranja);">→</span><span>Para a Rafa</span></a>
+      <a class="nav-link destaque" href="#escopo" data-view="escopo"><span class="nav-num" style="color:var(--laranja);">⚐</span><span>Escopo da Inception</span></a>
     </nav>
 
-    <div class="sidebar-section">Visão geral</div>
+    <div class="sidebar-section toggleable"><span>Entregas da Inception <em class="sec-count">11</em></span></div>
+    <nav class="sidebar-nav">
+      <a class="nav-link" href="#entregas" data-view="entregas"><span class="nav-num">→</span><span>Entregas detalhadas</span></a>
+      <ul class="nav-children" style="display:block;">
+        <li><a class="nav-child" href="#entregavel/diagnostico-360" data-entregavel="diagnostico-360"><span class="nav-child-symbol">⚐</span>Diagnóstico 360º</a></li>
+        <li><a class="nav-child" href="#entregavel/plano-mestre" data-entregavel="plano-mestre"><span class="nav-child-symbol">⚐</span>Plano Mestre</a></li>
+        <li><a class="nav-child" href="#entregavel/squad-2z-level" data-entregavel="squad-2z-level"><span class="nav-child-symbol">⚐</span>Squad 2Z Level</a></li>
+        <li><a class="nav-child" href="#entregavel/documentacao-metodo" data-entregavel="documentacao-metodo"><span class="nav-child-symbol">·</span>Documentação do método</a></li>
+        <li><a class="nav-child" href="#entregavel/notion-interno" data-entregavel="notion-interno"><span class="nav-child-symbol">·</span>Notion interno Bellz</a></li>
+        <li><a class="nav-child" href="#entregavel/notion-aluno" data-entregavel="notion-aluno"><span class="nav-child-symbol">·</span>Notion do mentorado</a></li>
+        <li><a class="nav-child" href="#entregavel/curseduca" data-entregavel="curseduca"><span class="nav-child-symbol">·</span>Curseduca estruturada</a></li>
+        <li><a class="nav-child" href="#entregavel/app-metricas" data-entregavel="app-metricas"><span class="nav-child-symbol">·</span>App de Métricas</a></li>
+        <li><a class="nav-child" href="#entregavel/playbook-treinamento" data-entregavel="playbook-treinamento"><span class="nav-child-symbol">·</span>Playbook Treinamento</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-section toggleable"><span>O Método</span></div>
     <nav class="sidebar-nav">
       <a class="nav-link" href="#home" data-view="home"><span class="nav-num">00</span><span>Home</span></a>
       <a class="nav-link" href="#ecossistema" data-view="ecossistema"><span class="nav-num">01</span><span>O Ecossistema</span></a>
       <a class="nav-link" href="#metodo" data-view="metodo"><span class="nav-num">02</span><span>O Método</span></a>
+      <a class="nav-link" href="#frameworks" data-view="frameworks"><span class="nav-num">03</span><span>Frameworks autorais</span></a>
+      <a class="nav-link" href="#plano-ensino" data-view="plano-ensino"><span class="nav-num">04</span><span>Plano de Ensino</span></a>
     </nav>
 
-    <div class="sidebar-section">As 7 Trilhas</div>
+    <div class="sidebar-section toggleable"><span>As 7 Trilhas <em class="sec-count">7</em></span></div>
     <nav class="sidebar-nav">
-      <a class="nav-link" href="#metodo" data-view="trilhas"><span class="nav-num">03</span><span>Todas as trilhas</span></a>
+      <a class="nav-link" href="#metodo" data-view="trilhas"><span class="nav-num">→</span><span>Todas as trilhas</span></a>
       <ul class="nav-children" style="display:block;">
         <li><a class="nav-child" href="#trilha/comercial" data-trilha="comercial"><span class="nav-child-symbol">◆</span>Comercial</a></li>
         <li><a class="nav-child" href="#trilha/oferta" data-trilha="oferta"><span class="nav-child-symbol">◆</span>Oferta e Produto</a></li>
@@ -63,9 +70,9 @@
       </ul>
     </nav>
 
-    <div class="sidebar-section">Produtos</div>
+    <div class="sidebar-section toggleable"><span>Produtos <em class="sec-count">3</em></span></div>
     <nav class="sidebar-nav">
-      <a class="nav-link" href="#produtos" data-view="produtos"><span class="nav-num">04</span><span>Todos os produtos</span></a>
+      <a class="nav-link" href="#produtos" data-view="produtos"><span class="nav-num">→</span><span>Todos os produtos</span></a>
       <ul class="nav-children" style="display:block;">
         <li><a class="nav-child" href="#produto/dois-z-level" data-produto="dois-z-level"><span class="nav-child-symbol">●</span>2Z Level</a></li>
         <li><a class="nav-child refor" href="#produto/sell-z" data-produto="sell-z"><span class="nav-child-symbol">●</span>Sell-Z</a></li>
@@ -73,7 +80,7 @@
       </ul>
     </nav>
 
-    <div class="sidebar-section">Jornada do Aluno (2Z)</div>
+    <div class="sidebar-section toggleable"><span>Jornada do Aluno (2Z) <em class="sec-count">4</em></span></div>
     <nav class="sidebar-nav">
       <ul class="nav-children" style="display:block;">
         <li><a class="nav-child" href="#jornada/onboarding" data-jornada="onboarding"><span class="nav-child-symbol">→</span>01 · Onboarding</a></li>
@@ -83,13 +90,13 @@
       </ul>
     </nav>
 
-    <div class="sidebar-section">Aprofundamento</div>
+    <div class="sidebar-section toggleable"><span>Acompanhamento</span></div>
     <nav class="sidebar-nav">
-      <a class="nav-link" href="#frameworks" data-view="frameworks"><span class="nav-num">05</span><span>Frameworks autorais</span></a>
-      <a class="nav-link" href="#plano-ensino" data-view="plano-ensino"><span class="nav-num">06</span><span>Plano de Ensino</span></a>
-      <a class="nav-link" href="#extracao" data-view="extracao"><span class="nav-num">07</span><span>Frentes de validação</span></a>
-      <a class="nav-link" href="#aprovacoes" data-view="aprovacoes"><span class="nav-num">08</span><span>Aprovações</span></a>
+      <a class="nav-link" href="#extracao" data-view="extracao"><span class="nav-num">→</span><span>Frentes de validação</span></a>
+      <a class="nav-link" href="#aprovacoes" data-view="aprovacoes"><span class="nav-num">→</span><span>Aprovações</span></a>
     </nav>
+
+
 
     <div class="sidebar-footer">
       <strong>v2 · 2026-05-26</strong><br>

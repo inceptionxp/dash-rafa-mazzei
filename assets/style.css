@@ -121,8 +121,26 @@ img{max-width:100%;display:block;}
   transition:transform .2s; flex:none; opacity:0.8;
 }
 .sidebar-section.toggleable.open::after{ transform:rotate(90deg); }
-.sidebar-nav{padding:0 8px 12px; overflow:hidden;}
+/* contador de itens da seção (badge ao lado do nome) */
+.sec-count{
+  font-style:normal; font-size:9px; font-weight:600; letter-spacing:0.06em;
+  color:var(--laranja); background:rgba(201,85,31,0.14);
+  border-radius:8px; padding:1px 6px; margin-left:6px;
+}
+.sidebar-section.toggleable > span{ display:flex; align-items:center; }
+.sidebar-nav{padding:0 8px 12px;}
 .sidebar-nav.collapsed{ display:none; }
+
+/* Atalhos fixos no topo (sempre visíveis, sem header colapsável) */
+.sidebar-fixos{ padding-top:6px; padding-bottom:6px; }
+.nav-link.destaque{
+  color:var(--cream); font-weight:600;
+  background:rgba(201,85,31,0.08);
+  border-left-color:rgba(201,85,31,0.5);
+  margin-bottom:3px;
+}
+.nav-link.destaque:hover{ background:rgba(201,85,31,0.16); }
+.nav-link.destaque .nav-num{ color:var(--laranja); }
 
 .nav-link{
   display:flex;

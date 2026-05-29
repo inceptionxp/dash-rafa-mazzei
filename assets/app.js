@@ -94,13 +94,19 @@ function updateSidebar(view, id) {
   }
 }
 
-// Abre a seção (sidebar-nav) que contém o elemento ativo, se estiver colapsada
+// Abre só a seção (sidebar-nav) que contém o elemento ativo — fecha as demais
+// (acordeão: na troca de rota, mantém a sidebar curta deixando 1 seção aberta)
 function abrirGrupoDoElemento(el) {
   const nav = el.closest('.sidebar-nav');
-  if (nav && nav.classList.contains('collapsed')) {
-    const header = nav.previousElementSibling;
-    if (header && header.classList.contains('sidebar-section')) toggleSecao(header, true);
-  }
+  if (!nav) return;
+  // fecha todas as outras seções colapsáveis
+  $$('.sidebar-section.toggleable').forEach(header => {
+    const sec = header.nextElementSibling;
+    if (sec && sec !== nav && sec.classList.contains('sidebar-nav')) toggleSecao(header, false);
+  });
+  // abre a do elemento ativo (se não for a fixa, que não tem header colapsável)
+  const header = nav.previousElementSibling;
+  if (header && header.classList.contains('sidebar-section')) toggleSecao(header, true);
 }
 
 // Toggle de uma seção: mostra/esconde a .sidebar-nav logo após o header
@@ -112,13 +118,15 @@ function toggleSecao(header, forceOpen) {
   header.classList.toggle('open', abrir);
 }
 
-// Inicializa os toggles: torna cada header de seção clicável (começa ABERTO)
+// Inicializa os toggles: cada header de seção é clicável e começa FECHADO
+// (só a seção da página ativa abre, via updateSidebar → abrirGrupoDoElemento)
 function initSidebarToggles() {
   $$('.sidebar-section').forEach(header => {
     const nav = header.nextElementSibling;
     if (!nav || !nav.classList.contains('sidebar-nav')) return;
-    header.classList.add('toggleable', 'open');   // visível e aberto por padrão
-    nav.classList.remove('collapsed');
+    header.classList.add('toggleable');   // clicável
+    header.classList.remove('open');      // começa fechado
+    nav.classList.add('collapsed');       // escondido por padrão
     header.addEventListener('click', () => toggleSecao(header));
   });
 }
