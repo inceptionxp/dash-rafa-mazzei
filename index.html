@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20260529b">
+<link rel="stylesheet" href="assets/style.css?v=20260529c">
 </head>
 <body>
 
@@ -31,22 +31,7 @@
       <a class="nav-link destaque" href="#escopo" data-view="escopo"><span class="nav-num" style="color:var(--laranja);">⚐</span><span>Escopo da Inception</span></a>
     </nav>
 
-    <div class="sidebar-section toggleable"><span>Entregas da Inception <em class="sec-count">11</em></span></div>
-    <nav class="sidebar-nav">
-      <a class="nav-link" href="#entregas" data-view="entregas"><span class="nav-num">→</span><span>Entregas detalhadas</span></a>
-      <ul class="nav-children" style="display:block;">
-        <li><a class="nav-child" href="#entregavel/diagnostico-360" data-entregavel="diagnostico-360"><span class="nav-child-symbol">⚐</span>Diagnóstico 360º</a></li>
-        <li><a class="nav-child" href="#entregavel/plano-mestre" data-entregavel="plano-mestre"><span class="nav-child-symbol">⚐</span>Plano Mestre</a></li>
-        <li><a class="nav-child" href="#entregavel/squad-2z-level" data-entregavel="squad-2z-level"><span class="nav-child-symbol">⚐</span>Squad 2Z Level</a></li>
-        <li><a class="nav-child" href="#entregavel/documentacao-metodo" data-entregavel="documentacao-metodo"><span class="nav-child-symbol">·</span>Documentação do método</a></li>
-        <li><a class="nav-child" href="#entregavel/notion-interno" data-entregavel="notion-interno"><span class="nav-child-symbol">·</span>Notion interno Bellz</a></li>
-        <li><a class="nav-child" href="#entregavel/notion-aluno" data-entregavel="notion-aluno"><span class="nav-child-symbol">·</span>Notion do mentorado</a></li>
-        <li><a class="nav-child" href="#entregavel/curseduca" data-entregavel="curseduca"><span class="nav-child-symbol">·</span>Curseduca estruturada</a></li>
-        <li><a class="nav-child" href="#entregavel/app-metricas" data-entregavel="app-metricas"><span class="nav-child-symbol">·</span>App de Métricas</a></li>
-        <li><a class="nav-child" href="#entregavel/playbook-treinamento" data-entregavel="playbook-treinamento"><span class="nav-child-symbol">·</span>Playbook Treinamento</a></li>
-      </ul>
-    </nav>
-
+    <!-- BLOCO 1 · O MÉTODO -->
     <div class="sidebar-section toggleable"><span>O Método</span></div>
     <nav class="sidebar-nav">
       <a class="nav-link" href="#home" data-view="home"><span class="nav-num">00</span><span>Home</span></a>
@@ -54,11 +39,7 @@
       <a class="nav-link" href="#metodo" data-view="metodo"><span class="nav-num">02</span><span>O Método</span></a>
       <a class="nav-link" href="#frameworks" data-view="frameworks"><span class="nav-num">03</span><span>Frameworks autorais</span></a>
       <a class="nav-link" href="#plano-ensino" data-view="plano-ensino"><span class="nav-num">04</span><span>Plano de Ensino</span></a>
-    </nav>
-
-    <div class="sidebar-section toggleable"><span>As 7 Trilhas <em class="sec-count">7</em></span></div>
-    <nav class="sidebar-nav">
-      <a class="nav-link" href="#metodo" data-view="trilhas"><span class="nav-num">→</span><span>Todas as trilhas</span></a>
+      <div class="nav-sublabel">As 7 Trilhas · <a href="#trilhas" data-view="trilhas">ver todas</a></div>
       <ul class="nav-children" style="display:block;">
         <li><a class="nav-child" href="#trilha/comercial" data-trilha="comercial"><span class="nav-child-symbol">◆</span>Comercial</a></li>
         <li><a class="nav-child" href="#trilha/oferta" data-trilha="oferta"><span class="nav-child-symbol">◆</span>Oferta e Produto</a></li>
@@ -70,18 +51,16 @@
       </ul>
     </nav>
 
-    <div class="sidebar-section toggleable"><span>Produtos <em class="sec-count">3</em></span></div>
+    <!-- BLOCO 2 · O PRODUTO 2Z -->
+    <div class="sidebar-section toggleable"><span>O Produto 2Z</span></div>
     <nav class="sidebar-nav">
-      <a class="nav-link" href="#produtos" data-view="produtos"><span class="nav-num">→</span><span>Todos os produtos</span></a>
+      <a class="nav-link" href="#produtos" data-view="produtos"><span class="nav-num">→</span><span>Os 3 produtos</span></a>
       <ul class="nav-children" style="display:block;">
         <li><a class="nav-child" href="#produto/dois-z-level" data-produto="dois-z-level"><span class="nav-child-symbol">●</span>2Z Level</a></li>
         <li><a class="nav-child refor" href="#produto/sell-z" data-produto="sell-z"><span class="nav-child-symbol">●</span>Sell-Z</a></li>
         <li><a class="nav-child refor" href="#produto/imersao" data-produto="imersao"><span class="nav-child-symbol">●</span>Imersão</a></li>
       </ul>
-    </nav>
-
-    <div class="sidebar-section toggleable"><span>Jornada do Aluno (2Z) <em class="sec-count">4</em></span></div>
-    <nav class="sidebar-nav">
+      <div class="nav-sublabel">Jornada do Aluno (2Z)</div>
       <ul class="nav-children" style="display:block;">
         <li><a class="nav-child" href="#jornada/onboarding" data-jornada="onboarding"><span class="nav-child-symbol">→</span>01 · Onboarding</a></li>
         <li><a class="nav-child" href="#jornada/diagnostico-360" data-jornada="diagnostico-360"><span class="nav-child-symbol">→</span>02 · Diagnóstico 360º</a></li>
@@ -90,6 +69,22 @@
       </ul>
     </nav>
 
+    <!-- BLOCO 3 · ENTREGAS DA INCEPTION -->
+    <div class="sidebar-section toggleable"><span>Entregas da Inception <em class="sec-count">7</em></span></div>
+    <nav class="sidebar-nav">
+      <a class="nav-link" href="#entregas" data-view="entregas"><span class="nav-num">→</span><span>Todas as entregas</span></a>
+      <ul class="nav-children" style="display:block;">
+        <li><a class="nav-child" href="#entregavel/squad-2z-level" data-entregavel="squad-2z-level"><span class="nav-child-symbol">⚙</span>Squad 2Z Level</a></li>
+        <li><a class="nav-child" href="#entregavel/documentacao-metodo" data-entregavel="documentacao-metodo"><span class="nav-child-symbol">·</span>Documentação do método</a></li>
+        <li><a class="nav-child" href="#entregavel/notion-interno" data-entregavel="notion-interno"><span class="nav-child-symbol">·</span>Notion interno Bellz</a></li>
+        <li><a class="nav-child" href="#entregavel/notion-aluno" data-entregavel="notion-aluno"><span class="nav-child-symbol">·</span>Notion do mentorado</a></li>
+        <li><a class="nav-child" href="#entregavel/curseduca" data-entregavel="curseduca"><span class="nav-child-symbol">·</span>Curseduca estruturada</a></li>
+        <li><a class="nav-child" href="#entregavel/app-metricas" data-entregavel="app-metricas"><span class="nav-child-symbol">·</span>App de Métricas</a></li>
+        <li><a class="nav-child" href="#entregavel/playbook-treinamento" data-entregavel="playbook-treinamento"><span class="nav-child-symbol">·</span>Playbook Treinamento</a></li>
+      </ul>
+    </nav>
+
+    <!-- BLOCO 4 · ACOMPANHAMENTO -->
     <div class="sidebar-section toggleable"><span>Acompanhamento</span></div>
     <nav class="sidebar-nav">
       <a class="nav-link" href="#extracao" data-view="extracao"><span class="nav-num">→</span><span>Frentes de validação</span></a>
@@ -127,11 +122,17 @@
   <div class="modal">
     <button class="modal-close" onclick="closeFramework()" aria-label="Fechar">×</button>
     <div id="modal-body"></div>
+    <!-- Comentários da Rafa por framework (thread própria por framework) -->
+    <div id="modal-giscus-wrapper" style="margin:0;padding:28px 44px 40px;border-top:1px solid var(--cream-3,rgba(14,15,13,0.12));">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--laranja,#C75A2C);margin:0 0 4px 0;font-weight:700;">💬 Comentários da Rafa · sobre ESTE framework</p>
+      <p style="font-size:13px;color:var(--txt-2,#6E7B72);margin:0 0 16px 0;">Cada framework tem seu próprio espaço. Corrige, valida ou comenta o que está documentado acima. (1ª vez: login com GitHub — 10 segundos.)</p>
+      <div class="giscus" id="modal-giscus"></div>
+    </div>
   </div>
 </div>
 
-<script src="data/data.js?v=20260529b"></script>
-<script src="assets/app.js?v=20260529b"></script>
+<script src="data/data.js?v=20260529c"></script>
+<script src="assets/app.js?v=20260529c"></script>
 
 <!-- ============================================================
      GISCUS — comentários por seção (recuperado e adaptado pra v2)
@@ -168,7 +169,38 @@
       s.crossOrigin='anonymous'; s.async=true;
       c.appendChild(s); loaded=true;
     } else {
-      const f=document.querySelector('iframe.giscus-frame');
+      const f=document.querySelector('#giscus-wrapper iframe.giscus-frame');
+      if(f) f.contentWindow.postMessage({giscus:{setConfig:{term}}},ORIGIN);
+    }
+  };
+
+  // === Giscus DENTRO do modal de framework (thread própria por framework) ===
+  let modalLoaded=false, modalTerm=null;
+  const modalContainer=()=>document.querySelector('#modal-giscus');
+  window._showGiscusModal=function(termKey){
+    const term='dash-framework-'+(termKey||'geral');
+    if(term===modalTerm) return;
+    modalTerm=term;
+    const c=modalContainer(); if(!c) return;
+    if(!modalLoaded){
+      const s=document.createElement('script');
+      s.src='https://giscus.app/client.js';
+      s.setAttribute('data-repo',REPO);
+      s.setAttribute('data-repo-id',REPO_ID);
+      s.setAttribute('data-category',CAT);
+      s.setAttribute('data-category-id',CAT_ID);
+      s.setAttribute('data-mapping','specific');
+      s.setAttribute('data-term',term);
+      s.setAttribute('data-strict','0');
+      s.setAttribute('data-reactions-enabled','1');
+      s.setAttribute('data-emit-metadata','0');
+      s.setAttribute('data-input-position','top');
+      s.setAttribute('data-theme','light');
+      s.setAttribute('data-lang','pt');
+      s.crossOrigin='anonymous'; s.async=true;
+      c.appendChild(s); modalLoaded=true;
+    } else {
+      const f=document.querySelector('#modal-giscus-wrapper iframe.giscus-frame');
       if(f) f.contentWindow.postMessage({giscus:{setConfig:{term}}},ORIGIN);
     }
   };

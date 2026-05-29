@@ -3279,56 +3279,6 @@ const ENTREGAVEIS = {
       'IAs do método (separadas, ver entregáveis específicos)'
     ]
   },
-  'ia-plano-mestre':{
-    id:'ia-plano-mestre',
-    nome:'IA Geradora de Plano Mestre',
-    categoria:'IA',
-    icone:'🧠',
-    publico:'Uso interno Rafa + saída pro aluno',
-    plataforma:'Claude Project',
-    status:'a criar',
-    prioridade:3,
-    visao_geral:'IA treinada na base do método da Rafa que recebe o relatório do Diagnóstico 360º + transcrição da sessão 1:1 com a Rafa, e gera o Plano Mestre estruturado no template Notion. Reduz drasticamente o tempo de pós-sessão da Rafa (de 2-3h pra 20min de revisão).',
-    conteudo:[
-      { item:'Base de conhecimento treinada', formato:'Claude Project com knowledge base', desc:'Todo o método documentado (trilhas, frameworks, teses, passo-a-passo, banco de histórias) treinado na IA. Atualizável conforme o método evolui.', status:'a criar' },
-      { item:'Prompt de geração de Plano Mestre', formato:'Sistema prompt + estrutura output', desc:'Recebe input (Diagnóstico + transcrição), entende contexto do aluno, prioriza trilhas, define ações mensais, gera saída em formato estruturado pro template Notion.', status:'a criar' },
-      { item:'Integração com template Notion', formato:'Output formatado pra colar', desc:'Saída da IA pré-formatada pra colar no template do Plano Mestre — não exige edição manual.', status:'a criar' },
-      { item:'Loop de validação Rafa', formato:'Etapa de revisão', desc:'Rafa revisa o Plano Mestre gerado antes de enviar pro aluno. Ajustes voltam pra IA aprender (refinamento contínuo).', status:'a criar' }
-    ],
-    como_funciona:'Rafa termina sessão 1:1 de Plano Mestre. Sobe a transcrição (via Otter/Descript) + Diagnóstico 360º do aluno no Claude Project. IA gera Plano Mestre completo em ~3min. Rafa revisa (20min), ajusta o que precisa, exporta pro Notion do aluno. CP entrega.',
-    o_que_NAO_tem:[
-      'IA conversacional do aluno (esse era o ChatGPT do escopo original — agora virou parte das IAs Fundação)',
-      'IAs específicas por trilha (backlog)',
-      'IA de criação de oferta (em Sprint 0 — entrega separada)'
-    ]
-  },
-  'ias-fundacao':{
-    id:'ias-fundacao',
-    nome:'IAs Fundação (cohort + Sell-Z)',
-    categoria:'IA',
-    icone:'⚙️',
-    publico:'Alunos do 2Z Level (Fundação) e Sell-Z',
-    plataforma:'Claude Project',
-    status:'a definir escopo final',
-    prioridade:4,
-    visao_geral:'Conjunto de IAs que apoiam as ações concretas da Etapa Fundação — base universal que TODO aluno passa, independente da jornada futura. Mesmo conjunto serve no Sell-Z (cohort de 8 semanas). ⚠ ESCOPO EXATO A DEFINIR — Rafa + Maiara precisam fechar o que entra/não entra antes de construir.',
-    conteudo:[
-      { item:'IA Score Soberano', formato:'Claude Project', desc:'Conduz aluno por ~30 critérios cruzando saúde do negócio, identidade empresarial, maturidade comercial. Output: score 0-100 + mapa de prioridades.', status:'a criar' },
-      { item:'IA Roda da Vida Empresarial', formato:'Claude Project', desc:'Auto-avaliação por área (Comercial, Oferta, Gestão, Posicionamento, Tração, Liderança, Mentalidade) + sugere ações mínimas. Substitui Roda da Vida tradicional. ⚠ depende do PDF original da Rafa.', status:'a criar — depende de input Rafa' },
-      { item:'IA Leitura PF/PJ', formato:'Claude Project', desc:'Diagnóstico financeiro + identidade empresarial. Output: status atual + ações de transição PF → empresário.', status:'a criar' },
-      { item:'IA Analisadora de PUV', formato:'Claude Project', desc:'Captura PUV atual do aluno + sugere ajustes baseados no método.', status:'a criar' },
-      { item:'IA Coerência Vida × Negócio', formato:'Claude Project', desc:'18 perguntas + identifica incoerências + sugere modelo de negócio coerente com vida do aluno.', status:'a criar' },
-      { item:'IA Construtor de Posicionamento', formato:'Claude Project', desc:'Engenharia reversa do posicionamento + matriz de atributos + 3 versões de bio + manifesto draft.', status:'a criar' },
-      { item:'IA Estruturador de Agenda Comercial', formato:'Claude Project', desc:'Sugere blocos de agenda baseado no Plano de Vida × Negócio + envia lembretes via WhatsApp.', status:'a criar' }
-    ],
-    como_funciona:'Aluno entra na Fundação (primeiras semanas após onboarding). Conversa com cada IA via Claude Project (acesso enviado pela CP). Outputs caem no Home Office Bellz (Notion do aluno). Rafa lê os outputs consolidados antes da sessão de Plano Mestre. Mesmo fluxo no Sell-Z.',
-    o_que_NAO_tem:[
-      'IAs específicas das trilhas avançadas (Liderança, Tração, etc — backlog)',
-      'IA de criação de conteúdo (calendário editorial, Reels — backlog)',
-      'IA Criadora de Ofertas (já está em Sprint 0 — entrega separada da Inception)',
-      'IA conversacional genérica (substituída por essas 7 dedicadas)'
-    ]
-  },
   'diagnostico-360':{
     id:'diagnostico-360',
     nome:'Diagnóstico 360º',

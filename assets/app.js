@@ -59,9 +59,19 @@ const routes = {
   'plano-ensino': renderPlanoEnsino
 };
 
+// Páginas consolidadas: Diagnóstico e Plano Mestre vivem só na Jornada do Aluno.
+// URLs antigas de Entregável redirecionam pra fonte única (evita conteúdo duplicado).
+const REDIRECT_ENTREGAVEL_JORNADA = ['diagnostico-360', 'plano-mestre'];
+
 function handleRoute() {
   const hash = window.location.hash.slice(1) || 'home';
   const [view, id] = hash.split('/');
+
+  if (view === 'entregavel' && REDIRECT_ENTREGAVEL_JORNADA.includes(id)) {
+    window.location.replace('#jornada/' + id);
+    return;
+  }
+
   const handler = routes[view] || renderNotFound;
   const html = handler(id);
   $('#main-inner').innerHTML = html;
@@ -83,7 +93,7 @@ function updateSidebar(view, id) {
   // Fallbacks de rota → item de nav (views que renderizam mas o link mora noutro lugar)
   if (!activeEl) {
     if (view === '' || view === 'home') activeEl = $('.nav-link[data-view="home"]');
-    else if (view === 'trilhas')        activeEl = $('.nav-link[data-view="trilhas"]');
+    else if (view === 'trilhas')        activeEl = $('.nav-sublabel a[data-view="trilhas"]');
     else if (view === 'produtos')       activeEl = $('.nav-link[data-view="produtos"]');
   }
 
@@ -973,6 +983,8 @@ function openFramework(id) {
   `;
   $('#modal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  // bloco de comentários da Rafa próprio deste framework
+  if (window._showGiscusModal) window._showGiscusModal(f.id);
 }
 
 function closeFramework() {
@@ -987,6 +999,12 @@ function closeFramework() {
 // JORNADA · página detalhada de cada etapa da jornada do aluno
 // ================================================================
 function renderJornada(id) {
+  // Diagnóstico e Plano Mestre: conteúdo canônico (atual) vive em ENTREGAVEIS.
+  // A Jornada é a casa oficial — renderiza o conteúdo rico com moldura de jornada.
+  if (REDIRECT_ENTREGAVEL_JORNADA.includes(id) && typeof ENTREGAVEIS !== 'undefined' && ENTREGAVEIS[id]) {
+    return renderEntregavel(id, { jornada: true });
+  }
+
   const j = JORNADA_DETALHADA && JORNADA_DETALHADA[id];
   if (!j) return renderNotFound();
 
@@ -1474,8 +1492,9 @@ function renderEntregas() {
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:20px;">
           ${lista.map(e => {
             const sb = statusBadgeGeneric(e.status);
+            const href = REDIRECT_ENTREGAVEL_JORNADA.includes(e.id) ? `#jornada/${e.id}` : `#entregavel/${e.id}`;
             return `
-              <a href="#entregavel/${e.id}" style="text-decoration:none;color:inherit;">
+              <a href="${href}" style="text-decoration:none;color:inherit;">
                 <div style="background:var(--cream-2);padding:22px;border-radius:var(--radius);border-left:3px solid var(--verde);transition:transform .15s,box-shadow .15s;cursor:pointer;height:100%;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 28px rgba(14,15,13,0.08)';" onmouseout="this.style.transform='';this.style.boxShadow='';">
                   <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;">
                     <div style="font-size:28px;line-height:1;">${e.icone || '📦'}</div>
@@ -1502,16 +1521,35 @@ function renderEntregas() {
 // ================================================================
 // ENTREGÁVEL · página detalhada de UM entregável
 // ================================================================
-function renderEntregavel(id) {
+function renderEntregavel(id, opts = {}) {
   const e = ENTREGAVEIS && ENTREGAVEIS[id];
   if (!e) return renderNotFound();
 
   const sb = statusBadgeGeneric(e.status);
+  const fromJornada = opts.jornada === true;
+
+  // Moldura de jornada (quando a página é acessada como etapa da jornada do aluno)
+  const JORNADA_STEPS = [
+    { id:'onboarding',     label:'01 · Onboarding' },
+    { id:'diagnostico-360',label:'02 · Diagnóstico 360º' },
+    { id:'plano-mestre',   label:'03 · Plano Mestre' },
+    { id:'a-fundacao',     label:'A Fundação' }
+  ];
+  const breadcrumb = fromJornada
+    ? `<div class="breadcrumb"><a href="#produto/dois-z-level" style="color:var(--laranja);">2Z Level</a> <span class="sep">/</span> Jornada do Aluno <span class="sep">/</span> ${esc(e.nome)}</div>`
+    : `<div class="breadcrumb"><a href="#entregas" style="color:var(--laranja);">Entregas</a> <span class="sep">/</span> ${esc(e.categoria)} <span class="sep">/</span> ${esc(e.nome)}</div>`;
+  const stepper = fromJornada ? `
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+      ${JORNADA_STEPS.map(s => `
+        <a href="#jornada/${s.id}" style="text-decoration:none;font-size:12px;font-weight:600;padding:7px 14px;border-radius:99px;white-space:nowrap;${s.id===id ? 'background:var(--verde);color:var(--cream);' : 'background:var(--cream-2);color:var(--txt-2);border:1px solid var(--cream-3,rgba(14,15,13,0.10));'}">${esc(s.label)}</a>
+      `).join('')}
+    </div>` : '';
 
   return `
-    <div class="page-head" style="margin-bottom:24px;">
-      <div class="breadcrumb"><a href="#entregas" style="color:var(--laranja);">Entregas</a> <span class="sep">/</span> ${esc(e.categoria)} <span class="sep">/</span> ${esc(e.nome)}</div>
+    <div class="page-head" style="margin-bottom:${fromJornada?'16px':'24px'};">
+      ${breadcrumb}
     </div>
+    ${stepper}
 
     <div style="background:var(--verde);color:var(--cream);padding:32px;border-radius:var(--radius);margin-bottom:32px;">
       <div style="display:flex;align-items:center;gap:18px;margin-bottom:16px;">
