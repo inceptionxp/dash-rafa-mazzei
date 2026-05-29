@@ -110,8 +110,19 @@ img{max-width:100%;display:block;}
   color:rgba(232,227,212,0.4);
   font-weight:500;
 }
-
-.sidebar-nav{padding:0 8px 12px;}
+/* Seção colapsável: header clicável + ícone abrir/fechar visível */
+.sidebar-section.toggleable{
+  cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+  gap:8px; transition:color .15s; user-select:none;
+}
+.sidebar-section.toggleable:hover{ color:rgba(232,227,212,0.75); }
+.sidebar-section.toggleable::after{
+  content:'▸'; font-size:10px; letter-spacing:0; color:var(--laranja);
+  transition:transform .2s; flex:none; opacity:0.8;
+}
+.sidebar-section.toggleable.open::after{ transform:rotate(90deg); }
+.sidebar-nav{padding:0 8px 12px; overflow:hidden;}
+.sidebar-nav.collapsed{ display:none; }
 
 .nav-link{
   display:flex;

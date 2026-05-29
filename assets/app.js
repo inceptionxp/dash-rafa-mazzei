@@ -71,31 +71,56 @@ function handleRoute() {
 
 function updateSidebar(view, id) {
   $$('.nav-link, .nav-child').forEach(el => el.classList.remove('active'));
-  const baseSel = `.nav-link[data-view="${view}"]`;
-  const base = $(baseSel);
-  if (base) base.classList.add('active');
 
-  if (view === 'trilha' && id) {
-    const child = $(`.nav-child[data-trilha="${id}"]`);
-    if (child) child.classList.add('active');
-    const parent = $('.nav-link[data-view="trilhas"]');
-    if (parent) parent.classList.add('active');
+  // Encontra o elemento exato da página aberta (cada tipo tem seu seletor específico)
+  let activeEl = null;
+  if (view === 'entregavel' && id)      activeEl = $(`.nav-link[data-entregavel="${id}"]`);
+  else if (view === 'jornada' && id)    activeEl = $(`.nav-child[data-jornada="${id}"]`);
+  else if (view === 'trilha' && id)     activeEl = $(`.nav-child[data-trilha="${id}"]`);
+  else if (view === 'produto' && id)    activeEl = $(`.nav-child[data-produto="${id}"]`);
+  else                                  activeEl = $(`.nav-link[data-view="${view}"]`);
+
+  // Fallbacks de rota → item de nav (views que renderizam mas o link mora noutro lugar)
+  if (!activeEl) {
+    if (view === '' || view === 'home') activeEl = $('.nav-link[data-view="home"]');
+    else if (view === 'trilhas')        activeEl = $('.nav-link[data-view="trilhas"]');
+    else if (view === 'produtos')       activeEl = $('.nav-link[data-view="produtos"]');
   }
 
-  if (view === 'produto' && id) {
-    const child = $(`.nav-child[data-produto="${id}"]`);
-    if (child) child.classList.add('active');
-    const parent = $('.nav-link[data-view="produtos"]');
-    if (parent) parent.classList.add('active');
+  if (activeEl) {
+    activeEl.classList.add('active');
+    abrirGrupoDoElemento(activeEl);   // garante que a seção pai esteja aberta
+    activeEl.scrollIntoView({ block:'nearest' });
   }
+}
 
-  if (view === 'jornada' && id) {
-    // Página de jornada — destaca 2Z Level como produto pai (por enquanto, todas as jornadas são do 2Z)
-    const parentProduto = $('.nav-child[data-produto="dois-z-level"]');
-    if (parentProduto) parentProduto.classList.add('active');
-    const parentSection = $('.nav-link[data-view="produtos"]');
-    if (parentSection) parentSection.classList.add('active');
+// Abre a seção (sidebar-nav) que contém o elemento ativo, se estiver colapsada
+function abrirGrupoDoElemento(el) {
+  const nav = el.closest('.sidebar-nav');
+  if (nav && nav.classList.contains('collapsed')) {
+    const header = nav.previousElementSibling;
+    if (header && header.classList.contains('sidebar-section')) toggleSecao(header, true);
   }
+}
+
+// Toggle de uma seção: mostra/esconde a .sidebar-nav logo após o header
+function toggleSecao(header, forceOpen) {
+  const nav = header.nextElementSibling;
+  if (!nav || !nav.classList.contains('sidebar-nav')) return;
+  const abrir = forceOpen === true ? true : (forceOpen === false ? false : nav.classList.contains('collapsed'));
+  nav.classList.toggle('collapsed', !abrir);
+  header.classList.toggle('open', abrir);
+}
+
+// Inicializa os toggles: torna cada header de seção clicável (começa ABERTO)
+function initSidebarToggles() {
+  $$('.sidebar-section').forEach(header => {
+    const nav = header.nextElementSibling;
+    if (!nav || !nav.classList.contains('sidebar-nav')) return;
+    header.classList.add('toggleable', 'open');   // visível e aberto por padrão
+    nav.classList.remove('collapsed');
+    header.addEventListener('click', () => toggleSecao(header));
+  });
 }
 
 // ================================================================
@@ -1629,7 +1654,7 @@ function renderNotFound() {
 // INIT
 // ================================================================
 window.addEventListener('hashchange', handleRoute);
-window.addEventListener('load', handleRoute);
+window.addEventListener('load', () => { initSidebarToggles(); handleRoute(); });
 
 // Expose modal handlers globally
 window.openFramework = openFramework;
