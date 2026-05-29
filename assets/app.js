@@ -48,6 +48,7 @@ const routes = {
   'trilhas': renderTrilhas,
   'trilha': renderTrilha,
   'frameworks': renderFrameworks,
+  'framework': renderFrameworkPage,
   'produtos': renderProdutos,
   'produto': renderProduto,
   'jornada': renderJornada,
@@ -94,6 +95,7 @@ function updateSidebar(view, id) {
   if (!activeEl) {
     if (view === '' || view === 'home') activeEl = $('.nav-link[data-view="home"]');
     else if (view === 'trilhas')        activeEl = $('.nav-sublabel a[data-view="trilhas"]');
+    else if (view === 'framework')      activeEl = $('.nav-link[data-view="frameworks"]');
     else if (view === 'produtos')       activeEl = $('.nav-link[data-view="produtos"]');
   }
 
@@ -863,15 +865,19 @@ function bindFrameworkFilters() {
 // ================================================================
 // FRAMEWORK MODAL (detalhe)
 // ================================================================
-function openFramework(id) {
+function renderFrameworkPage(id) {
   const f = getFramework(id);
-  if (!f) return;
+  if (!f) return renderNotFound();
   const trilhasNomes = f.trilhas.map(tid => getTrilha(tid)?.nome).filter(Boolean);
   // Frameworks com material extraído por IA — aguardam validação Maiara + Rafa
   const novos = ['cinco-regras-objecao','matematica-funil','icp-estrutural','tres-duvidas-vou-pensar','pre-vendas-vs-vendas','pergunta-empatica','etapa-nao-e-produto','etica-vs-carater','investimento-presenca','depoimento-vs-elogio','regra-link-nao-telefone','anatomia-pdf','venda-consultiva','plano-de-foco','esteira','qualificacao-lead','leitura-indicadores','indicacao-estruturada','escala-funis','valor-do-tempo','pf-pj','fluxo-caixa','custos-margem','contratacao-apoio','time-comercial','lideranca-delegacao','crencas-limitantes','timing-contratacao','roteiro-desligamento','transicao-identidade','marca-pessoal-corporativa','roda-vida-empresarial'];
   const aguardaValidacao = novos.includes(f.id);
 
-  $('#modal-body').innerHTML = `
+  return `
+    <div class="page-head" style="margin-bottom:18px;">
+      <div class="breadcrumb"><a href="#frameworks" style="color:var(--laranja);">Frameworks autorais</a> <span class="sep">/</span> ${esc(f.nome)}</div>
+    </div>
+    <div class="framework-page">
     <div class="modal-head">
       <div class="modal-status-row">
         ${trilhasNomes.map(n => `<span class="modal-tag trilha">${esc(n)}</span>`).join('')}
@@ -980,15 +986,24 @@ function openFramework(id) {
         ${ul(f.vira_conteudo)}
       </div>
     </div>
+    </div>
+    <div style="max-width:840px;margin:24px auto 0;padding-top:18px;border-top:1px solid var(--cream-3,rgba(14,15,13,0.08));">
+      <a href="#frameworks" style="color:var(--laranja);text-decoration:none;font-weight:600;font-size:14px;">← Voltar pros frameworks</a>
+    </div>
   `;
-  $('#modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  // bloco de comentários da Rafa próprio deste framework
-  if (window._showGiscusModal) window._showGiscusModal(f.id);
+}
+
+// openFramework agora NAVEGA pra página do framework. Os comentários da Rafa vêm do
+// Giscus do rodapé, que troca de thread por rota (term dash-framework-<id>). O client.js
+// do Giscus só inicializa 1 instância por página — por isso a casa do framework é uma
+// PÁGINA (não modal): a Rafa rola até o bloco de comentários e comenta ali.
+function openFramework(id) {
+  if (getFramework(id)) location.hash = '#framework/' + id;
 }
 
 function closeFramework() {
-  $('#modal').classList.remove('active');
+  const m = $('#modal');
+  if (m) m.classList.remove('active');
   document.body.style.overflow = '';
 }
 

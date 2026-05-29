@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20260529c">
+<link rel="stylesheet" href="assets/style.css?v=20260529d">
 </head>
 <body>
 
@@ -122,17 +122,11 @@
   <div class="modal">
     <button class="modal-close" onclick="closeFramework()" aria-label="Fechar">×</button>
     <div id="modal-body"></div>
-    <!-- Comentários da Rafa por framework (thread própria por framework) -->
-    <div id="modal-giscus-wrapper" style="margin:0;padding:28px 44px 40px;border-top:1px solid var(--cream-3,rgba(14,15,13,0.12));">
-      <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--laranja,#C75A2C);margin:0 0 4px 0;font-weight:700;">💬 Comentários da Rafa · sobre ESTE framework</p>
-      <p style="font-size:13px;color:var(--txt-2,#6E7B72);margin:0 0 16px 0;">Cada framework tem seu próprio espaço. Corrige, valida ou comenta o que está documentado acima. (1ª vez: login com GitHub — 10 segundos.)</p>
-      <div class="giscus" id="modal-giscus"></div>
-    </div>
   </div>
 </div>
 
-<script src="data/data.js?v=20260529c"></script>
-<script src="assets/app.js?v=20260529c"></script>
+<script src="data/data.js?v=20260529d"></script>
+<script src="assets/app.js?v=20260529d"></script>
 
 <!-- ============================================================
      GISCUS — comentários por seção (recuperado e adaptado pra v2)
@@ -170,37 +164,6 @@
       c.appendChild(s); loaded=true;
     } else {
       const f=document.querySelector('#giscus-wrapper iframe.giscus-frame');
-      if(f) f.contentWindow.postMessage({giscus:{setConfig:{term}}},ORIGIN);
-    }
-  };
-
-  // === Giscus DENTRO do modal de framework (thread própria por framework) ===
-  let modalLoaded=false, modalTerm=null;
-  const modalContainer=()=>document.querySelector('#modal-giscus');
-  window._showGiscusModal=function(termKey){
-    const term='dash-framework-'+(termKey||'geral');
-    if(term===modalTerm) return;
-    modalTerm=term;
-    const c=modalContainer(); if(!c) return;
-    if(!modalLoaded){
-      const s=document.createElement('script');
-      s.src='https://giscus.app/client.js';
-      s.setAttribute('data-repo',REPO);
-      s.setAttribute('data-repo-id',REPO_ID);
-      s.setAttribute('data-category',CAT);
-      s.setAttribute('data-category-id',CAT_ID);
-      s.setAttribute('data-mapping','specific');
-      s.setAttribute('data-term',term);
-      s.setAttribute('data-strict','0');
-      s.setAttribute('data-reactions-enabled','1');
-      s.setAttribute('data-emit-metadata','0');
-      s.setAttribute('data-input-position','top');
-      s.setAttribute('data-theme','light');
-      s.setAttribute('data-lang','pt');
-      s.crossOrigin='anonymous'; s.async=true;
-      c.appendChild(s); modalLoaded=true;
-    } else {
-      const f=document.querySelector('#modal-giscus-wrapper iframe.giscus-frame');
       if(f) f.contentWindow.postMessage({giscus:{setConfig:{term}}},ORIGIN);
     }
   };

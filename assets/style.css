@@ -795,6 +795,17 @@ img{max-width:100%;display:block;}
   overflow-y:auto;
   position:relative;
 }
+/* Framework como PÁGINA (não modal) — reusa o visual do modal num cartão centrado */
+.framework-page{
+  max-width:840px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:0 2px 16px rgba(14,15,13,0.06);
+  border:1px solid var(--cream-3,rgba(14,15,13,0.08));
+}
+.framework-page .modal-head{ border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
 .modal-close{
   position:absolute;
   top:16px;right:18px;
