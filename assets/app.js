@@ -3,7 +3,7 @@
    Lógica de navegação + renderização
    ================================================================ */
 
-const { STATUS, ECOSSISTEMA, PERSONAS, TRILHAS, FRAMEWORKS, PRODUTOS, JORNADA_DETALHADA, EXTRACAO, APROVACOES, calcularProgressoFrameworks, calcularProgressoTrilha } = window.DATA;
+const { STATUS, ECOSSISTEMA, PERSONAS, TRILHAS, FRAMEWORKS, PRODUTOS, JORNADA_DETALHADA, EXTRACAO, APROVACOES, ESCOPO_INCEPTION, ENTREGAVEIS, calcularProgressoFrameworks, calcularProgressoTrilha } = window.DATA;
 
 // Helpers
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -30,7 +30,10 @@ const routes = {
   'produto': renderProduto,
   'jornada': renderJornada,
   'extracao': renderExtracao,
-  'aprovacoes': renderAprovacoes
+  'aprovacoes': renderAprovacoes,
+  'escopo': renderEscopo,
+  'entregas': renderEntregas,
+  'entregavel': renderEntregavel
 };
 
 function handleRoute() {
@@ -798,8 +801,8 @@ function openFramework(id) {
   const f = getFramework(id);
   if (!f) return;
   const trilhasNomes = f.trilhas.map(tid => getTrilha(tid)?.nome).filter(Boolean);
-  // Frameworks novos da varredura (aguardam validação)
-  const novos = ['cinco-regras-objecao','matematica-funil','icp-estrutural','tres-duvidas-vou-pensar','pre-vendas-vs-vendas','pergunta-empatica','etapa-nao-e-produto','etica-vs-carater','investimento-presenca','depoimento-vs-elogio','regra-link-nao-telefone'];
+  // Frameworks com material extraído por IA — aguardam validação Maiara + Rafa
+  const novos = ['cinco-regras-objecao','matematica-funil','icp-estrutural','tres-duvidas-vou-pensar','pre-vendas-vs-vendas','pergunta-empatica','etapa-nao-e-produto','etica-vs-carater','investimento-presenca','depoimento-vs-elogio','regra-link-nao-telefone','anatomia-pdf','venda-consultiva','plano-de-foco','esteira','qualificacao-lead','leitura-indicadores','indicacao-estruturada','escala-funis','valor-do-tempo','pf-pj','fluxo-caixa','custos-margem','contratacao-apoio','time-comercial','lideranca-delegacao','crencas-limitantes','timing-contratacao','roteiro-desligamento','transicao-identidade','marca-pessoal-corporativa','roda-vida-empresarial'];
   const aguardaValidacao = novos.includes(f.id);
 
   $('#modal-body').innerHTML = `
@@ -817,6 +820,60 @@ function openFramework(id) {
       ${f.o_que_e ? `
       <div class="modal-section" style="background:var(--cream-2);padding:14px 18px;border-radius:var(--radius);border-left:3px solid var(--laranja);">
         <p style="font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.4;color:var(--verde);margin:0;">"${esc(f.o_que_e)}"</p>
+      </div>
+      ` : ''}
+
+      ${f.quando_acionar && f.quando_acionar.length ? `
+      <div class="modal-section">
+        <h4><span class="icon">⚡</span>Quando acionar</h4>
+        <p style="font-size:13px;color:var(--txt-2);margin:0 0 10px 0;font-style:italic;">Contextos, problemas, situações em que esse framework é indicado.</p>
+        ${ul(f.quando_acionar)}
+      </div>
+      ` : ''}
+
+      ${f.teses_metodologias ? `
+      <div class="modal-section" style="background:rgba(90,122,60,0.06);padding:14px 18px;border-radius:var(--radius);border-left:3px solid var(--verde);">
+        <h4 style="margin-top:0;"><span class="icon">📚</span>Teses e metodologias</h4>
+        ${f.teses_metodologias.base_externa ? `
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--txt-2);margin-bottom:4px;">Base externa</div>
+            <p style="margin:0;font-size:14px;line-height:1.5;">${esc(f.teses_metodologias.base_externa)}</p>
+          </div>
+        ` : `
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--txt-2);margin-bottom:4px;">Base externa</div>
+            <p style="margin:0;font-size:13px;line-height:1.5;font-style:italic;color:var(--txt-2);">Autoral — sem base externa identificada.</p>
+          </div>
+        `}
+        ${f.teses_metodologias.teses_rafa && f.teses_metodologias.teses_rafa.length ? `
+          <div>
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--txt-2);margin-bottom:6px;">Teses da Rafa</div>
+            <ul style="margin:0;padding-left:18px;">
+              ${f.teses_metodologias.teses_rafa.map(t => `<li style="font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.5;color:var(--verde);margin-bottom:6px;">${esc(t)}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+      </div>
+      ` : ''}
+
+      ${f.passo_a_passo && f.passo_a_passo.length ? `
+      <div class="modal-section">
+        <h4><span class="icon">🪜</span>Passo a passo</h4>
+        <p style="font-size:13px;color:var(--txt-2);margin:0 0 14px 0;font-style:italic;">Como o framework funciona na prática. Etapas com ramificações quando há condicionais.</p>
+        <ol style="margin:0;padding-left:0;list-style:none;counter-reset:passo;">
+          ${f.passo_a_passo.map(p => `
+            <li style="counter-increment:passo;position:relative;padding:14px 14px 14px 52px;margin-bottom:10px;background:var(--cream-2);border-radius:var(--radius);">
+              <div style="position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--verde);color:var(--cream);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">${p.etapa || ''}</div>
+              <div style="font-weight:700;font-size:14px;color:var(--verde);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;">${esc(p.titulo || '')}</div>
+              <div style="font-size:14px;line-height:1.55;color:var(--txt);">${esc(p.desc || '')}</div>
+              ${p.condicional ? `
+                <div style="margin-top:8px;padding:8px 12px;background:rgba(199,90,44,0.10);border-left:2px solid var(--laranja);border-radius:0 var(--radius) var(--radius) 0;font-size:13px;line-height:1.5;color:var(--txt);">
+                  <strong style="color:var(--laranja);text-transform:uppercase;font-size:11px;letter-spacing:0.06em;">Ramificação:</strong> ${esc(p.condicional)}
+                </div>
+              ` : ''}
+            </li>
+          `).join('')}
+        </ol>
       </div>
       ` : ''}
 
@@ -1191,6 +1248,286 @@ function renderAprovacoes() {
         <h4>○ Decisões pendentes</h4>
         <ul>${APROVACOES.pendentes.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
       </div>
+    </div>
+  `;
+}
+
+// ================================================================
+// ESCOPO INCEPTION · o que está dentro e fora desta consultoria
+// ================================================================
+function statusBadgeGeneric(s) {
+  if (!s) return { cor:'var(--txt-2)', label:'—', bg:'rgba(14,15,13,0.06)' };
+  const low = String(s).toLowerCase();
+  if (low.includes('pronto')) return { cor:'var(--status-pronto)', label:s, bg:'rgba(90,122,60,0.12)' };
+  if (low.includes('em construção') || low.includes('parcial')) return { cor:'var(--status-parcial)', label:s, bg:'rgba(199,90,44,0.12)' };
+  if (low.includes('a definir')) return { cor:'var(--laranja)', label:s, bg:'rgba(199,90,44,0.18)' };
+  if (low.includes('rafa produz') || low.includes('⚐')) return { cor:'#8b6f3a', label:s, bg:'rgba(139,111,58,0.12)' };
+  return { cor:'var(--txt-2)', label:s, bg:'rgba(14,15,13,0.06)' };
+}
+
+function renderEscopo() {
+  const e = ESCOPO_INCEPTION;
+  const statusBadge = statusBadgeGeneric;
+
+  return `
+    <div class="page-head" style="margin-bottom:24px;">
+      <div class="breadcrumb">Inception <span class="sep">/</span> Escopo desta consultoria</div>
+      <h1 class="page-h">Escopo da Inception</h1>
+      <p class="page-lead">O que entra, o que não entra e como a gente prioriza. Esta página existe pra calibrar expectativa — produto robusto, equipe enxuta, foco em uma coisa por vez.</p>
+    </div>
+
+    <div style="background:var(--cream-2);padding:22px 26px;border-radius:var(--radius);border-left:4px solid var(--laranja);margin-bottom:32px;">
+      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--laranja);margin-bottom:8px;font-weight:700;">Mensagem para a Rafa</div>
+      <p style="font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.55;color:var(--verde);margin:0;">"${esc(e.mensagem_rafa)}"</p>
+      <div style="font-size:11px;color:var(--txt-2);margin-top:10px;">— Maiara · ${esc(e.versao)}</div>
+    </div>
+
+    ${e.principio_estrategico ? `
+    <div class="section" style="margin-bottom:40px;background:var(--verde);color:var(--cream);padding:32px;border-radius:var(--radius);">
+      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--laranja);margin-bottom:10px;font-weight:700;">⚐ Princípio estratégico</div>
+      <h2 style="margin:0 0 20px 0;font-family:var(--serif);font-size:28px;line-height:1.25;color:var(--cream);">${esc(e.principio_estrategico.titulo)}</h2>
+      <div style="background:rgba(232,227,212,0.08);padding:18px 22px;border-radius:var(--radius);border-left:3px solid var(--laranja);margin-bottom:20px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--laranja);margin-bottom:6px;font-weight:700;">Evidência</div>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--cream);">${esc(e.principio_estrategico.evidencia)}</p>
+      </div>
+      <div style="background:rgba(232,227,212,0.12);padding:18px 22px;border-radius:var(--radius);margin-bottom:20px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--laranja);margin-bottom:6px;font-weight:700;">Regra</div>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--cream);font-weight:600;">${esc(e.principio_estrategico.regra)}</p>
+      </div>
+      <div style="margin-bottom:20px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--laranja);margin-bottom:8px;font-weight:700;">O que isso protege</div>
+        <ul style="margin:0;padding-left:22px;">
+          ${e.principio_estrategico.o_que_isso_protege.map(p => `<li style="margin-bottom:6px;font-size:14px;line-height:1.55;color:var(--cream);">${esc(p)}</li>`).join('')}
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--laranja);margin-bottom:10px;font-weight:700;">Divisão de papéis</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          ${e.principio_estrategico.divisao_papeis.map(d => `
+            <div style="background:rgba(232,227,212,0.12);padding:16px 18px;border-radius:var(--radius);">
+              <div style="font-weight:700;color:var(--laranja);margin-bottom:6px;font-size:14px;">${esc(d.papel)}</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.55;color:var(--cream);">${esc(d.faz)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+    ` : ''}
+
+    <div class="section" style="margin-bottom:40px;">
+      <div class="section-title" style="color:var(--status-pronto);">✓ DENTRO DO ESCOPO</div>
+      <h2 class="section-h">${esc(e.dentro_escopo.titulo)}</h2>
+
+      ${e.dentro_escopo.grupos.map(g => `
+        <div style="margin-top:24px;">
+          <h3 style="font-size:16px;color:var(--verde);margin:0 0 14px 0;text-transform:uppercase;letter-spacing:0.04em;">${esc(g.grupo)}</h3>
+          ${typeof g.itens[0] === 'string'
+            ? `<ul style="margin:0;padding-left:22px;">${g.itens.map(i => `<li style="font-size:15px;line-height:1.7;margin-bottom:6px;">${esc(i)}</li>`).join('')}</ul>`
+            : `<div style="display:grid;gap:14px;">${g.itens.map(i => {
+                const sb = statusBadge(i.status);
+                return `
+                <div style="background:var(--cream-2);padding:18px 20px;border-radius:var(--radius);border-left:3px solid var(--verde);">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:8px;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:240px;">
+                      <div style="font-size:11px;color:var(--txt-2);margin-bottom:4px;">PRIORIDADE ${i.prioridade}</div>
+                      <h4 style="margin:0;font-size:16px;color:var(--verde);">${esc(i.nome)}</h4>
+                    </div>
+                    <span style="background:${sb.bg};color:${sb.cor};padding:5px 11px;border-radius:99px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;">${sb.label}</span>
+                  </div>
+                  <p style="margin:0;font-size:14px;line-height:1.55;color:var(--txt);">${esc(i.desc)}</p>
+                </div>`;
+              }).join('')}</div>`
+          }
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="section" style="margin-bottom:40px;">
+      <div class="section-title" style="color:var(--laranja);">✗ FORA DO ESCOPO</div>
+      <h2 class="section-h">${esc(e.fora_escopo.titulo)}</h2>
+      <p style="font-size:14px;color:var(--txt-2);font-style:italic;margin-bottom:18px;">${esc(e.fora_escopo.aviso)}</p>
+      <ul style="margin:0;padding-left:0;list-style:none;">
+        ${e.fora_escopo.itens.map(i => `
+          <li style="padding:12px 16px;margin-bottom:8px;background:rgba(199,90,44,0.06);border-left:3px solid var(--laranja);border-radius:0 var(--radius) var(--radius) 0;font-size:15px;line-height:1.55;color:var(--txt);">
+            <span style="color:var(--laranja);font-weight:700;margin-right:8px;">✗</span>${esc(i)}
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+
+    <div class="section" style="margin-bottom:40px;">
+      <div class="section-title">Princípios de priorização</div>
+      <h2 class="section-h">Como decidimos onde focar</h2>
+      <ol style="margin:0;padding-left:24px;">
+        ${e.principio_priorizacao.map(p => `<li style="font-size:15px;line-height:1.7;margin-bottom:8px;color:var(--txt);">${esc(p)}</li>`).join('')}
+      </ol>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Backlog futuro (para a 2ª etapa OU execução interna da Rafa)</div>
+      <h2 class="section-h">Ideias registradas — não esquecidas, não executadas agora</h2>
+      <p style="font-size:14px;color:var(--txt-2);font-style:italic;margin-bottom:18px;">Aqui ficam as demandas que surgiram durante a consultoria mas que extrapolam o escopo inicial. A Rafa decide depois: executa internamente, contrata outro fornecedor, ou orça com a Inception uma 2ª etapa.</p>
+      <div style="display:grid;gap:10px;">
+        ${e.backlog_futuro.map(i => `
+          <div style="padding:12px 16px;background:var(--cream-2);border-radius:var(--radius);border-left:2px dashed var(--txt-2);font-size:14px;line-height:1.5;color:var(--txt);">
+            <span style="color:var(--txt-2);font-weight:700;margin-right:8px;">↪</span>${esc(i)}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ================================================================
+// ENTREGAS · lista geral de todos os entregáveis
+// ================================================================
+function renderEntregas() {
+  const itens = Object.values(ENTREGAVEIS);
+
+  // Agrupar por categoria
+  const grupos = {};
+  itens.forEach(e => {
+    if (!grupos[e.categoria]) grupos[e.categoria] = [];
+    grupos[e.categoria].push(e);
+  });
+
+  // Ordem das categorias (Sistema Central primeiro)
+  const ordemCategorias = ['Sistema Central','Documentação','Notion','Curseduca','IA','App Externo','Treinamento'];
+  const gruposOrdenados = {};
+  ordemCategorias.forEach(cat => {
+    if (grupos[cat]) gruposOrdenados[cat] = grupos[cat];
+  });
+  // Adiciona qualquer outra categoria não listada
+  Object.keys(grupos).forEach(cat => {
+    if (!gruposOrdenados[cat]) gruposOrdenados[cat] = grupos[cat];
+  });
+  Object.keys(grupos).forEach(k => delete grupos[k]);
+  Object.assign(grupos, gruposOrdenados);
+
+  return `
+    <div class="page-head" style="margin-bottom:24px;">
+      <div class="breadcrumb">Inception <span class="sep">/</span> Entregas detalhadas</div>
+      <h1 class="page-h">Entregas da consultoria</h1>
+      <p class="page-lead">Uma página por entregável — clica em cada um pra ver: o que tem dentro, formato de cada item, como funciona e <strong>o que NÃO tem</strong> (alivia a ansiedade de "será que tá faltando?").</p>
+    </div>
+
+    ${Object.entries(grupos).map(([cat, lista]) => `
+      <div class="section" style="margin-bottom:36px;">
+        <div class="section-title">${esc(cat)}</div>
+        <h2 class="section-h">${cat === 'Sistema Central' ? 'Coração do produto (Diagnóstico · Plano Mestre · Squad)' : cat === 'Notion' ? 'Sistemas operacionais (Notion)' : cat === 'Curseduca' ? 'Plataforma de aprendizado (Curseduca)' : cat === 'IA' ? 'Inteligências artificiais' : cat === 'Documentação' ? 'Documentação do método' : cat === 'App Externo' ? 'App de métricas (Marco + Rafa · em dev)' : cat === 'Treinamento' ? 'Entrega final (treinamento Rafa + CP)' : cat}</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:20px;">
+          ${lista.map(e => {
+            const sb = statusBadgeGeneric(e.status);
+            return `
+              <a href="#entregavel/${e.id}" style="text-decoration:none;color:inherit;">
+                <div style="background:var(--cream-2);padding:22px;border-radius:var(--radius);border-left:3px solid var(--verde);transition:transform .15s,box-shadow .15s;cursor:pointer;height:100%;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 28px rgba(14,15,13,0.08)';" onmouseout="this.style.transform='';this.style.boxShadow='';">
+                  <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;">
+                    <div style="font-size:28px;line-height:1;">${e.icone || '📦'}</div>
+                    <div style="flex:1;">
+                      <div style="font-size:10.5px;color:var(--txt-2);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.05em;">Prioridade ${e.prioridade}</div>
+                      <h3 style="margin:0;font-size:16px;color:var(--verde);">${esc(e.nome)}</h3>
+                    </div>
+                  </div>
+                  <p style="margin:0 0 12px 0;font-size:13px;line-height:1.55;color:var(--txt);">${esc(e.visao_geral.slice(0,160))}${e.visao_geral.length > 160 ? '…' : ''}</p>
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+                    <span style="background:${sb.bg};color:${sb.cor};padding:4px 10px;border-radius:99px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">${esc(sb.label)}</span>
+                    <span style="font-size:12px;color:var(--laranja);font-weight:600;">Ver detalhes →</span>
+                  </div>
+                </div>
+              </a>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+// ================================================================
+// ENTREGÁVEL · página detalhada de UM entregável
+// ================================================================
+function renderEntregavel(id) {
+  const e = ENTREGAVEIS && ENTREGAVEIS[id];
+  if (!e) return renderNotFound();
+
+  const sb = statusBadgeGeneric(e.status);
+
+  return `
+    <div class="page-head" style="margin-bottom:24px;">
+      <div class="breadcrumb"><a href="#entregas" style="color:var(--laranja);">Entregas</a> <span class="sep">/</span> ${esc(e.categoria)} <span class="sep">/</span> ${esc(e.nome)}</div>
+    </div>
+
+    <div style="background:var(--verde);color:var(--cream);padding:32px;border-radius:var(--radius);margin-bottom:32px;">
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:16px;">
+        <div style="font-size:48px;line-height:1;">${e.icone || '📦'}</div>
+        <div style="flex:1;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--laranja);margin-bottom:4px;font-weight:700;">${esc(e.categoria)} · Prioridade ${e.prioridade}</div>
+          <h1 style="margin:0;font-family:var(--serif);font-size:32px;line-height:1.2;color:var(--cream);">${esc(e.nome)}</h1>
+        </div>
+        <span style="background:${sb.bg};color:${sb.cor};padding:6px 14px;border-radius:99px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;">${esc(sb.label)}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(232,227,212,0.18);">
+        <div>
+          <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--laranja);margin-bottom:4px;font-weight:700;">Público</div>
+          <div style="font-size:14px;color:var(--cream);">${esc(e.publico)}</div>
+        </div>
+        <div>
+          <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--laranja);margin-bottom:4px;font-weight:700;">Plataforma</div>
+          <div style="font-size:14px;color:var(--cream);">${esc(e.plataforma)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-bottom:36px;">
+      <div class="section-title">Visão geral</div>
+      <p style="font-size:16px;line-height:1.65;color:var(--txt);margin:0;max-width:780px;">${esc(e.visao_geral)}</p>
+    </div>
+
+    <div class="section" style="margin-bottom:36px;">
+      <div class="section-title">Conteúdo detalhado</div>
+      <h2 class="section-h">O que tem dentro</h2>
+      <p style="font-size:14px;color:var(--txt-2);font-style:italic;margin-bottom:18px;">Item × formato × descrição × status atual. Status "Rafa produz" = conteúdo final é responsabilidade da expert; Inception entrega briefing/estrutura.</p>
+      <div style="display:grid;gap:14px;">
+        ${e.conteudo.map(c => {
+          const csb = statusBadgeGeneric(c.status);
+          return `
+            <div style="background:var(--cream-2);padding:18px 22px;border-radius:var(--radius);border-left:3px solid var(--verde);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:8px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:240px;">
+                  <h4 style="margin:0 0 4px 0;font-size:15.5px;color:var(--verde);">${esc(c.item)}</h4>
+                  <div style="font-size:12px;color:var(--txt-2);text-transform:uppercase;letter-spacing:0.04em;">${esc(c.formato)}</div>
+                </div>
+                <span style="background:${csb.bg};color:${csb.cor};padding:4px 10px;border-radius:99px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;">${esc(csb.label)}</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.6;color:var(--txt);">${esc(c.desc)}</p>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="section" style="margin-bottom:36px;background:var(--cream-2);padding:24px 28px;border-radius:var(--radius);border-left:3px solid var(--laranja);">
+      <div class="section-title" style="color:var(--laranja);">Como funciona na prática</div>
+      <p style="font-size:15px;line-height:1.65;color:var(--txt);margin:0;">${esc(e.como_funciona)}</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title" style="color:var(--laranja);">O que NÃO tem neste entregável</div>
+      <h2 class="section-h">Pra deixar claro o limite</h2>
+      <p style="font-size:14px;color:var(--txt-2);font-style:italic;margin-bottom:18px;">Esses itens não estão aqui — ou ficam em OUTRO entregável (link), ou estão no backlog futuro (2ª etapa / execução interna da Rafa).</p>
+      <ul style="margin:0;padding-left:0;list-style:none;">
+        ${e.o_que_NAO_tem.map(i => `
+          <li style="padding:10px 14px;margin-bottom:6px;background:rgba(199,90,44,0.06);border-left:3px solid var(--laranja);border-radius:0 var(--radius) var(--radius) 0;font-size:14px;line-height:1.5;color:var(--txt);">
+            <span style="color:var(--laranja);font-weight:700;margin-right:8px;">✗</span>${esc(i)}
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+
+    <div style="margin-top:36px;padding-top:24px;border-top:1px solid var(--cream-3);">
+      <a href="#entregas" style="color:var(--laranja);text-decoration:none;font-size:14px;font-weight:600;">← Voltar pra todas as entregas</a>
+      <span style="margin:0 12px;color:var(--txt-2);">·</span>
+      <a href="#escopo" style="color:var(--laranja);text-decoration:none;font-size:14px;font-weight:600;">Ver escopo geral</a>
     </div>
   `;
 }
