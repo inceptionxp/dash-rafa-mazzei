@@ -349,8 +349,8 @@ function renderHome() {
 
     <div class="section">
       <div class="section-title">Plano de extração</div>
-      <h2 class="section-h">Frentes de validação por demanda</h2>
-      <p class="section-sub">A extração já foi feita pela Inception (varredura das transcrições). O que resta são frentes de <strong>validação por tema</strong> — a maioria assíncrona. <strong>Tempo total da Rafa: ~1h30 a 3h30, conforme a demanda de cada frente.</strong></p>
+      <h2 class="section-h">Validação dos frameworks por trilha</h2>
+      <p class="section-sub">A extração já foi feita pela Inception. Agora a Rafa abre <strong>cada framework</strong> no dashboard e comenta — corrige, ajusta ou aprova. São <strong>48 frameworks</strong> nas 7 trilhas (32 com material detalhado), mais as 2 páginas centrais. <strong>Tempo total: ~4h30 a 5h30 — melhor dividir em 2-3 blocos de ~1h30-2h, não tudo de uma vez.</strong></p>
       <table class="extracao-tabela">
         <thead><tr><th>Sessão</th><th>Foco</th><th>Frameworks</th><th>Tempo da Rafa</th></tr></thead>
         <tbody>
@@ -1261,8 +1261,8 @@ function renderExtracao() {
     </div>
 
     <div class="section">
-      <div class="section-title">Calendário</div>
-      <h2 class="section-h">Frentes de validação por tema</h2>
+      <div class="section-title">Blocos de revisão</div>
+      <h2 class="section-h">Validação dos frameworks por trilha</h2>
       <table class="extracao-tabela">
         <thead><tr><th>Sessão</th><th>Foco</th><th>Frameworks</th><th>Fonte</th><th>Tempo da Rafa</th></tr></thead>
         <tbody>
