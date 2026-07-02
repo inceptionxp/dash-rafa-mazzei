@@ -57,8 +57,7 @@ const routes = {
   'escopo': renderEscopo,
   'entregas': renderEntregas,
   'entregavel': renderEntregavel,
-  'plano-ensino': renderPlanoEnsino,
-  'briefing-imersao': renderBriefingImersao
+  'plano-ensino': renderPlanoEnsino
 };
 
 // Páginas consolidadas: Diagnóstico e Plano Mestre vivem só na Jornada do Aluno.
@@ -71,6 +70,12 @@ function handleRoute() {
 
   if (view === 'entregavel' && REDIRECT_ENTREGAVEL_JORNADA.includes(id)) {
     window.location.replace('#jornada/' + id);
+    return;
+  }
+
+  // Briefing da Imersão vive na página do produto Imersão (rota antiga vira alias)
+  if (view === 'briefing-imersao') {
+    window.location.replace('#produto/imersao');
     return;
   }
 
@@ -535,6 +540,9 @@ function renderMetodo() {
 function renderProduto(id) {
   const p = PRODUTOS.find(prod => prod.id === id);
   if (!p) return renderNotFound();
+
+  // A Imersão agora é definida pelo briefing de campanha (embutido)
+  if (id === 'imersao') return renderBriefingImersao();
 
   if (p.status === 'em_construcao') {
     return `
