@@ -1,0 +1,479 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Briefing — Imersão Cliente Certo com IA · Bellz House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --preto:#0e0f0d; --preto-2:#1a1b18;
+  --verde:#1f3a2a; --verde-2:#2b4a35; --verde-claro:#3d5d47;
+  --laranja:#c75a2c; --laranja-2:#d96d3c; --bordeaux:#8a2c1c;
+  --azul:#7da5b8; --azul-2:#a8c5d2;
+  --cream:#e8e3d4; --cream-2:#f2efe6; --cream-3:#faf8f2;
+  --txt:rgba(14,15,13,0.88); --txt-2:#6e7b72; --linha:rgba(14,15,13,0.1);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+  --radius:6px; --radius-card:10px; --radius-lg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--txt);background:var(--cream-3);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spacing:-0.01em;color:var(--preto);}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--laranja);font-weight:700;}
+em{font-family:var(--serif);font-style:italic;color:var(--verde);}
+strong{font-weight:700;color:var(--preto);}
+a{color:var(--verde);}
+
+/* HERO */
+.hero{background:var(--verde);color:var(--cream-2);padding:64px 0 56px;position:relative;overflow:hidden;}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 88% -10%,rgba(199,90,44,0.28),transparent 55%);pointer-events:none;}
+.hero .wrap{position:relative;}
+.hero .eyebrow{color:var(--laranja-2);}
+.hero h1{color:var(--cream-2);font-size:clamp(38px,6.5vw,66px);margin:14px 0 6px;}
+.hero h1 em{color:var(--azul-2);font-style:italic;}
+.wk-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--laranja-2);font-weight:700;margin:0 0 14px;}
+.hero .promise{font-size:clamp(17px,2.4vw,22px);max-width:640px;color:rgba(242,239,230,0.92);font-weight:500;}
+.hero .promise em{color:var(--azul-2);}
+.metabar{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:30px;padding-top:22px;border-top:1px solid rgba(232,227,212,0.18);}
+.metabar div{font-size:12.5px;color:rgba(242,239,230,0.72);}
+.metabar b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--laranja-2);margin-bottom:3px;font-weight:700;}
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;padding:5px 11px;border-radius:100px;}
+.pill-status{background:var(--laranja);color:#fff;}
+
+/* NAV */
+.toc{position:sticky;top:0;z-index:20;background:rgba(31,58,42,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(232,227,212,0.14);}
+.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:0 24px;scrollbar-width:none;}
+.toc .wrap::-webkit-scrollbar{display:none;}
+.toc a{flex:0 0 auto;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(242,239,230,0.6);text-decoration:none;padding:13px 12px;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s;}
+.toc a:hover{color:var(--cream-2);border-color:var(--laranja);}
+
+/* SECTIONS */
+section{padding:52px 0;border-bottom:1px solid var(--linha);}
+section:last-of-type{border-bottom:none;}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--laranja);font-weight:700;letter-spacing:0.08em;}
+h2{font-size:clamp(27px,4vw,40px);margin:8px 0 6px;}
+.sec-lead{font-size:17.5px;color:var(--txt-2);max-width:660px;margin-bottom:26px;}
+h3{font-size:22px;margin:30px 0 12px;}
+p{margin:0 0 14px;}
+p:last-child{margin-bottom:0;}
+ul{margin:0 0 14px;padding-left:0;list-style:none;}
+li{position:relative;padding-left:22px;margin-bottom:9px;}
+li:before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:2px;background:var(--laranja);transform:rotate(45deg);}
+ul.plain li:before{background:var(--verde-claro);}
+
+/* CARDS + GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.card{background:#fff;border:1px solid var(--linha);border-radius:var(--radius-card);padding:22px 22px;}
+.card h4{font-size:18px;margin-bottom:8px;}
+.card .k{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--laranja);font-weight:700;margin-bottom:8px;display:block;}
+.card.dark{background:var(--verde);color:var(--cream-2);border-color:var(--verde-2);}
+.card.dark h4{color:var(--cream-2);}
+.card.dark .k{color:var(--laranja-2);}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--laranja);background:var(--cream-2);border-radius:0 var(--radius-card) var(--radius-card) 0;padding:18px 22px;margin:18px 0;}
+.callout .k{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;color:var(--laranja);margin-bottom:6px;display:block;}
+.callout.verde{border-color:var(--verde-claro);}
+.callout.verde .k{color:var(--verde);}
+.callout.warn{border-color:var(--bordeaux);background:#f7ece9;}
+.callout.warn .k{color:var(--bordeaux);}
+.bigidea{background:var(--preto);color:var(--cream-2);border-radius:var(--radius-lg);padding:38px 34px;margin:8px 0;position:relative;overflow:hidden;}
+.bigidea:before{content:"“";position:absolute;font-family:var(--serif);font-size:220px;line-height:1;color:rgba(199,90,44,0.16);top:-30px;left:14px;}
+.bigidea .k{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--laranja-2);font-weight:700;position:relative;}
+.bigidea p{font-family:var(--serif);font-size:clamp(24px,3.6vw,34px);line-height:1.22;color:var(--cream-2);position:relative;margin:12px 0 0;}
+.bigidea .sub{font-family:var(--sans);font-size:16px;color:rgba(242,239,230,0.78);margin-top:16px;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px;margin:6px 0 4px;}
+.tbl th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--laranja);font-weight:700;padding:10px 12px;border-bottom:2px solid var(--linha);vertical-align:bottom;}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--linha);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl td:first-child{font-weight:600;color:var(--preto);white-space:nowrap;}
+.tbl .g{background:var(--cream-2);}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* DEFINITION / copymap */
+.dl{display:grid;grid-template-columns:180px 1fr;gap:0;border:1px solid var(--linha);border-radius:var(--radius-card);overflow:hidden;background:#fff;}
+.dl dt{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--verde);font-weight:700;padding:15px 16px;background:var(--cream-2);border-bottom:1px solid var(--linha);display:flex;align-items:center;}
+.dl dd{padding:15px 18px;border-bottom:1px solid var(--linha);font-size:15px;}
+.dl dt:last-of-type,.dl dd:last-of-type{border-bottom:none;}
+
+/* TIMELINE / run of show */
+.rundown{border-left:2px solid var(--linha);margin-left:8px;padding-left:0;}
+.rundown .step{position:relative;padding:0 0 24px 30px;}
+.rundown .step:last-child{padding-bottom:0;}
+.rundown .step:before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--laranja);border:3px solid var(--cream-3);}
+.rundown .step .t{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--txt-2);font-weight:700;}
+.rundown .step h4{font-size:18px;margin:2px 0 5px;}
+.rundown .step .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde);background:var(--cream-2);padding:2px 8px;border-radius:100px;margin-top:6px;font-weight:700;}
+
+/* FUNNEL */
+.funnel{display:flex;flex-direction:column;gap:8px;}
+.funnel .stage{background:#fff;border:1px solid var(--linha);border-radius:var(--radius-card);padding:14px 18px;display:flex;gap:14px;align-items:flex-start;}
+.funnel .stage .n{font-family:var(--serif);font-size:26px;color:var(--laranja);line-height:1;min-width:34px;}
+.funnel .stage .n small{font-family:var(--mono);font-size:9px;}
+.funnel .stage h4{font-size:16px;margin-bottom:2px;}
+.funnel .stage p{font-size:14px;color:var(--txt-2);margin:0;}
+
+/* NAMES */
+.namegrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.namecard{background:#fff;border:1px solid var(--linha);border-radius:var(--radius-card);padding:16px 18px;}
+.namecard.rec{border:2px solid var(--laranja);background:#fff;}
+.namecard .nm{font-family:var(--serif);font-size:22px;color:var(--preto);}
+.namecard .terr{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--txt-2);font-weight:700;}
+.namecard .why{font-size:13.5px;color:var(--txt-2);margin-top:6px;}
+.recflag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;background:var(--laranja);color:#fff;padding:3px 8px;border-radius:100px;font-weight:700;margin-bottom:8px;}
+
+/* CHECKLIST */
+.check{list-style:none;padding:0;}
+.check li{padding-left:30px;margin-bottom:12px;}
+.check li:before{content:"";position:absolute;left:0;top:2px;width:17px;height:17px;border:2px solid var(--laranja);border-radius:4px;background:transparent;transform:none;}
+.check li b{color:var(--preto);}
+.check li span{color:var(--txt-2);font-size:14px;}
+
+/* FOOTER */
+.foot{background:var(--preto);color:rgba(242,239,230,0.66);padding:34px 0;font-size:13px;}
+.foot .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.foot b{color:var(--cream-2);font-family:var(--serif);font-weight:400;font-size:16px;}
+
+@media(max-width:680px){
+  .grid-2,.grid-3,.namegrid{grid-template-columns:1fr;}
+  .dl{grid-template-columns:1fr;}
+  .dl dt{border-bottom:none;padding-bottom:2px;}
+  section{padding:40px 0;}
+}
+/* quando embutido na dash (iframe): esconde a TOC sticky (não funciona em iframe auto-altura) */
+.embedded .toc{display:none;}
+.embedded .hero{padding-top:48px;}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Briefing de campanha · Lançamento pago · Padrão MSE + The Path</span>
+    <h1>Imersão Cliente Certo <em>com IA</em></h1>
+    <div class="wk-label">Nome recomendado — variações na seção 13</div>
+    <p class="promise">Encontre, com IA e ao vivo, <em>pra quem</em> você deveria estar vendendo — e descubra que o preço para de travar quando você acerta a pessoa.</p>
+    <div class="metabar">
+      <div><b>Cliente</b>Rafaella Mazzei · Bellz House</div>
+      <div><b>Produto</b>Imersão de captação (topo de funil)</div>
+      <div><b>Papel na esteira</b>Porta de entrada → Sell-Z</div>
+      <div><b>Formato</b>Online ao vivo · low-ticket</div>
+      <div><b>Status</b><span class="pill pill-status">Para aprovação da Rafa</span></div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#leitura">Como ler</a>
+    <a href="#visao">01 Visão</a>
+    <a href="#objetivo">02 Objetivo</a>
+    <a href="#publico">03 Público</a>
+    <a href="#oferta">04 A imersão</a>
+    <a href="#mecanismo">05 Mecanismo</a>
+    <a href="#bigidea">06 Big Idea</a>
+    <a href="#copymap">07 Mapa da Copy</a>
+    <a href="#ganchos">08 Ganchos</a>
+    <a href="#runshow">09 Estrutura</a>
+    <a href="#pitch">10 Pitch Sell-Z</a>
+    <a href="#funil">11 Funil</a>
+    <a href="#trava">12 Trava de marca</a>
+    <a href="#nome">13 Nome</a>
+    <a href="#pendencias">14 Decisões</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="leitura">
+  <span class="sec-num">00</span>
+  <h2>Como ler este briefing</h2>
+  <p class="sec-lead">Este documento fecha as três coisas que faltavam na imersão: <strong>tema, nome e a inteligência de campanha</strong>. Ele é o mapa que a copy, o design e o tráfego vão seguir depois — nada aqui é peça final, é a decisão que orienta a peça.</p>
+  <div class="grid-2">
+    <div class="card"><span class="k">O que já está travado</span>
+      <ul class="plain">
+        <li>Formato: online ao vivo, low-ticket, captação</li>
+        <li>Entregável: pesquisa do cliente ideal + guia de entrevista, feitos com IA na hora</li>
+        <li>Mecanismo: prompt/skill rodado no Claude (navegador)</li>
+        <li>Eixo/narrativa: "não é a venda, é o cliente"</li>
+        <li>Ponte pro Sell-Z: depois do cliente vem toda a estrutura da venda</li>
+        <li>Linguagem no masculino/neutro (trava da marca)</li>
+      </ul>
+    </div>
+    <div class="card"><span class="k">O que depende de você</span>
+      <ul>
+        <li><strong>Nome</strong> — recomendado "Cliente Certo com IA"; variações na seção 13</li>
+        <li><strong>Preço, data e duração</strong> — faixas de referência, a bater o martelo</li>
+        <li><strong>Canal e verba de captação</strong> — proposta na seção 11</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="visao">
+  <span class="sec-num">01</span>
+  <h2>Visão geral & papel na esteira</h2>
+  <p class="sec-lead">A imersão é a <strong>porta de entrada paga</strong> da Bellz House. Ela resolve uma dor pequena e rápida com IA, prova o poder do método, e puxa a pessoa pro Sell-Z, que é o programa completo.</p>
+  <p>A regra da imersão (decidida pela Rafa) manda: dor <strong>latente, prática, resolvível em poucas horas, com resultado rápido</strong>, foco em dor — não em mentalidade. A pessoa sai pensando <em>"se essa pontinha resolveu, imagina no programa inteiro"</em>. A origem da dor é emocional (medo de cobrar, sensação de impostora), mas a imersão entrega uma <strong>virada técnica</strong>, não terapia.</p>
+  <p>O recorte escolhido: <strong>encontrar o cliente ideal</strong>. É o degrau mais limpo da esteira — não canibaliza o Sell-Z (a oferta, o processo e o funil ficam lá) e é <em>literalmente o passo 1 do programa</em> ("definir o cliente ideal") dado como amostra. E, melhor: o entregável não nasce do zero — é a versão enxuta de uma IA que já está no mapa do método (a Construtora de ICP + Mapa da Empatia).</p>
+  <div class="callout verde"><span class="k">A jogada</span>Provar o poder da IA num pedaço pequeno. Se com esse pedacinho a pessoa já sai sabendo pra quem vender, ela projeta sozinha o valor da IA completa + a Rafa junto — que vivem no Sell-Z.</div>
+</section>
+
+<section id="objetivo">
+  <span class="sec-num">02</span>
+  <h2>Objetivo & critério de sucesso</h2>
+  <p class="sec-lead">Dois objetivos, em ordem: <strong>captar</strong> gente do perfil certo e <strong>converter</strong> uma parte dela pro Sell-Z ao vivo (e na janela pós-imersão).</p>
+  <div class="grid-2">
+    <div class="card"><span class="k">Objetivo primário</span><h4>Captação qualificada</h4><p>Encher a imersão com prestadores de serviço de venda consultiva — o perfil que compra o Sell-Z. A imersão paga (low-ticket) já filtra curioso.</p></div>
+    <div class="card"><span class="k">Objetivo secundário</span><h4>Conversão pro Sell-Z</h4><p>O pitch ao vivo (+ follow-up) leva quem viveu a virada pro programa completo. A imersão paga o tráfego; o Sell-Z é o lucro.</p></div>
+  </div>
+  <h3>KPIs a acompanhar</h3>
+  <div class="scroll"><table class="tbl">
+    <tr><th>Métrica</th><th>Por que importa</th><th>Meta</th></tr>
+    <tr><td>Inscritos</td><td>Volume de topo</td><td class="g">a definir</td></tr>
+    <tr><td>CPL / CAC da imersão</td><td>Saúde do tráfego pago</td><td class="g">a definir</td></tr>
+    <tr><td>Comparecimento ao vivo</td><td>Quem assiste é quem converte</td><td class="g">a definir</td></tr>
+    <tr><td>Conversão imersão → Sell-Z</td><td>É o resultado que importa</td><td class="g">a definir</td></tr>
+    <tr><td>ROAS do ciclo</td><td>Imersão + Sell-Z pagam o tráfego?</td><td class="g">a definir</td></tr>
+  </table></div>
+  <div class="callout warn"><span class="k">Nota honesta</span>Metas específicas ficam em branco de propósito — a gente define com base no seu histórico de tráfego e no preço. Não vou inventar número.</div>
+</section>
+
+<section id="publico">
+  <span class="sec-num">03</span>
+  <h2>Público / Avatar</h2>
+  <p class="sec-lead">Um público só (o corte é comportamento, nunca faturamento). Pra imersão e Sell-Z, a persona é a <strong>Ana</strong> — problema-aware: sente a dor, ainda não conhece a solução.</p>
+  <div class="card dark">
+    <span class="k">Persona 01 · Ana, 36</span>
+    <h4>A prestadora que entrega demais e vende no feeling</h4>
+    <p>Tem um negócio de venda consultiva de alto valor (advogada, arquiteta, nutri, dentista, contadora, consultora). Entrega acima da média, é reconhecida e já tem leads chegando. Mas não sabe explicar por que uns meses fecham no azul e outros não. Vende por indicação, fecha no feeling, precifica no achismo. Já fez curso e grupo — saiu com conhecimento, sem transformação.</p>
+  </div>
+  <div class="grid-2" style="margin-top:18px;">
+    <div class="card"><span class="k">O que a atrai (o que ela busca)</span><p>Acha que precisa de <strong>mais clientes</strong> / prospectar mais.</p></div>
+    <div class="card"><span class="k">O que entregamos (o que ela precisa)</span><p>Quase nunca é mais clientes — é <strong>converter melhor quem já chega</strong>: começando por saber pra quem vender.</p></div>
+  </div>
+  <h3>A barreira real</h3>
+  <p>A dor sente-se emocional: medo de cobrar, "vender é ser chata", sensação de impostora, travar na hora do preço. Mas a raiz prática é que ela está oferecendo pra pessoa errada. É essa ponte — <em>emocional na entrada, técnica na entrega</em> — que a imersão explora.</p>
+  <h3>Objeções que a copy precisa desarmar</h3>
+  <div class="scroll"><table class="tbl">
+    <tr><th>A objeção</th><th>A resposta (ângulo)</th></tr>
+    <tr><td>"Eu já sei quem é meu cliente"</td><td>Você sabe o segmento. Não o cliente <em>certo</em> — o que paga o que você vale sem pechinchar. A IA mostra a diferença em minutos.</td></tr>
+    <tr class="g"><td>"É mais uma coisa de vendas / coach"</td><td>Não é palestra motivacional. É uma virada técnica com IA — você sai com um artefato pronto, não com anotações.</td></tr>
+    <tr><td>"Não entendo de IA"</td><td>Roda no navegador, você cola um prompt. A gente faz junto, ao vivo.</td></tr>
+    <tr class="g"><td>"O que eu preciso é de mais clientes"</td><td>Quase nunca é. É converter melhor quem já chega — e isso começa em saber pra quem vender.</td></tr>
+    <tr><td>"Vou travar no preço de novo"</td><td>Com o cliente certo o preço para de travar, porque você sabe que está ajudando.</td></tr>
+  </table></div>
+</section>
+
+<section id="oferta">
+  <span class="sec-num">04</span>
+  <h2>A imersão (a oferta em si)</h2>
+  <p class="sec-lead">Uma imersão curta, online e ao vivo, onde a pessoa <strong>sai com um artefato pronto</strong> — não com teoria.</p>
+  <div class="grid-2">
+    <div class="card"><span class="k">Formato</span><h4>Online ao vivo</h4><p>Ao vivo pra ter a demo e a mão na massa. Duração: <strong>a definir</strong> (referência: meio período / algumas horas — o suficiente pra rodar a IA e sair com o resultado).</p></div>
+    <div class="card"><span class="k">Preço</span><h4>Low-ticket de captação</h4><p><strong>Faixa a definir.</strong> Referência interna anterior a revalidar: Standard ~R$39 / VIP ~R$219–249. O preço filtra curioso sem barrar o topo.</p></div>
+  </div>
+  <h3>O que a pessoa leva pronto da sessão</h3>
+  <div class="grid-2">
+    <div class="card"><span class="k">Artefato 1</span><h4>Pesquisa do cliente ideal</h4><p>Quem é, a dor real, a linguagem que ele usa — gerado com IA na hora.</p></div>
+    <div class="card"><span class="k">Artefato 2</span><h4>Guia de entrevista</h4><p>As perguntas pra ir ouvir cliente de verdade. Sai com tarefa concreta — e já prepara o terreno do Sell-Z.</p></div>
+  </div>
+  <div class="callout"><span class="k">Pré-requisito logístico (a comunicar na inscrição)</span>Pra rodar ao vivo, cada pessoa precisa de <strong>notebook + uma conta no Claude</strong> (a grátis serve). A Rafa demonstra no Claude dela (qualidade garantida); a plateia roda a versão express.</div>
+</section>
+
+<section id="mecanismo">
+  <span class="sec-num">05</span>
+  <h2>Mecanismo único</h2>
+  <p class="sec-lead">O diferencial que só a Bellz House tem: uma <strong>IA que encontra o seu cliente ideal</strong>, amarrada ao método — e um gostinho da IA que "encurta a curva" dentro do Sell-Z.</p>
+  <div class="grid-2">
+    <div class="card"><span class="k">Como funciona</span><p>A pessoa cola um prompt (ou instala a skill) no Claude, responde sobre o próprio serviço, e a IA devolve a pesquisa do cliente ideal + o guia de entrevista. Baixa fricção, resultado na hora.</p></div>
+    <div class="card"><span class="k">Por que é diferente</span><p>Não é "aprenda IA" nem "assista uma aula". É <strong>IA pra encurtar a curva</strong> aplicada num problema real de venda, com você saindo com a entrega feita.</p></div>
+  </div>
+  <div class="callout verde"><span class="k">Amarra com o método</span>Esse agente é a versão enxuta da IA #2 do método (Construtora de ICP + Mapa da Empatia). A completa — mais profunda, com a Rafa junto — vive no Sell-Z. A imersão é a amostra que vende a completa.</div>
+</section>
+
+<section id="bigidea">
+  <span class="sec-num">06</span>
+  <h2>Big Idea</h2>
+  <p class="sec-lead">A grande ideia que sustenta a campanha inteira — a frase que faz a Ana parar e virar a cabeça.</p>
+  <div class="bigidea">
+    <span class="k">Big Idea</span>
+    <p>Você não tem um problema de venda.<br>Você tem um problema de cliente.</p>
+    <p class="sub">A venda trava porque você está oferecendo pra pessoa errada. Acerte a pessoa, e a venda destrava sozinha — inclusive o preço. É isso que a IA mostra em minutos.</p>
+  </div>
+  <p style="margin-top:20px;">Por que essa ideia funciona pra esse público:</p>
+  <ul>
+    <li><strong>Concorda com como a Ana se vê.</strong> Ela não se reconhece em "problema de vendas". Em vez de acusar, a gente valida — e redireciona.</li>
+    <li><strong>Move o problema pra um lugar resolvível com técnica</strong> (a pesquisa de cliente ideal), não pra terapia.</li>
+    <li><strong>Devolve o alívio emocional pela porta certa:</strong> com o cliente certo, o preço para de travar, porque ela sabe que está ajudando. E <em>vender é ajudar</em> já é da linguagem da marca.</li>
+  </ul>
+  <div class="callout"><span class="k">O eixo (espinha da copy e da imersão)</span><em>Não é que você não sabe vender. É que você está vendendo pra pessoa errada. Com o cliente certo, o preço para de travar — porque você sabe que está ajudando.</em></div>
+</section>
+
+<section id="copymap">
+  <span class="sec-num">07</span>
+  <h2>Mapa da Copy</h2>
+  <p class="sec-lead">O diagnóstico do qual toda a copy nasce — pra quem, em que nível de consciência, com que emoção, sob qual mecanismo. Padrão The Path.</p>
+  <dl class="dl">
+    <dt>Pra quem</dt><dd>Persona Ana — prestadora de venda consultiva de alto valor, entrega acima da média, leads chegando, vende no feeling e não converte o que vale.</dd>
+    <dt>Nível de consciência</dt><dd><strong>Problema-aware</strong> (Schwartz). Sente a dor (vende sem consistência, trava no preço), mas não conhece a solução — nem imagina que o buraco é o cliente errado.</dd>
+    <dt>Sofisticação de mercado</dt><dd>Alta no genérico ("aprenda a vender" / mentoria) — mercado saturado. Escapamos por <strong>mecanismo novo</strong> (a IA que acha o cliente) + <strong>inimigo novo</strong> (você está vendendo pra pessoa errada).</dd>
+    <dt>Emoção dominante</dt><dd>Alívio e validação ("não sou ruim de venda — eu só não achei quem"), com esperança concreta (dá pra resolver rápido, hoje). Pano de fundo: o cansaço de ser comparada por preço.</dd>
+    <dt>Mecanismo (o quê)</dt><dd>Pesquisa de cliente ideal feita com IA, ao vivo → pesquisa + guia de entrevista prontos.</dd>
+    <dt>Promessa</dt><dd>Descubra, com IA e ao vivo, pra quem você deveria estar vendendo — e por que o preço para de travar quando você acerta a pessoa.</dd>
+    <dt>Prova</dt><dd>A demo ao vivo da Rafa (monta o cliente ideal de um voluntário na hora); o artefato que a própria pessoa gera na sessão; a lógica busca × precisa.</dd>
+    <dt>Big Idea</dt><dd>Você não tem um problema de venda — você tem um problema de cliente.</dd>
+    <dt>Tom de voz</dt><dd>Imponente, metódico, disruptivo. Autoridade pela clareza. Começa pela dor. Frase-mãe exata: <em>"vender, gerir e sorrir na mesma medida"</em>.</dd>
+    <dt>Ação (CTA)</dt><dd>Entrar na imersão agora (topo) → ao vivo, aplicar a virada e ser convidado pro Sell-Z (fundo).</dd>
+  </dl>
+</section>
+
+<section id="ganchos">
+  <span class="sec-num">08</span>
+  <h2>Ganchos & headlines</h2>
+  <p class="sec-lead">Selecionados a partir das sugestões da Rafa — quase todos saíram da nossa própria linguagem, por isso soam certos. Neutralizados no gênero (ver trava, seção 12).</p>
+  <div class="grid-3">
+    <div class="card"><span class="k">Pra abrir (emocional)</span><p style="font-family:var(--serif);font-size:19px;color:var(--preto);line-height:1.25;">"Você entrega acima da média e ainda vende no feeling. Vamos virar isso."</p><p style="font-size:13px;color:var(--txt-2);margin-top:8px;">Espelha a Ana sem acusar. Usa duas expressões da marca.</p></div>
+    <div class="card"><span class="k">Gancho-título</span><p style="font-family:var(--serif);font-size:19px;color:var(--preto);line-height:1.25;">"Você não precisa de mais clientes. Precisa dos certos."</p><p style="font-size:13px;color:var(--txt-2);margin-top:8px;">+ "e a IA te mostra quem são." A tese numa linha.</p></div>
+    <div class="card"><span class="k">Pra fechar (âncora)</span><p style="font-family:var(--serif);font-size:19px;color:var(--preto);line-height:1.25;">"De comparado a escolhido pelo valor."</p><p style="font-size:13px;color:var(--txt-2);margin-top:8px;">Nossa âncora canônica, compartilhada com o Sell-Z.</p></div>
+  </div>
+  <h3>Variações pra teste</h3>
+  <ul>
+    <li>"Pare de atrair quem pechincha: descubra o cliente que paga o que você vale."</li>
+    <li>"Como fazer o cliente te escolher e pagar o que você vale — sem parecer insistente."</li>
+  </ul>
+  <div class="callout warn"><span class="k">Segurar</span>"O que trava a sua venda não é o preço. É a insegurança." — nomear "insegurança" soa acusatório e puxa mentalidade (que ficou em 2º plano). Nossa versão é mais forte: o problema não é o seu valor, é a tradução dele.</div>
+</section>
+
+<section id="runshow">
+  <span class="sec-num">09</span>
+  <h2>Estrutura da imersão (run of show)</h2>
+  <p class="sec-lead">A sequência que leva da dor à virada, com a demo no meio e o pitch no fim. Tempos a definir junto com a duração.</p>
+  <div class="rundown">
+    <div class="step"><span class="t">Bloco 1 · Abertura</span><h4>A dor, pela porta emocional</h4><p>"Você entrega acima da média e ainda vende no feeling." Nomeia a realidade da Ana e promete a virada. <span class="tag">emocional</span></p></div>
+    <div class="step"><span class="t">Bloco 2 · A virada</span><h4>"Não é a venda, é o cliente"</h4><p>Ensina o conceito de cliente certo (busca × precisa, comparado × escolhido). Aqui ela sente "existem coisas que eu nem sabia que existiam". <span class="tag">método</span></p></div>
+    <div class="step"><span class="t">Bloco 3 · Demo ao vivo</span><h4>A Rafa roda a IA num voluntário</h4><p>Pega um caso da plateia e monta a pesquisa do cliente ideal na frente de todos. O momento "caraca". <span class="tag">prova</span></p></div>
+    <div class="step"><span class="t">Bloco 4 · Mão na massa</span><h4>A plateia roda o próprio</h4><p>Cada pessoa cola o prompt no seu Claude e sai com a pesquisa + o guia de entrevista. Resultado na hora. <span class="tag">aplicação</span></p></div>
+    <div class="step"><span class="t">Bloco 5 · O que vem depois</span><h4>Pitch do Sell-Z</h4><p>"Você achou a pessoa. Agora falta estruturar a venda pra ela." Seeding + oferta do programa completo. <span class="tag">pitch</span></p></div>
+  </div>
+</section>
+
+<section id="pitch">
+  <span class="sec-num">10</span>
+  <h2>O pitch pro Sell-Z</h2>
+  <p class="sec-lead">A imersão termina exatamente onde o Sell-Z começa — sem canibalizar, porque entrega o degrau, não a escada.</p>
+  <p>A lógica da ponte, na voz da Rafa: <em>se com esse pedacinho de IA você já saiu sabendo pra quem vender, imagina a IA completa — mais profunda, e comigo junto — construindo toda a estrutura da venda pra esse cliente.</em></p>
+  <div class="card dark" style="margin-top:8px;">
+    <span class="k">A sequência que amarra imersão → Sell-Z</span>
+    <p style="color:var(--cream-2);"><strong>Na imersão você descobriu QUEM.</strong> No Sell-Z a gente estrutura o resto, em 8 semanas de implementação guiada: definir o cliente ideal a fundo, montar a oferta de alto valor, o processo comercial e a base pra sair do improviso. Você sai <em>de comparado a escolhido</em>.</p>
+  </div>
+  <div class="callout verde"><span class="k">Por que não canibaliza</span>A imersão entrega uma versão express que a pessoa gera sozinha. O Sell-Z é o feito-com-você: profundidade + a Rafa + tudo que vem depois do cliente. São coisas diferentes de propósito.</div>
+</section>
+
+<section id="funil">
+  <span class="sec-num">11</span>
+  <h2>Estrutura de campanha / funil de captação</h2>
+  <p class="sec-lead">O caminho do estranho até o Sell-Z. Proposta MSE — os detalhes de verba e canais a gente fecha na fase de tráfego.</p>
+  <div class="funnel">
+    <div class="stage"><div class="n">1</div><div><h4>Topo · Tráfego</h4><p>Meta Ads (frio) + orgânico da Rafa levam pro gancho "não precisa de mais clientes, precisa dos certos".</p></div></div>
+    <div class="stage"><div class="n">2</div><div><h4>Inscrição · Checkout low-ticket</h4><p>Página de inscrição da imersão + pagamento (Assiny/Asaas). O preço já filtra curioso.</p></div></div>
+    <div class="stage"><div class="n">3</div><div><h4>Aquecimento pré-imersão</h4><p>Sequência de e-mail/WhatsApp: confirma, cria expectativa e passa o pré-requisito (conta no Claude criada + notebook).</p></div></div>
+    <div class="stage"><div class="n">4</div><div><h4>Ao vivo · A imersão</h4><p>O run of show da seção 9. Dor → virada → demo → mão na massa → pitch.</p></div></div>
+    <div class="stage"><div class="n">5</div><div><h4>Conversão · Janela Sell-Z</h4><p>Pitch ao vivo + follow-up (e-mail/WhatsApp) pra quem não fechou na hora. Prazo e bônus a definir.</p></div></div>
+    <div class="stage"><div class="n">6</div><div><h4>Pós</h4><p>Quem comprou → onboarding Sell-Z. Quem não → nutrição pro próximo ciclo.</p></div></div>
+  </div>
+</section>
+
+<section id="trava">
+  <span class="sec-num">12</span>
+  <h2>Trava de marca / restrições</h2>
+  <p class="sec-lead">O que a copy e o design PODEM e NÃO podem fazer — direto da governança de conteúdo da Bellz House.</p>
+  <div class="grid-2">
+    <div class="card"><span class="k">Diz assim ✓</span>
+      <ul class="plain">
+        <li>alto valor · oferta de alto valor</li>
+        <li>ser a escolha do cliente que você deseja</li>
+        <li>de comparado a escolhido · entrega acima da média</li>
+        <li>IA pra encurtar a curva</li>
+        <li>frase-mãe exata: "vender, gerir e sorrir na mesma medida"</li>
+      </ul>
+    </div>
+    <div class="card"><span class="k">Não diz ✗</span>
+      <ul>
+        <li>alto padrão · gente talentosa · empresária soberana</li>
+        <li>"aprenda IA" · escalar vendas/faturamento</li>
+        <li>clichê de coach (transforme sua vida, liberdade financeira, oportunidade única)</li>
+        <li>CRM / CRP da Rafa em material público</li>
+        <li>dividir o público por faixa de faturamento</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout verde"><span class="k">Decisão travada · gênero</span>A copy fala no <strong>masculino/neutro</strong> — trava da marca ("empresário de verdade"), mantida mesmo com ~88% do público sendo mulheres (feminino só pontualmente). Ganchos já neutralizados.</div>
+</section>
+
+<section id="nome">
+  <span class="sec-num">13</span>
+  <h2>Nome — decisão</h2>
+  <p class="sec-lead">Nome recomendado: <strong>Imersão Cliente Certo com IA</strong> — direto na dor/desejo, com o mecanismo (IA) no próprio nome. Abaixo, variações na mesma linha objetiva. A escolha final é sua.</p>
+  <div class="namegrid">
+    <div class="namecard rec">
+      <span class="recflag">Recomendado</span>
+      <div class="terr">Direto no desejo + IA</div>
+      <div class="nm">Imersão Cliente Certo com IA</div>
+      <div class="why">Objetivo, casa com o gancho-título e a Big Idea. "com IA" é mais amplo que "com Claude" pro público frio (o Claude entra no pré-requisito).</div>
+    </div>
+    <div class="namecard">
+      <div class="terr">Entregável tangível + IA</div>
+      <div class="nm">Imersão Mapa do Cliente com IA</div>
+      <div class="why">"Mapa do Cliente" é o artefato concreto que a pessoa leva pra casa — ainda mais palpável que "cliente certo".</div>
+    </div>
+    <div class="namecard">
+      <div class="terr">Nomeia a ferramenta</div>
+      <div class="nm">Imersão Cliente Certo com Claude</div>
+      <div class="why">Mais distintivo e novo — "com Claude" sinaliza IA de verdade. Risco: público frio pode não conhecer o Claude ainda.</div>
+    </div>
+    <div class="namecard">
+      <div class="terr">Mais leve / tático</div>
+      <div class="nm">Workshop Mapa do Cliente com IA</div>
+      <div class="why">"Workshop" pesa menos que "imersão" pra um low-ticket de poucas horas. Combina com o entregável tangível.</div>
+    </div>
+    <div class="namecard">
+      <div class="terr">Termo do método</div>
+      <div class="nm">Imersão Cliente Ideal com IA</div>
+      <div class="why">"Cliente ideal" é o termo do método (e o passo 1 do Sell-Z). Claríssimo, um pouco menos punchy.</div>
+    </div>
+    <div class="namecard">
+      <div class="terr">Enxuto</div>
+      <div class="nm">Cliente Certo com IA</div>
+      <div class="why">Só o essencial, sem rótulo de formato — o "imersão / workshop" fica à parte na comunicação.</div>
+    </div>
+  </div>
+</section>
+
+<section id="pendencias">
+  <span class="sec-num">14</span>
+  <h2>Decisões abertas — pra Rafa/Maiara bater o martelo</h2>
+  <p class="sec-lead">O que falta fechar antes de a copy e o design começarem.</p>
+  <ul class="check">
+    <li><b>Nome</b> — <span>confirmar "Imersão Cliente Certo com IA" ou escolher uma variação da seção 13.</span></li>
+    <li><b>Preço</b> — <span>faixa low-ticket (Standard / VIP?) — revalidar os R$39 / R$219–249.</span></li>
+    <li><b>Data e duração</b> — <span>quando e quantas horas.</span></li>
+    <li><b>Veículo da IA</b> — <span>prompt pra colar (recomendado) e/ou skill como bônus.</span></li>
+    <li><b>Canal e verba de captação</b> — <span>Meta Ads + orgânico; quanto investir.</span></li>
+    <li><b>Bônus / oferta do Sell-Z</b> — <span>o que compõe a oferta do fundo e o prazo da janela.</span></li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><b>Briefing — Imersão Cliente Certo com IA</b><br>Bellz House · Rafaella Mazzei</div>
+    <div style="text-align:right;">Consultoria Inception · padrão MSE + The Path<br>Documento para aprovação · rascunho estratégico</div>
+  </div>
+</footer>
+<script>if(window.self!==window.top){document.documentElement.classList.add('embedded');}</script>

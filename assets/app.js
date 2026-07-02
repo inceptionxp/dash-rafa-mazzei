@@ -57,7 +57,8 @@ const routes = {
   'escopo': renderEscopo,
   'entregas': renderEntregas,
   'entregavel': renderEntregavel,
-  'plano-ensino': renderPlanoEnsino
+  'plano-ensino': renderPlanoEnsino,
+  'briefing-imersao': renderBriefingImersao
 };
 
 // Páginas consolidadas: Diagnóstico e Plano Mestre vivem só na Jornada do Aluno.
@@ -413,7 +414,8 @@ function renderEcossistema() {
 
     <div class="section">
       <div class="section-title">Personas</div>
-      <h2 class="section-h">Quem compra cada produto</h2>
+      <h2 class="section-h">Um público só — o que muda é a maturidade</h2>
+      <p class="section-sub">O corte é <strong>comportamento + entrega acima da média + leads chegando</strong> — nunca faturamento. O que separa Ana (Sell-Z) de Fernanda (2Z Level) é a <strong>maturidade</strong>: se já existe lucro/sobra recorrente acontecendo. Cada persona traz <strong>o que ela busca</strong> (o que atrai) e <strong>o que ela precisa</strong> (o que entregamos) — atrair pelo que busca, entregar o que precisa.</p>
       <div class="eco-grid">
         ${PERSONAS.map(p => `
           <div class="eco-card">
@@ -421,7 +423,9 @@ function renderEcossistema() {
             <div class="eco-nome">${esc(p.nome)} · ${p.idade}</div>
             <div class="eco-funcao"><strong>Vende por:</strong> ${esc(p.vende_por)}</div>
             <p style="font-size:13px;color:var(--txt-2);line-height:1.5;margin-bottom:10px;"><strong>Dor:</strong> ${esc(p.dor)}</p>
-            <p style="font-size:13px;color:var(--txt-2);line-height:1.5;"><strong>Busca:</strong> ${esc(p.busca)}</p>
+            ${p.o_que_busca ? `<p style="font-size:13px;color:var(--txt-2);line-height:1.5;margin-bottom:10px;"><strong>O que busca:</strong> ${esc(p.o_que_busca)}</p>` : ''}
+            ${p.o_que_precisa ? `<p style="font-size:13px;color:var(--txt-2);line-height:1.5;margin-bottom:10px;"><strong>O que precisa:</strong> ${esc(p.o_que_precisa)}</p>` : ''}
+            <p style="font-size:13px;color:var(--txt-2);line-height:1.5;"><strong>Produto:</strong> ${esc(p.busca)}</p>
           </div>
         `).join('')}
       </div>
@@ -606,9 +610,9 @@ function renderProduto(id) {
     </div>
 
     <div class="section">
-      <div class="section-title">A Fundação · base universal</div>
+      <div class="section-title">Sell-Z · base universal</div>
       <h2 class="section-h">Todo aluno passa</h2>
-      <p class="section-sub">Antes das trilhas personalizadas, A Fundação. 7 ações concretas com aceleradores IA. Também é a base do Sell-Z. Clique para ver checklist completo + estado de cada acelerador.</p>
+      <p class="section-sub">Antes das trilhas personalizadas, o Sell-Z aplicado individualmente. 7 ações concretas com aceleradores IA. É o mesmo squad/conteúdo do produto vendido em cohort separado. Clique para ver checklist completo + estado de cada acelerador.</p>
       ${p.jornada.base_universal.map(b => `
         <a href="#jornada/${b.id}" style="display:block;background:var(--verde);color:var(--cream);padding:30px 36px;border-radius:var(--radius-card);text-decoration:none;transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 14px 32px rgba(14,15,13,0.12)';" onmouseout="this.style.transform='';this.style.boxShadow='';">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--laranja);font-weight:600;margin-bottom:10px;">Base Universal · Setup do Empresário</div>
@@ -1089,12 +1093,12 @@ function renderJornada(id) {
     `;
   }
 
-  // Checklist de ações (especial da Fundação)
+  // Checklist de ações (especial do Sell-Z aplicado individualmente)
   if (j.checklist_acoes && j.checklist_acoes.length) {
     html += `
       <div class="section">
         <div class="section-title">Checklist de ações concretas</div>
-        <h2 class="section-h">${j.checklist_acoes.length} ações que o aluno executa em A Fundação</h2>
+        <h2 class="section-h">${j.checklist_acoes.length} ações que o aluno executa no Sell-Z</h2>
         <p class="section-sub">Cada ação tem um acelerador IA dedicado. O aluno não aprende a fazer do zero — usa o acelerador. <strong>O tempo dela é gasto fazendo só o que REALMENTE precisa ser ela.</strong></p>
 
         ${j.checklist_acoes.map(c => {
@@ -1548,7 +1552,7 @@ function renderEntregavel(id, opts = {}) {
     { id:'onboarding',     label:'01 · Onboarding' },
     { id:'diagnostico-360',label:'02 · Diagnóstico 360º' },
     { id:'plano-mestre',   label:'03 · Plano Mestre' },
-    { id:'a-fundacao',     label:'A Fundação' }
+    { id:'a-fundacao',     label:'04 · Sell-Z' }
   ];
   const breadcrumb = fromJornada
     ? `<div class="breadcrumb"><a href="#produto/dois-z-level" style="color:var(--laranja);">2Z Level</a> <span class="sep">/</span> Jornada do Aluno <span class="sep">/</span> ${esc(e.nome)}</div>`
@@ -1710,6 +1714,37 @@ function renderNotFound() {
     </div>
   `;
 }
+
+// ================================================================
+// BRIEFING DA IMERSÃO (embed do briefing de campanha, isolado em iframe)
+// ================================================================
+function renderBriefingImersao() {
+  return `
+    <div class="briefing-embed">
+      <iframe src="briefing-imersao/index.html?v=20260702a" title="Briefing · Imersão Cliente Certo com IA"
+        style="width:100%;border:0;display:block;min-height:80vh;background:#faf8f2;border-radius:10px;"
+        onload="ajustarBriefingFrame(this)"></iframe>
+    </div>`;
+}
+window.ajustarBriefingFrame = function(f){
+  const fit = () => {
+    try {
+      if (f.clientWidth < 240) return;              // largura ainda não estabilizou → não mede
+      const h = f.contentDocument.documentElement.scrollHeight;
+      if (h > 200) f.style.height = h + 'px';
+    } catch(e){}
+  };
+  fit(); [200,600,1200,2000].forEach(t => setTimeout(fit, t));
+  // refit quando o conteúdo do iframe reflui (fontes carregando, etc.)
+  try { new ResizeObserver(fit).observe(f.contentDocument.body); } catch(e){}
+  if (!window._briefingResizeBound) {
+    window._briefingResizeBound = true;
+    window.addEventListener('resize', () => {
+      const fr = document.querySelector('.briefing-embed iframe');
+      if (fr) window.ajustarBriefingFrame(fr);
+    });
+  }
+};
 
 // ================================================================
 // INIT
