@@ -776,6 +776,8 @@ function renderTrilha(id) {
       </div>
     </div>
 
+    ${t.brainstorm ? renderBrainstorm(t.brainstorm) : ''}
+
     <div class="section">
       <div class="section-title">Frameworks autorais</div>
       <h2 class="section-h">O que sustenta essa trilha</h2>
@@ -839,6 +841,56 @@ function renderTrilha(id) {
       <h4>O que ainda precisa sair da cabeça dela</h4>
       ${ul(t.lacunas)}
       <div class="agenda">📅 Sessão prevista: <strong>${esc(t.sessao_extracao)}</strong></div>
+    </div>
+  `;
+}
+
+// ================================================================
+// BRAINSTORM DA TRILHA (material de referência a triar com a Rafa)
+// ================================================================
+function renderBrainstorm(b) {
+  const tab = b.tabela;
+  const item = (i) => `<li>${esc(i.t)}${i.sub && i.sub.length ? `<ul class="bg-sub">${i.sub.map(s => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}</li>`;
+  return `
+    <div class="section">
+      <div class="section-title">Brainstorm da trilha</div>
+      <h2 class="section-h">Temas a revisar — o que entra e o que não entra</h2>
+      <div class="brainstorm-box">
+        <div class="brainstorm-head">
+          <span class="brainstorm-tag">Rascunho · para revisão</span>
+          ${b.fonte ? `<span class="brainstorm-fonte">${esc(b.fonte)}</span>` : ''}
+        </div>
+        ${b.nota ? `<p class="brainstorm-nota">${esc(b.nota)}</p>` : ''}
+        <div class="brainstorm-legenda">
+          <span><i class="dot entra"></i> entra (essencial · todo aluno)</span>
+          <span><i class="dot avancado"></i> avançado (só mentoria · sob demanda)</span>
+          <span><i class="dot fora"></i> não entra</span>
+        </div>
+
+        ${tab ? `
+        <div class="brainstorm-tabela">
+          ${tab.titulo ? `<div class="bt-titulo">${esc(tab.titulo)}</div>` : ''}
+          <div class="bt-row">
+            <div class="bt-label">Objetivo</div>
+            <div class="bt-content">${esc(tab.objetivo)}</div>
+          </div>
+          <div class="bt-row">
+            <div class="bt-label">Conhecimentos</div>
+            <div class="bt-content"><ul>${tab.conhecimentos.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div>
+          </div>
+          <div class="bt-row">
+            <div class="bt-label">Ações</div>
+            <div class="bt-content"><ul>${tab.acoes.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>
+          </div>
+        </div>` : ''}
+
+        ${(b.grupos || []).map(g => `
+          <div class="brainstorm-grupo">
+            <div class="bg-titulo">${esc(g.titulo)}</div>
+            <ul class="bg-lista">${g.itens.map(item).join('')}</ul>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
 }

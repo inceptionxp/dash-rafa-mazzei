@@ -407,7 +407,63 @@ const TRILHAS = [
       'Como aborda crenças limitantes e medo',
       'Histórias dela de transição (alimenta banco de histórias)'
     ],
-    sessao_extracao:'S5 (Transição de identidade + Roda da Vida + Score Soberano)'
+    sessao_extracao:'S5 (Transição de identidade + Roda da Vida + Score Soberano)',
+    brainstorm:{
+      fonte:'Notion · etapa "Plano de Vida × Plano de Negócio" (mapeada no início da consultoria, ~6 meses atrás)',
+      nota:'Conteúdo antigo resgatado como REFERÊNCIA — só pra você conferir se algum tema importante ficou de fora do método atual. O que vale é o que já está na dash; isto aqui é rascunho pra triar. Em cada item, decida: entra (essencial, todo aluno) · avançado (só na mentoria / sob demanda) · não entra. Os nomes atuais prevalecem.',
+      tabela:{
+        titulo:'Tabela original do Notion — Plano de Vida × Plano de Negócio',
+        objetivo:'Identificar onde o aluno está hoje e onde quer chegar — e as possíveis incoerências entre os dois.',
+        conhecimentos:[
+          'Tipos e modelos de negócio: prós e contras de cada modelo',
+          'Como projetar e antecipar os desafios',
+          'Mentalidade de autorresponsabilidade e identidade'
+        ],
+        acoes:[
+          'Decidir qual modelo de negócio quer ter',
+          'Se comprometer com a identidade de quem quer se tornar',
+          'Organizar a agenda para se tornar a pessoa que constrói a vida que quer ter'
+        ]
+      },
+      grupos:[
+        {
+          titulo:'Diagnóstico da situação atual',
+          itens:[
+            { t:'Produtos que tem hoje → margem de cada um → qual o mais lucrativo (mapear tempo de entrega etc.)' },
+            { t:'Tem alguma necessidade imediata que o negócio resolve?' },
+            { t:'Mentalidade: identidade como empreendedor' },
+            { t:'Mapeamento da rotina: estratégico × tático × operacional', sub:[
+              'Pensando no negócio × Executando coisas × Apagando incêndios',
+              'O que é delegável, automatizável ou eliminável',
+              'O que é demanda pessoal e o que é trabalho'
+            ]},
+            { t:'Recursos: CNPJ, fluxo de caixa, CRM, PJ × PF, tipo de contratação, ferramentas que utiliza' },
+            { t:'De onde vêm os clientes hoje' },
+            { t:'Posicionamento intencional ou não' },
+            { t:'Clareza do cliente ideal' }
+          ]
+        },
+        {
+          titulo:'Modelos de negócio',
+          itens:[
+            { t:'Recorrência × Venda/serviço pontual → orienta a escolher recorrência sempre que possível' },
+            { t:'One person business × Construir time' },
+            { t:'Produtos/serviços escalável ou escalonável × personalizado' },
+            { t:'Nicho: necessidade imediata ou não?' }
+          ]
+        },
+        {
+          titulo:'Princípios e provocações',
+          itens:[
+            { t:'Distração é tudo o que dá dinheiro rápido agora, mas não te aproxima da visão de longo prazo' },
+            { t:'Termômetro da felicidade' },
+            { t:'Não coloque todos os ovos numa cesta só — mas também não centralize tudo em si. Precisa escolher com clareza' },
+            { t:'Definir os valores inegociáveis do negócio e como isso afeta as decisões do dia a dia' },
+            { t:'Definir visão e valores do negócio de forma consciente e intencional' }
+          ]
+        }
+      ]
+    }
   }
 ];
 
