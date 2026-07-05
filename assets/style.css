@@ -736,6 +736,54 @@ img{max-width:100%;display:block;}
 .kpi-block ul{padding-left:18px;margin:0;}
 .kpi-block li{font-size:13.5px;margin-bottom:5px;line-height:1.5;}
 
+/* NÍVEL da ação (base / intermediário / avançado) */
+.acao-nivel{
+  display:inline-block;
+  font-size:12px;
+  line-height:1.4;
+  color:var(--txt);
+  background:var(--cream-2);
+  border-radius:var(--radius);
+  padding:5px 10px;
+}
+.acao-nivel .acao-nivel-label{
+  font-family:var(--mono);
+  font-size:8.5px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  font-weight:600;
+  margin-right:8px;
+  padding:2px 6px;
+  border-radius:3px;
+  color:#fff;
+}
+.acao-nivel.base .acao-nivel-label{background:var(--status-pronto);}
+.acao-nivel.inter .acao-nivel-label{background:var(--azul);color:var(--preto);}
+.acao-nivel.avancado .acao-nivel-label{background:var(--laranja);}
+
+/* BRAINSTORM de uma AÇÃO do Sell-Z (dentro do card da ação) */
+.acao-brainstorm{
+  margin-top:14px;
+  padding:16px 18px;
+  background:var(--cream-3);
+  border:1px dashed var(--laranja);
+  border-radius:var(--radius);
+}
+.acao-brainstorm-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.acao-brainstorm-nota{
+  font-size:12.5px;
+  line-height:1.5;
+  color:var(--txt-2);
+  font-style:italic;
+  margin-bottom:10px;
+}
+
 /* BRAINSTORM DA TRILHA (material de referência a triar) */
 .brainstorm-box{
   background:var(--cream-2);

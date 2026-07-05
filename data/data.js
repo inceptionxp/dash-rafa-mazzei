@@ -2921,6 +2921,10 @@ const JORNADA_DETALHADA = {
       { quem:'Consultora de Progresso', papel:'Cobra entregáveis semanais. Garante que aluno não fica patinando em uma etapa.' }
     ],
     principio:'Aluno só aprende o que é ESSENCIALMENTE necessário. Tudo o que pode ser acelerado por IA é acelerado. O tempo do aluno é gasto fazendo o que REALMENTE precisa ser ela.',
+    // ⚠️ Cada ação carrega, além do operacional (acelerador/tempo), o BRAINSTORM
+    // da etapa equivalente resgatada do Notion (referência a triar com a Rafa) + o
+    // NÍVEL (base/intermediário/avançado). É a jornada linear do Sell-Z com o mesmo
+    // conteúdo que também aparece nas trilhas temáticas (repetição é intencional).
     checklist_acoes:[
       {
         ordem:'01',
@@ -2928,7 +2932,36 @@ const JORNADA_DETALHADA = {
         descricao:'Definir identidade pretendida, estilo de vida desejado e modelo de negócio que sustenta isso. Sem incoerências.',
         tempo_aluna:'2h',
         acelerador:{ nome:'IA Coerência de Vida × Negócio', status:'a criar', desc:'Conduz aluno por 18 perguntas + identifica incoerências + sugere modelo de negócio coerente.' },
-        rafa_envolvida:'Revisão crítica de 15min após preenchimento'
+        rafa_envolvida:'Revisão crítica de 15min após preenchimento',
+        nivel:'base · nivelamento',
+        brainstorm:{
+          etapa_ref:'Plano de Vida × Plano de Negócio',
+          grupos:[
+            { titulo:'Diagnóstico da situação atual', itens:[
+              { t:'Produtos que tem hoje → margem de cada um → qual o mais lucrativo (mapear tempo de entrega etc.)' },
+              { t:'Tem alguma necessidade imediata que o negócio resolve?' },
+              { t:'Mentalidade: identidade como empreendedor' },
+              { t:'Mapeamento da rotina: estratégico × tático × operacional', sub:['Pensando no negócio × Executando coisas × Apagando incêndios','O que é delegável, automatizável ou eliminável','O que é demanda pessoal e o que é trabalho'] },
+              { t:'Recursos: CNPJ, fluxo de caixa, CRM, PJ × PF, tipo de contratação, ferramentas que utiliza' },
+              { t:'De onde vêm os clientes hoje' },
+              { t:'Posicionamento intencional ou não' },
+              { t:'Clareza do cliente ideal' }
+            ]},
+            { titulo:'Modelos de negócio', itens:[
+              { t:'Recorrência × Venda/serviço pontual → orienta a escolher recorrência sempre que possível' },
+              { t:'One person business × Construir time' },
+              { t:'Produtos/serviços escalável ou escalonável × personalizado' },
+              { t:'Nicho: necessidade imediata ou não?' }
+            ]},
+            { titulo:'Princípios e provocações', itens:[
+              { t:'Distração é tudo o que dá dinheiro rápido agora, mas não te aproxima da visão de longo prazo' },
+              { t:'Termômetro da felicidade' },
+              { t:'Não coloque todos os ovos numa cesta só — mas também não centralize tudo em si. Precisa escolher com clareza' },
+              { t:'Definir os valores inegociáveis do negócio e como isso afeta as decisões do dia a dia' },
+              { t:'Definir visão e valores do negócio de forma consciente e intencional' }
+            ]}
+          ]
+        }
       },
       {
         ordem:'02',
@@ -2936,7 +2969,19 @@ const JORNADA_DETALHADA = {
         descricao:'Mapear concorrentes diretos e indiretos, fazer cliente oculto em 5 concorrentes, identificar gaps de mercado. Sair com clareza do território.',
         tempo_aluna:'4h distribuídas em 1 semana',
         acelerador:{ nome:'IA Mapeadora de Concorrência', status:'a criar', desc:'Recebe nicho, gera lista de 10-15 concorrentes diretos/indiretos, roteiro de cliente oculto, planilha de comparação.' },
-        rafa_envolvida:'Não participa diretamente — aluno leva achados pra próxima sessão'
+        rafa_envolvida:'Não participa diretamente — aluno leva achados pra próxima sessão',
+        nivel:'avançado → revisar (deep research é base; mapa da empatia é avançado/sob demanda)',
+        brainstorm:{
+          etapa_ref:'As regras do jogo · olhar para fora',
+          nota:'Brainstorm parcial — o print veio cortado.',
+          grupos:[
+            { titulo:'Levantado', itens:[
+              { t:'Antecipar comportamento do mercado' },
+              { t:'Conhecer o mercado não para modelar/copiar, mas para se diferenciar' },
+              { t:'Como fazer cliente oculto' }
+            ]}
+          ]
+        }
       },
       {
         ordem:'03',
@@ -2944,7 +2989,20 @@ const JORNADA_DETALHADA = {
         descricao:'Abrir CNPJ (se não tem), separar contas bancárias PF/PJ, configurar contador estratégico, montar fluxo de caixa básico.',
         tempo_aluna:'1h decisão + 1-2 semanas execução com profissionais',
         acelerador:{ nome:'Checklist de Setup PJ + IA Indicadora de Contador', status:'a criar', desc:'Checklist passo-a-passo + IA que indica perfil de contador ideal pro nicho do aluno + scripts pra fazer triagem de contadores.' },
-        rafa_envolvida:'Não participa — execução operacional do aluno'
+        rafa_envolvida:'Não participa — execução operacional do aluno',
+        nivel:'base',
+        brainstorm:{
+          etapa_ref:'Ordem na casa · olhar para dentro',
+          nota:'Brainstorm não veio do Notion — pendente. Ações da etapa como referência:',
+          grupos:[
+            { titulo:'Ações da etapa (referência)', itens:[
+              { t:'Preencher planilha, olhar pros números' },
+              { t:'Separar PF e PJ' },
+              { t:'Planejar custo de vida e pró-labore' },
+              { t:'Separar recebimento de competência' }
+            ]}
+          ]
+        }
       },
       {
         ordem:'04',
@@ -2952,7 +3010,30 @@ const JORNADA_DETALHADA = {
         descricao:'Criar o PDF de Oferta Irresistível do produto/serviço principal do aluno usando o Criador de Ofertas Bellz House.',
         tempo_aluna:'1h briefing + 30min revisão',
         acelerador:{ nome:'Criador de Ofertas Bellz House', status:'em construção (Sprint 0 pronto)', desc:'Briefing conversacional → gera HTML estilizado com identidade visual do aluno em 14 slides estruturados.' },
-        rafa_envolvida:'Revisão estratégica de 15min no primeiro Mentoria'
+        rafa_envolvida:'Revisão estratégica de 15min no primeiro Mentoria',
+        nivel:'intermediário',
+        brainstorm:{
+          etapa_ref:'Setup de Ofertas',
+          grupos:[
+            { titulo:'Cada oferta precisa ter', itens:[
+              { t:'Promessa / transformação' },
+              { t:'Entregáveis com ancoragem e conexão de como cada um resolve um problema ou desejo; tornar cada entregável atrativo; comunicação única, impossível de comparar com a concorrência' },
+              { t:'Antecipar e quebrar objeções (medos, o que pode dar errado ao não fechar, o que o mercado e outras soluções prometem e o que não vão resolver)' },
+              { t:'Bônus que aumentam a percepção de valor (de XX por 00) — valorizam a entrega mas não aumentam o esforço', sub:['De fechamento imediato','Com prazo'] },
+              { t:'Precificação' },
+              { t:'Garantia' }
+            ]},
+            { titulo:'Definições do contrato', itens:[
+              { t:'O que o cliente só precisa saber depois de fechar (a não ser que pergunte)' },
+              { t:'Particularidades do produto/serviço que precisa definir' }
+            ]},
+            { titulo:'Precificação e oferta estratégica · condições de pagamento', itens:[
+              { t:'Tempo de parcelamento coerente com o tempo de entrega' },
+              { t:'Cuidados com parcelamento no cartão D1 pro fluxo de caixa (usar só no início, mas se planejar pra evitar a longo prazo)' },
+              { t:'Boleto é exceção; multa e juros próximo ao máximo que a área permite' }
+            ]}
+          ]
+        }
       },
       {
         ordem:'05',
@@ -2960,7 +3041,17 @@ const JORNADA_DETALHADA = {
         descricao:'Construir frase de posicionamento autoral, matriz de diferenciação por atributos verificáveis, bio Instagram/LinkedIn coerente, manifesto pessoal.',
         tempo_aluna:'3h distribuídas em 1 semana',
         acelerador:{ nome:'IA Construtor de Posicionamento', status:'a criar', desc:'Faz engenharia reversa do posicionamento do aluno (perguntas socráticas) + gera matriz de atributos + 3 versões de bio + manifesto draft.' },
-        rafa_envolvida:'Revisão crítica de 30min — aprova ou pede ajuste'
+        rafa_envolvida:'Revisão crítica de 30min — aprova ou pede ajuste',
+        nivel:'avançado + bônus',
+        brainstorm:{
+          etapa_ref:'Setup de Posicionamento',
+          nota:'Brainstorm veio incompleto (o texto colado era duplicata do funil). Texto real pendente da Rafa.',
+          grupos:[
+            { titulo:'Levantado (parcial)', itens:[
+              { t:'Quais são os limites e as concessões que não vai mais fazer no negócio com clientes' }
+            ]}
+          ]
+        }
       },
       {
         ordem:'06',
@@ -2968,7 +3059,32 @@ const JORNADA_DETALHADA = {
         descricao:'Implantar CRM básico (Notion ou Trello), começar a registrar leads, agendar reuniões consultivas, medir taxa de conversão.',
         tempo_aluna:'2h setup + uso diário',
         acelerador:{ nome:'Template CRM Notion Bellz', status:'a criar', desc:'Notion pronto pro aluno duplicar. Já vem com etapas do funil, automações básicas, dashboard de taxa de conversão.' },
-        rafa_envolvida:'Não participa — execução operacional'
+        rafa_envolvida:'Não participa — execução operacional',
+        nivel:'intermediário',
+        brainstorm:{
+          etapa_ref:'Funil do Lead até a venda',
+          nota:'A etapa do funil é mais ampla que só o CRM — a Rafa decide o que fica aqui e o que vira etapa própria.',
+          grupos:[
+            { titulo:'Funil e números', itens:[
+              { t:'Como calcular e acompanhar métricas' },
+              { t:'Venda é: 1) dinheiro no bolso e 2) contrato assinado' },
+              { t:'Pré-venda → Venda → Pós-venda' },
+              { t:'Definir "motivos de perda" do lead (parou de responder, não corresponde ao perfil ideal, etapa em que parou, insegurança do investimento, já tem outro mentor, não é prioridade/momento, mudou de opinião, percepção de custo elevado, telefone errado)' },
+              { t:'Onde implementar automações' },
+              { t:'Visão clara dos dados, dominar os números' },
+              { t:'Fluxo de metas: faturamento desejado → vendas necessárias → reuniões → agendamentos → follow-ups → leads' },
+              { t:'Evolução do processo (começar simples e ir profissionalizando; saber o que priorizar)' }
+            ]},
+            { titulo:'Estrutura comercial + engenharia de crescimento', itens:[
+              { t:'De: vendas por improviso · meses imprevisíveis · esforço individual desorganizado' },
+              { t:'Para: sistema comercial estruturado · previsibilidade de receita · decisões por números, capacidade e margem' }
+            ]},
+            { titulo:'Linguagem de transformação', itens:[
+              { t:'Ponto A: vende, mas depende do improviso, não sabe explicar por que vende, vive meses bons e ruins, cresce no esforço' },
+              { t:'Ponto B: entende o funil comercial, sabe quanto pode vender com a estrutura atual, decide por números, constrói previsibilidade' }
+            ]}
+          ]
+        }
       },
       {
         ordem:'07',
@@ -2976,9 +3092,47 @@ const JORNADA_DETALHADA = {
         descricao:'Definir bloco fixo na agenda semanal pra prospecção/follow-up/reuniões consultivas. Vender não é tarefa, é rotina.',
         tempo_aluna:'30min setup + execução semanal',
         acelerador:{ nome:'IA Estruturador de Agenda Comercial', status:'a criar', desc:'Sugere blocos baseados no estilo de vida do aluno (de Plano de Vida × Negócio) + envia lembretes via WhatsApp.' },
-        rafa_envolvida:'Não participa — execução operacional'
+        rafa_envolvida:'Não participa — execução operacional',
+        nivel:'intermediário',
+        brainstorm:{
+          etapa_ref:'A sessão de venda (Notion: ex-"Vendas no Campo de Batalha" — nome bélico a trocar)',
+          grupos:[
+            { titulo:'Preparo', itens:[
+              { t:'Qualificação' },
+              { t:'Mapeamento de perfis comportamentais e como vender pra cada perfil' },
+              { t:'Adaptação da proposta com base na pesquisa prévia' }
+            ]},
+            { titulo:'Estrutura da apresentação', itens:[
+              { t:'Promessa / transformação' },
+              { t:'Dados de autoridade e resultados concretos' },
+              { t:'Provas sociais (depoimentos, cases semelhantes ao lead, antes e depois)' },
+              { t:'Diferenciais — por que escolher você' },
+              { t:'Dores e desejos e como resolve' },
+              { t:'Entregáveis com ancoragem' },
+              { t:'Antecipar e quebrar objeções' },
+              { t:'Bônus', sub:['De fechamento imediato','Com prazo'] },
+              { t:'Precificação' },
+              { t:'Garantia' }
+            ]},
+            { titulo:'Boas práticas da apresentação', itens:[
+              { t:'Apresentar em tópicos (não competir com a leitura)' },
+              { t:'Como mostrar o preço (de xxx por 12x de yyy)' },
+              { t:'Não colocar validade' },
+              { t:'Pedir autorização e gravar — salvar tudo' },
+              { t:'Pergunta de impacto final: quanto perde por mês se continuar assim?' }
+            ]},
+            { titulo:'Fechamento', itens:[
+              { t:'Como tangibilizar o ROI — calcular o custo de não contratar' },
+              { t:'Quebra de objeções' }
+            ]}
+          ]
+        }
       }
     ],
+    // Fora da base linear: "Métodos de Captura" (protocolos de tração — parceiro,
+    // referidos, conteúdo, tráfego pago, networking). Nível Avançado + Sob demanda:
+    // vive na trilha TRAÇÃO como ferramenta da mentoria, não como fase base do CELI.
+    captura_fora_base:'Métodos de Captura (protocolos de tração) não é fase base — é ferramenta da trilha Tração, nível avançado/sob demanda.',
     ferramentas_stack:[
       { item:'7 IAs aceleradoras (Claude Project)', uso:'1 IA por ação do checklist', status:'a criar (1 de 7 em construção)' },
       { item:'Home Office Bellz (Notion)', uso:'Onde o aluno executa o Sell-Z (aplicado individualmente) + acompanha progresso', status:'em construção' },

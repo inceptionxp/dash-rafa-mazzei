@@ -895,6 +895,27 @@ function renderBrainstorm(b) {
   `;
 }
 
+// Brainstorm de uma AÇÃO do Sell-Z (referência do Notion, a triar) — versão compacta
+function renderAcaoBrainstorm(b) {
+  if (!b) return '';
+  const item = (i) => `<li>${esc(i.t)}${i.sub && i.sub.length ? `<ul class="bg-sub">${i.sub.map(s => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}</li>`;
+  return `
+    <div class="acao-brainstorm">
+      <div class="acao-brainstorm-head">
+        <span class="brainstorm-tag">Brainstorm · a triar</span>
+        ${b.etapa_ref ? `<span class="brainstorm-fonte">Notion: ${esc(b.etapa_ref)}</span>` : ''}
+      </div>
+      ${b.nota ? `<p class="acao-brainstorm-nota">${esc(b.nota)}</p>` : ''}
+      ${(b.grupos || []).map(g => `
+        <div class="brainstorm-grupo">
+          <div class="bg-titulo">${esc(g.titulo)}</div>
+          <ul class="bg-lista">${g.itens.map(item).join('')}</ul>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 // ================================================================
 // FRAMEWORKS (galeria cross-trilha)
 // ================================================================
@@ -1195,16 +1216,18 @@ function renderJornada(id) {
         ${j.checklist_acoes.map(c => {
           const ac = c.acelerador;
           const st = statusItem(ac.status);
+          const nivelClass = /avan|sob demanda/i.test(c.nivel||'') ? 'avancado' : /intermedi/i.test(c.nivel||'') ? 'inter' : 'base';
           return `
           <div style="background:#fff;border:1px solid var(--linha);border-radius:var(--radius-card);padding:24px 26px;margin-bottom:14px;">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:12px;">
               <div style="display:flex;align-items:center;gap:14px;">
                 <span style="font-family:var(--serif);font-style:italic;font-size:32px;color:var(--laranja);line-height:1;">${esc(c.ordem)}</span>
                 <h4 style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--preto);line-height:1.1;">${esc(c.acao)}</h4>
               </div>
               <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:${st.cor};background:${st.bg};padding:4px 9px;border-radius:3px;font-weight:600;white-space:nowrap;">${st.label}</span>
             </div>
-            <p style="font-size:14px;color:var(--txt-2);line-height:1.55;margin-bottom:14px;">${esc(c.descricao)}</p>
+            ${c.nivel ? `<div class="acao-nivel ${nivelClass}"><span class="acao-nivel-label">Nível</span>${esc(c.nivel)}</div>` : ''}
+            <p style="font-size:14px;color:var(--txt-2);line-height:1.55;margin:12px 0 14px;">${esc(c.descricao)}</p>
 
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;background:var(--cream-2);padding:14px 16px;border-radius:var(--radius);">
               <div>
@@ -1221,8 +1244,10 @@ function renderJornada(id) {
                 <div style="font-size:12.5px;line-height:1.4;">${esc(c.rafa_envolvida)}</div>
               </div>
             </div>
+            ${renderAcaoBrainstorm(c.brainstorm)}
           </div>
         `}).join('')}
+        ${j.captura_fora_base ? `<p style="font-size:12.5px;color:var(--txt-2);font-style:italic;margin-top:10px;padding:12px 16px;background:var(--cream-2);border-left:2px solid var(--verde-claro);border-radius:0 var(--radius) var(--radius) 0;">${esc(j.captura_fora_base)}</p>` : ''}
       </div>
     `;
   }
