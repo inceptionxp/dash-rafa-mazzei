@@ -24,8 +24,8 @@ const ECOSSISTEMA = {
     id:'bellz-house',
     nome:'Bellz House',
     camada:'Empresa-mãe',
-    funcao:'Ecossistema de soluções em negócios, vendas e gestão. Território dos negócios anti-ordinários.',
-    puv:'Retiramos o empresário da arena do improviso e o posicionamos no governo do seu próprio negócio através de um ecossistema de soluções em negócios, vendas & gestão, onde o lucro deixa de ser uma aposta e se torna um projeto à prova de ansiedade.',
+    funcao:'Uma forma única de integrar estratégia de negócio, vendas consultivas e gestão. O território dos negócios anti-ordinários.',
+    puv:'Transformamos donos de negócio em empresários de verdade e os levamos a assumir o governo do próprio negócio, possibilitando que cobrem o real valor da sua entrega e gerem lucro recorrente, tornando possível vender, gerir e sorrir na mesma medida, através de uma forma única de integrar estratégia de negócio, vendas consultivas e gestão.',
     tagline:'O território dos negócios anti-ordinários.',
     arquetipo:'Governante + Criador (com sombra do Rebelde)',
     tom:'Provocador, assertivo, analítico'
@@ -33,15 +33,15 @@ const ECOSSISTEMA = {
   componentes:[
     { id:'rafa-mazzei', nome:'Rafa Mazzei', camada:'Pessoa · autoridade',
       funcao:'A expert por trás do método. Voz, presença e provocação.',
-      puv:'Guio empresários decididos a romper o próprio teto rumo ao domínio do seu faturamento e liberdade.',
+      puv:'Guio donos de negócio cansados da montanha-russa do faturamento a assumir o governo da própria empresa e se tornar empresário de verdade, transformando excelência em lucro recorrente — para viver na prática o vender, gerir e sorrir na mesma medida.',
       tem_pagina:false },
-    { id:'dois-z-level', nome:'2Z Level', camada:'Produto · avançado',
-      funcao:'Mentoria em grupo contínua para empresários consolidados. Acompanhamento profundo, encontros recorrentes, garantia condicional.',
-      puv:'Direcionamos o crescimento do seu negócio através de um modelo de conselho estratégico de alto nível, para que você assuma o domínio do seu legado sem que a escala dependa do seu sacrifício pessoal.',
+    { id:'dois-z-level', nome:'2Z Level', camada:'Produto · avançado (por maturidade)',
+      funcao:'Mentoria de acompanhamento em grupo para donos de negócio que já têm lucro recorrente acontecendo. Acompanhamento profundo, encontros recorrentes, garantia condicional.',
+      puv:'Guiamos o dono de negócio que já fatura, mas ainda vive na montanha-russa do faturamento, a assumir o governo da própria empresa, através de uma mentoria de acompanhamento em grupo, para viver na prática o vender, gerir e sorrir na mesma medida.',
       tem_pagina:true },
-    { id:'sell-z', nome:'Sell-Z', camada:'Produto · intermediário',
-      funcao:'Cohort de 8 semanas de aceleração comercial. Implementação guiada do método de vendas.',
-      puv:'Aceleramos a sua virada como empresário através de um método de implementação guiada, para que você deixe o improviso de lado e assuma o controle das suas vendas.',
+    { id:'sell-z', nome:'Sell-Z', camada:'Produto · entrada',
+      funcao:'Cohort de 8 semanas de implementação guiada. Constrói com o dono de negócio a oferta de alto valor e a base comercial pra sair do improviso.',
+      puv:'Tiramos o dono de negócio do improviso e o colocamos no comando do próprio processo comercial, construindo, através de uma implementação guiada, uma oferta de alto valor, pronta para ser a escolhida pelo cliente ideal.',
       tem_pagina:true },
     { id:'imersao', nome:'Imersão', camada:'Produto · captação',
       funcao:'Evento presencial pago anual. Topo de funil + primeiro contato direto com o método.',
@@ -58,27 +58,34 @@ const PERSONAS = [
     id:'ana',
     nome:'Ana',
     idade:36,
-    perfil:'Prestadora de serviço · R$10-35k/mês',
+    perfil:'Venda consultiva / alto valor · sem piso de faturamento',
     arquetipos:['advogada','arquiteta','nutricionista','personal','contadora','consultora'],
     vende_por:'indicação, feeling, achismo',
-    dor:'Sabe que tem potencial mas não transforma em previsibilidade. Faturamento oscila.',
+    dor:'Entrega muito e é reconhecida, mas não vira previsibilidade — o fechamento trava e ela trava na hora de cobrar. Carrega uma barreira emocional com a venda (medo de cobrar, "vender é ser chata", sensação de impostora).',
+    o_que_busca:'Acha que precisa de mais clientes / prospectar mais.',
+    o_que_precisa:'Quase nunca é mais clientes — é converter melhor o que já chega: processo de venda consultiva, definir a oferta, cobrar o que vale sem travar, consistência.',
     busca:'Sell-Z',
-    valoriza:['acompanhamento próximo','resultado concreto e rápido','sentir que não está sozinha','facilitadores tecnológicos'],
+    valoriza:['acompanhamento próximo','resultado concreto e rápido','sentir que não está sozinha','IA pra encurtar a curva'],
     evita:['grupos grandes','respostas genéricas','acompanhamento que ensina sem entrar no negócio']
   },
   {
     id:'fernanda',
     nome:'Fernanda',
     idade:42,
-    perfil:'Dona de negócio consolidado · R$35-150k/mês',
+    perfil:'Venda consultiva consolidado · lucro/sobra recorrente já acontecendo',
     arquetipos:['advogada','consultora','médica','empresária técnica'],
     vende_por:'cresceu por heroísmo — tudo passa por ela',
-    dor:'Crescimento chegou no teto. Sabe que precisa escalar sem comprometer qualidade.',
+    dor:'O crescimento bateu no teto; tudo passa por ela; vive sobrecarregada (na agenda, na vida, na família). Já tem lucro recorrente e conhece os números, mas é o gargalo.',
+    o_que_busca:'Acha que quer um negócio que rode sem ela e/ou mais crescimento.',
+    o_que_precisa:'Não é o negócio rodar sem ela (isso é um nível além) — é um processo que rode COM ela, mas leve: previsibilidade, governo do negócio, sair da sobrecarga, e transformar o lucro em patrimônio.',
     busca:'2Z Level',
-    valoriza:['profundidade','presença','clareza estratégica','ser tratado como empresário, não aluno'],
+    valoriza:['profundidade','presença','clareza estratégica','ser tratada como empresária, não aluna'],
     evita:['grupos grandes','respostas genéricas','mentorias que ensinam sem entrar no negócio']
   }
 ];
+// NOTA (ICP 30/06/2026): o público é UM só. O corte é comportamento + entrega acima
+// da média + leads chegando — NUNCA faturamento. O que separa Ana (Sell-Z) de Fernanda
+// (2Z Level) é a MATURIDADE: se já existe lucro/sobra recorrente acontecendo.
 
 // ================================================================
 // TRILHAS
@@ -2844,9 +2851,11 @@ const JORNADA_DETALHADA = {
 
   'a-fundacao': {
     id:'a-fundacao',
-    nome:'A Fundação',
-    subtitulo:'A base universal · todo aluno passa · também base do Sell-Z',
-    objetivo:'Antes das trilhas personalizadas, todo aluno estrutura a base que sustenta qualquer crescimento: identidade, visão estratégica, leitura de mercado, infraestrutura mínima do negócio. Sem A Fundação, qualquer outra ação fica em cima de fundação rasa.',
+    // ⚠️ 01/07/2026: "A Fundação" não é mais um nome à parte — esta etapa É o Sell-Z, aplicado individualmente.
+    // id interno mantido (a-fundacao) só pra não quebrar rotas #jornada/a-fundacao já existentes.
+    nome:'Sell-Z',
+    subtitulo:'Sell-Z aplicado individualmente — mesmo squad/conteúdo do programa vendido em cohort separado; sem turma aberta, o mentorado percorre no próprio ritmo',
+    objetivo:'Antes das trilhas personalizadas, todo aluno estrutura a base que sustenta qualquer crescimento: identidade, visão estratégica, leitura de mercado, infraestrutura mínima do negócio. Esta base é o próprio Sell-Z — não é um programa à parte, é o mesmo conteúdo/squad do Sell-Z vendido separadamente, aplicado aqui no ritmo individual do mentorado. Sem essa base, qualquer outra ação fica em cima de fundação rasa.',
     duracao:'Primeiros 60 dias da jornada (paralelo às trilhas iniciais)',
     status:'parcial',
     papeis:[
@@ -2916,7 +2925,7 @@ const JORNADA_DETALHADA = {
     ],
     ferramentas_stack:[
       { item:'7 IAs aceleradoras (Claude Project)', uso:'1 IA por ação do checklist', status:'a criar (1 de 7 em construção)' },
-      { item:'Home Office Bellz (Notion)', uso:'Onde o aluno executa A Fundação + acompanha progresso', status:'em construção' },
+      { item:'Home Office Bellz (Notion)', uso:'Onde o aluno executa o Sell-Z (aplicado individualmente) + acompanha progresso', status:'em construção' },
       { item:'Curseduca', uso:'Aulas curtas (10-15min) explicando o ESSENCIAL de cada ação — não tutorial completo, só o que aluno precisa pra usar o acelerador', status:'em construção' },
       { item:'Template CRM Notion', uso:'Aluno duplica e usa', status:'a criar' }
     ],
@@ -2928,10 +2937,10 @@ const JORNADA_DETALHADA = {
       'Template CRM Notion Bellz',
       'IA Estruturador de Agenda Comercial',
       '7 aulas curtas (10-15min cada) explicando o essencial de cada ação',
-      'Dashboard de progresso d\'A Fundação no Home Office Bellz (visual: 7 ações com check verde/amarelo/vermelho)'
+      'Dashboard de progresso do Sell-Z (aplicado individualmente) no Home Office Bellz (visual: 7 ações com check verde/amarelo/vermelho)'
     ],
-    output:'Aluno sai d\'A Fundação com: modelo de negócio claro, leitura de mercado feita, infraestrutura PJ resolvida, PDF de Oferta pronto, posicionamento construído, CRM rodando, ritual de vendas instalado. Base sólida pra qualquer trilha personalizada que venha depois.',
-    nota_sell_z:'A Fundação será também a estrutura base do Sell-Z (cohort 8 semanas) — adaptada para grupo. As 7 ações do checklist são as mesmas, com aceleradores compartilhados. Diferença: no 2Z Level cada aluno roda no próprio ritmo; no Sell-Z roda em cohort sincronizado.'
+    output:'Aluno sai desta etapa com: modelo de negócio claro, leitura de mercado feita, infraestrutura PJ resolvida, PDF de Oferta pronto, posicionamento construído, CRM rodando, ritual de vendas instalado. Base sólida pra qualquer trilha personalizada que venha depois.',
+    nota_sell_z:'Esta etapa É o Sell-Z (mesmo squad, mesmo conteúdo, mesmas 7 ações) — não é uma base separada que "também" vira Sell-Z. Diferença é só o ritmo: no 2Z Level o mentorado aplica o Sell-Z individualmente (sem turma aberta); no produto Sell-Z vendido separadamente, roda em cohort sincronizado de 8 semanas.'
   }
 };
 
@@ -2946,13 +2955,13 @@ const PRODUTOS = [
     id:'dois-z-level',
     nome:'2Z Level',
     formato:'Mentoria contínua em grupo · 3 encontros/mês · garantia 6 meses condicional',
-    publico:'Persona Fernanda · R$35-150k/mês',
+    publico:'Persona Fernanda · maturidade: lucro/sobra recorrente já acontecendo (corte por comportamento, não por faturamento)',
     ticket:'R$20.4k-22.8k/ano (atual)',
     quando:'Em operação · 26 alunos ativos (migradas de Maestria)',
     trilhas_cobertas:'Todas as 7 trilhas conforme Plano Mestre individual',
-    promessa:'Acompanhamento próximo para empresários consolidados que precisam escalar sem comprometer qualidade.',
-    puv:'Direcionamos o crescimento do seu negócio através de um modelo de conselho estratégico de alto nível, para que você assuma o domínio do seu legado sem que a escala dependa do seu sacrifício pessoal.',
-    tagline:'Onde você recebe o domínio definitivo da sua estrutura.',
+    promessa:'Acompanhamento próximo para donos de negócio que já têm lucro recorrente e precisam assumir o governo da própria empresa — sem depender do próprio sacrifício.',
+    puv:'Guiamos o dono de negócio que já fatura, mas ainda vive na montanha-russa do faturamento, a assumir o governo da própria empresa, através de uma mentoria de acompanhamento em grupo, para viver na prática o vender, gerir e sorrir na mesma medida.',
+    tagline:'De dono de negócio a empresário de verdade.',
     status:'ativo',
     paleta:{ primaria:'#7da5b8', secundaria:'#1f3a2a' },
     // === JORNADA DO ALUNO (cada etapa abre página detalhada via #jornada/<id>) ===
@@ -2963,7 +2972,7 @@ const PRODUTOS = [
         { id:'plano-mestre', num:'03', nome:'Plano Mestre', quem:'1:1 com a Rafa (90min)', desc:'Mapa anual do aluno: trilhas + metas mensais + ordem de execução. Gerado por IA, validado pela Rafa.' }
       ],
       base_universal:[
-        { id:'a-fundacao', nome:'A Fundação', desc:'Base universal de todo aluno. Inclui Plano de Vida × Negócio, Leitura do Tabuleiro, Setup PJ, Material de Oferta, Posicionamento, CRM, Ritual de Vendas. 7 ações concretas com aceleradores IA. Também é a base do Sell-Z.' }
+        { id:'a-fundacao', nome:'Sell-Z', desc:'Base universal de todo aluno — é o próprio Sell-Z aplicado individualmente (mesmo squad/conteúdo do programa vendido em cohort separado). Inclui Plano de Vida × Negócio, Leitura do Tabuleiro, Setup PJ, Material de Oferta, Posicionamento, CRM, Ritual de Vendas. 7 ações concretas com aceleradores IA.' }
       ],
       marcos_ciclo:[
         { quando:'Mês 6', nome:'Revisão de Rota', desc:'1:1 com a Rafa. Leitura dos números + ajuste do plano.' },
@@ -2972,33 +2981,78 @@ const PRODUTOS = [
     },
     // === ENCONTROS RECORRENTES ===
     encontros:[
-      { nome:'Mezza Bellz', frequencia:'1×/mês · manhã', desc:'Ritual de comunidade + café + convidado especialista. Fortalece pertencimento.' },
-      { nome:'Mentoria', frequencia:'2×/mês · 30min por mentorado (agendado antes)', desc:'Sessão da mentoria onde cada mentorado tem seu tempo com a Rafa. O mentorado agenda os 30min antes. É a entrega central de acompanhamento — não existe "janela" separada, é uma coisa só.' },
-      { nome:'Engenharia Reversa', frequencia:'1×/mês · a partir de set/2026', desc:'Análise de casos do aluno — pode ser reunião comercial gravada, material de oferta, ou outro caso real. A Rafa analisa o que só o humano vê (não-verbal, nuance). Pré-requisito: oferta definida.' },
-      { nome:'Evento presencial anual', frequencia:'1×/ano · 3 dias', desc:'1 dia exclusivo + 2 dias abertos a pagantes. Imersão profunda.' }
+      { nome:'Mezza', frequencia:'1×/mês · manhã', desc:'Ritual de comunidade + café + convidado especialista. Fortalece pertencimento. (Nome oficial encurtado de "Mezza Bellz" pra só "Mezza" — decisão da Rafa 01/07.)' },
+      { nome:'Sessão "Destrava"', frequencia:'2×/mês · 30min por mentorado (agendado antes)', desc:'Sessão individual onde cada mentorado destrava seu caso com a Rafa. O mentorado agenda os 30min antes. É a entrega central de acompanhamento — não existe "janela" separada, é uma coisa só. (Antes chamada "Mentoria".)' },
+      { nome:'Z-Lab', frequencia:'1×/mês · só entra depois que TODO o método estiver implementado E uma turma de Sell-Z já tiver rodado', desc:'Análise de casos do aluno — pode ser reunião comercial gravada, material de oferta, ou outro caso real. A Rafa analisa o que só o humano vê (não-verbal, nuance). Pré-requisito: oferta definida + método implementado + Sell-Z já rodado (não é dia 1 da mentoria). (Antes chamada "Engenharia Reversa".)' },
+      { nome:'Evento presencial anual', frequencia:'1×/ano · 3 dias', desc:'1 dia exclusivo + 2 dias abertos a pagantes. Imersão profunda. (Nome ainda a definir.)' }
     ],
     // === COMPONENTES TANGÍVEIS ===
     componentes:[
-      { nome:'Home Office Bellz', tipo:'Notion', desc:'Ambiente do aluno: gestão diária + CRM com metodologia + banco de materiais.' },
+      { nome:'Home Office Bellz', tipo:'Notion', desc:'O Notion com CRM (já com a metodologia dentro) e ferramentas de gestão diária para as mentoradas.' },
       { nome:'Indicadores Bellz', tipo:'Aplicativo (Marco)', desc:'Painel de indicadores financeiros e comerciais.' },
-      { nome:'Biblioteca de gravações', tipo:'Curseduca', desc:'Aulas, Engenharias Reversas, Mesas Bellz arquivadas.' },
+      { nome:'Área de Membros Bellz House', tipo:'Plataforma própria (substitui Curseduca)', desc:'Nova plataforma em construção: aulas, materiais, playbooks e ferramentas da mentoria (Sessão Destrava, Mezza, Z-Lab arquivados). Plano de longo prazo: migrar Home Office Bellz e Indicadores Bellz pra dentro dessa mesma plataforma.', status:'em construção' },
       { nome:'Comunidade WhatsApp', tipo:'WhatsApp', desc:'Grupo de alunos ativos.' }
-    ]
+    ],
+    // === OFERTA (proposta comercial) ===
+    oferta:{
+      status:'da_pra_fechar',
+      nota:'A oferta do 2Z Level dá pra FECHAR agora — o produto já opera. O que falta é consolidar os pontos ⚠️ abaixo (decisão sua).',
+      inclui:[
+        'Diagnóstico 360º — mapeamento estratégico de entrada',
+        'Plano Mestre — 1:1 de 90min com a Rafa (o mapa anual)',
+        'Acesso às 7 trilhas do método (conforme Plano Mestre individual)',
+        'Sell-Z aplicado individualmente — a base universal (7 ações estruturais)',
+        'Sessão Destrava — 2×/mês, 30min individuais com a Rafa',
+        'Mezza — 1×/mês, conteúdo + convidado',
+        'Z-Lab — 1×/mês (após método implementado + 1ª turma de Sell-Z rodada)',
+        'Evento presencial anual — acesso VIP',
+        'Marcos 1:1 — Revisão de Rota (mês 6) e A Travessia (mês 11)',
+        'Plataformas — Home Office Bellz · Indicadores Bellz · Área de Membros · Comunidade WhatsApp',
+        'Acompanhamento da Consultora de Progresso'
+      ],
+      a_definir:[
+        { item:'Bônus', desc:'O "bônus de fechamento imediato" que você usa nas vendas (dobro de tempo / acesso do sócio) vira bônus PADRÃO da oferta, ou é só tática de fechamento 1:1? Definir o(s) bônus oficial(is).' },
+        { item:'Garantia', desc:'Você pratica a garantia invertida de 6 meses condicionada à aplicação. Confirmar os termos exatos (o que conta como "aplicou e não teve retorno").' },
+        { item:'Investimento', desc:'Histórico: sweet spot 12× R$1.900 (acima disso começou inadimplência). Confirmar o preço oficial atual.' },
+        { item:'Ancoragem de preço', desc:'A cascata que você usa na venda (mercado → consultoria → entrega → bônus → preço real por contraste). Definir a que entra na oferta.' },
+        { item:'Condições de pagamento', desc:'Parcelas, à vista com desconto, entrada, régua de flexibilização.' },
+        { item:'Inclui × NÃO inclui', desc:'Deixar explícito o que NÃO promete (é grupo, não atendimento individual ilimitado; não é "o negócio rodar sem você").' }
+      ]
+    }
   },
   {
     id:'sell-z',
     nome:'Sell-Z',
     formato:'Cohort de 8 semanas · workshop 21-22/07 · kick-off 29/07',
-    publico:'Persona Ana · R$10-35k/mês',
+    publico:'Persona Ana · sem piso de faturamento (qualifica por entrega acima da média + leads chegando + decidir aplicar)',
     ticket:'R$1k-3k (a confirmar)',
     quando:'Workshop 21-22/07 · kick-off 29/07 · conteúdo 5/08-set/2026',
     trilhas_cobertas:'Comercial · Oferta · Gestão (parcial) · Posicionamento (intro)',
     promessa:'Em 8 semanas, instala o processo comercial que faz a venda acontecer com previsibilidade.',
-    puv:'Aceleramos a sua virada como empresário através de um método de implementação guiada, para que você deixe o improviso de lado e assuma o controle das suas vendas.',
+    puv:'Tiramos o dono de negócio do improviso e o colocamos no comando do próprio processo comercial, construindo, através de uma implementação guiada, uma oferta de alto valor, pronta para ser a escolhida pelo cliente ideal.',
     tagline:'8 semanas de aceleração implacável. Domine o método. Faça o sino tocar.',
     status:'em_construcao',
     paleta:{ primaria:'#c75a2c', secundaria:'#0e0f0d' },
-    jornada_status:'A jornada do aluno, os encontros específicos e a estrutura interna do Sell-Z serão documentados durante a preparação do lançamento (junho/julho 2026), em sessão conjunta com Pedro (responsável pela operação técnica do lançamento).'
+    jornada_status:'A jornada do aluno, os encontros específicos e a estrutura interna do Sell-Z serão documentados durante a preparação do lançamento (junho/julho 2026), em sessão conjunta com Pedro (responsável pela operação técnica do lançamento).',
+    // === OFERTA (proposta comercial) ===
+    oferta:{
+      status:'maior_parte',
+      nota:'A estrutura da oferta do Sell-Z dá pra fechar agora (é decisão comercial, não depende do squad). Só o conteúdo fino de cada fase depende do squad pronto.',
+      inclui:[
+        'Fase 0 · Ponto de partida — Plano de Vida × Negócio',
+        'Fase 1 · Pra quem eu vendo — ICP + leitura de mercado',
+        'Fase 2 · O que eu vendo — oferta de alto valor',
+        'Fase 3 · Por que me escolhem — posicionamento',
+        'Fase 4 · Como me organizo — PF/PJ + CRM mínimo',
+        'Fase 5 · Como eu vendo — ritual + sessão de venda consultiva',
+        'Fase 6 · Como leio os números — indicadores + funil'
+      ],
+      a_definir:[
+        { item:'Investimento', desc:'Faixa atual R$1k–3k. Definir o preço da 1ª turma.' },
+        { item:'Bônus · Garantia · Condições', desc:'Dá pra fechar sem o squad — decisão comercial.' }
+      ],
+      depende_squad:'O conteúdo fino de cada fase (aulas gravadas, passo-a-passo de cada framework, instrumentos finais) depende do squad do Sell-Z pronto. A estrutura da oferta acima dá pra fechar e vender antes disso.'
+    }
   },
   {
     id:'imersao',
@@ -3133,7 +3187,7 @@ const ESCOPO_INCEPTION = {
           { id:'notion-interno', nome:'Notion de acompanhamento dos mentorados (uso interno Bellz)', desc:'Sistema interno onde CP atualiza status do onboarding, dispara automações, registra entregáveis e acompanha progresso de cada aluno.', status:'em construção', prioridade:1 },
           { id:'notion-aluno', nome:'Notion do mentorado (entregável ao cliente)', desc:'Notion duplicável que o aluno recebe ao entrar. Contém: Plano Mestre (kanban acionável), trilhas com links pra Curseduca, CRM, ferramenta de documentação de reuniões.', status:'em construção', prioridade:2 },
           { id:'ia-plano-mestre', nome:'IA treinada pra gerar Plano Mestre a partir do Diagnóstico 360º', desc:'Recebe o relatório do Diagnóstico 360º + transcrição da sessão Rafa+aluno → gera Plano Mestre estruturado no template Notion. Validado pela Rafa antes de entregar.', status:'a criar', prioridade:3 },
-          { id:'ias-fundacao', nome:'IAs aceleradoras da Etapa Fundação (também usadas no Sell-Z)', desc:'Conjunto de IAs que apoiam as 7 ações concretas da Fundação (Plano de Vida × Negócio, Leitura do Tabuleiro, Setup PJ, Material de Oferta, Posicionamento, CRM, Ritual de Vendas). Mesmo conjunto serve no Sell-Z. ⚠ ESCOPO EXATO A DEFINIR — Rafa + Maiara precisam fechar o que entra/não entra antes de construir.', status:'a definir escopo', prioridade:4 }
+          { id:'ias-fundacao', nome:'IAs aceleradoras do Sell-Z', desc:'Conjunto de IAs que apoiam as 7 ações concretas do Sell-Z (Plano de Vida × Negócio, Leitura do Tabuleiro, Setup PJ, Material de Oferta, Posicionamento, CRM, Ritual de Vendas). Mesmo conjunto serve tanto o Sell-Z vendido em cohort quanto aplicado individualmente no 2Z Level. ⚠ ESCOPO EXATO A DEFINIR — Rafa + Maiara precisam fechar o que entra/não entra antes de construir.', status:'a definir escopo', prioridade:4 }
         ]
       }
     ]
@@ -3213,7 +3267,7 @@ const ENTREGAVEIS = {
       { item:'Plano de Foco semanal', formato:'Template Notion · ritual', desc:'Inegociável × Importante × Sabotador da semana. Rotina fixa de todos. É o filtro de priorização que a Rafa usa.', status:'a criar' },
       { item:'Banco de Depoimentos', formato:'Database Notion · condicional', desc:'Organiza depoimentos por categoria, com tags, prints e links de vídeo. Inclui na mesma página o roteiro de como coletar. CONDICIONAL: se já tem organizado, não precisa.', status:'a criar' },
       { item:'Checklist Setup PJ', formato:'Lista acionável', desc:'O que precisa estar configurado pra operar como CNPJ (separação PF/PJ, conta jurídica, contador, marca no CPF). Possível redundância com o Diagnóstico 360º — a definir.', status:'⚠ aguardando informações Rafa' },
-      { item:'Plano de Vida × Negócio', formato:'Template Notion (Fundação)', desc:'Output da 1ª ação da Fundação: identidade pretendida, estilo de vida e modelo de negócio coerente. Fica documentado no Notion do aluno.', status:'a criar' },
+      { item:'Plano de Vida × Negócio', formato:'Template Notion (Sell-Z)', desc:'Output da 1ª ação do Sell-Z (aplicado no 2Z Level): identidade pretendida, estilo de vida e modelo de negócio coerente. Fica documentado no Notion do aluno.', status:'a criar' },
       { item:'Mapa de Canais de Aquisição', formato:'Template Notion (Tração)', desc:'Os canais que o aluno já tem, priorizados por esforço × impacto. Atualiza trimestral.', status:'a mapear' },
       { item:'Banco de Parceiros', formato:'Database Notion (Indicação)', desc:'Parceiros de indicação mão-dupla, com comissão e tracking. Cresce ao longo do tempo.', status:'a mapear' },
       { item:'Mapa de Funções (o que delegar)', formato:'Template Notion (Liderança)', desc:'O que tira do dono × o que delegar. Evolui conforme o negócio cresce.', status:'a mapear' },
@@ -3368,7 +3422,7 @@ const ENTREGAVEIS = {
     o_que_NAO_tem:[
       'Aluno não acessa o Squad — é exclusivamente uso interno Rafa/CP',
       'Não substitui sessão 1:1 — sessão acontece entre os 2 checkpoints',
-      'Não substitui análise da Rafa nos encontros de Engenharia Reversa (comportamento não-verbal)',
+      'Não substitui análise da Rafa nos encontros de Z-Lab (comportamento não-verbal)',
       'Não processa pagamentos, não envia emails, não opera o app de métricas',
       'Não gera conteúdo educacional (Curseduca é separada)'
     ]

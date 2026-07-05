@@ -537,6 +537,34 @@ function renderMetodo() {
 // ================================================================
 // PRODUTO (página individual)
 // ================================================================
+function renderOferta(p){
+  if(!p.oferta) return '';
+  const o = p.oferta;
+  const statusLabel = o.status==='da_pra_fechar' ? 'Dá pra fechar agora' : (o.status==='maior_parte' ? 'Maior parte dá pra fechar' : 'Em construção');
+  return `
+    <div class="section" id="oferta-${p.id}">
+      <div class="section-title" style="color:var(--laranja);">A oferta · ${esc(statusLabel)}</div>
+      <h2 class="section-h">Oferta do ${esc(p.nome)}</h2>
+      ${o.nota ? `<p class="section-sub">${esc(o.nota)}</p>` : ''}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;">
+        <div style="background:var(--cream);border-left:3px solid var(--verde);border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px;">
+          <strong style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--verde);display:block;margin-bottom:12px;">✓ O que já está definido</strong>
+          <ul style="list-style:none;padding:0;margin:0;">
+            ${o.inclui.map(i=>`<li style="font-size:13.5px;line-height:1.5;color:var(--txt-2);padding:6px 0 6px 18px;position:relative;"><span style="position:absolute;left:0;color:var(--verde);font-weight:700;">•</span>${esc(i)}</li>`).join('')}
+          </ul>
+        </div>
+        <div style="background:#fbeee6;border-left:3px solid var(--laranja);border-radius:0 var(--radius) var(--radius) 0;padding:22px 24px;">
+          <strong style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--laranja);display:block;margin-bottom:12px;">⚠ O que falta você definir</strong>
+          <ul style="list-style:none;padding:0;margin:0;">
+            ${o.a_definir.map(a=>`<li style="font-size:13px;line-height:1.5;color:var(--txt-2);padding:9px 0;border-bottom:1px solid rgba(199,90,44,.14);"><strong style="color:var(--laranja);">${esc(a.item)}:</strong> ${esc(a.desc)}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+      ${o.depende_squad ? `<div style="margin-top:16px;background:var(--verde);color:var(--cream);border-radius:var(--radius);padding:16px 20px;font-size:13.5px;line-height:1.55;"><strong style="color:var(--laranja);">🔒 Depende do squad pronto:</strong> ${esc(o.depende_squad)}</div>` : ''}
+    </div>
+  `;
+}
+
 function renderProduto(id) {
   const p = PRODUTOS.find(prod => prod.id === id);
   if (!p) return renderNotFound();
@@ -570,6 +598,7 @@ function renderProduto(id) {
           </div>
         ` : ''}
       </div>
+      ${renderOferta(p)}
       <div class="placeholder-box">
         <h3>Jornada do aluno em construção</h3>
         <p>${esc(p.jornada_status)}</p>
@@ -600,6 +629,8 @@ function renderProduto(id) {
       <p style="font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.5;color:var(--verde);max-width:760px;">"${esc(p.puv)}"</p>
       ${p.tagline ? `<p style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--txt-3);margin-top:10px;">${esc(p.tagline)}</p>` : ''}
     </div>
+
+    ${renderOferta(p)}
 
     <div class="section">
       <div class="section-title">Jornada do aluno · entrada (Mês 1)</div>
